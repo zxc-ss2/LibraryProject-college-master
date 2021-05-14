@@ -20,9 +20,25 @@ namespace LibraryProject.Views
     /// </summary>
     public partial class MenuClientPage : Page
     {
+        Controllers.BooksController booksController = new Controllers.BooksController();
+
         public MenuClientPage()
         {
             InitializeComponent();
+            Console.WriteLine("gggggggggg");
+            //ClientDataGrid.ItemsSource = booksController.GetBookInfo();
+        }
+
+        private void FilterList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Console.WriteLine(FilterList.SelectedItem);
+
+            if (Convert.ToInt32(FilterList.SelectedItem) ==1)
+            {
+                ClientDataGrid.ItemsSource = booksController.BooksInfoOutput();
+            }
+
+
         }
     }
 }

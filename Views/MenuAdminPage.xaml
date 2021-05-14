@@ -78,9 +78,6 @@
                 <DataGridTextColumn Width="70" Header="ББК" Binding="{Binding bbk}"></DataGridTextColumn>
                 <DataGridTextColumn Width="100" Header="Место издания" Binding="{Binding place}"></DataGridTextColumn>
                 <DataGridTextColumn Width="80" Header="Год издания"  Binding="{Binding year}"></DataGridTextColumn>
-                <DataGridTextColumn Width="50" Header="Вид" Binding="{Binding knowledge_field_id}"></DataGridTextColumn>
-                <DataGridTextColumn Width="100" Header="Издательства" Binding="{Binding interpreter_id}"></DataGridTextColumn>
-                <DataGridTextColumn Width="60" Header="Отсек"  Binding="{Binding chamber_id}"></DataGridTextColumn>
                 <DataGridTextColumn Width="60" Header="zxc"  Binding="{Binding isbn}"></DataGridTextColumn>
                 <DataGridTextColumn Width="60" Header="123"  Binding="{Binding trading.ticket}"></DataGridTextColumn>
             </DataGrid.Columns>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище LibraryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище LibraryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="books">
           <Key>
             <PropertyRef Name="book_id" />
@@ -69,9 +69,9 @@
         </EntityType>
         <EntityType Name="quantity">
           <Key>
-            <PropertyRef Name="id_book" />
+            <PropertyRef Name="book_id" />
           </Key>
-          <Property Name="id_book" Type="int" Nullable="false" />
+          <Property Name="book_id" Type="int" Nullable="false" />
           <Property Name="instook" Type="int" />
           <Property Name="total" Type="int" />
         </EntityType>
@@ -186,7 +186,7 @@
               <PropertyRef Name="book_id" />
             </Principal>
             <Dependent Role="quantity">
-              <PropertyRef Name="id_book" />
+              <PropertyRef Name="book_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -247,7 +247,8 @@
             <End Role="trading" EntitySet="trading" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LibraryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -326,9 +327,9 @@
         </EntityType>
         <EntityType Name="quantity">
           <Key>
-            <PropertyRef Name="id_book" />
+            <PropertyRef Name="book_id" />
           </Key>
-          <Property Name="id_book" Type="Int32" Nullable="false" />
+          <Property Name="book_id" Type="Int32" Nullable="false" />
           <Property Name="instook" Type="Int32" />
           <Property Name="total" Type="Int32" />
           <NavigationProperty Name="books" Relationship="Self.FK_quantity_book" FromRole="quantity" ToRole="books" />
@@ -406,7 +407,7 @@
               <PropertyRef Name="book_id" />
             </Principal>
             <Dependent Role="quantity">
-              <PropertyRef Name="id_book" />
+              <PropertyRef Name="book_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -586,7 +587,7 @@
           <EntitySetMapping Name="quantity">
             <EntityTypeMapping TypeName="LibraryModel.quantity">
               <MappingFragment StoreEntitySet="quantity">
-                <ScalarProperty Name="id_book" ColumnName="id_book" />
+                <ScalarProperty Name="book_id" ColumnName="book_id" />
                 <ScalarProperty Name="instook" ColumnName="instook" />
                 <ScalarProperty Name="total" ColumnName="total" />
               </MappingFragment>

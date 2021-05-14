@@ -14,7 +14,7 @@ namespace LibraryProject.Models
     
     public partial class quantity
     {
-        public int id_book { get; set; }
+        public int book_id { get; set; }
         public Nullable<int> instook { get; set; }
         public Nullable<int> total { get; set; }
     

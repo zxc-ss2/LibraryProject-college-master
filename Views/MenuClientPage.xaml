@@ -13,34 +13,20 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <ComboBox x:Name="FilterList" Style="{StaticResource FilterComboBox}">
-            <TextBlock>Все кнниги</TextBlock>
-            <TextBlock>Мои книги</TextBlock>
+        <ComboBox x:Name="FilterList" Style="{StaticResource FilterComboBox}" SelectionChanged="FilterList_SelectionChanged">
+            <ComboBoxItem>
+                <TextBlock>Все книги</TextBlock>
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <TextBlock>Мои книги</TextBlock>
+            </ComboBoxItem>
         </ComboBox>
-        <DockPanel Style="{StaticResource AdminDocPanel}">
-            <Button Style="{StaticResource AdminBtn}" Click="Button_Click">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                    <Image Source="/Resources/images/trash.png"/>
-                    <TextBlock VerticalAlignment="Center" Margin="10 0 10 0"><Run Text="Удалить"/></TextBlock>
-                </StackPanel>
-            </Button>
-            <Button Style="{StaticResource AdminBtn}">
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="/Resources/images/add.png"></Image>
-                    <TextBlock VerticalAlignment="Center" Margin="10 0 10 0">Добавить</TextBlock>
-                </StackPanel>
-            </Button>
-            <TextBox  x:Name="SearchAdminReadersBox" Style="{StaticResource SearchAdminBox}" TextChanged="SearchAdminReadersBox_TextChanged"></TextBox>
-            <TextBlock Style="{StaticResource PlaceholderAdminStyle}" Tag="{Binding ElementName=SearchAdminReadersBox}" Text="Введите ФИО читателя или номер чит. билета">
-            </TextBlock>
-            <Image Style="{StaticResource SearchIcon}"/>
-        </DockPanel>
         <DataGrid x:Name="ClientDataGrid" Style="{StaticResource BookDataGrid}" ColumnHeaderStyle="{StaticResource HeaderStyle}" ColumnWidth="*" AutoGenerateColumns="False"  IsReadOnly="True" SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="100" Header="Название" Binding="{Binding name}"></DataGridTextColumn>
-                <DataGridTextColumn Width="100" Header="Автор" Binding="{Binding surname}"></DataGridTextColumn>
-                <DataGridTextColumn Width="100" Header="Дата выдачи" Binding="{Binding surname}"></DataGridTextColumn>
-                <DataGridTextColumn Width="100" Header="Дата возврата" Binding="{Binding surname}"></DataGridTextColumn>
+                <DataGridTextColumn Width="100" Header="Автор" Binding="{Binding author}"></DataGridTextColumn>
+                <DataGridTextColumn Width="100" Header="Дата выдачи" Binding="{Binding trading.delivery}"></DataGridTextColumn>
+                <DataGridTextColumn Width="100" Header="Дата возврата" Binding="{Binding trading.ticket}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

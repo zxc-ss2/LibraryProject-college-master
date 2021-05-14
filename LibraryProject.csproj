@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
@@ -234,6 +237,9 @@
     <Resource Include="Resources\images\warning-removebg-preview.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\images\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Models\LibraryProjectModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>LibraryProjectModel.edmx</DependentUpon>
@@ -244,9 +250,6 @@
       <DependentUpon>LibraryProjectModel.edmx</DependentUpon>
       <LastGenOutput>LibraryProjectModel.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\images\logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +11,7 @@ namespace LibraryProject.Controllers
 {
     public class BooksController
     {
-        DbHelper dbHelper = new DbHelper(); 
+            DbHelper dbHelper = new DbHelper(); 
 
         /// <summary>
         /// 
@@ -54,6 +56,23 @@ namespace LibraryProject.Controllers
             dbHelper.context.books.Remove(selectString);
             dbHelper.context.SaveChanges();
             MessageBox.Show("Удалена информация о" + selectString);
+        }
+
+        public void GetBookInfo(List selectDataGrid)
+        {
+            SqlConnection thisConnection = new SqlConnection(@"Server=(LocalDB)\MSSQLLocalDB;Database=library;Trusted_Connection=Yes;");
+            thisConnection.Open();
+
+            string sql = "select 'delivery', 'reception', 'author', 'name' from books inner join trading on books.book_id = trading.trading_id";
+
+            SqlCommand cmd = thisConnection.CreateCommand();
+            cmd.CommandText = sql;
+
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable("emp");
+            sda.Fill(dt);
+
+            selectDataGrid.ItemsSource = dt.DefaultView;
         }
     }
 }

@@ -37,7 +37,16 @@ namespace LibraryProject.Views
         {
             if (clientsController.CheckUser(LoginTextBox.Text, PasswordTextBox.Text))
             {
-                if (Settings.Default.role == 3)
+                if(Settings.Default.role == 1)
+                {
+                    this.NavigationService.Navigate(new MenuAdminPage());
+
+                    MainWindow page = (MainWindow)Application.Current.MainWindow;
+                    page.login = LoginTextBox.Text;
+                    page.password = PasswordTextBox.Text;
+                }
+
+               else if (Settings.Default.role == 3)
                 {
                     this.NavigationService.Navigate(new MenuClientPage());
 
