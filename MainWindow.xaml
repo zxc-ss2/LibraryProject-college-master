@@ -1,0 +1,32 @@
+﻿<Window x:Class="LibraryProject.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LibraryProject"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="650" Width="900"
+        MinHeight="650" MinWidth="900" MaxHeight="1080" MaxWidth="1920"
+        Icon="/Resources/images/drftgyh.png">
+
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Rectangle Grid.Row="0" Fill="{StaticResource SecondColor}"></Rectangle>
+        <Rectangle Grid.Row="1" Fill="{StaticResource MainColor}"></Rectangle>
+        <Rectangle Grid.Row="2" Fill="{StaticResource SecondColor}"></Rectangle>
+        <Image Style="{StaticResource BackIcon}" MouseDown="Image_MouseDown"/>
+        <DockPanel HorizontalAlignment="Center">
+            <Image Style="{StaticResource LogoIcon}"/>
+            <TextBlock Style="{StaticResource NameTextBlock}">lorem ipsum dolor sit amet</TextBlock>
+        </DockPanel>
+        <Image x:Name="PersonalAreaImage" Style="{StaticResource PersonalAreaIcon}" MouseDown="PersonalAreaImage_MouseDown"/>
+        <Button x:Name="ExitBtn" Grid.Row="2" Style="{StaticResource FooterBtn}" Click="ExitBtn_Click">Выйти</Button>
+        <Button x:Name="LogOutBtn" Grid.Row="2" Style="{StaticResource FooterBtn}" Click="LogOutBtn_Click" >Выйти</Button>
+        <Frame Grid.Row="1" NavigationUIVisibility="Hidden" x:Name="MainFrame" Navigated="MainFrame_Navigated"/>
+    </Grid>
+</Window>
