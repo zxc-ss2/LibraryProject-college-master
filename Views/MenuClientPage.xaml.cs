@@ -21,23 +21,31 @@ namespace LibraryProject.Views
     public partial class MenuClientPage : Page
     {
         Controllers.BooksController booksController = new Controllers.BooksController();
+        Controllers.TradingController tradingController = new Controllers.TradingController();
 
         public MenuClientPage()
         {
             InitializeComponent();
-            Console.WriteLine("gggggggggg");
-            //ClientDataGrid.ItemsSource = booksController.GetBookInfo();
+            AllBooksDataGrid.ItemsSource = booksController.BooksInfoOutput();
         }
 
         private void FilterList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Console.WriteLine(FilterList.SelectedItem);
 
-            if (Convert.ToInt32(FilterList.SelectedItem) ==1)
+            if (FilterList.Text == "Мои книги")
             {
-                ClientDataGrid.ItemsSource = booksController.BooksInfoOutput();
+                ClientTakenBooksDataGrid.Visibility = Visibility.Collapsed;
+                AllBooksDataGrid.Visibility = Visibility.Visible;
+                AllBooksDataGrid.ItemsSource = booksController.BooksInfoOutput();
+
             }
 
+            else if (FilterList.Text == "Все книги")
+            {
+                AllBooksDataGrid.Visibility = Visibility.Collapsed;
+                ClientTakenBooksDataGrid.Visibility = Visibility.Visible;
+                ClientTakenBooksDataGrid.ItemsSource = booksController.GetTradingBooks();
+            }
 
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryProject.Properties;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -11,14 +12,14 @@ namespace LibraryProject.Controllers
 {
     public class BooksController
     {
-            DbHelper dbHelper = new DbHelper(); 
+        DbHelper dbHelper = new DbHelper();
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public List <Models.books> BooksInfoOutput()
-        {   
+        public List<Models.books> BooksInfoOutput()
+        {
             return dbHelper.context.books.ToList();
         }
 
@@ -32,7 +33,7 @@ namespace LibraryProject.Controllers
             return dbHelper.context.books.Where(t => t.author.Contains(author) || t.isbn.Contains(author)).ToList();
         }
 
-        public void AddNewBook(string bookAuthor, string bookName, string bookBBK, string bookISBN, string bookPlace, int bookYear, int bookKnowledgeField, int bookInterpreter, int bookChamber, int bookTrading)
+        public void AddNewBook(string bookAuthor, string bookName, string bookBBK, string bookISBN, string bookPlace, int bookYear, int bookKnowledgeField, int bookInterpreter, int bookChamber)
         {
             dbHelper.context.books.Add(new Models.books
             {
@@ -45,7 +46,7 @@ namespace LibraryProject.Controllers
                 knowledge_field_id = bookKnowledgeField,
                 interpreter_id = bookInterpreter,
                 chamber_id = bookChamber,
-                trading_id = bookTrading
+                trading_id = null
             });
 
             dbHelper.context.SaveChanges();
@@ -58,21 +59,26 @@ namespace LibraryProject.Controllers
             MessageBox.Show("Удалена информация о" + selectString);
         }
 
-        public void GetBookInfo(List selectDataGrid)
+        //public void GetBookInfo(/*List selectDataGrid*/)
+        //{
+        //    SqlConnection thisConnection = new SqlConnection(@"Server=(LocalDB)\MSSQLLocalDB;Database=library;Trusted_Connection=Yes;");
+        //    thisConnection.Open();
+
+        //    string sql = "select 'delivery', 'reception', 'author', 'name' from books inner join trading on books.book_id = trading.trading_id";
+
+        //    SqlCommand cmd = thisConnection.CreateCommand();
+        //    cmd.CommandText = sql;
+
+        //    SqlDataAdapter sda = new SqlDataAdapter(cmd);
+        //    DataTable dt = new DataTable("emp");
+        //    sda.Fill(dt);
+
+        //    //selectDataGrid.ItemsSource = dt.DefaultView;
+        //}
+
+        public List<Models.books> GetTradingBooks()
         {
-            SqlConnection thisConnection = new SqlConnection(@"Server=(LocalDB)\MSSQLLocalDB;Database=library;Trusted_Connection=Yes;");
-            thisConnection.Open();
-
-            string sql = "select 'delivery', 'reception', 'author', 'name' from books inner join trading on books.book_id = trading.trading_id";
-
-            SqlCommand cmd = thisConnection.CreateCommand();
-            cmd.CommandText = sql;
-
-            SqlDataAdapter sda = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable("emp");
-            sda.Fill(dt);
-
-            selectDataGrid.ItemsSource = dt.DefaultView;
+           return dbHelper.context.books.Where(t => t.trading.login == Settings.Default.login).ToList();
         }
     }
 }

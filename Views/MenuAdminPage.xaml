@@ -21,7 +21,7 @@
                     <TextBlock VerticalAlignment="Center" Margin="10 0 10 0"><Run Text="Удалить"/></TextBlock>
                 </StackPanel>
             </Button>
-            <Button Style="{StaticResource AdminBtn}">
+            <Button Style="{StaticResource AdminBtn}" Click="Button_Click_3">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Resources/images/add.png"></Image>
                     <TextBlock VerticalAlignment="Center" Margin="10 0 10 0">Добавить</TextBlock>
@@ -78,8 +78,6 @@
                 <DataGridTextColumn Width="70" Header="ББК" Binding="{Binding bbk}"></DataGridTextColumn>
                 <DataGridTextColumn Width="100" Header="Место издания" Binding="{Binding place}"></DataGridTextColumn>
                 <DataGridTextColumn Width="80" Header="Год издания"  Binding="{Binding year}"></DataGridTextColumn>
-                <DataGridTextColumn Width="60" Header="zxc"  Binding="{Binding isbn}"></DataGridTextColumn>
-                <DataGridTextColumn Width="60" Header="123"  Binding="{Binding trading.ticket}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

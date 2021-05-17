@@ -70,6 +70,7 @@
     </ApplicationDefinition>
     <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
+    <Compile Include="Controllers\TradingController.cs" />
     <Compile Include="DbHelper.cs" />
     <Compile Include="Models\books.cs">
       <DependentUpon>LibraryProjectModel.tt</DependentUpon>
@@ -104,10 +105,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LibraryProjectModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\quantity.cs">
+    <Compile Include="Models\roles.cs">
       <DependentUpon>LibraryProjectModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\roles.cs">
+    <Compile Include="Models\storage.cs">
       <DependentUpon>LibraryProjectModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\trading.cs">
@@ -203,9 +204,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Views\App.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="StringCheckLib\StringCheckLib.csproj">

@@ -17,6 +17,7 @@ namespace LibraryProject.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public trading()
         {
+            this.books = new HashSet<books>();
             this.clients = new HashSet<clients>();
             this.formular = new HashSet<formular>();
         }
@@ -26,8 +27,10 @@ namespace LibraryProject.Models
         public string ticket { get; set; }
         public System.DateTime delivery { get; set; }
         public System.DateTime reception { get; set; }
+        public string login { get; set; }
     
-        public virtual books books { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<books> books { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<clients> clients { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

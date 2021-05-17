@@ -89,6 +89,7 @@ namespace LibraryProject.Views
                 if(clientsController.CheckForAnExistingkUser(LoginInput.Text))
                 {
                     clientsController.AddNewUser(FirstNameInput.Text, LastNameInput.Text, PatronymicInput.Text, Convert.ToDateTime(DateInput.SelectedDate), AddressInput.Text, WorkplaceInput.Text, StudyplaceInput.Text, PhoneInput.Text, LoginInput.Text, PasswordInput.Password);
+                    this.NavigationService.Navigate(new AuthorizationPage());
                 }
 
                 else

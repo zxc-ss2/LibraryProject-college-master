@@ -73,5 +73,10 @@ namespace LibraryProject.Views
                 ClientDataGrid.ItemsSource = clientsController.ClientsInfoOutput();
             }
         }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new RegistrationPage());
+        }
     }
 }

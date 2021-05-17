@@ -13,21 +13,39 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <ComboBox x:Name="FilterList" Style="{StaticResource FilterComboBox}" SelectionChanged="FilterList_SelectionChanged">
-            <ComboBoxItem>
+        <DockPanel>
+            <ComboBox x:Name="FilterList" Style="{StaticResource FilterComboBox}" SelectionChanged="FilterList_SelectionChanged">
                 <TextBlock>Все книги</TextBlock>
-            </ComboBoxItem>
-            <ComboBoxItem>
                 <TextBlock>Мои книги</TextBlock>
-            </ComboBoxItem>
-        </ComboBox>
-        <DataGrid x:Name="ClientDataGrid" Style="{StaticResource BookDataGrid}" ColumnHeaderStyle="{StaticResource HeaderStyle}" ColumnWidth="*" AutoGenerateColumns="False"  IsReadOnly="True" SelectionMode="Single">
+            </ComboBox>
+            <Button Style="{StaticResource UserBtn}">Взять книгу</Button>
+            <Button Style="{StaticResource UserBtn}">Вернуть книгу</Button>
+        </DockPanel>
+        <DataGrid x:Name="AllBooksDataGrid" Style="{StaticResource AllBooksDataGrid}" ColumnHeaderStyle="{StaticResource HeaderStyle}" ColumnWidth="*" AutoGenerateColumns="False"  IsReadOnly="True" SelectionMode="Single">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="100" Header="Название" Binding="{Binding name}"></DataGridTextColumn>
-                <DataGridTextColumn Width="100" Header="Автор" Binding="{Binding author}"></DataGridTextColumn>
-                <DataGridTextColumn Width="100" Header="Дата выдачи" Binding="{Binding trading.delivery}"></DataGridTextColumn>
-                <DataGridTextColumn Width="100" Header="Дата возврата" Binding="{Binding trading.ticket}"></DataGridTextColumn>
+                <DataGridTextColumn x:Name="FirstTextColumn" Width="100" Header="Название" Binding="{Binding name}"></DataGridTextColumn>
+                <DataGridTextColumn x:Name="SecondTextColumn" Width="100" Header="Автор" Binding="{Binding author}"></DataGridTextColumn>
+                <DataGridTextColumn x:Name="ThirdTextColumn" Width="100" Header="Место" Binding="{Binding place}"></DataGridTextColumn>
+                <DataGridTextColumn x:Name="FourTextColumn" Width="100" Header="Отсек" Binding="{Binding chamber_id}"></DataGridTextColumn>
+                <DataGridTextColumn x:Name="FiveTextColumn" Width="100" Header="В Наличии" Binding="{Binding quantity_library}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <DataGrid x:Name="ClientTakenBooksDataGrid" Style="{StaticResource ClientTakenBooksDataGrid}" ColumnHeaderStyle="{StaticResource HeaderStyle}" ColumnWidth="*" AutoGenerateColumns="False"  IsReadOnly="True" SelectionMode="Single" Visibility="Collapsed">
+            <DataGrid.Columns>
+                <DataGridTextColumn  Width="100" Header="Название" Binding="{Binding name}"></DataGridTextColumn>
+                <DataGridTextColumn  Width="100" Header="Автор" Binding="{Binding author}"></DataGridTextColumn>
+                <DataGridTextColumn  Width="100" Header="Номер читательского билета" Binding="{Binding trading.ticket}"></DataGridTextColumn>
+                <DataGridTextColumn  Width="100" Header="Дата выдачи" Binding="{Binding trading.delivery, StringFormat = d}"></DataGridTextColumn>
+                <DataGridTextColumn  Width="100" Header="Дата возврата" Binding="{Binding trading.reception, StringFormat = d}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DockPanel Grid.Row="1">
+            <DataGrid x:Name="AvailableBooksDataGrid" Style="{StaticResource AvailableBooksDataGrid}" ColumnHeaderStyle="{StaticResource HeaderStyle}" ColumnWidth="*" AutoGenerateColumns="False"  IsReadOnly="True" SelectionMode="Single">
+                <DataGrid.Columns>
+                    <DataGridTextColumn  Width="100" Header="Название" Binding="{Binding name}"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
     </Grid>
 </Page>

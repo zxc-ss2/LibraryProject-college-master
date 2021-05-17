@@ -38,6 +38,16 @@
         </Setter>
     </Style>
 
+    <Style TargetType="Button" x:Key="UserBtn">
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="Width" Value="125"/>
+        <Setter Property="Margin" Value="20 10 0 0"/>
+        <Setter Property="Padding" Value="7 7 7 7"/>
+        <Setter Property="Foreground" Value="#fff"/>
+        <Setter Property="Background" Value="#16798c"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+    </Style>
+
     <Style TargetType="Button" x:Key="StartBtn">
         <Setter Property="Width" Value="400"/>
         <Setter Property="Foreground" Value="#fff"/>
@@ -477,7 +487,29 @@ Value="{x:Static sys:String.Empty}">
         <Setter Property="Background" Value="{StaticResource MainColor}"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
-        <Setter Property="Margin" Value="20 0 0 0"/>
+        <Setter Property="Margin" Value="20 10 0 0"/>
+        <Style.Triggers>
+            <Trigger Property="SelectedItem" Value="{x:Null}">
+                <Setter Property="SelectedIndex" Value="0"></Setter>
+                <Setter Property="Background" Value="{StaticResource MainColor}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="AllBooksDataGrid" TargetType="DataGrid" BasedOn="{StaticResource BookDataGrid}">
+        <Setter Property="Margin" Value="20 150 20 0"/>
+    </Style>
+
+    <Style x:Key="ClientTakenBooksDataGrid" TargetType="DataGrid" BasedOn="{StaticResource BookDataGrid}">
+        <Setter Property="Margin" Value="20 150 20 0"/>
+    </Style>
+
+    <Style x:Key="AvailableBooksDataGrid" TargetType="DataGrid" BasedOn="{StaticResource BookDataGrid}">
+        <Setter Property="Margin" Value="20 15 20 0"/>
+        <Setter Property="Width" Value=" 300"/>
+        <Setter Property="Height" Value=" 100"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
     </Style>
 
 </ResourceDictionary>

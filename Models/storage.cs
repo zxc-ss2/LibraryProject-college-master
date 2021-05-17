@@ -12,12 +12,19 @@ namespace LibraryProject.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class quantity
+    public partial class storage
     {
-        public int book_id { get; set; }
-        public Nullable<int> instook { get; set; }
-        public Nullable<int> total { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public storage()
+        {
+            this.books = new HashSet<books>();
+        }
     
-        public virtual books books { get; set; }
+        public int storage_id { get; set; }
+        public int book_id { get; set; }
+        public int quantity { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<books> books { get; set; }
     }
 }
