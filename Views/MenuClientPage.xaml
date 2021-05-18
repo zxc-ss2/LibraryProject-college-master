@@ -47,7 +47,7 @@
                 </DataGrid.Columns>
             </DataGrid>
             <DockPanel>
-                <ComboBox Style="{StaticResource AccessRightComboBox}">
+                <ComboBox x:Name="AbonementsTypeList" Style="{StaticResource AccessRightComboBox}" SelectionChanged="ComboBox_SelectionChanged">
                     <TextBlock>А - только абонемент</TextBlock>
                     <TextBlock>Ч - только читальный зал</TextBlock>
                     <TextBlock>О - читальный зал и абонемент</TextBlock>

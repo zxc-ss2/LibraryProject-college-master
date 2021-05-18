@@ -56,5 +56,11 @@ namespace LibraryProject.Views
             var firstSelectedCell = firstSelectedCellContent != null ? firstSelectedCellContent.Parent as DataGridCell : null;
 
         }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var ticketLetter = AbonementsTypeList.Text;
+            
+        }
     }
 }

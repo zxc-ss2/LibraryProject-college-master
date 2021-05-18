@@ -16,9 +16,17 @@ namespace LibraryProject.Controllers
             return dbHelper.context.trading.Where(x=>x.login == "UliyaBay").ToList();
         }
 
-        public bool AddNewTrading(string bookId, string ticket, DateTime deliveryDate, DateTime receptionDate, Settings)
+        public bool AddNewTrading(int bookId, string ticket, DateTime deliveryDate, DateTime receptionDate, string userLogin)
         {
-            Settings.Default.login;
+            dbHelper.context.trading.Add(new Models.trading
+            {
+                book_id = bookId,
+                ticket = ticket,
+                delivery = deliveryDate,
+                reception = receptionDate,
+                login = userLogin
+            });
+
             dbHelper.context.SaveChanges();
             return true;
         }
