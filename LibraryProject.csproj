@@ -44,6 +44,7 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -104,6 +105,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LibraryProjectModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\quantity.cs">
+      <DependentUpon>LibraryProjectModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\roles.cs">
       <DependentUpon>LibraryProjectModel.tt</DependentUpon>
@@ -237,6 +241,7 @@
   <ItemGroup>
     <Resource Include="Resources\images\logo.png" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Models\LibraryProjectModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

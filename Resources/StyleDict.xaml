@@ -484,32 +484,52 @@ Value="{x:Static sys:String.Empty}">
     <Style x:Key="FilterComboBox" TargetType="ComboBox">
         <Setter Property="Height" Value="30"/>
         <Setter Property="Width" Value="100"/>
-        <Setter Property="Background" Value="{StaticResource MainColor}"/>
+        <Setter Property="Background" Value="Green" />
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="Margin" Value="20 10 0 0"/>
+        <Setter Property="FontSize" Value="14"/>
         <Style.Triggers>
             <Trigger Property="SelectedItem" Value="{x:Null}">
                 <Setter Property="SelectedIndex" Value="0"></Setter>
                 <Setter Property="Background" Value="{StaticResource MainColor}"/>
             </Trigger>
+            <Trigger Property="IsDropDownOpen" Value="True">
+                <Setter Property="Background" Value="Red" />
+            </Trigger>
         </Style.Triggers>
+    </Style>
+    
+    <Style TargetType="ComboBoxItem">
+        <Setter Property="Background" Value="{StaticResource MainColor}"/>
     </Style>
 
     <Style x:Key="AllBooksDataGrid" TargetType="DataGrid" BasedOn="{StaticResource BookDataGrid}">
-        <Setter Property="Margin" Value="20 150 20 0"/>
+        <Setter Property="Margin" Value="20 50 20 0"/>
     </Style>
 
     <Style x:Key="ClientTakenBooksDataGrid" TargetType="DataGrid" BasedOn="{StaticResource BookDataGrid}">
-        <Setter Property="Margin" Value="20 150 20 0"/>
+        <Setter Property="Margin" Value="20 50 20 0"/>
     </Style>
 
     <Style x:Key="AvailableBooksDataGrid" TargetType="DataGrid" BasedOn="{StaticResource BookDataGrid}">
-        <Setter Property="Margin" Value="20 15 20 0"/>
-        <Setter Property="Width" Value=" 300"/>
-        <Setter Property="Height" Value=" 100"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Margin" Value="20 10 20 0"/>
+        <Setter Property="Height" Value="100"/>
     </Style>
 
+    <Style x:Key="AccessRightComboBox" TargetType="ComboBox" BasedOn="{StaticResource FilterComboBox}">
+        <Setter Property="Width" Value="200"/>
+    </Style>
+
+    <Style x:Key="GetBookBtn" TargetType="Button" BasedOn="{StaticResource AdminBtn}">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Margin" Value="20 10 0 0"/>
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
+
+    <Style x:Key="GiveBookBtn" TargetType="Button" BasedOn="{StaticResource GetBookBtn}">
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Margin" Value="20 10 20 0"/>
+    </Style>
 </ResourceDictionary>

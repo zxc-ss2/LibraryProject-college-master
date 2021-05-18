@@ -20,8 +20,8 @@ namespace LibraryProject.Models
         public string bbk { get; set; }
         public string isbn { get; set; }
         public string place { get; set; }
-        public Nullable<int> year { get; set; }
-        public int quantity_library { get; set; }
+        public int year { get; set; }
+        public Nullable<int> quantity_id { get; set; }
         public Nullable<int> storage_id { get; set; }
         public int knowledge_field_id { get; set; }
         public int interpreter_id { get; set; }
@@ -31,6 +31,7 @@ namespace LibraryProject.Models
         public virtual chambers chambers { get; set; }
         public virtual fields fields { get; set; }
         public virtual interpretors interpretors { get; set; }
+        public virtual quantity quantity { get; set; }
         public virtual storage storage { get; set; }
         public virtual trading trading { get; set; }
     }
