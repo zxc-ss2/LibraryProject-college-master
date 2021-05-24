@@ -18,8 +18,6 @@
                 <TextBlock>Все книги</TextBlock>
                 <TextBlock>Мои книги</TextBlock>
             </ComboBox>
-            <Button Style="{StaticResource UserBtn}">Взять книгу</Button>
-            <Button Style="{StaticResource UserBtn}">Вернуть книгу</Button>
         </DockPanel>
         <DataGrid x:Name="AllBooksDataGrid" Style="{StaticResource AllBooksDataGrid}" ColumnHeaderStyle="{StaticResource HeaderStyle}" ColumnWidth="*" AutoGenerateColumns="False"  IsReadOnly="True" SelectionMode="Single">
             <DataGrid.Columns>
@@ -39,23 +37,24 @@
                 <DataGridTextColumn  Width="100" Header="Дата возврата" Binding="{Binding trading.reception, StringFormat = d}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-
-        <DockPanel Grid.Row="1">
-            <StackPanel>
-                <DataGrid x:Name="AvailableBooksDataGrid" Style="{StaticResource AvailableBooksDataGrid}" ColumnHeaderStyle="{StaticResource HeaderStyle}" ColumnWidth="*" AutoGenerateColumns="False"  IsReadOnly="True" SelectionMode="Single">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn  Width="100" Header="Название" Binding="{Binding name}"></DataGridTextColumn>
-                        <DataGridTextColumn  Width="100" Header="Автор" Binding="{Binding name}"></DataGridTextColumn>
-                        <DataGridTextColumn  Width="100" Header="Автор" Binding="{Binding name}"></DataGridTextColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
-                <TextBlock></TextBlock>
-                <ComboBox Style="{StaticResource  AccessPermissionComboBox}">
-                    <TextBlock>А(только абонемент)</TextBlock>
-                    <TextBlock>Ч(только читальный зал)</TextBlock>
-                    <TextBlock>О(читальный зал и абонемент)</TextBlock>
+        <StackPanel Grid.Row="1">
+            <DataGrid x:Name="AvailableBooksDataGrid" Style="{StaticResource AvailableBooksDataGrid}" ColumnHeaderStyle="{StaticResource HeaderStyle}" ColumnWidth="*" AutoGenerateColumns="False"  IsReadOnly="True" SelectionMode="Single">
+                <DataGrid.Columns>
+                    <DataGridTextColumn  Width="30" Header="id" Binding="{Binding book_id}"></DataGridTextColumn>
+                    <DataGridTextColumn  Width="100" Header="Название" Binding="{Binding name}"></DataGridTextColumn>
+                    <DataGridTextColumn  Width="60" Header="Автор" Binding="{Binding author}"></DataGridTextColumn>
+                    <DataGridTextColumn  Width="60" Header="Количество" Binding="{Binding quantity_library}"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DockPanel>
+                <ComboBox x:Name="AbonementsTypeList" Style="{StaticResource AccessRightComboBox}" SelectionChanged="ComboBox_SelectionChanged">
+                    <TextBlock>А - только абонемент</TextBlock>
+                    <TextBlock>Ч - только читальный зал</TextBlock>
+                    <TextBlock>О - читальный зал и абонемент</TextBlock>
                 </ComboBox>
-            </StackPanel>
-        </DockPanel>
+                <Button Style="{StaticResource GetBookBtn}" Click="GetBookClick">Взять книгу</Button>
+                <Button Style="{StaticResource GiveBookBtn}">Вернуть книгу</Button>
+            </DockPanel>
+        </StackPanel>
     </Grid>
 </Page>

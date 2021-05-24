@@ -52,6 +52,11 @@ namespace LibraryProject.Controllers
             dbHelper.context.SaveChanges();
         }
 
+        /// <summary>
+        /// Удаляет всю информацию о выбранной книге
+        /// </summary>
+        /// <param name="selectString" - выбранная пользователем строка DataGrid>
+        /// </param>
         public void DeleteBookInfo(Models.books selectString)
         {
             dbHelper.context.books.Remove(selectString);
@@ -76,9 +81,34 @@ namespace LibraryProject.Controllers
         //    //selectDataGrid.ItemsSource = dt.DefaultView;
         //}
 
+        /// <summary>
+        /// Возвращает список книг, которые взял пользователь
+        /// </summary>
+        /// <returns></returns>
         public List<Models.books> GetTradingBooks()
         {
            return dbHelper.context.books.Where(t => t.trading.login == Settings.Default.login).ToList();
+        }
+
+        /// <summary>
+        /// Возвращает список книг, количество которых больше нуля
+        /// </summary>
+        /// <returns></returns>
+        public List<Models.books> GetAvailableBooks()
+        {
+           return dbHelper.context.books.Where(t => t.quantity.quantity1 > 0).ToList();
+        }
+
+        public bool UpdatetradingBook(string newName, List<Models.books> qwe)
+        {
+
+            foreach (var item in qwe)
+            {
+                item.name = newName;
+            }
+
+            dbHelper.context.SaveChanges();
+            return true;
         }
     }
 }

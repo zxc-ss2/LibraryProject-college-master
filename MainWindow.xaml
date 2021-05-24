@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LibraryProject"
         mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="900"
+        Title="Library" Height="650" Width="900"
         MinHeight="650" MinWidth="900" MaxHeight="1080" MaxWidth="1920"
         Icon="/Resources/images/drftgyh.png">
 

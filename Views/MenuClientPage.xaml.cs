@@ -27,6 +27,7 @@ namespace LibraryProject.Views
         {
             InitializeComponent();
             AllBooksDataGrid.ItemsSource = booksController.BooksInfoOutput();
+            AvailableBooksDataGrid.ItemsSource = booksController.GetAvailableBooks();
         }
 
         private void FilterList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -47,6 +48,19 @@ namespace LibraryProject.Views
                 ClientTakenBooksDataGrid.ItemsSource = booksController.GetTradingBooks();
             }
 
+        }
+
+        private void GetBookClick(object sender, RoutedEventArgs e)
+        {
+            var firstSelectedCellContent = this.AvailableBooksDataGrid.Columns[0].GetCellContent(this.AvailableBooksDataGrid.SelectedItem);
+            var firstSelectedCell = firstSelectedCellContent != null ? firstSelectedCellContent.Parent as DataGridCell : null;
+
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var ticketLetter = AbonementsTypeList.Text;
+            
         }
     }
 }
