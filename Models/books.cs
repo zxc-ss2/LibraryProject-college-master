@@ -21,7 +21,7 @@ namespace LibraryProject.Models
         public string isbn { get; set; }
         public string place { get; set; }
         public Nullable<int> year { get; set; }
-        public int quantity_library { get; set; }
+        public Nullable<int> quantiy_in_library { get; set; }
         public Nullable<int> storage_id { get; set; }
         public int knowledge_field_id { get; set; }
         public int interpreter_id { get; set; }

@@ -496,6 +496,12 @@ Value="{x:Static sys:String.Empty}">
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="AccessPermissionComboBox" TargetType="ComboBox" BasedOn="{StaticResource FilterComboBox}">
+        <Setter Property="Margin" Value="20 10 0 0"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Width" Value="200"/>
+    </Style>
+
     <Style x:Key="AllBooksDataGrid" TargetType="DataGrid" BasedOn="{StaticResource BookDataGrid}">
         <Setter Property="Margin" Value="20 150 20 0"/>
     </Style>
