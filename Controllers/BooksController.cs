@@ -33,17 +33,18 @@ namespace LibraryProject.Controllers
             return dbHelper.context.books.Where(t => t.author.Contains(author) || t.isbn.Contains(author)).ToList();
         }
 
-        public void AddNewBook(string bookAuthor, string bookName, string bookBBK, string bookISBN, string bookPlace, int bookYear, int bookKnowledgeField, int bookInterpreter, int bookChamber)
+        public void AddNewBook(string bookAuthor, int bookKnowledgeField, string bookName, string bookISBN, string bookPlace, int bookYear, int bookInterpreter, int bookChamber)
         {
             dbHelper.context.books.Add(new Models.books
             {
                 author = bookAuthor,
+                field_knowledge_id = bookKnowledgeField,
                 name = bookName,
-                bbk = bookBBK,
                 isbn = bookISBN,
                 place = bookPlace,
                 year = bookYear,
-                knowledge_field_id = bookKnowledgeField,
+                quantity_id = null,
+                storage_id = null,
                 interpreter_id = bookInterpreter,
                 chamber_id = bookChamber,
                 trading_id = null
@@ -96,19 +97,8 @@ namespace LibraryProject.Controllers
         /// <returns></returns>
         public List<Models.books> GetAvailableBooks()
         {
-           return dbHelper.context.books.Where(t => t.quantity.quantity1 > 0).ToList();
+           return dbHelper.context.books.Where(t => t.quantity.library_quantity > 0).ToList();
         }
 
-        public bool UpdatetradingBook(string newName, List<Models.books> qwe)
-        {
-
-            foreach (var item in qwe)
-            {
-                item.name = newName;
-            }
-
-            dbHelper.context.SaveChanges();
-            return true;
-        }
     }
 }

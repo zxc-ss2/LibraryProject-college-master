@@ -4,23 +4,22 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище LibraryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище LibraryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="books">
           <Key>
             <PropertyRef Name="book_id" />
           </Key>
           <Property Name="book_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="author" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="field_knowledge_id" Type="int" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="bbk" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="isbn" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="place" Type="nvarchar" MaxLength="50" />
           <Property Name="year" Type="int" Nullable="false" />
           <Property Name="quantity_id" Type="int" />
           <Property Name="storage_id" Type="int" />
-          <Property Name="knowledge_field_id" Type="int" Nullable="false" />
           <Property Name="interpreter_id" Type="int" Nullable="false" />
-          <Property Name="chamber_id" Type="int" />
+          <Property Name="chamber_id" Type="int" Nullable="false" />
           <Property Name="trading_id" Type="int" />
         </EntityType>
         <EntityType Name="chambers">
@@ -52,8 +51,9 @@
           <Key>
             <PropertyRef Name="field_knowledge_id" />
           </Key>
-          <Property Name="field_knowledge_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="field_knowledge_name" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="field_knowledge_id" Type="int" Nullable="false" />
+          <Property Name="field_knowledge_bbk" Type="nvarchar" MaxLength="50" />
+          <Property Name="field_knowledge_name" Type="nvarchar" MaxLength="900" />
         </EntityType>
         <EntityType Name="formular">
           <Key>
@@ -75,7 +75,7 @@
           </Key>
           <Property Name="quantity_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="book_id" Type="int" Nullable="false" />
-          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="library_quantity" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="roles">
           <Key>
@@ -96,7 +96,7 @@
           <Key>
             <PropertyRef Name="trading_id" />
           </Key>
-          <Property Name="trading_id" Type="int" Nullable="false" />
+          <Property Name="trading_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="book_id" Type="int" />
           <Property Name="ticket" Type="nvarchar" MaxLength="8" Nullable="false" />
           <Property Name="delivery" Type="date" Nullable="false" />
@@ -104,7 +104,7 @@
           <Property Name="login" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_books_chambers">
-          <End Role="chambers" Type="Self.chambers" Multiplicity="0..1">
+          <End Role="chambers" Type="Self.chambers" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="books" Type="Self.books" Multiplicity="*" />
@@ -127,7 +127,7 @@
               <PropertyRef Name="field_knowledge_id" />
             </Principal>
             <Dependent Role="books">
-              <PropertyRef Name="knowledge_field_id" />
+              <PropertyRef Name="field_knowledge_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -275,8 +275,7 @@
             <End Role="formular" EntitySet="formular" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LibraryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -286,16 +285,15 @@
           </Key>
           <Property Name="book_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="author" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="field_knowledge_id" Type="Int32" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="bbk" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="isbn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="place" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="year" Type="Int32" Nullable="false" />
           <Property Name="quantity_id" Type="Int32" />
           <Property Name="storage_id" Type="Int32" />
-          <Property Name="knowledge_field_id" Type="Int32" Nullable="false" />
           <Property Name="interpreter_id" Type="Int32" Nullable="false" />
-          <Property Name="chamber_id" Type="Int32" />
+          <Property Name="chamber_id" Type="Int32" Nullable="false" />
           <Property Name="trading_id" Type="Int32" />
           <NavigationProperty Name="chambers" Relationship="Self.FK_books_chambers" FromRole="books" ToRole="chambers" />
           <NavigationProperty Name="fields" Relationship="Self.FK_books_fields" FromRole="books" ToRole="fields" />
@@ -336,8 +334,9 @@
           <Key>
             <PropertyRef Name="field_knowledge_id" />
           </Key>
-          <Property Name="field_knowledge_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="field_knowledge_name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="field_knowledge_id" Type="Int32" Nullable="false" />
+          <Property Name="field_knowledge_bbk" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="field_knowledge_name" Type="String" MaxLength="900" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="books" Relationship="Self.FK_books_fields" FromRole="fields" ToRole="books" />
         </EntityType>
         <EntityType Name="formular">
@@ -362,7 +361,7 @@
           </Key>
           <Property Name="quantity_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="book_id" Type="Int32" Nullable="false" />
-          <Property Name="quantity1" Type="Int32" Nullable="false" />
+          <Property Name="library_quantity" Type="Int32" Nullable="false" />
           <NavigationProperty Name="books" Relationship="Self.FK_books_quantity" FromRole="quantity" ToRole="books" />
         </EntityType>
         <EntityType Name="roles">
@@ -397,7 +396,7 @@
           <NavigationProperty Name="formular" Relationship="Self.FK_formular_trading" FromRole="trading" ToRole="formular" />
         </EntityType>
         <Association Name="FK_books_chambers">
-          <End Role="chambers" Type="Self.chambers" Multiplicity="0..1">
+          <End Role="chambers" Type="Self.chambers" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="books" Type="Self.books" Multiplicity="*" />
@@ -420,7 +419,7 @@
               <PropertyRef Name="field_knowledge_id" />
             </Principal>
             <Dependent Role="books">
-              <PropertyRef Name="knowledge_field_id" />
+              <PropertyRef Name="field_knowledge_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -579,14 +578,13 @@
               <MappingFragment StoreEntitySet="books">
                 <ScalarProperty Name="book_id" ColumnName="book_id" />
                 <ScalarProperty Name="author" ColumnName="author" />
+                <ScalarProperty Name="field_knowledge_id" ColumnName="field_knowledge_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="bbk" ColumnName="bbk" />
                 <ScalarProperty Name="isbn" ColumnName="isbn" />
                 <ScalarProperty Name="place" ColumnName="place" />
                 <ScalarProperty Name="year" ColumnName="year" />
                 <ScalarProperty Name="quantity_id" ColumnName="quantity_id" />
                 <ScalarProperty Name="storage_id" ColumnName="storage_id" />
-                <ScalarProperty Name="knowledge_field_id" ColumnName="knowledge_field_id" />
                 <ScalarProperty Name="interpreter_id" ColumnName="interpreter_id" />
                 <ScalarProperty Name="chamber_id" ColumnName="chamber_id" />
                 <ScalarProperty Name="trading_id" ColumnName="trading_id" />
@@ -624,6 +622,7 @@
             <EntityTypeMapping TypeName="LibraryModel.fields">
               <MappingFragment StoreEntitySet="fields">
                 <ScalarProperty Name="field_knowledge_id" ColumnName="field_knowledge_id" />
+                <ScalarProperty Name="field_knowledge_bbk" ColumnName="field_knowledge_bbk" />
                 <ScalarProperty Name="field_knowledge_name" ColumnName="field_knowledge_name" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -649,7 +648,7 @@
               <MappingFragment StoreEntitySet="quantity">
                 <ScalarProperty Name="quantity_id" ColumnName="quantity_id" />
                 <ScalarProperty Name="book_id" ColumnName="book_id" />
-                <ScalarProperty Name="quantity1" ColumnName="quantity" />
+                <ScalarProperty Name="library_quantity" ColumnName="library_quantity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

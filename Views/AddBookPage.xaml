@@ -28,8 +28,34 @@
                 <TextBlock Style="{StaticResource RightLabelText}">ISBN</TextBlock>
             </DockPanel>
             <DockPanel>
-                <TextBox Style="{StaticResource LeftInputBox}" x:Name="BBKInput"></TextBox>
-                <TextBox Style="{StaticResource RightInputBox}" x:Name="ISBNInput"></TextBox>
+                <StackPanel>
+                    <DockPanel Width="180">
+                        <Button x:Name="DirectInputBtn" Style="{StaticResource CorrectEnterBtn}" Click="DirectInputBtn_Click" >Ввести вручную</Button>
+                        <Button x:Name="SelectInputBtn" Style="{StaticResource CorrectEnterBtn}" Click="SelectInputBtn_Click" Visibility="Collapsed">Вернуться к списку</Button>
+                        <StackPanel Width="100">
+                            <TextBox  Style="{StaticResource SearchBBkBox}" x:Name="BbkSearchBox" TextChanged="BbkSearchBox_TextChanged"></TextBox>
+                            <TextBlock Style="{StaticResource PlaceholderBbkStyle}" Tag="{Binding ElementName=BbkSearchBox}" Text="Введите ББК/название" HorizontalAlignment="Left" Margin="5,-13,0,8"></TextBlock>
+                        </StackPanel>
+                    </DockPanel>
+                    <ComboBox x:Name="BBkInputComboBox" MaxDropDownHeight="100" TextBoxBase.TextChanged="ComboBox_TextChanged" Style="{DynamicResource BbkComboBox}" HorizontalAlignment="Left" ></ComboBox>
+                    <TextBox x:Name="DirectInputTextBox" Style="{StaticResource LeftInputBox}" Visibility="Collapsed"></TextBox>
+                    <DockPanel x:Name="SelectShowDocPanel" Margin="0 7 0 2">
+                        <TextBlock Style="{StaticResource BbkOrFieldNameChange}">Показать:</TextBlock>
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton Style="{StaticResource RadioButtonDefault}" Click="RadioButtonBbk_Click">
+                                <WrapPanel>
+                                    <TextBlock Style="{StaticResource UserChoiceTextBlock}">BBK</TextBlock>
+                                </WrapPanel>
+                            </RadioButton>
+                            <RadioButton Style="{StaticResource RadioButtonDefault}" Click="RadioButtonName_Click">
+                                <WrapPanel>
+                                    <TextBlock Style="{StaticResource UserChoiceTextBlock}">Название</TextBlock>
+                                </WrapPanel>
+                            </RadioButton>
+                        </StackPanel>
+                    </DockPanel>
+                </StackPanel>
+                <TextBox Style="{StaticResource RightISBNInputBox}" x:Name="ISBNInput"></TextBox>
             </DockPanel>
             <DockPanel>
                 <TextBlock Style="{StaticResource LeftLabelText}">Место издания</TextBlock>

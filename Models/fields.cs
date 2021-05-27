@@ -21,6 +21,7 @@ namespace LibraryProject.Models
         }
     
         public int field_knowledge_id { get; set; }
+        public string field_knowledge_bbk { get; set; }
         public string field_knowledge_name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

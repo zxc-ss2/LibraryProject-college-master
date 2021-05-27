@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryProject.Properties;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace LibraryProject.Views
     {
         Controllers.BooksController booksController = new Controllers.BooksController();
         Controllers.TradingController tradingController = new Controllers.TradingController();
+        Controllers.QuantityController quantityController = new Controllers.QuantityController();
 
         public MenuClientPage()
         {
@@ -29,7 +31,8 @@ namespace LibraryProject.Views
             AllBooksDataGrid.ItemsSource = booksController.BooksInfoOutput();
             AvailableBooksDataGrid.ItemsSource = booksController.GetAvailableBooks();
         }
-
+        List<Models.quantity> booksQuantity = new List<Models.quantity>();
+        string ticket = "";
         private void FilterList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -49,18 +52,70 @@ namespace LibraryProject.Views
             }
 
         }
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
 
         private void GetBookClick(object sender, RoutedEventArgs e)
         {
-            var firstSelectedCellContent = this.AvailableBooksDataGrid.Columns[0].GetCellContent(this.AvailableBooksDataGrid.SelectedItem);
-            var firstSelectedCell = firstSelectedCellContent != null ? firstSelectedCellContent.Parent as DataGridCell : null;
+            Random rnd = new Random();
+            string generator = "";
 
-        }
+            if (AbonementsTypeList.Text == "А - только абонемент")
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    generator += rnd.Next(0, 9);
+                }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var ticketLetter = AbonementsTypeList.Text;
+                ticket = "А" + generator + "-" + DateTime.Now.ToString("yy");
+            }
+
+            if (AbonementsTypeList.Text == "Ч - только читальный зал")
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    generator += rnd.Next(0, 9);
+                }
+
+                ticket = "Ч" + generator + "-" + DateTime.Now.ToString("yy");
+            }
+
+            if (AbonementsTypeList.Text == "О - читальный зал и абонемент")
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    generator += rnd.Next(0, 9);
+                }
+
+                ticket = "О" + generator + "-" + DateTime.Now.ToString("yy");
+            }
+
+            if (string.IsNullOrEmpty(AbonementsTypeList.Text))
+            {
+                MessageBox.Show("Выберите вид абонемента");
+            }
+
+            var firstSelectedCellContent = new DataGridCellInfo(AvailableBooksDataGrid.SelectedItem, AvailableBooksDataGrid.Columns[0]);
+            TextBlock firstSelectedCell = firstSelectedCellContent.Column.GetCellContent(firstSelectedCellContent.Item) as TextBlock;
+
             
+
+            if(firstSelectedCell == null)
+            {
+                MessageBox.Show("Выберите книгу");
+            }
+            else
+            {
+                booksQuantity = quantityController.GetQuantity(Convert.ToInt32(firstSelectedCell.Text));
+                if (tradingController.AddNewTrading(Convert.ToInt32(firstSelectedCell.Text), ticket, DateTime.Now, DateTime.Now.AddMonths(1), Settings.Default.login))
+                {
+                    quantityController.ChangeQuantity(Convert.ToInt32(firstSelectedCell.Text), booksQuantity);
+                }
+            }
+
         }
+
     }
 }

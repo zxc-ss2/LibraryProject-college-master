@@ -22,7 +22,7 @@ namespace LibraryProject.Models
     
         public int quantity_id { get; set; }
         public int book_id { get; set; }
-        public int quantity1 { get; set; }
+        public int library_quantity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<books> books { get; set; }

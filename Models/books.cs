@@ -16,16 +16,15 @@ namespace LibraryProject.Models
     {
         public int book_id { get; set; }
         public string author { get; set; }
+        public int field_knowledge_id { get; set; }
         public string name { get; set; }
-        public string bbk { get; set; }
         public string isbn { get; set; }
         public string place { get; set; }
         public int year { get; set; }
         public Nullable<int> quantity_id { get; set; }
         public Nullable<int> storage_id { get; set; }
-        public int knowledge_field_id { get; set; }
         public int interpreter_id { get; set; }
-        public Nullable<int> chamber_id { get; set; }
+        public int chamber_id { get; set; }
         public Nullable<int> trading_id { get; set; }
     
         public virtual chambers chambers { get; set; }
