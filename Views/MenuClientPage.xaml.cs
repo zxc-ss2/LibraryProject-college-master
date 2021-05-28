@@ -29,9 +29,10 @@ namespace LibraryProject.Views
         {
             InitializeComponent();
             AllBooksDataGrid.ItemsSource = booksController.BooksInfoOutput();
-            AvailableBooksDataGrid.ItemsSource = booksController.GetAvailableBooks();
+            AvailableBooksDataGrid.ItemsSource = booksController.GetAvailableBooks(Settings.Default.login);
         }
         List<Models.quantity> booksQuantity = new List<Models.quantity>();
+        List<Models.books> books = new List<Models.books>();
         string ticket = "";
         private void FilterList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -109,9 +110,11 @@ namespace LibraryProject.Views
             else
             {
                 booksQuantity = quantityController.GetQuantity(Convert.ToInt32(firstSelectedCell.Text));
+                books = booksController.BooksInfoOutput();
                 if (tradingController.AddNewTrading(Convert.ToInt32(firstSelectedCell.Text), ticket, DateTime.Now, DateTime.Now.AddMonths(1), Settings.Default.login))
                 {
                     quantityController.ChangeQuantity(Convert.ToInt32(firstSelectedCell.Text), booksQuantity);
+                    booksController.AssignIdTradingToBook(Convert.ToInt32(firstSelectedCell.Text), tradingController.GetNeededTradingId(Convert.ToInt32(firstSelectedCell.Text)), books);
                 }
             }
 

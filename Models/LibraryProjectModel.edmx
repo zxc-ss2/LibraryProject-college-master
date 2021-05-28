@@ -385,7 +385,7 @@
           <Key>
             <PropertyRef Name="trading_id" />
           </Key>
-          <Property Name="trading_id" Type="Int32" Nullable="false" />
+          <Property Name="trading_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="book_id" Type="Int32" />
           <Property Name="ticket" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="delivery" Type="DateTime" Nullable="false" Precision="0" />

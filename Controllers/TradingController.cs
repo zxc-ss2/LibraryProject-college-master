@@ -18,6 +18,8 @@ namespace LibraryProject.Controllers
 
         public bool AddNewTrading(int bookId, string ticket, DateTime deliveryDate, DateTime receptionDate, string userLogin)
         {
+            //dbHelper.context.trading.Where(t => t.book_id)
+
             dbHelper.context.trading.Add(new Models.trading
             {
                 book_id = bookId,
@@ -29,6 +31,29 @@ namespace LibraryProject.Controllers
 
             dbHelper.context.SaveChanges();
             return true;
+        }
+
+        public int GetNeededTradingId(int selectBook)
+        {
+            return dbHelper.context.trading.Where(t => t.book_id == selectBook).First().trading_id;
+        }
+
+        public List<int> GetBooksId()
+        {
+            List<int> zxc = new List<int>();
+
+            foreach (var item in dbHelper.context.trading.ToList())
+            {
+                zxc.Add(item.book_id.Value);
+            }
+
+            if(zxc != null)
+            {
+                return zxc;
+            }
+            else{
+                return null;
+            }
         }
     }
 }

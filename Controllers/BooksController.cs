@@ -13,6 +13,7 @@ namespace LibraryProject.Controllers
     public class BooksController
     {
         DbHelper dbHelper = new DbHelper();
+        TradingController tradingController = new TradingController();
 
         /// <summary>
         /// 
@@ -92,13 +93,36 @@ namespace LibraryProject.Controllers
         }
 
         /// <summary>
-        /// Возвращает список книг, количество которых больше нуля
+        /// 
         /// </summary>
+        /// <param name="userLogin"></param>
         /// <returns></returns>
-        public List<Models.books> GetAvailableBooks()
+        public List<Models.books> GetAvailableBooks(string userLogin)
         {
-           return dbHelper.context.books.Where(t => t.quantity.library_quantity > 0).ToList();
+            List<Models.books> qwe = new List<Models.books>();
+
+            foreach (var item in tradingController.GetBooksId())
+            {
+                //dbHelper.context.books.Where(t => t.quantity.library_quantity > 0 && t.trading.book_id != selectBook && t.trading.login != userLogin).ToList();
+                qwe = dbHelper.context.books.Where(t => t.book_id != item && t.trading.login != userLogin).ToList();
+            }
+
+            return qwe;
+
         }
 
+        public bool AssignIdTradingToBook(int selectBook, int newTradingId, List<Models.books> selectBookList)
+        {
+
+            var bookTrading = dbHelper.context.books.Where(t => t.book_id == selectBook).First().trading_id;
+
+            foreach (var item in selectBookList)
+            {
+                item.trading_id = newTradingId;
+            }
+
+            dbHelper.context.SaveChanges();
+            return true;
+        }
     }
 }
