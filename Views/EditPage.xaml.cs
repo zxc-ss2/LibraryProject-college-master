@@ -21,9 +21,8 @@ namespace LibraryProject.Views
     /// </summary>
     public partial class EditPage : Page
     {
-
-        Controllers.ClientsController clientsController = new Controllers.ClientsController();
-        List<Models.clients> zxc = new List<Models.clients>();
+        readonly Controllers.ClientsController clientsController = new Controllers.ClientsController();
+        readonly List<Models.clients> zxc = new List<Models.clients>();
 
         public EditPage(string password)
         {
@@ -152,7 +151,6 @@ namespace LibraryProject.Views
 
         private void WorkplaceInput_TextChanged(object sender, TextChangedEventArgs e)
         {
-            StringCheck check = new StringCheck();
 
             string word = NewWorkplaceInput.Text;
 
@@ -177,7 +175,6 @@ namespace LibraryProject.Views
 
         private void StudyplaceInput_TextChanged(object sender, TextChangedEventArgs e)
         {
-            StringCheck check = new StringCheck();
 
             string word = NewStudyplaceInput.Text;
 

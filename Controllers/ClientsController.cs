@@ -1,5 +1,4 @@
-﻿using LibraryProject.Models;
-using LibraryProject.Properties;
+﻿using LibraryProject.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +8,7 @@ namespace LibraryProject.Controllers
 {
     public class ClientsController
     {
-        DbHelper dbHelper = new DbHelper();
+        readonly Models.DbHelper dbHelper = new Models.DbHelper();
 
         public List<Models.clients> ClientsInfoOutput()
         {
@@ -35,7 +34,7 @@ namespace LibraryProject.Controllers
         /// <returns></returns>
         public bool CheckUser(string userLogin, string userPassword)
         {
-            clients user = dbHelper.context.clients.AsNoTracking().FirstOrDefault(t => t.login == userLogin && t.password == userPassword);
+            Models.clients user = dbHelper.context.clients.AsNoTracking().FirstOrDefault(t => t.login == userLogin && t.password == userPassword);
 
             if (user == null)
             {

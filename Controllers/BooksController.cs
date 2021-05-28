@@ -12,8 +12,8 @@ namespace LibraryProject.Controllers
 {
     public class BooksController
     {
-        DbHelper dbHelper = new DbHelper();
-        TradingController tradingController = new TradingController();
+        readonly Models.DbHelper dbHelper = new Models.DbHelper();
+        readonly TradingController tradingController = new TradingController();
 
         /// <summary>
         /// 
@@ -34,7 +34,7 @@ namespace LibraryProject.Controllers
             return dbHelper.context.books.Where(t => t.author.Contains(author) || t.isbn.Contains(author)).ToList();
         }
 
-        public void AddNewBook(string bookAuthor, int bookKnowledgeField, string bookName, string bookISBN, string bookPlace, int bookYear, int bookInterpreter, int bookChamber)
+        public bool AddNewBook(string bookAuthor, int bookKnowledgeField, string bookName, string bookISBN, string bookPlace, int bookYear, int bookInterpreter, int bookChamber)
         {
             dbHelper.context.books.Add(new Models.books
             {
@@ -52,6 +52,7 @@ namespace LibraryProject.Controllers
             });
 
             dbHelper.context.SaveChanges();
+            return true;
         }
 
         /// <summary>
@@ -65,23 +66,6 @@ namespace LibraryProject.Controllers
             dbHelper.context.SaveChanges();
             MessageBox.Show("Удалена информация о" + selectString);
         }
-
-        //public void GetBookInfo(/*List selectDataGrid*/)
-        //{
-        //    SqlConnection thisConnection = new SqlConnection(@"Server=(LocalDB)\MSSQLLocalDB;Database=library;Trusted_Connection=Yes;");
-        //    thisConnection.Open();
-
-        //    string sql = "select 'delivery', 'reception', 'author', 'name' from books inner join trading on books.book_id = trading.trading_id";
-
-        //    SqlCommand cmd = thisConnection.CreateCommand();
-        //    cmd.CommandText = sql;
-
-        //    SqlDataAdapter sda = new SqlDataAdapter(cmd);
-        //    DataTable dt = new DataTable("emp");
-        //    sda.Fill(dt);
-
-        //    //selectDataGrid.ItemsSource = dt.DefaultView;
-        //}
 
         /// <summary>
         /// Возвращает список книг, которые взял пользователь
@@ -99,21 +83,26 @@ namespace LibraryProject.Controllers
         /// <returns></returns>
         public List<Models.books> GetAvailableBooks(string userLogin)
         {
-            List<Models.books> qwe = new List<Models.books>();
+            List<Models.books> AvailbleBooksList = new List<Models.books>();
 
             foreach (var item in tradingController.GetBooksId())
             {
                 //dbHelper.context.books.Where(t => t.quantity.library_quantity > 0 && t.trading.book_id != selectBook && t.trading.login != userLogin).ToList();
-                qwe = dbHelper.context.books.Where(t => t.book_id != item && t.trading.login != userLogin).ToList();
+                AvailbleBooksList = dbHelper.context.books.Where(t => t.book_id != item && t.trading.login != userLogin).ToList();
             }
 
-            return qwe;
-
+            if (AvailbleBooksList == null)
+            {
+                return null;
+            }
+            else
+            {
+                return AvailbleBooksList;
+            }
         }
 
         public bool AssignIdTradingToBook(int selectBook, int newTradingId, List<Models.books> selectBookList)
         {
-
             var bookTrading = dbHelper.context.books.Where(t => t.book_id == selectBook).First().trading_id;
 
             foreach (var item in selectBookList)

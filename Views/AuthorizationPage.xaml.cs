@@ -21,7 +21,7 @@ namespace LibraryProject.Views
     /// </summary>
     public partial class AuthorizationPage : Page
     {
-        Controllers.ClientsController clientsController = new Controllers.ClientsController();
+        readonly Controllers.ClientsController clientsController = new Controllers.ClientsController();
         public AuthorizationPage()
         {
             InitializeComponent();

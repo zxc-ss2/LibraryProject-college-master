@@ -21,9 +21,9 @@ namespace LibraryProject.Views
     /// </summary>
     public partial class MenuClientPage : Page
     {
-        Controllers.BooksController booksController = new Controllers.BooksController();
-        Controllers.TradingController tradingController = new Controllers.TradingController();
-        Controllers.QuantityController quantityController = new Controllers.QuantityController();
+        readonly Controllers.BooksController booksController = new Controllers.BooksController();
+        readonly Controllers.TradingController tradingController = new Controllers.TradingController();
+        readonly Controllers.QuantityController quantityController = new Controllers.QuantityController();
 
         public MenuClientPage()
         {

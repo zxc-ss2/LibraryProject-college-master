@@ -20,8 +20,8 @@ namespace LibraryProject.Views
     /// </summary>
     public partial class AddBookPage : Page
     {
-        Controllers.BooksController booksController = new Controllers.BooksController();
-        Controllers.FieldsController fieldsController = new Controllers.FieldsController();
+        readonly Controllers.BooksController booksController = new Controllers.BooksController();
+        readonly Controllers.FieldsController fieldsController = new Controllers.FieldsController();
         public AddBookPage()
         {
             InitializeComponent();
@@ -32,33 +32,20 @@ namespace LibraryProject.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            booksController.AddNewBook(AuthorInput.Text, fieldsController.GetBbkId(BBkInputComboBox.Text), NameInput.Text, ISBNInput.Text, PlaceInput.Text, Convert.ToInt32(YearInput.Text), Convert.ToInt32(InterpretrInput.Text), Convert.ToInt32(ChamberInput.Text));
+            if(booksController.AddNewBook(AuthorInput.Text, fieldsController.GetBbkId(BBkInputComboBox.Text), NameInput.Text, ISBNInput.Text, PlaceInput.Text, Convert.ToInt32(YearInput.Text), Convert.ToInt32(InterpretrInput.Text), Convert.ToInt32(ChamberInput.Text)))
+            {
+                MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите выйти?", "Выход из аккаунта", MessageBoxButton.YesNoCancel);
+                if (result == MessageBoxResult.Yes)
+                {
+                    this.NavigationService.Navigate(new MenuAdminPage());
+                }
+            }
+            
         }
 
         private void BBkInputComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-        }
-
-        private void ComboBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var tb = (TextBox)e.OriginalSource;
-            if (tb.SelectionStart != 0)
-            {
-                BBkInputComboBox.SelectedItem = null; // Если набирается текст сбросить выбраный элемент
-            }
-            if (tb.SelectionStart == 0 && BBkInputComboBox.SelectedItem == null)
-            {
-                BBkInputComboBox.IsDropDownOpen = false; // Если сбросили текст и элемент не выбран, сбросить фокус выпадающего списка
-            }
-
-            BBkInputComboBox    .IsDropDownOpen = true;
-            if (BBkInputComboBox.SelectedItem == null)
-            {
-                // Если элемент не выбран менять фильтр
-                CollectionView cv = (CollectionView)CollectionViewSource.GetDefaultView(BBkInputComboBox.ItemsSource);
-                cv.Filter = s => ((string)s).IndexOf(BBkInputComboBox.Text, StringComparison.CurrentCultureIgnoreCase) >= 0;
-            }
         }
 
         private void BbkSearchBox_TextChanged(object sender, TextChangedEventArgs e)

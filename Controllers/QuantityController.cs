@@ -8,7 +8,7 @@ namespace LibraryProject.Controllers
 {
     class QuantityController
     {
-        DbHelper dbHelper = new DbHelper();
+        readonly Models.DbHelper dbHelper = new Models.DbHelper();
 
         public List<Models.quantity> GetQuantity(int selectBook)
         {

@@ -74,7 +74,7 @@
     <Compile Include="Controllers\FieldsController.cs" />
     <Compile Include="Controllers\QuantityController.cs" />
     <Compile Include="Controllers\TradingController.cs" />
-    <Compile Include="DbHelper.cs" />
+    <Compile Include="Models\DbHelper.cs" />
     <Compile Include="Models\books.cs">
       <DependentUpon>LibraryProjectModel.tt</DependentUpon>
     </Compile>

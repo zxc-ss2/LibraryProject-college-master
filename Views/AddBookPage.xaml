@@ -37,7 +37,7 @@
                             <TextBlock Style="{StaticResource PlaceholderBbkStyle}" Tag="{Binding ElementName=BbkSearchBox}" Text="Введите ББК/название" HorizontalAlignment="Left" Margin="5,-13,0,8"></TextBlock>
                         </StackPanel>
                     </DockPanel>
-                    <ComboBox x:Name="BBkInputComboBox" MaxDropDownHeight="100" TextBoxBase.TextChanged="ComboBox_TextChanged" Style="{DynamicResource BbkComboBox}" HorizontalAlignment="Left" ></ComboBox>
+                    <ComboBox x:Name="BBkInputComboBox" MaxDropDownHeight="100" Style="{DynamicResource BbkComboBox}" HorizontalAlignment="Left" ></ComboBox>
                     <TextBox x:Name="DirectInputTextBox" Style="{StaticResource LeftInputBox}" Visibility="Collapsed"></TextBox>
                     <DockPanel x:Name="SelectShowDocPanel" Margin="0 7 0 2">
                         <TextBlock Style="{StaticResource BbkOrFieldNameChange}">Показать:</TextBlock>

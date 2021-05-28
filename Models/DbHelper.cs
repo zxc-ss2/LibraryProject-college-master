@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryProject
+namespace LibraryProject.Models
 {
    public class DbHelper
     {

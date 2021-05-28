@@ -20,8 +20,8 @@ namespace LibraryProject.Views
     /// </summary>
     public partial class MenuAdminPage : Page
     {
-        Controllers.BooksController booksController = new Controllers.BooksController();
-        Controllers.ClientsController clientsController = new Controllers.ClientsController();
+        readonly Controllers.BooksController booksController = new Controllers.BooksController();
+        readonly Controllers.ClientsController clientsController = new Controllers.ClientsController();
         public MenuAdminPage()
         {
             InitializeComponent();
@@ -70,7 +70,7 @@ namespace LibraryProject.Views
             else
             {
                 booksController.DeleteBookInfo(item);
-                ClientDataGrid.ItemsSource = clientsController.ClientsInfoOutput();
+                BookDataGrid.ItemsSource = booksController.BooksInfoOutput();
             }
         }
 

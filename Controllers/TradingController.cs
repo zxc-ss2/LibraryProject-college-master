@@ -9,7 +9,7 @@ namespace LibraryProject.Controllers
 {
    public class TradingController
     {
-        DbHelper dbHelper = new DbHelper();
+        readonly Models.DbHelper dbHelper = new Models.DbHelper();
 
         public List<Models.trading> TradingInfoOutput()
         {
