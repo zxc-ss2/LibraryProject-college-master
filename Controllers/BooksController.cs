@@ -129,5 +129,31 @@ namespace LibraryProject.Controllers
             dbHelper.context.SaveChanges();
             return true;
         }
+
+        public List<books> GetBookWithId(int selectBookId)
+        {
+            return dbHelper.context.books.Where(t => t.book_id == selectBookId).ToList();
+        }
+
+        public bool UpdateBookInfo(string newAuthor, int newfFieldKnowledgeId, string newName, string newIsbn, string newPlace, int newYear, int newQuantityId, int newStorageId, int newInterpretorId, int newChamberId, List<books> oldBook)
+        {
+            foreach (var item in oldBook)
+            {
+                item.author = newAuthor;
+                item.field_knowledge_id = newfFieldKnowledgeId;
+                item.name = newName;
+                item.isbn = newIsbn;
+                item.place = newPlace;
+                item.year = newYear;
+                item.quantity_id = newQuantityId;
+                item.storage_id = newStorageId;
+                item.interpreter_id = newInterpretorId;
+                item.chamber_id = newChamberId;
+                item.trading_id = null;
+            }
+
+            dbHelper.context.SaveChanges();
+            return true;
+        }
     }
 }

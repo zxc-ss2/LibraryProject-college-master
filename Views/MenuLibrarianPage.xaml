@@ -63,7 +63,7 @@
                         <TextBlock VerticalAlignment="Center" Margin="10 0 10 0">Добавить</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button x:Name="EditBookInfoBtn" Style="{StaticResource AdminBtn}">
+                <Button x:Name="EditBookInfoBtn" Style="{StaticResource AdminBtn}" Click="EditBookInfoBtn_Click">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                         <Image Source="/Resources/images/trash.png"/>
                         <TextBlock VerticalAlignment="Center" Margin="10 0 10 0"><Run Text="Редактировать"/></TextBlock>
@@ -76,7 +76,7 @@
             </DockPanel>
             <DataGrid Grid.Row="1" x:Name="BookDataGrid" Style="{StaticResource BookDataGrid}" ColumnHeaderStyle="{StaticResource HeaderStyle}" ColumnWidth="*" AutoGenerateColumns="False"  IsReadOnly="True" SelectionMode="Single">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width="30" Header="№" Binding="{Binding client_id}"></DataGridTextColumn>
+                    <DataGridTextColumn Width="30" Header="№" Binding="{Binding book_id}"></DataGridTextColumn>
                     <DataGridTextColumn Width="120" Header="Автор" Binding="{Binding author}"></DataGridTextColumn>
                     <DataGridTextColumn Width="180" Header="Название"  Binding="{Binding name}"></DataGridTextColumn>
                     <DataGridTextColumn Width="70" Header="ББК" Binding="{Binding bbk}"></DataGridTextColumn>

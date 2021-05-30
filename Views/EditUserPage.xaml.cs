@@ -24,7 +24,7 @@ namespace LibraryProject.Views
     public partial class EditUserPage : Page
     {
         readonly ClientsController clientsController = new ClientsController();
-        readonly List<clients> zxc = new List<clients>();
+        readonly List<clients> SessionClient = new List<clients>();
         public EditUserPage(string password)
         {
             InitializeComponent();
@@ -43,7 +43,7 @@ namespace LibraryProject.Views
                 NewPasswordInput.Password = item.password;
             }
 
-            zxc = clientsController.ClientsPasswordMatchUp(password);
+            SessionClient = clientsController.ClientsPasswordMatchUp(password);
         }
 
         private void FirstNameInput_TextChanged(object sender, TextChangedEventArgs e)
@@ -278,7 +278,7 @@ namespace LibraryProject.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (clientsController.UpdateClientInfo(NewFirstNameInput.Text, NewLastNameInput.Text, NewPatronymicInput.Text, NewAddressInput.Text, NewWorkplaceInput.Text, NewStudyplaceInput.Text, NewPhoneInput.Text, NewLoginInput.Text, NewPasswordInput.Password, zxc))
+            if (clientsController.UpdateClientInfo(NewFirstNameInput.Text, NewLastNameInput.Text, NewPatronymicInput.Text, NewAddressInput.Text, NewWorkplaceInput.Text, NewStudyplaceInput.Text, NewPhoneInput.Text, NewLoginInput.Text, NewPasswordInput.Password, SessionClient))
             {
                 SaveBtn.IsEnabled = false;
                 MessageBox.Show("Данные успешно обновлены");

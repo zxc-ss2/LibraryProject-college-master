@@ -1,4 +1,5 @@
 ﻿using LibraryProject.Controllers;
+using LibraryProject.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,8 @@ namespace LibraryProject.Views
             InitializeComponent();
             TradingDataGrid.ItemsSource = tradingController.GetTradingInfo();
             BookDataGrid.ItemsSource = booksController.BooksInfoOutput();
+
+            
         }
 
         private void DeleteTradingInfoBtn_Click(object sender, RoutedEventArgs e)
@@ -58,6 +61,16 @@ namespace LibraryProject.Views
         private void AddBookInfoBtn_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new AddBookPage());
+        }
+
+        private void EditBookInfoBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var firstSelectedCellContent = new DataGridCellInfo(BookDataGrid.SelectedItem, BookDataGrid.Columns[0]);
+            TextBlock firstSelectedCell = firstSelectedCellContent.Column.GetCellContent(firstSelectedCellContent.Item) as TextBlock;
+
+            Settings.Default.selectBook = Convert.ToInt32(firstSelectedCell.Text);
+
+            this.NavigationService.Navigate(new EditBookPage());
         }
     }
 }

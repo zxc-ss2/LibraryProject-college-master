@@ -78,7 +78,7 @@
                     </Button>
                 </DockPanel>
                 <DockPanel HorizontalAlignment="Right">
-                    <PasswordBox x:Name="NewPasswordInput" Style="{StaticResource CenterInputBox}" PasswordChanged="PasswordInput_PasswordChanged"></PasswordBox>
+                    <PasswordBox x:Name="NewPasswordInput" Style="{StaticResource CenterPasswordInputBox}" PasswordChanged="PasswordInput_PasswordChanged"></PasswordBox>
                     <Button Style="{StaticResource WarningBtn}" Height="20" Width="20" VerticalContentAlignment="Center">
                         <Image Source="/Resources/images/warning-removebg-preview.png"/>
                     </Button>

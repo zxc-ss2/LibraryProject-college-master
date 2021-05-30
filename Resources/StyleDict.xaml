@@ -76,7 +76,7 @@
     <Style TargetType="{x:Type TextBlock}" x:Key="OfferText">
         <Setter Property="Foreground" Value="#ffffff"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="FontSize" Value="15px"/>
+        <Setter Property="FontSize" Value="18px"/>
         <Setter Property="Margin" Value="0 5 0 0"/>
     </Style>
 
@@ -106,6 +106,11 @@
         <Setter Property="Margin" Value="40 5 0 0"/>
     </Style>
 
+    <Style TargetType="{x:Type TextBlock}" x:Key="CenterLabelText" BasedOn="{StaticResource LeftLabelText}">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+    </Style>
+    
     <Style TargetType="{x:Type TextBox}" x:Key="LeftInputBox">
         <Setter Property="Background" Value="#24313c"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
@@ -125,7 +130,12 @@
         <Setter Property="HorizontalAlignment" Value="Right"/>
     </Style>
 
-    <Style TargetType="{x:Type PasswordBox}" x:Key="CenterInputBox">
+    <Style TargetType="{x:Type TextBox}" x:Key="CenterInputBox" BasedOn="{StaticResource LeftInputBox}">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Width" Value="400"/>
+    </Style>
+
+    <Style TargetType="{x:Type PasswordBox}" x:Key="CenterPasswordInputBox">
         <Setter Property="Background" Value="#24313c"/>
         <Setter Property="HorizontalAlignment" Value="Right"/>
         <Setter Property="BorderBrush" Value="#7d8b7c"/>
