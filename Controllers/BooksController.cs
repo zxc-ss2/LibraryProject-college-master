@@ -1,4 +1,5 @@
-﻿using LibraryProject.Properties;
+﻿using LibraryProject.Models;
+using LibraryProject.Properties;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,14 +13,14 @@ namespace LibraryProject.Controllers
 {
     public class BooksController
     {
-        readonly Models.DbHelper dbHelper = new Models.DbHelper();
+        readonly DbHelper dbHelper = new DbHelper();
         readonly TradingController tradingController = new TradingController();
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public List<Models.books> BooksInfoOutput()
+        public List<books> BooksInfoOutput()
         {
             return dbHelper.context.books.ToList();
         }
@@ -29,14 +30,14 @@ namespace LibraryProject.Controllers
         /// </summary>
         /// <param name="author"></param>
         /// <returns></returns>
-        public List<Models.books> BooksMatchUpInfoOutput(string author)
+        public List<books> BooksMatchUpInfoOutput(string author)
         {
             return dbHelper.context.books.Where(t => t.author.Contains(author) || t.isbn.Contains(author)).ToList();
         }
 
         public bool AddNewBook(string bookAuthor, int bookKnowledgeField, string bookName, string bookISBN, string bookPlace, int bookYear, int bookInterpreter, int bookChamber)
         {
-            dbHelper.context.books.Add(new Models.books
+            dbHelper.context.books.Add(new books
             {
                 author = bookAuthor,
                 field_knowledge_id = bookKnowledgeField,
@@ -60,7 +61,7 @@ namespace LibraryProject.Controllers
         /// </summary>
         /// <param name="selectString" - выбранная пользователем строка DataGrid>
         /// </param>
-        public void DeleteBookInfo(Models.books selectString)
+        public void DeleteBookInfo(books selectString)
         {
             dbHelper.context.books.Remove(selectString);
             dbHelper.context.SaveChanges();
@@ -71,7 +72,7 @@ namespace LibraryProject.Controllers
         /// Возвращает список книг, которые взял пользователь
         /// </summary>
         /// <returns></returns>
-        public List<Models.books> GetTradingBooks()
+        public List<books> GetTradingBooks()
         {
            return dbHelper.context.books.Where(t => t.trading.login == Settings.Default.login).ToList();
         }
@@ -81,33 +82,48 @@ namespace LibraryProject.Controllers
         /// </summary>
         /// <param name="userLogin"></param>
         /// <returns></returns>
-        public List<Models.books> GetAvailableBooks(string userLogin)
+        public List<books> GetAvailableBooks(string userLogin)
         {
-            List<Models.books> AvailbleBooksList = new List<Models.books>();
+            List<books> AvailbleBooksList = new List<books>();
 
-            foreach (var item in tradingController.GetBooksId())
+            if (tradingController.GetBooksId().Count == 0)
             {
-                //dbHelper.context.books.Where(t => t.quantity.library_quantity > 0 && t.trading.book_id != selectBook && t.trading.login != userLogin).ToList();
-                AvailbleBooksList = dbHelper.context.books.Where(t => t.book_id != item && t.trading.login != userLogin).ToList();
-            }
-
-            if (AvailbleBooksList == null)
-            {
-                return null;
+                AvailbleBooksList = dbHelper.context.books.Where(t => t.quantity.library_quantity > 0).ToList();
             }
             else
             {
-                return AvailbleBooksList;
+                foreach (var i in BooksInfoOutput())
+                {
+                    foreach (var item in tradingController.GetBooksId())
+                    {
+                        //dbHelper.context.books.Where(t => t.quantity.library_quantity > 0 && t.trading.book_id != selectBook && t.trading.login != userLogin).ToList();
+                        AvailbleBooksList = dbHelper.context.books.Where(t => t.quantity.library_quantity > 0 && t.book_id != item && t.trading.login != userLogin).ToList();
+
+                    }
+                }
+
             }
+            return AvailbleBooksList;
         }
 
-        public bool AssignIdTradingToBook(int selectBook, int newTradingId, List<Models.books> selectBookList)
+        public bool AssignIdTradingToBook(int selectBook, int newTradingId)
         {
-            var bookTrading = dbHelper.context.books.Where(t => t.book_id == selectBook).First().trading_id;
 
-            foreach (var item in selectBookList)
+            foreach (var item in dbHelper.context.books.Where(t => t.book_id == selectBook).ToList())
             {
                 item.trading_id = newTradingId;
+            }
+
+            dbHelper.context.SaveChanges();
+            return true;
+        }
+
+        public bool RemoveIdTradingFromBook(int selectBook)
+        {
+
+            foreach (var item in dbHelper.context.books.Where(t => t.book_id == selectBook).ToList())
+            {
+                item.trading_id = null;
             }
 
             dbHelper.context.SaveChanges();

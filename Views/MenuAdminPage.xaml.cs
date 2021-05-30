@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryProject.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,8 +21,8 @@ namespace LibraryProject.Views
     /// </summary>
     public partial class MenuAdminPage : Page
     {
-        readonly Controllers.BooksController booksController = new Controllers.BooksController();
-        readonly Controllers.ClientsController clientsController = new Controllers.ClientsController();
+        readonly BooksController booksController = new BooksController();
+        readonly ClientsController clientsController = new ClientsController();
         public MenuAdminPage()
         {
             InitializeComponent();

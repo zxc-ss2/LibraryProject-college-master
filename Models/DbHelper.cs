@@ -8,6 +8,6 @@ namespace LibraryProject.Models
 {
    public class DbHelper
     {
-        public Models.LibraryEntities context = new Models.LibraryEntities();
+        public LibraryEntities context = new LibraryEntities();
     }
 }

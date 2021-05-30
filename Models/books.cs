@@ -24,7 +24,7 @@ namespace LibraryProject.Models
         public Nullable<int> quantity_id { get; set; }
         public Nullable<int> storage_id { get; set; }
         public int interpreter_id { get; set; }
-        public int chamber_id { get; set; }
+        public Nullable<int> chamber_id { get; set; }
         public Nullable<int> trading_id { get; set; }
     
         public virtual chambers chambers { get; set; }

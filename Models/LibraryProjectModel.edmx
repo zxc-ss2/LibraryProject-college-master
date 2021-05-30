@@ -19,7 +19,7 @@
           <Property Name="quantity_id" Type="int" />
           <Property Name="storage_id" Type="int" />
           <Property Name="interpreter_id" Type="int" Nullable="false" />
-          <Property Name="chamber_id" Type="int" Nullable="false" />
+          <Property Name="chamber_id" Type="int" />
           <Property Name="trading_id" Type="int" />
         </EntityType>
         <EntityType Name="chambers">
@@ -104,7 +104,7 @@
           <Property Name="login" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_books_chambers">
-          <End Role="chambers" Type="Self.chambers" Multiplicity="1">
+          <End Role="chambers" Type="Self.chambers" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="books" Type="Self.books" Multiplicity="*" />
@@ -146,7 +146,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_books_quantity">
-          <End Role="quantity" Type="Self.quantity" Multiplicity="0..1" />
+          <End Role="quantity" Type="Self.quantity" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="books" Type="Self.books" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="quantity">
@@ -293,7 +295,7 @@
           <Property Name="quantity_id" Type="Int32" />
           <Property Name="storage_id" Type="Int32" />
           <Property Name="interpreter_id" Type="Int32" Nullable="false" />
-          <Property Name="chamber_id" Type="Int32" Nullable="false" />
+          <Property Name="chamber_id" Type="Int32" />
           <Property Name="trading_id" Type="Int32" />
           <NavigationProperty Name="chambers" Relationship="Self.FK_books_chambers" FromRole="books" ToRole="chambers" />
           <NavigationProperty Name="fields" Relationship="Self.FK_books_fields" FromRole="books" ToRole="fields" />
@@ -396,7 +398,7 @@
           <NavigationProperty Name="formular" Relationship="Self.FK_formular_trading" FromRole="trading" ToRole="formular" />
         </EntityType>
         <Association Name="FK_books_chambers">
-          <End Role="chambers" Type="Self.chambers" Multiplicity="1">
+          <End Role="chambers" Type="Self.chambers" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="books" Type="Self.books" Multiplicity="*" />
@@ -438,7 +440,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_books_quantity">
-          <End Role="quantity" Type="Self.quantity" Multiplicity="0..1" />
+          <End Role="quantity" Type="Self.quantity" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="books" Type="Self.books" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="quantity">

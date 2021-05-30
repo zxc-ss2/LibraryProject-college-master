@@ -1,4 +1,6 @@
-﻿using StringCheckLib;
+﻿using LibraryProject.Controllers;
+using LibraryProject.Models;
+using StringCheckLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +23,8 @@ namespace LibraryProject.Views
     /// </summary>
     public partial class EditPage : Page
     {
-        readonly Controllers.ClientsController clientsController = new Controllers.ClientsController();
-        readonly List<Models.clients> zxc = new List<Models.clients>();
+        readonly ClientsController clientsController = new ClientsController();
+        readonly List<clients> zxc = new List<clients>();
 
         public EditPage(string password)
         {

@@ -1,17 +1,24 @@
-﻿using LibraryProject.Properties;
+﻿using LibraryProject.Models;
+using LibraryProject.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace LibraryProject.Controllers
 {
    public class TradingController
     {
-        readonly Models.DbHelper dbHelper = new Models.DbHelper();
+        readonly DbHelper dbHelper = new DbHelper();
 
-        public List<Models.trading> TradingInfoOutput()
+        public List<trading> GetTradingInfo()
+        {
+            return dbHelper.context.trading.ToList();
+        }
+
+        public List<trading> TradingInfoOutput()
         {
             return dbHelper.context.trading.Where(x=>x.login == "UliyaBay").ToList();
         }
@@ -20,7 +27,7 @@ namespace LibraryProject.Controllers
         {
             //dbHelper.context.trading.Where(t => t.book_id)
 
-            dbHelper.context.trading.Add(new Models.trading
+            dbHelper.context.trading.Add(new trading
             {
                 book_id = bookId,
                 ticket = ticket,
@@ -40,20 +47,29 @@ namespace LibraryProject.Controllers
 
         public List<int> GetBooksId()
         {
-            List<int> zxc = new List<int>();
+            List<int> tradingBooksId = new List<int>();
 
             foreach (var item in dbHelper.context.trading.ToList())
             {
-                zxc.Add(item.book_id.Value);
+                tradingBooksId.Add(item.book_id.Value);
             }
 
-            if(zxc != null)
+            if(tradingBooksId != null)
             {
-                return zxc;
+                return tradingBooksId;
             }
             else{
                 return null;
             }
         }
+
+        public bool RemoveTrading(trading selectString)
+        {
+            dbHelper.context.trading.Remove(selectString);
+            dbHelper.context.SaveChanges();
+            MessageBox.Show("Удалена информация о" + selectString);
+            return true;
+        }
+
     }
 }

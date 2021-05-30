@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryProject.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,9 @@ namespace LibraryProject.Controllers
 {
     class FieldsController
     {
-        readonly Models.DbHelper dbHelper = new Models.DbHelper();
+        readonly DbHelper dbHelper = new DbHelper();
 
-        public List<Models.fields> GetBbk()
+        public List<fields> GetBbk()
         {
             return dbHelper.context.fields.ToList();
         }
@@ -25,7 +26,7 @@ namespace LibraryProject.Controllers
             return dbHelper.context.fields.Where(t => t.field_knowledge_name.Contains(userField) || t.field_knowledge_bbk.Contains(userField)).First().field_knowledge_id;
         }
 
-        public List<Models.fields> GetCorrectBbk(string userField)
+        public List<fields> GetCorrectBbk(string userField)
         {
             return dbHelper.context.fields.Where(t => t.field_knowledge_name.Contains(userField) || t.field_knowledge_bbk.Contains(userField)).ToList();
         }

@@ -1,4 +1,6 @@
-﻿using LibraryProject.Properties;
+﻿using LibraryProject.Controllers;
+using LibraryProject.Models;
+using LibraryProject.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,18 +23,18 @@ namespace LibraryProject.Views
     /// </summary>
     public partial class MenuClientPage : Page
     {
-        readonly Controllers.BooksController booksController = new Controllers.BooksController();
-        readonly Controllers.TradingController tradingController = new Controllers.TradingController();
-        readonly Controllers.QuantityController quantityController = new Controllers.QuantityController();
+        readonly BooksController booksController = new BooksController();
+        readonly TradingController tradingController = new TradingController();
+        readonly QuantityController quantityController = new QuantityController();
 
         public MenuClientPage()
         {
             InitializeComponent();
             AllBooksDataGrid.ItemsSource = booksController.BooksInfoOutput();
             AvailableBooksDataGrid.ItemsSource = booksController.GetAvailableBooks(Settings.Default.login);
+            ClientTakenBooksDataGrid.ItemsSource = booksController.GetTradingBooks();
         }
-        List<Models.quantity> booksQuantity = new List<Models.quantity>();
-        List<Models.books> books = new List<Models.books>();
+        List<quantity> booksQuantity = new List<quantity>();
         string ticket = "";
         private void FilterList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -58,7 +60,7 @@ namespace LibraryProject.Views
             
         }
 
-        private void GetBookClick(object sender, RoutedEventArgs e)
+        private void GetBookBtn_Click(object sender, RoutedEventArgs e)
         {
             Random rnd = new Random();
             string generator = "";
@@ -100,8 +102,7 @@ namespace LibraryProject.Views
 
             var firstSelectedCellContent = new DataGridCellInfo(AvailableBooksDataGrid.SelectedItem, AvailableBooksDataGrid.Columns[0]);
             TextBlock firstSelectedCell = firstSelectedCellContent.Column.GetCellContent(firstSelectedCellContent.Item) as TextBlock;
-
-            
+          
 
             if(firstSelectedCell == null)
             {
@@ -110,15 +111,40 @@ namespace LibraryProject.Views
             else
             {
                 booksQuantity = quantityController.GetQuantity(Convert.ToInt32(firstSelectedCell.Text));
-                books = booksController.BooksInfoOutput();
                 if (tradingController.AddNewTrading(Convert.ToInt32(firstSelectedCell.Text), ticket, DateTime.Now, DateTime.Now.AddMonths(1), Settings.Default.login))
                 {
-                    quantityController.ChangeQuantity(Convert.ToInt32(firstSelectedCell.Text), booksQuantity);
-                    booksController.AssignIdTradingToBook(Convert.ToInt32(firstSelectedCell.Text), tradingController.GetNeededTradingId(Convert.ToInt32(firstSelectedCell.Text)), books);
+                    quantityController.ChangeQuantityMinus(Convert.ToInt32(firstSelectedCell.Text), booksQuantity);
+                    booksController.AssignIdTradingToBook(Convert.ToInt32(firstSelectedCell.Text), tradingController.GetNeededTradingId(Convert.ToInt32(firstSelectedCell.Text)));
+                    AvailableBooksDataGrid.ItemsSource = booksController.GetAvailableBooks(Settings.Default.login);
                 }
             }
 
         }
 
+        private void ReturnBookBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var item = ClientTakenBooksDataGrid.SelectedItem as Models.trading;
+
+
+            //var firstSelectedCellContent = new DataGridCellInfo(ClientTakenBooksDataGrid.SelectedItem, ClientTakenBooksDataGrid.Columns[0]);
+            //TextBlock firstSelectedCell = firstSelectedCellContent.Column.GetCellContent(firstSelectedCellContent.Item) as TextBlock;
+
+
+            if (item == null)
+            {
+                MessageBox.Show("Вы не выбрали ни одной строки");
+            }
+            else
+            {
+                //booksQuantity = quantityController.GetQuantity(Convert.ToInt32(firstSelectedCell.Text));
+                //if (tradingController.RemoveTrading(item))
+                //{                   
+                //    ClientTakenBooksDataGrid.ItemsSource = booksController.GetTradingBooks();
+                //    booksController.RemoveIdTradingFromBook(Convert.ToInt32(firstSelectedCell.Text));
+                //    quantityController.ChangeQuantityMinus(Convert.ToInt32(firstSelectedCell.Text), booksQuantity);
+                //}
+                MessageBox.Show("Вы не выапрапрарапрой строки");
+            }
+        }
     }
 }

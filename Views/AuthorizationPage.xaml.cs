@@ -1,4 +1,5 @@
-﻿using LibraryProject.Properties;
+﻿using LibraryProject.Controllers;
+using LibraryProject.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace LibraryProject.Views
     /// </summary>
     public partial class AuthorizationPage : Page
     {
-        readonly Controllers.ClientsController clientsController = new Controllers.ClientsController();
+        readonly ClientsController clientsController = new ClientsController();
         public AuthorizationPage()
         {
             InitializeComponent();

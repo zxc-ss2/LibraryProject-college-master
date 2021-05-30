@@ -1,4 +1,5 @@
-﻿using LibraryProject.Properties;
+﻿using LibraryProject.Models;
+using LibraryProject.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,20 +9,20 @@ namespace LibraryProject.Controllers
 {
     public class ClientsController
     {
-        readonly Models.DbHelper dbHelper = new Models.DbHelper();
+        readonly DbHelper dbHelper = new DbHelper();
 
-        public List<Models.clients> ClientsInfoOutput()
+        public List<clients> ClientsInfoOutput()
         {
             return dbHelper.context.clients.ToList();
         }
 
-        public List<Models.clients> ClientsMatchUpInfoOutput(string info)
+        public List<clients> ClientsMatchUpInfoOutput(string info)
         {
             return dbHelper.context.clients.Where(t => t.name.Contains(info) || t.surname.Contains(info) ||
                                                   t.patronymic.Contains(info) || t.trading.ticket.Contains(info)).ToList();
         }
 
-        public List<Models.clients> ClientsPasswordMatchUp(string password)
+        public List<clients> ClientsPasswordMatchUp(string password)
         {
             return dbHelper.context.clients.Where(t => t.password == password).ToList();
         }
@@ -34,7 +35,7 @@ namespace LibraryProject.Controllers
         /// <returns></returns>
         public bool CheckUser(string userLogin, string userPassword)
         {
-            Models.clients user = dbHelper.context.clients.AsNoTracking().FirstOrDefault(t => t.login == userLogin && t.password == userPassword);
+            clients user = dbHelper.context.clients.AsNoTracking().FirstOrDefault(t => t.login == userLogin && t.password == userPassword);
 
             if (user == null)
             {
@@ -50,7 +51,7 @@ namespace LibraryProject.Controllers
 
         public void AddNewUser(string userName, string userSurname, string userPatronymic, DateTime userDate, string userAddress, string userWorkplace, string userStudyplace, string userPhone, string userLogin, string userPassword)
         {
-            dbHelper.context.clients.Add(new Models.clients
+            dbHelper.context.clients.Add(new clients
             {
                 id_trading = null,
                 id_role = 3,
@@ -84,7 +85,7 @@ namespace LibraryProject.Controllers
             }
         }
 
-        public bool UpdateClientInfo(string newName, string newSurname, string newPatronymic, string newAddress, string newWorkplace, string newStudyplace, string newPhone, string newLogin, string newPassword, List<Models.clients> qwe)
+        public bool UpdateClientInfo(string newName, string newSurname, string newPatronymic, string newAddress, string newWorkplace, string newStudyplace, string newPhone, string newLogin, string newPassword, List<clients> qwe)
         {
 
             foreach (var item in qwe) { 
@@ -103,11 +104,12 @@ namespace LibraryProject.Controllers
             return true;
         }
 
-        public void DeleteClientInfo(Models.clients selectString)
+        public bool DeleteClientInfo(clients selectString)
         {
             dbHelper.context.clients.Remove(selectString);
             dbHelper.context.SaveChanges();
             MessageBox.Show("Удалена информация о" + selectString);
+            return true;
         }
     }
 }

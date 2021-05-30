@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryProject.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,8 +21,8 @@ namespace LibraryProject.Views
     /// </summary>
     public partial class AddBookPage : Page
     {
-        readonly Controllers.BooksController booksController = new Controllers.BooksController();
-        readonly Controllers.FieldsController fieldsController = new Controllers.FieldsController();
+        readonly BooksController booksController = new BooksController();
+        readonly FieldsController fieldsController = new FieldsController();
         public AddBookPage()
         {
             InitializeComponent();
@@ -34,10 +35,14 @@ namespace LibraryProject.Views
         {
             if(booksController.AddNewBook(AuthorInput.Text, fieldsController.GetBbkId(BBkInputComboBox.Text), NameInput.Text, ISBNInput.Text, PlaceInput.Text, Convert.ToInt32(YearInput.Text), Convert.ToInt32(InterpretrInput.Text), Convert.ToInt32(ChamberInput.Text)))
             {
-                MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите выйти?", "Выход из аккаунта", MessageBoxButton.YesNoCancel);
-                if (result == MessageBoxResult.Yes)
+                MessageBoxResult result = MessageBox.Show("Вернуться на страницу добавления?", "Книга добавлена", MessageBoxButton.YesNoCancel);
+                if (result == MessageBoxResult.No)
                 {
                     this.NavigationService.Navigate(new MenuAdminPage());
+                }
+                else
+                {
+                    this.NavigationService.Navigate(new AddBookPage());
                 }
             }
             
