@@ -19,14 +19,13 @@ using System.Windows.Shapes;
 namespace LibraryProject.Views
 {
     /// <summary>
-    /// Логика взаимодействия для EditPage.xaml
+    /// Логика взаимодействия для EditUserPage.xaml
     /// </summary>
-    public partial class EditPage : Page
+    public partial class EditUserPage : Page
     {
         readonly ClientsController clientsController = new ClientsController();
         readonly List<clients> zxc = new List<clients>();
-
-        public EditPage(string password)
+        public EditUserPage(string password)
         {
             InitializeComponent();
 
@@ -67,7 +66,7 @@ namespace LibraryProject.Views
                 }
             }
 
-            if(NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" || NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "")
+            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" || NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -165,7 +164,7 @@ namespace LibraryProject.Views
                 }
                 else
                 {
-                    SaveBtn.IsEnabled  = false;
+                    SaveBtn.IsEnabled = false;
                 }
             }
 
@@ -279,7 +278,7 @@ namespace LibraryProject.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if(clientsController.UpdateClientInfo(NewFirstNameInput.Text, NewLastNameInput.Text, NewPatronymicInput.Text, NewAddressInput.Text, NewWorkplaceInput.Text, NewStudyplaceInput.Text, NewPhoneInput.Text, NewLoginInput.Text, NewPasswordInput.Password, zxc))
+            if (clientsController.UpdateClientInfo(NewFirstNameInput.Text, NewLastNameInput.Text, NewPatronymicInput.Text, NewAddressInput.Text, NewWorkplaceInput.Text, NewStudyplaceInput.Text, NewPhoneInput.Text, NewLoginInput.Text, NewPasswordInput.Password, zxc))
             {
                 SaveBtn.IsEnabled = false;
                 MessageBox.Show("Данные успешно обновлены");
@@ -289,7 +288,5 @@ namespace LibraryProject.Views
                 MessageBox.Show("Данные не были обновлены");
             }
         }
-
-
     }
 }

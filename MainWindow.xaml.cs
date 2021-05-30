@@ -33,7 +33,7 @@ namespace LibraryProject
 
         private void PersonalAreaImage_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            MainFrame.Navigate(new Views.EditPage(password));
+            MainFrame.Navigate(new Views.EditUserPage(password));
         }
 
         private void Image_MouseDown(object sender, MouseButtonEventArgs e)
