@@ -68,14 +68,6 @@ namespace LibraryProject.Controllers
             return dbHelper.context.trading.Where(t => t.trading_id == selectedBook).ToList();
         }
 
-        public bool RemoveTrading(trading selectString)
-        {
-            dbHelper.context.trading.Remove(selectString);
-            dbHelper.context.SaveChanges();
-            MessageBox.Show("Удалена информация о" + selectString);
-            return true;
-        }
-
         public bool UpdateTradingInfo(int newBook_id, string newTicket, DateTime newDelivery, DateTime newReception, List<trading> oldBook)
         {
             foreach (var item in oldBook)
