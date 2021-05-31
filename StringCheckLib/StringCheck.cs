@@ -103,20 +103,5 @@ namespace StringCheckLib
                 return false;
             }
         }
-
-        public bool CheckBBK(string bbk)
-        {
-            string pattern = "([1-9]+[0-9]*)+\\.+[0-9]*";
-
-            if (Regex.Match(bbk, pattern, RegexOptions.IgnoreCase).Success)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
     }
 }

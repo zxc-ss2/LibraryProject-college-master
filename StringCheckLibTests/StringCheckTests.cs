@@ -43,52 +43,52 @@ namespace StringCheckLibTests
             Assert.IsFalse(correctName);
         }
 
-        [TestMethod]
-        public void CheckBBK_isCorrect_TrueReturned()
-        {
-            //Arrange
-            string stringBBK = "12.645";
-            //Act 
-            StringCheck isBBK = new StringCheck();
-            bool correctBBK = isBBK.CheckBBK(stringBBK);
-            //Assert
-            Assert.IsTrue(correctBBK);
-        }
+        //[TestMethod]
+        //public void CheckBBK_isCorrect_TrueReturned()
+        //{
+        //    //Arrange
+        //    string stringBBK = "12.645";
+        //    //Act 
+        //    StringCheck isBBK = new StringCheck();
+        //    bool correctBBK = isBBK.CheckBBK(stringBBK);
+        //    //Assert
+        //    Assert.IsTrue(correctBBK);
+        //}
 
-        [TestMethod]
-        public void CheckBBK_isEmpty_FalseReturned()
-        {
-            //Arrange
-            string stringBBK = "";
-            //Act 
-            StringCheck isBBK = new StringCheck();
-            bool correctBBK = isBBK.CheckBBK(stringBBK);
-            //Assert
-            Assert.IsFalse(correctBBK);
-        }
+        //[TestMethod]
+        //public void CheckBBK_isEmpty_FalseReturned()
+        //{
+        //    //Arrange
+        //    string stringBBK = "";
+        //    //Act 
+        //    StringCheck isBBK = new StringCheck();
+        //    bool correctBBK = isBBK.CheckBBK(stringBBK);
+        //    //Assert
+        //    Assert.IsFalse(correctBBK);
+        //}
 
-        [TestMethod]
-        public void CheckBBK_isEngLetters_FalseReturned()
-        {
-            //Arrange
-            string stringBBK = "sdfsdgfdgdf";
-            //Act 
-            StringCheck isBBK = new StringCheck();
-            bool correctBBK = isBBK.CheckBBK(stringBBK);
-            //Assert
-            Assert.IsFalse(correctBBK);
-        }
+        //[TestMethod]
+        //public void CheckBBK_isEngLetters_FalseReturned()
+        //{
+        //    //Arrange
+        //    string stringBBK = "sdfsdgfdgdf";
+        //    //Act 
+        //    StringCheck isBBK = new StringCheck();
+        //    bool correctBBK = isBBK.CheckBBK(stringBBK);
+        //    //Assert
+        //    Assert.IsFalse(correctBBK);
+        //}
 
-        [TestMethod]
-        public void CheckBBK_isRusLetters_FalseReturned()
-        {
-            //Arrange
-            string stringBBK = "авпвапвапва";
-            //Act 
-            StringCheck isBBK = new StringCheck();
-            bool correctBBK = isBBK.CheckBBK(stringBBK);
-            //Assert
-            Assert.IsFalse(correctBBK);
-        }
+        //[TestMethod]
+        //public void CheckBBK_isRusLetters_FalseReturned()
+        //{
+        //    //Arrange
+        //    string stringBBK = "авпвапвапва";
+        //    //Act 
+        //    StringCheck isBBK = new StringCheck();
+        //    bool correctBBK = isBBK.CheckBBK(stringBBK);
+        //    //Assert
+        //    Assert.IsFalse(correctBBK);
+        //}
     }
 }

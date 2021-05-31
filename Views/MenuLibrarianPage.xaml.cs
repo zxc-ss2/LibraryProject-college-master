@@ -72,5 +72,22 @@ namespace LibraryProject.Views
 
             this.NavigationService.Navigate(new EditBookPage());
         }
+
+        private void EditTradingInfoBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var firstSelectedCellContent = new DataGridCellInfo(TradingDataGrid.SelectedItem, TradingDataGrid.Columns[0]);
+            TextBlock firstSelectedCell = firstSelectedCellContent.Column.GetCellContent(firstSelectedCellContent.Item) as TextBlock;
+
+            if(firstSelectedCell == null)
+            {
+                MessageBox.Show("Выберите книгу из раздела 'мои книги'");
+            }
+            else
+            {
+                Settings.Default.selectBook2 = Convert.ToInt32(firstSelectedCell.Text);
+
+                this.NavigationService.Navigate(new EditTradingPage());
+            }
+        }
     }
 }

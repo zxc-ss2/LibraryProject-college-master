@@ -9,6 +9,42 @@
       Title="EditTradingPage">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="400">
+            <DockPanel>
+                <TextBlock Style="{StaticResource LeftLabelText}">книга (ID)</TextBlock>
+                <TextBlock Style="{StaticResource RightLabelText}">Номер чит. билета</TextBlock>
+            </DockPanel>
+            <DockPanel>
+                <DockPanel>
+                    <TextBox Style="{StaticResource LeftInputBox}" x:Name="NewBookIdInput" TextChanged="NewBookIdInput_TextChanged"></TextBox>
+                    <Button x:Name="AuthorWarningBtn" Style="{StaticResource WarningBtn}">
+                        <Image Source="/Resources/images/warning-removebg-preview.png" />
+                    </Button>
+                </DockPanel>
+                <DockPanel HorizontalAlignment="Right">
+                    <TextBox Style="{StaticResource RightInputBox}" x:Name="NewTicketInput" TextChanged="NewTicketInput_TextChanged"></TextBox>
+                    <Button x:Name="NameWarningBtn" Style="{StaticResource WarningBtn}">
+                        <Image Source="/Resources/images/warning-removebg-preview.png"/>
+                    </Button>
+                </DockPanel>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Style="{StaticResource LeftLabelText}">Дата выдачи</TextBlock>
+                <TextBlock Style="{StaticResource RightLabelText}">Дата возврата</TextBlock>
+            </DockPanel>
+            <DockPanel>
+                <DockPanel>
+                    <TextBox Style="{StaticResource LeftInputBox}" x:Name="NewDeliveryInput" TextChanged="NewDeliveryInput_TextChanged"></TextBox>
+                </DockPanel>
+                <DockPanel HorizontalAlignment="Right">
+                    <TextBox Style="{StaticResource RightInputBox}" x:Name="NewReceptionInput" TextChanged="NewReceptionInput_TextChanged"></TextBox>
+                </DockPanel>
+            </DockPanel>
+            <Button x:Name="SaveBtn" Style="{StaticResource StartBtn}" Click="SaveBtn_Click">Сохранить изменения</Button>
+        </StackPanel >
     </Grid>
 </Page>

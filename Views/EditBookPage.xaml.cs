@@ -23,7 +23,6 @@ namespace LibraryProject.Views
     /// </summary>
     public partial class EditBookPage : Page
     {
-        readonly ClientsController clientsController = new ClientsController();
         readonly BooksController booksController = new BooksController();
         readonly List<books> UpdatingBook = new List<books>();
         public EditBookPage()
