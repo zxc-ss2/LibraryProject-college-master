@@ -16,6 +16,23 @@ namespace LibraryProject.Controllers
             return dbHelper.context.fields.ToList();
         }
 
+        public List<string> GetBbkNumbers()
+        {
+            List<string> bbk = new List<string>();
+            //foreach (var item in dbHelper.context.fields)
+            //{
+            //    string element = dbHelper.context.fields.First().field_knowledge_bbk;
+            //    bbk[item] = element;
+            //}
+
+            for (int i = 0; i < dbHelper.context.fields.Count(); i++)
+            {
+                string element = dbHelper.context.fields.Select(t => t.field_knowledge_id == i);
+                bbk.Add(element);
+            }
+
+            return bbk;
+        }
         //public int GetBbkId(string selectedBbk)
         //{
         //    return dbHelper.context.fields.Where(t => t.field_knowledge_bbk == selectedBbk || t.field_knowledge_name == selectedBbk).First().field_knowledge_bbk;

@@ -1,4 +1,5 @@
-﻿using LibraryProject.Controllers;
+﻿using LibraryProject.Classes;
+using LibraryProject.Controllers;
 using LibraryProject.Properties;
 using System;
 using System.Collections.Generic;
@@ -24,18 +25,18 @@ namespace LibraryProject.Views
     {
         TradingController tradingController = new TradingController();
         BooksController booksController = new BooksController();
+        BbkCheckClass bbkCheckClass = new BbkCheckClass(); 
         public MenuLibrarianPage()
         {
             InitializeComponent();
             TradingDataGrid.ItemsSource = tradingController.GetTradingInfo();
             BookDataGrid.ItemsSource = booksController.BooksInfoOutput();
 
-            
         }
 
         private void DeleteTradingInfoBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            bbkCheckClass.CheckBbk("28,01");
         }
 
         private void AddTradingInfoBtn_Click(object sender, RoutedEventArgs e)

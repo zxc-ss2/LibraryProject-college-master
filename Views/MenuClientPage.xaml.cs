@@ -123,26 +123,26 @@ namespace LibraryProject.Views
 
         private void ReturnBookBtn_Click(object sender, RoutedEventArgs e)
         {
-            var firstSelectedCellContent = new DataGridCellInfo(ClientTakenBooksDataGrid.SelectedItem, ClientTakenBooksDataGrid.Columns[0]);
-            TextBlock firstSelectedCell = firstSelectedCellContent.Column.GetCellContent(firstSelectedCellContent.Item) as TextBlock;
-            var item = ClientTakenBooksDataGrid.ItemsSource as Models.books;
+            //var firstSelectedCellContent = new DataGridCellInfo(ClientTakenBooksDataGrid.SelectedItem, ClientTakenBooksDataGrid.Columns[0]);
+            //TextBlock firstSelectedCell = firstSelectedCellContent.Column.GetCellContent(firstSelectedCellContent.Item) as TextBlock;
+            //var item = ClientTakenBooksDataGrid.ItemsSource as Models.books;
 
-            if (item == null)
-            {
-                MessageBox.Show("Вы не выбрали ни одной строки");
-            }
-            else
-            {
-                booksController.RemoveIdTradingFromBook(Convert.ToInt32(firstSelectedCell.Text));
+            //if (item == null)
+            //{
+            //    MessageBox.Show("Вы не выбрали ни одной строки");
+            //}
+            //else
+            //{
+            //    booksController.RemoveIdTradingFromBook(Convert.ToInt32(firstSelectedCell.Text));
 
-                booksQuantity = quantityController.GetQuantity(Convert.ToInt32(firstSelectedCell.Text));
-                if (tradingController.RemoveTrading(item))
-                {
-                    ClientTakenBooksDataGrid.ItemsSource = booksController.GetTradingBooks();
-                    quantityController.ChangeQuantityMinus(Convert.ToInt32(firstSelectedCell.Text), booksQuantity);
-                }
-                MessageBox.Show("Вы не выапрапрарапрой строки");
-            }
+            //    booksQuantity = quantityController.GetQuantity(Convert.ToInt32(firstSelectedCell.Text));
+            //    if (tradingController.RemoveTrading(item))
+            //    {
+            //        ClientTakenBooksDataGrid.ItemsSource = booksController.GetTradingBooks();
+            //        quantityController.ChangeQuantityMinus(Convert.ToInt32(firstSelectedCell.Text), booksQuantity);
+            //    }
+            //    MessageBox.Show("Вы не выапрапрарапрой строки");
+            //}
         }
     }
 }

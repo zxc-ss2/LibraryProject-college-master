@@ -82,7 +82,7 @@
                     </Button>
                 </DockPanel>
                 <DockPanel HorizontalAlignment="Right">
-                    <PasswordBox x:Name="PasswordInput" Style="{StaticResource CenterInputBox}"></PasswordBox>
+                    <PasswordBox x:Name="PasswordInput" Style="{StaticResource CenterPasswordInputBox}"></PasswordBox>
                     <Button Style="{StaticResource WarningBtn}" Height="20" Width="20" VerticalContentAlignment="Center">
                         <Image Source="/Resources/images/warning-removebg-preview.png"/>
                     </Button>

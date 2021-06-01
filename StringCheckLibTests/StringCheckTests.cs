@@ -43,52 +43,305 @@ namespace StringCheckLibTests
             Assert.IsFalse(correctName);
         }
 
-        //[TestMethod]
-        //public void CheckBBK_isCorrect_TrueReturned()
-        //{
-        //    //Arrange
-        //    string stringBBK = "12.645";
-        //    //Act 
-        //    StringCheck isBBK = new StringCheck();
-        //    bool correctBBK = isBBK.CheckBBK(stringBBK);
-        //    //Assert
-        //    Assert.IsTrue(correctBBK);
-        //}
+        [TestMethod]
+        public void CheckAddress_isRusSpaceDelimiter_TrueReturned()
+        {
+            //Arrange
+            string stringAddress = "Щорса 56";
+            //Act 
+            StringCheck isAddress = new StringCheck();
+            bool correctAddress = isAddress.CheckAddress(stringAddress);
+            //Assert
+            Assert.IsTrue(correctAddress);
+        }
 
-        //[TestMethod]
-        //public void CheckBBK_isEmpty_FalseReturned()
-        //{
-        //    //Arrange
-        //    string stringBBK = "";
-        //    //Act 
-        //    StringCheck isBBK = new StringCheck();
-        //    bool correctBBK = isBBK.CheckBBK(stringBBK);
-        //    //Assert
-        //    Assert.IsFalse(correctBBK);
-        //}
+        [TestMethod]
+        public void CheckAddress_isRusCommaDelimiter_TrueReturned()
+        {
+            //Arrange
+            string stringAddress = "Щорса,56";
+            //Act 
+            StringCheck isAddress = new StringCheck();
+            bool correctAddress = isAddress.CheckAddress(stringAddress);
+            //Assert
+            Assert.IsTrue(correctAddress);
+        }
 
-        //[TestMethod]
-        //public void CheckBBK_isEngLetters_FalseReturned()
-        //{
-        //    //Arrange
-        //    string stringBBK = "sdfsdgfdgdf";
-        //    //Act 
-        //    StringCheck isBBK = new StringCheck();
-        //    bool correctBBK = isBBK.CheckBBK(stringBBK);
-        //    //Assert
-        //    Assert.IsFalse(correctBBK);
-        //}
+        [TestMethod]
+        public void CheckAddress_isRusDashDelimiter_TrueReturned()
+        {
+            //Arrange
+            string stringAddress = "Щорса-56";
+            //Act 
+            StringCheck isAddress = new StringCheck();
+            bool correctAddress = isAddress.CheckAddress(stringAddress);
+            //Assert
+            Assert.IsTrue(correctAddress);
+        }
 
-        //[TestMethod]
-        //public void CheckBBK_isRusLetters_FalseReturned()
-        //{
-        //    //Arrange
-        //    string stringBBK = "авпвапвапва";
-        //    //Act 
-        //    StringCheck isBBK = new StringCheck();
-        //    bool correctBBK = isBBK.CheckBBK(stringBBK);
-        //    //Assert
-        //    Assert.IsFalse(correctBBK);
-        //}
+        [TestMethod]
+        public void CheckAddress_isEmmpty_FalseReturned()
+        {
+            //Arrange
+            string stringAddress = "";
+            //Act 
+            StringCheck isAddress = new StringCheck();
+            bool correctAddress = isAddress.CheckAddress(stringAddress);
+            //Assert
+            Assert.IsFalse(correctAddress);
+        }
+
+        [TestMethod]
+        public void CheckAddress_isRusWithOutNumbers_FalseReturned()
+        {
+            //Arrange
+            string stringAddress = "Щорса";
+            //Act 
+            StringCheck isAddress = new StringCheck();
+            bool correctAddress = isAddress.CheckAddress(stringAddress);
+            //Assert
+            Assert.IsFalse(correctAddress);
+        }
+
+        [TestMethod]
+        public void CheckPhone_isCorrectPhoneThatStartsWithNumber8_TrueReturned()
+        {
+            //Arrange
+            string stringPhone = "89089150664";
+            //Act 
+            StringCheck isPhone = new StringCheck();
+            bool correctPhone = isPhone.CheckPhone(stringPhone);
+            //Assert
+            Assert.IsTrue(correctPhone);
+        }
+
+        [TestMethod]
+        public void CheckPhone_isCorrectPhoneThatStartsWithNumberPlus7_TrueReturned()
+        {
+            //Arrange
+            string stringPhone = "+79089150664";
+            //Act 
+            StringCheck isPhone = new StringCheck();
+            bool correctPhone = isPhone.CheckPhone(stringPhone);
+            //Assert
+            Assert.IsTrue(correctPhone);
+        }
+
+
+        [TestMethod]
+        public void CheckPhone_isCorrectPhoneThatStartsWithNumber7_TrueReturned()
+        {
+            //Arrange
+            string stringPhone = "79089150664";
+            //Act 
+            StringCheck isPhone = new StringCheck();
+            bool correctPhone = isPhone.CheckPhone(stringPhone);
+            //Assert
+            Assert.IsTrue(correctPhone);
+        }
+
+        [TestMethod]
+        public void CheckPhone_isEmpty_FalseReturned()
+        {
+            //Arrange
+            string stringPhone = "";
+            //Act 
+            StringCheck isPhone = new StringCheck();
+            bool correctPhone = isPhone.CheckPhone(stringPhone);
+            //Assert
+            Assert.IsFalse(correctPhone);
+        }
+
+        [TestMethod]
+        public void CheckPhone_isNotEnoughChars_FalseReturned()
+        {
+            //Arrange
+            string stringPhone = "8908963";
+            //Act 
+            StringCheck isPhone = new StringCheck();
+            bool correctPhone = isPhone.CheckPhone(stringPhone);
+            //Assert
+            Assert.IsFalse(correctPhone);
+        }
+
+        [TestMethod]
+        public void CheckLogin_isCorrect_TrueReturned()
+        {
+            //Arrange
+            string stringLogin = "cursed_1234";
+            //Act 
+            StringCheck isLogin = new StringCheck();
+            bool correctLogin = isLogin.CheckLogin(stringLogin);
+            //Assert
+            Assert.IsTrue(correctLogin);
+        }
+
+        [TestMethod]
+        public void CheckLogin_isUppercaseLogin_TrueReturned()
+        {
+            //Arrange
+            string stringLogin = "CURSED_1234";
+            //Act 
+            StringCheck isLogin = new StringCheck();
+            bool correctLogin = isLogin.CheckLogin(stringLogin);
+            //Assert
+            Assert.IsTrue(correctLogin);
+        }
+
+        [TestMethod]
+        public void CheckLogin_isEmpty_FalseReturned()
+        {
+            //Arrange
+            string stringLogin = "";
+            //Act 
+            StringCheck isLogin = new StringCheck();
+            bool correctLogin = isLogin.CheckLogin(stringLogin);
+            //Assert
+            Assert.IsFalse(correctLogin);
+        }
+
+        [TestMethod]
+        public void CheckLogin_isTwoInARowDash_FalseReturned()
+        {
+            //Arrange
+            string stringLogin = "cursed--1234";
+            //Act 
+            StringCheck isLogin = new StringCheck();
+            bool correctLogin = isLogin.CheckLogin(stringLogin);
+            //Assert
+            Assert.IsFalse(correctLogin);
+        }
+
+        [TestMethod]
+        public void CheckLogin_isTwoInARowLowDash_FalseReturned()
+        {
+            //Arrange
+            string stringLogin = "cursed__1234";
+            //Act 
+            StringCheck isLogin = new StringCheck();
+            bool correctLogin = isLogin.CheckLogin(stringLogin);
+            //Assert
+            Assert.IsFalse(correctLogin);
+        }
+
+        [TestMethod]
+        public void CheckLogin_isMoreThanTwoDash_FalseReturned()
+        {
+            //Arrange
+            string stringLogin = "cursed-12-3-4";
+            //Act 
+            StringCheck isLogin = new StringCheck();
+            bool correctLogin = isLogin.CheckLogin(stringLogin);
+            //Assert
+            Assert.IsFalse(correctLogin);
+        }
+
+        [TestMethod]
+        public void CheckLogin_isMoreThanTwoLowDash_FalseReturned()
+        {
+            //Arrange
+            string stringLogin = "cursed_12_3_4";
+            //Act 
+            StringCheck isLogin = new StringCheck();
+            bool correctLogin = isLogin.CheckLogin(stringLogin);
+            //Assert
+            Assert.IsFalse(correctLogin);
+        }
+
+        [TestMethod]
+        public void CheckPassword_isCorrect_TrueReturned()
+        {
+            //Arrange
+            string stringPassword = "ThatStuffW1llKillYa!";
+            //Act 
+            StringCheck isPassword = new StringCheck();
+            bool correctLogin = isPassword.CheckPassword(stringPassword);
+            //Assert
+            Assert.IsTrue(correctLogin);
+        }
+
+        [TestMethod]
+        public void CheckPassword_isNotEnoughChars_FalseReturned()
+        {
+            //Arrange
+            string stringPassword = "zxcV1_";
+            //Act 
+            StringCheck isPassword = new StringCheck();
+            bool correctLogin = isPassword.CheckPassword(stringPassword);
+            //Assert
+            Assert.IsFalse(correctLogin);
+        }
+
+        [TestMethod]
+        public void CheckPassword_isNotEnoughspecialChars_FalseReturned()
+        {
+            //Arrange
+            string stringPassword = "zxcvQWER1234";
+            //Act 
+            StringCheck isPassword = new StringCheck();
+            bool correctLogin = isPassword.CheckPassword(stringPassword);
+            //Assert
+            Assert.IsFalse(correctLogin);
+        }
+
+        [TestMethod]
+        public void CheckPassword_isNotEnoughNumbers_FalseReturned()
+        {
+            //Arrange
+            string stringPassword = "zxcQWER_!gf";
+            //Act 
+            StringCheck isPassword = new StringCheck();
+            bool correctLogin = isPassword.CheckPassword(stringPassword);
+            //Assert
+            Assert.IsFalse(correctLogin);
+        }
+
+        [TestMethod]
+        public void CheckPassword_isNotEnoughUppercaseLetters_FalseReturned()
+        {
+            //Arrange
+            string stringPassword = "zxcvbb!_f32";
+            //Act 
+            StringCheck isPassword = new StringCheck();
+            bool correctLogin = isPassword.CheckPassword(stringPassword);
+            //Assert
+            Assert.IsFalse(correctLogin);
+        }
+
+        [TestMethod]
+        public void CheckPassword_isNotEnoughLowcaseLetters_FalseReturned()
+        {
+            //Arrange
+            string stringPassword = "FSFSD123_!fd";
+            //Act 
+            StringCheck isPassword = new StringCheck();
+            bool correctLogin = isPassword.CheckPassword(stringPassword);
+            //Assert
+            Assert.IsFalse(correctLogin);
+        }
+
+        [TestMethod]
+        public void CheckPassword_isRusLetters_FalseReturned()
+        {
+            //Arrange
+            string stringPassword = "йцукячс!_АВ";
+            //Act 
+            StringCheck isPassword = new StringCheck();
+            bool correctLogin = isPassword.CheckPassword(stringPassword);
+            //Assert
+            Assert.IsFalse(correctLogin);
+        }
+
+        [TestMethod]
+        public void CheckPassword_isEmpty_FalseReturned()
+        {
+            //Arrange
+            string stringPassword = "";
+            //Act 
+            StringCheck isPassword = new StringCheck();
+            bool correctLogin = isPassword.CheckPassword(stringPassword);
+            //Assert
+            Assert.IsFalse(correctLogin);
+        }
     }
 }

@@ -20,58 +20,86 @@
                 <TextBlock Style="{StaticResource RightLabelText}">Название</TextBlock>
             </DockPanel>
             <DockPanel>
-                <TextBox x:Name="AuthorInput" Style="{StaticResource LeftInputBox}"></TextBox>
-                <TextBox x:Name="NameInput" Style="{StaticResource RightInputBox}"></TextBox>
+                <DockPanel>
+                    <TextBox x:Name="AuthorInput" Style="{StaticResource LeftInputBox}"></TextBox>
+                    <Button x:Name="AuthorWarningBtn" Style="{StaticResource WarningBtn}">
+                        <Image Source="/Resources/images/warning-removebg-preview.png" />
+                    </Button>
+                </DockPanel>
+                <DockPanel HorizontalAlignment="Right">
+                    <TextBox x:Name="NameInput" Style="{StaticResource RightInputBox}"></TextBox>
+                    <Button x:Name="NameWarningBtn" Style="{StaticResource WarningBtn}">
+                        <Image Source="/Resources/images/warning-removebg-preview.png" />
+                    </Button>
+                </DockPanel>
             </DockPanel>
             <DockPanel>
                 <TextBlock Style="{StaticResource LeftLabelText}">BBK</TextBlock>
                 <TextBlock Style="{StaticResource RightLabelText}">ISBN</TextBlock>
             </DockPanel>
             <DockPanel>
-                <StackPanel>
-                    <DockPanel Width="180">
-                        <Button x:Name="DirectInputBtn" Style="{StaticResource CorrectEnterBtn}" Click="DirectInputBtn_Click" >Ввести вручную</Button>
-                        <Button x:Name="SelectInputBtn" Style="{StaticResource CorrectEnterBtn}" Click="SelectInputBtn_Click" Visibility="Collapsed">Вернуться к списку</Button>
-                        <StackPanel Width="100">
-                            <TextBox  Style="{StaticResource SearchBBkBox}" x:Name="BbkSearchBox" TextChanged="BbkSearchBox_TextChanged"></TextBox>
-                            <TextBlock Style="{StaticResource PlaceholderBbkStyle}" Tag="{Binding ElementName=BbkSearchBox}" Text="Введите ББК/название" HorizontalAlignment="Left" Margin="5,-13,0,8"></TextBlock>
-                        </StackPanel>
-                    </DockPanel>
-                    <ComboBox x:Name="BBkInputComboBox" MaxDropDownHeight="100" Style="{DynamicResource BbkComboBox}" HorizontalAlignment="Left" ></ComboBox>
-                    <TextBox x:Name="DirectInputTextBox" Style="{StaticResource LeftInputBox}" Visibility="Collapsed"></TextBox>
-                    <DockPanel x:Name="SelectShowDocPanel" Margin="0 7 0 2">
-                        <TextBlock Style="{StaticResource BbkOrFieldNameChange}">Показать:</TextBlock>
-                        <StackPanel Orientation="Horizontal">
-                            <RadioButton Style="{StaticResource RadioButtonDefault}" Click="RadioButtonBbk_Click">
-                                <WrapPanel>
-                                    <TextBlock Style="{StaticResource UserChoiceTextBlock}">BBK</TextBlock>
-                                </WrapPanel>
-                            </RadioButton>
-                            <RadioButton Style="{StaticResource RadioButtonDefault}" Click="RadioButtonName_Click">
-                                <WrapPanel>
-                                    <TextBlock Style="{StaticResource UserChoiceTextBlock}">Название</TextBlock>
-                                </WrapPanel>
-                            </RadioButton>
-                        </StackPanel>
-                    </DockPanel>
-                </StackPanel>
-                <TextBox Style="{StaticResource RightISBNInputBox}" x:Name="ISBNInput"></TextBox>
+                <DockPanel>
+                    <StackPanel>
+                        <DockPanel Width="180">
+                            <Button x:Name="DirectInputBtn" Style="{StaticResource CorrectEnterBtn}" Click="DirectInputBtn_Click" >Ввести вручную</Button>
+                            <Button x:Name="SelectInputBtn" Style="{StaticResource CorrectEnterBtn}" Click="SelectInputBtn_Click" Visibility="Collapsed">Вернуться к списку</Button>
+                            <StackPanel Width="100">
+                                <TextBox  Style="{StaticResource SearchBBkBox}" x:Name="BbkSearchBox" TextChanged="BbkSearchBox_TextChanged"></TextBox>
+                                <TextBlock Style="{StaticResource PlaceholderBbkStyle}" Tag="{Binding ElementName=BbkSearchBox}" Text="Введите ББК/название" HorizontalAlignment="Left" Margin="5,-13,0,8"></TextBlock>
+                            </StackPanel>
+                        </DockPanel>
+                        <ComboBox x:Name="BBkInputComboBox" MaxDropDownHeight="100" Style="{DynamicResource BbkComboBox}" HorizontalAlignment="Left" ></ComboBox>
+                        <TextBox x:Name="DirectInputTextBox" Style="{StaticResource LeftInputBox}" Visibility="Collapsed"></TextBox>
+                        <DockPanel x:Name="SelectShowDocPanel" Margin="0 7 0 2">
+                            <TextBlock Style="{StaticResource BbkOrFieldNameChange}">Показать:</TextBlock>
+                            <StackPanel Orientation="Horizontal">
+                                <RadioButton Style="{StaticResource RadioButtonDefault}" Click="RadioButtonBbk_Click">
+                                    <WrapPanel>
+                                        <TextBlock Style="{StaticResource UserChoiceTextBlock}">BBK</TextBlock>
+                                    </WrapPanel>
+                                </RadioButton>
+                                <RadioButton Style="{StaticResource RadioButtonDefault}" Click="RadioButtonName_Click">
+                                    <WrapPanel>
+                                        <TextBlock Style="{StaticResource UserChoiceTextBlock}">Название</TextBlock>
+                                    </WrapPanel>
+                                </RadioButton>
+                            </StackPanel>
+                        </DockPanel>
+                    </StackPanel>
+                </DockPanel>
+                <DockPanel HorizontalAlignment="Right">
+                    <TextBox Style="{StaticResource RightISBNInputBox}" x:Name="ISBNInput"></TextBox>
+                    <Button x:Name="ISBNWarningBtn" Style="{StaticResource WarningBtn}">
+                        <Image Source="/Resources/images/warning-removebg-preview.png" />
+                    </Button>
+                </DockPanel>
             </DockPanel>
             <DockPanel>
+                <DockPanel>
+                    
+                </DockPanel>
                 <TextBlock Style="{StaticResource LeftLabelText}">Место издания</TextBlock>
                 <TextBlock Style="{StaticResource RightLabelText}">Год издания</TextBlock>
             </DockPanel>
             <DockPanel>
                 <TextBox x:Name="PlaceInput" Style="{StaticResource LeftInputBox}"></TextBox>
-                <TextBox x:Name="YearInput" Style="{StaticResource RightInputBox}"></TextBox>
+                <DockPanel HorizontalAlignment="Right">
+                    <TextBox x:Name="YearInput" Style="{StaticResource RightInputBox}"></TextBox>
+                    <Button x:Name="YearWarningBtn" Style="{StaticResource WarningBtn}">
+                        <Image Source="/Resources/images/warning-removebg-preview.png" />
+                    </Button>
+                </DockPanel>
             </DockPanel>
             <DockPanel>
-                <TextBlock Style="{StaticResource LeftLabelText}">Сфера книги</TextBlock>
-                <TextBlock Style="{StaticResource RightLabelText}">Издательство</TextBlock>
+                <TextBlock Style="{StaticResource CenterLabelText}">Издательство</TextBlock>
             </DockPanel>
             <DockPanel>
-                <TextBox x:Name="AreaInput" Style="{StaticResource LeftInputBox}"></TextBox>
-                <TextBox x:Name="InterpretrInput" Style="{StaticResource RightInputBox}"></TextBox>
+                <DockPanel>
+                    <TextBox x:Name="InterpretrInput" Style="{StaticResource CenterInputBox}"></TextBox>
+                    <Button x:Name="InterpreterWarningBtn" Style="{StaticResource WarningBtn}">
+                        <Image Source="/Resources/images/warning-removebg-preview.png" />
+                    </Button>
+                </DockPanel>
             </DockPanel>
             <DockPanel>
                 <TextBlock Style="{StaticResource LeftLabelText}">Отсек</TextBlock>

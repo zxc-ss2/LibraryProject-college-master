@@ -156,12 +156,12 @@ namespace LibraryProject.Controllers
             return true;
         }
 
-        public bool RemoveTrading(books selectString)
-        {
-            dbHelper.context.books);
-            dbHelper.context.SaveChanges();
-            MessageBox.Show("Удалена информация о" + selectString);
-            return true;
-        }
+        //public bool RemoveTrading(books selectString)
+        //{
+        //    //dbHelper.context.books);
+        //    //dbHelper.context.SaveChanges();
+        //    //MessageBox.Show("Удалена информация о" + selectString);
+        //    //return true;
+        //}
     }
 }

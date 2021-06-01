@@ -103,5 +103,21 @@ namespace StringCheckLib
                 return false;
             }
         }
+
+        public bool CheckBookName(string bookName)
+        {
+            string pattern = @"[A-Z]|[a-z]|[А-Я]|[а-я]|[0-9]$";
+
+            if (Regex.Match(bookName, pattern, RegexOptions.IgnoreCase).Success)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
     }
 }
