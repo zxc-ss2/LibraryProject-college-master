@@ -14,17 +14,20 @@ namespace LibraryProject.Classes
         FieldsController fieldsController = new FieldsController();
         public bool CheckBbk(string bbk)
         {
-            List<char> delimiterChars = new List<char>();
-            delimiterChars.Add(',');
-            delimiterChars.Add(';');
+            //List<char> delimiterChars = new List<char>();
+            //delimiterChars.Add(',');
+            //delimiterChars.Add(';');
 
-            List<string> bbkParts = new List<string>();
-            bbkParts.Add(Convert.ToString(delimiterChars));
+            //List<string> bbkParts = new List<string>();
+            //bbkParts.Add(bbk.Split((",")));
 
-            foreach (var item in fieldsController.GetBbkNumbers())
-            {
-                    MessageBox.Show(item);
-            }
+            char[] dilimiterChars = {',','.'};
+            string[] bbkParts = bbk.Split(dilimiterChars);
+
+            //foreach (var item in fieldsController.GetBbkNumbers())
+            //{
+
+            //}
             return true;
         }
     }

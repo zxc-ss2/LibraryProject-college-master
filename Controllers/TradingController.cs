@@ -66,7 +66,7 @@ namespace LibraryProject.Controllers
         public List<trading> GetTradingString(int selectedBook)
         {
             return dbHelper.context.trading.Where(t => t.trading_id == selectedBook).ToList();
-        }
+        } 
 
         public bool UpdateTradingInfo(int newBook_id, string newTicket, DateTime newDelivery, DateTime newReception, List<trading> oldBook)
         {
@@ -78,6 +78,33 @@ namespace LibraryProject.Controllers
                 item.reception = newReception;
             }
 
+            dbHelper.context.SaveChanges();
+            return true;
+        }
+
+        public bool RemoveTrading(int selectString)
+        {
+            //var selectTrading = from zxc in dbHelper.context.trading
+            //                    where zxc.trading_id == selectString
+            //                    select zxc;
+
+            //if (selectTrading != null)
+            //{
+            //    foreach (var item in selectTrading)
+            //    {
+            //        dbHelper.context.trading.Remove(item);                              
+            //    }
+            //    dbHelper.context.SaveChanges();
+            //    return true;
+            //}
+            //else
+            //{
+            //    return false;
+            //} 
+
+            var selectTrading = dbHelper.context.trading.Where(t => t.trading_id == selectString).FirstOrDefault();
+
+            dbHelper.context.trading.Remove(selectTrading);
             dbHelper.context.SaveChanges();
             return true;
         }

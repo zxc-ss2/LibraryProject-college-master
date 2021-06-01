@@ -99,15 +99,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LibraryProjectModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LibraryProjectModel.Designer.cs">
-      <DependentUpon>LibraryProjectModel.edmx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Models\LibraryProjectModel1.cs">
+    <Compile Include="Models\LibraryProjectModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LibraryProjectModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LibraryProjectModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LibraryProjectModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\quantity.cs">
       <DependentUpon>LibraryProjectModel.tt</DependentUpon>
@@ -281,7 +281,7 @@
     <Content Include="Models\LibraryProjectModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>LibraryProjectModel.edmx</DependentUpon>
-      <LastGenOutput>LibraryProjectModel1.cs</LastGenOutput>
+      <LastGenOutput>LibraryProjectModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

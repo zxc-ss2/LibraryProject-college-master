@@ -21,12 +21,11 @@
         </DockPanel>
         <DataGrid x:Name="AllBooksDataGrid" Style="{StaticResource AllBooksDataGrid}" ColumnHeaderStyle="{StaticResource HeaderStyle}" ColumnWidth="*" AutoGenerateColumns="False"  IsReadOnly="True" SelectionMode="Single">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="100" Header="Название" Binding="{Binding book_id}"></DataGridTextColumn>
+                <DataGridTextColumn Width="100" Header="Id" Binding="{Binding book_id}"></DataGridTextColumn>
                 <DataGridTextColumn Width="100" Header="Название" Binding="{Binding name}"></DataGridTextColumn>
                 <DataGridTextColumn Width="100" Header="Автор" Binding="{Binding author}"></DataGridTextColumn>
-                <DataGridTextColumn Width="100" Header="Место" Binding="{Binding place}"></DataGridTextColumn>
                 <DataGridTextColumn Width="100" Header="Отсек" Binding="{Binding chamber_id}"></DataGridTextColumn>
-                <DataGridTextColumn Width="100" Header="В Наличии" Binding="{Binding quantity_library}"></DataGridTextColumn>
+                <DataGridTextColumn Width="100" Header="Количество" Binding="{Binding quantity.library_quantity}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <DataGrid x:Name="ClientTakenBooksDataGrid" Style="{StaticResource ClientTakenBooksDataGrid}" ColumnHeaderStyle="{StaticResource HeaderStyle}" ColumnWidth="*" AutoGenerateColumns="False"  IsReadOnly="True" SelectionMode="Single" Visibility="Collapsed">
@@ -45,7 +44,7 @@
                     <DataGridTextColumn  Width="30" Header="id" Binding="{Binding book_id}"></DataGridTextColumn>
                     <DataGridTextColumn  Width="100" Header="Название" Binding="{Binding name}"></DataGridTextColumn>
                     <DataGridTextColumn  Width="60" Header="Автор" Binding="{Binding author}"></DataGridTextColumn>
-                    <DataGridTextColumn  Width="60" Header="Количество" Binding="{Binding quantity_library}"></DataGridTextColumn>
+                    <DataGridTextColumn  Width="60" Header="Количество" Binding="{Binding quantity.library_quantity}"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
             <DockPanel>

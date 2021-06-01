@@ -36,7 +36,7 @@ namespace LibraryProject.Views
 
         private void DeleteTradingInfoBtn_Click(object sender, RoutedEventArgs e)
         {
-            bbkCheckClass.CheckBbk("28,01");
+            //bbkCheckClass.CheckBbk("28,01");
         }
 
         private void AddTradingInfoBtn_Click(object sender, RoutedEventArgs e)

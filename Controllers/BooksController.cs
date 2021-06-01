@@ -96,9 +96,7 @@ namespace LibraryProject.Controllers
                 {
                     foreach (var item in tradingController.GetBooksId())
                     {
-                        //dbHelper.context.books.Where(t => t.quantity.library_quantity > 0 && t.trading.book_id != selectBook && t.trading.login != userLogin).ToList();
                         AvailbleBooksList = dbHelper.context.books.Where(t => t.quantity.library_quantity > 0 && t.book_id != item && t.trading.login != userLogin).ToList();
-
                     }
                 }
 
@@ -155,13 +153,5 @@ namespace LibraryProject.Controllers
             dbHelper.context.SaveChanges();
             return true;
         }
-
-        //public bool RemoveTrading(books selectString)
-        //{
-        //    //dbHelper.context.books);
-        //    //dbHelper.context.SaveChanges();
-        //    //MessageBox.Show("Удалена информация о" + selectString);
-        //    //return true;
-        //}
     }
 }
