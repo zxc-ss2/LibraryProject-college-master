@@ -19,7 +19,6 @@ namespace LibraryProject.Models
         {
             this.books = new HashSet<books>();
             this.clients = new HashSet<clients>();
-            this.formular = new HashSet<formular>();
         }
     
         public int trading_id { get; set; }
@@ -33,7 +32,5 @@ namespace LibraryProject.Models
         public virtual ICollection<books> books { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<clients> clients { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<formular> formular { get; set; }
     }
 }

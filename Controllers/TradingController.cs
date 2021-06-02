@@ -2,6 +2,7 @@
 using LibraryProject.Properties;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,19 +26,25 @@ namespace LibraryProject.Controllers
 
         public bool AddNewTrading(int bookId, string ticket, DateTime deliveryDate, DateTime receptionDate, string userLogin)
         {
-            //dbHelper.context.trading.Where(t => t.book_id)
-
-            dbHelper.context.trading.Add(new trading
+            try
             {
-                book_id = bookId,
-                ticket = ticket,
-                delivery = deliveryDate,
-                reception = receptionDate,
-                login = userLogin
-            });
+                dbHelper.context.trading.Add(new trading
+                {
+                    book_id = bookId,
+                    ticket = ticket,
+                    delivery = deliveryDate,
+                    reception = receptionDate,
+                    login = userLogin
+                });
 
-            dbHelper.context.SaveChanges();
-            return true;
+                dbHelper.context.SaveChanges();
+                return true;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
         }
 
         public int GetNeededTradingId(int selectBook)
@@ -70,43 +77,55 @@ namespace LibraryProject.Controllers
 
         public bool UpdateTradingInfo(int newBook_id, string newTicket, DateTime newDelivery, DateTime newReception, List<trading> oldBook)
         {
-            foreach (var item in oldBook)
+            try
             {
-                item.book_id = newBook_id;
-                item.ticket = newTicket;
-                item.delivery = newDelivery;
-                item.reception = newReception;
+                foreach (var item in oldBook)
+                {
+                    item.book_id = newBook_id;
+                    item.ticket = newTicket;
+                    item.delivery = newDelivery;
+                    item.reception = newReception;
+                }
+
+                dbHelper.context.SaveChanges();
+                return true;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
             }
 
-            dbHelper.context.SaveChanges();
-            return true;
         }
 
         public bool RemoveTrading(int selectString)
         {
-            //var selectTrading = from zxc in dbHelper.context.trading
-            //                    where zxc.trading_id == selectString
-            //                    select zxc;
+            try
+            {
+                var selectTrading = from zxc in dbHelper.context.trading
+                                    where zxc.trading_id == selectString
+                                    select zxc;
 
-            //if (selectTrading != null)
-            //{
-            //    foreach (var item in selectTrading)
-            //    {
-            //        dbHelper.context.trading.Remove(item);                              
-            //    }
-            //    dbHelper.context.SaveChanges();
-            //    return true;
-            //}
-            //else
-            //{
-            //    return false;
-            //} 
+                if (selectTrading != null)
+                {
+                    foreach (var item in selectTrading)
+                    {
+                        dbHelper.context.trading.Remove(item);
+                    }
+                    dbHelper.context.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
 
-            var selectTrading = dbHelper.context.trading.Where(t => t.trading_id == selectString).FirstOrDefault();
-
-            dbHelper.context.trading.Remove(selectTrading);
-            dbHelper.context.SaveChanges();
-            return true;
         }
 
     }

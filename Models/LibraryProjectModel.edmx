@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище LibraryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище LibraryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="books">
           <Key>
             <PropertyRef Name="book_id" />
@@ -46,6 +46,8 @@
           <Property Name="phone" Type="nvarchar" MaxLength="11" />
           <Property Name="login" Type="nvarchar" MaxLength="50" />
           <Property Name="password" Type="varchar" MaxLength="25" />
+          <Property Name="email" Type="varchar" MaxLength="100" />
+          <Property Name="ticket" Type="nvarchar" MaxLength="9" />
         </EntityType>
         <EntityType Name="fields">
           <Key>
@@ -59,8 +61,12 @@
           <Key>
             <PropertyRef Name="formular_id" />
           </Key>
-          <Property Name="formular_id" Type="int" Nullable="false" />
-          <Property Name="id_trading" Type="int" />
+          <Property Name="formular_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ticket" Type="nvarchar" MaxLength="9" />
+          <Property Name="book_delivery" Type="datetime" />
+          <Property Name="book_reception" Type="datetime" />
+          <Property Name="book_return" Type="datetime" />
+          <Property Name="book_id" Type="int" />
         </EntityType>
         <EntityType Name="interpretors">
           <Key>
@@ -98,7 +104,7 @@
           </Key>
           <Property Name="trading_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="book_id" Type="int" />
-          <Property Name="ticket" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="ticket" Type="nvarchar" MaxLength="9" Nullable="false" />
           <Property Name="delivery" Type="date" Nullable="false" />
           <Property Name="reception" Type="date" Nullable="false" />
           <Property Name="login" Type="nvarchar" MaxLength="50" />
@@ -215,17 +221,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_formular_trading">
-          <End Role="trading" Type="Self.trading" Multiplicity="0..1">
+        <Association Name="FK_formular_books">
+          <End Role="books" Type="Self.books" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="formular" Type="Self.formular" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="trading">
-              <PropertyRef Name="trading_id" />
+            <Principal Role="books">
+              <PropertyRef Name="book_id" />
             </Principal>
             <Dependent Role="formular">
-              <PropertyRef Name="id_trading" />
+              <PropertyRef Name="book_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -272,12 +278,13 @@
             <End Role="trading" EntitySet="trading" />
             <End Role="clients" EntitySet="clients" />
           </AssociationSet>
-          <AssociationSet Name="FK_formular_trading" Association="Self.FK_formular_trading">
-            <End Role="trading" EntitySet="trading" />
+          <AssociationSet Name="FK_formular_books" Association="Self.FK_formular_books">
+            <End Role="books" EntitySet="books" />
             <End Role="formular" EntitySet="formular" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LibraryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -303,6 +310,7 @@
           <NavigationProperty Name="quantity" Relationship="Self.FK_books_quantity" FromRole="books" ToRole="quantity" />
           <NavigationProperty Name="storage" Relationship="Self.FK_books_storage" FromRole="books" ToRole="storage" />
           <NavigationProperty Name="trading" Relationship="Self.FK_books_trading" FromRole="books" ToRole="trading" />
+          <NavigationProperty Name="formular" Relationship="Self.FK_formular_books" FromRole="books" ToRole="formular" />
         </EntityType>
         <EntityType Name="chambers">
           <Key>
@@ -329,6 +337,8 @@
           <Property Name="phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
           <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="password" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ticket" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="roles" Relationship="Self.FK_client_roles" FromRole="clients" ToRole="roles" />
           <NavigationProperty Name="trading" Relationship="Self.FK_clients_trading" FromRole="clients" ToRole="trading" />
         </EntityType>
@@ -345,9 +355,13 @@
           <Key>
             <PropertyRef Name="formular_id" />
           </Key>
-          <Property Name="formular_id" Type="Int32" Nullable="false" />
-          <Property Name="id_trading" Type="Int32" />
-          <NavigationProperty Name="trading" Relationship="Self.FK_formular_trading" FromRole="formular" ToRole="trading" />
+          <Property Name="formular_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ticket" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="book_delivery" Type="DateTime" Precision="3" />
+          <Property Name="book_reception" Type="DateTime" Precision="3" />
+          <Property Name="book_return" Type="DateTime" Precision="3" />
+          <Property Name="book_id" Type="Int32" />
+          <NavigationProperty Name="books" Relationship="Self.FK_formular_books" FromRole="formular" ToRole="books" />
         </EntityType>
         <EntityType Name="interpretors">
           <Key>
@@ -389,13 +403,12 @@
           </Key>
           <Property Name="trading_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="book_id" Type="Int32" />
-          <Property Name="ticket" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ticket" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="delivery" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="reception" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="books" Relationship="Self.FK_books_trading" FromRole="trading" ToRole="books" />
           <NavigationProperty Name="clients" Relationship="Self.FK_clients_trading" FromRole="trading" ToRole="clients" />
-          <NavigationProperty Name="formular" Relationship="Self.FK_formular_trading" FromRole="trading" ToRole="formular" />
         </EntityType>
         <Association Name="FK_books_chambers">
           <End Role="chambers" Type="Self.chambers" Multiplicity="0..1">
@@ -481,6 +494,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_formular_books">
+          <End Role="books" Type="Self.books" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="formular" Type="Self.formular" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="books">
+              <PropertyRef Name="book_id" />
+            </Principal>
+            <Dependent Role="formular">
+              <PropertyRef Name="book_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_client_roles">
           <End Role="roles" Type="Self.roles" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -505,20 +532,6 @@
               <PropertyRef Name="trading_id" />
             </Principal>
             <Dependent Role="clients">
-              <PropertyRef Name="id_trading" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_formular_trading">
-          <End Role="trading" Type="Self.trading" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="formular" Type="Self.formular" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="trading">
-              <PropertyRef Name="trading_id" />
-            </Principal>
-            <Dependent Role="formular">
               <PropertyRef Name="id_trading" />
             </Dependent>
           </ReferentialConstraint>
@@ -558,6 +571,10 @@
             <End Role="trading" EntitySet="trading" />
             <End Role="books" EntitySet="books" />
           </AssociationSet>
+          <AssociationSet Name="FK_formular_books" Association="Self.FK_formular_books">
+            <End Role="books" EntitySet="books" />
+            <End Role="formular" EntitySet="formular" />
+          </AssociationSet>
           <AssociationSet Name="FK_client_roles" Association="Self.FK_client_roles">
             <End Role="roles" EntitySet="roles" />
             <End Role="clients" EntitySet="clients" />
@@ -565,10 +582,6 @@
           <AssociationSet Name="FK_clients_trading" Association="Self.FK_clients_trading">
             <End Role="trading" EntitySet="trading" />
             <End Role="clients" EntitySet="clients" />
-          </AssociationSet>
-          <AssociationSet Name="FK_formular_trading" Association="Self.FK_formular_trading">
-            <End Role="trading" EntitySet="trading" />
-            <End Role="formular" EntitySet="formular" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -619,6 +632,8 @@
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="login" ColumnName="login" />
                 <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="ticket" ColumnName="ticket" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -635,7 +650,11 @@
             <EntityTypeMapping TypeName="LibraryModel.formular">
               <MappingFragment StoreEntitySet="formular">
                 <ScalarProperty Name="formular_id" ColumnName="formular_id" />
-                <ScalarProperty Name="id_trading" ColumnName="id_trading" />
+                <ScalarProperty Name="ticket" ColumnName="ticket" />
+                <ScalarProperty Name="book_delivery" ColumnName="book_delivery" />
+                <ScalarProperty Name="book_reception" ColumnName="book_reception" />
+                <ScalarProperty Name="book_return" ColumnName="book_return" />
+                <ScalarProperty Name="book_id" ColumnName="book_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

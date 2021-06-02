@@ -15,8 +15,12 @@ namespace LibraryProject.Models
     public partial class formular
     {
         public int formular_id { get; set; }
-        public Nullable<int> id_trading { get; set; }
+        public string ticket { get; set; }
+        public Nullable<System.DateTime> book_delivery { get; set; }
+        public Nullable<System.DateTime> book_reception { get; set; }
+        public Nullable<System.DateTime> book_return { get; set; }
+        public Nullable<int> book_id { get; set; }
     
-        public virtual trading trading { get; set; }
+        public virtual books books { get; set; }
     }
 }

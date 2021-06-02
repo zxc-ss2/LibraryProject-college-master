@@ -48,15 +48,22 @@ namespace LibraryProject.Views
             
         }
 
-        private void BBkInputComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void BbkSearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            BBkInputComboBox.ItemsSource = fieldsController.GetCorrectBbk(BbkSearchBox.Text);
-            BBkInputComboBox.IsDropDownOpen = true;
+            try
+            {
+                if (BbkSearchBox.Text != null)
+                {
+                    BBkInputComboBox.ItemsSource = fieldsController.GetCorrectBbk(BbkSearchBox.Text);
+                    BBkInputComboBox.IsDropDownOpen = true;
+                }
+            }
+            catch
+            {
+                throw new Exception("ячс");
+            }
+
+
         }
 
         private void RadioButtonBbk_Click(object sender, RoutedEventArgs e)

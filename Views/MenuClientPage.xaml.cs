@@ -26,6 +26,8 @@ namespace LibraryProject.Views
         readonly BooksController booksController = new BooksController();
         readonly TradingController tradingController = new TradingController();
         readonly QuantityController quantityController = new QuantityController();
+        readonly FormularController formularController = new FormularController();
+        readonly ClientsController clientsController = new ClientsController();
 
         public MenuClientPage()
         {
@@ -62,63 +64,54 @@ namespace LibraryProject.Views
 
         private void GetBookBtn_Click(object sender, RoutedEventArgs e)
         {
-            Random rnd = new Random();
-            string generator = "";
+            string[] strList = clientsController.GetTicket(Settings.Default.login).Split('-');
 
             if (AbonementsTypeList.Text == "А - только абонемент")
             {
-                for (int i = 0; i < 4; i++)
-                {
-                    generator += rnd.Next(0, 9);
-                }
-
-                ticket = "А" + generator + "-" + DateTime.Now.ToString("yy");
+                strList[0] = "А";
+                ticket = strList[0] + "-" + strList[1] + "-" + strList[2];
             }
 
             if (AbonementsTypeList.Text == "Ч - только читальный зал")
             {
-                for (int i = 0; i < 4; i++)
-                {
-                    generator += rnd.Next(0, 9);
-                }
-
-                ticket = "Ч" + generator + "-" + DateTime.Now.ToString("yy");
+                strList[0] = "Ч";
+                ticket = strList[0] + "-" + strList[1] + "-" + strList[2];
             }
 
             if (AbonementsTypeList.Text == "О - читальный зал и абонемент")
             {
-                for (int i = 0; i < 4; i++)
-                {
-                    generator += rnd.Next(0, 9);
-                }
-
-                ticket = "О" + generator + "-" + DateTime.Now.ToString("yy");
+                strList[0] = "О";
+                ticket = strList[0] + "-" + strList[1] + "-" + strList[2];
             }
 
+            clientsController.UpdateUserTicket(Settings.Default.login, ticket);
             if (string.IsNullOrEmpty(AbonementsTypeList.Text))
             {
                 MessageBox.Show("Выберите вид абонемента");
             }
-
-            var firstSelectedCellContent = new DataGridCellInfo(AvailableBooksDataGrid.SelectedItem, AvailableBooksDataGrid.Columns[0]);
-            TextBlock firstSelectedCell = firstSelectedCellContent.Column.GetCellContent(firstSelectedCellContent.Item) as TextBlock;
-          
-
-            if(firstSelectedCell == null)
-            {
-                MessageBox.Show("Выберите книгу");
-            }
             else
             {
-                booksQuantity = quantityController.GetQuantity(Convert.ToInt32(firstSelectedCell.Text));
-                if (tradingController.AddNewTrading(Convert.ToInt32(firstSelectedCell.Text), ticket, DateTime.Now, DateTime.Now.AddMonths(1), Settings.Default.login))
+                var firstSelectedCellContent = new DataGridCellInfo(AvailableBooksDataGrid.SelectedItem, AvailableBooksDataGrid.Columns[0]);
+                TextBlock firstSelectedCell = firstSelectedCellContent.Column.GetCellContent(firstSelectedCellContent.Item) as TextBlock;
+
+
+                if (firstSelectedCell == null)
                 {
-                    quantityController.ChangeQuantityMinus(Convert.ToInt32(firstSelectedCell.Text), booksQuantity);
-                    booksController.AssignIdTradingToBook(Convert.ToInt32(firstSelectedCell.Text), tradingController.GetNeededTradingId(Convert.ToInt32(firstSelectedCell.Text)));
-                    AvailableBooksDataGrid.ItemsSource = booksController.GetAvailableBooks(Settings.Default.login);
+                    MessageBox.Show("Выберите книгу");
+                }
+                else
+                {
+                    booksQuantity = quantityController.GetQuantity(Convert.ToInt32(firstSelectedCell.Text));
+                    if (tradingController.AddNewTrading(Convert.ToInt32(firstSelectedCell.Text), ticket, DateTime.Now, DateTime.Now.AddMonths(1), Settings.Default.login))
+                    {
+                        quantityController.ChangeQuantityMinus(Convert.ToInt32(firstSelectedCell.Text), booksQuantity);
+                        booksController.AssignIdTradingToBook(Convert.ToInt32(firstSelectedCell.Text), tradingController.GetNeededTradingId(Convert.ToInt32(firstSelectedCell.Text)));
+                        formularController.AddFormularInfo(ticket, DateTime.Now, DateTime.Now.AddMonths(1), Convert.ToInt32(firstSelectedCell.Text));
+                        AvailableBooksDataGrid.ItemsSource = booksController.GetAvailableBooks(Settings.Default.login);
+                        ClientTakenBooksDataGrid.ItemsSource = booksController.GetTradingBooks();
+                    }
                 }
             }
-
         }
 
         private void ReturnBookBtn_Click(object sender, RoutedEventArgs e)
@@ -133,17 +126,20 @@ namespace LibraryProject.Views
             }
             else
             {
+                int zxc = Convert.ToInt32(item.trading_id);
+                formularController.AddBookReturnDate(DateTime.Now, clientsController.GetTicket(Settings.Default.login));
                 if (booksController.RemoveIdTradingFromBook(Convert.ToInt32(firstSelectedCell.Text)))
                 {
                     booksQuantity = quantityController.GetQuantity(Convert.ToInt32(firstSelectedCell.Text));
-                    if (tradingController.RemoveTrading(Convert.ToInt32(item.trading_id)))
+                    if (tradingController.RemoveTrading(zxc))
                     {
+                        AvailableBooksDataGrid.ItemsSource = booksController.GetAvailableBooks(Settings.Default.login);
                         ClientTakenBooksDataGrid.ItemsSource = booksController.GetTradingBooks();
                         quantityController.ChangeQuantityPlus(Convert.ToInt32(firstSelectedCell.Text), booksQuantity);
                         MessageBox.Show("Данные успешно обновлены");
                     }
                 }              
-            }
+            } 
         }
     }
 }

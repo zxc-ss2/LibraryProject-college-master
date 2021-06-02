@@ -73,6 +73,7 @@
     <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\FieldsController.cs" />
+    <Compile Include="Controllers\FormularController.cs" />
     <Compile Include="Controllers\QuantityController.cs" />
     <Compile Include="Controllers\TradingController.cs" />
     <Compile Include="Models\books.cs">

@@ -16,25 +16,20 @@ namespace LibraryProject.Controllers
             return dbHelper.context.fields.ToList();
         }
 
-        //public List<string> GetBbkNumbers()
-        ////{
-        ////    string[] bbk;
-        ////    foreach (var item in dbHelper.context.fields)
-        ////    {
-        ////        bbk = item.field_knowledge_bbk;
-        ////    }
+        public List<string> GetBbkNumbers()
+        {
+            List<string> bbk = new List<string>();
+            foreach (var item in dbHelper.context.fields)
+            {
+                bbk.Add(item.field_knowledge_bbk);
+            }
 
-        ////    List<char> delimiterChars = new List<char>();
-        ////    delimiterChars.Add(',');
-        ////    delimiterChars.Add(';');
+            List<char> delimiterChars = new List<char>();
+            delimiterChars.Add(',');
+            delimiterChars.Add(';');
 
-
-        ////    return bbk;
-        //}
-        //public int GetBbkId(string selectedBbk)
-        //{
-        //    return dbHelper.context.fields.Where(t => t.field_knowledge_bbk == selectedBbk || t.field_knowledge_name == selectedBbk).First().field_knowledge_bbk;
-        //}
+            return bbk;
+        }
 
         public int GetBbkId(string userField)
         {

@@ -34,6 +34,8 @@ namespace LibraryProject.Views
 
         private void StartBtnClick(object sender, RoutedEventArgs e)
         {
+            Random rnd = new Random();
+            string generator = "";
             string resultString = "";
 
             StringCheck isName = new StringCheck();
@@ -88,7 +90,14 @@ namespace LibraryProject.Views
             {
                 if(clientsController.CheckForAnExistingkUser(LoginInput.Text))
                 {
-                    clientsController.AddNewUser(FirstNameInput.Text, LastNameInput.Text, PatronymicInput.Text, Convert.ToDateTime(DateInput.SelectedDate), AddressInput.Text, WorkplaceInput.Text, StudyplaceInput.Text, PhoneInput.Text, LoginInput.Text, PasswordInput.Password);
+                    for (int i = 0; i < 4; i++)
+                    {
+                        generator += rnd.Next(0, 9);
+                    }
+
+                    string ticket = "X" + "-" + generator + "-" + DateTime.Now.ToString("yy");
+                    clientsController.AddNewUser(FirstNameInput.Text, LastNameInput.Text, PatronymicInput.Text, Convert.ToDateTime(DateInput.SelectedDate), AddressInput.Text, WorkplaceInput.Text, StudyplaceInput.Text, PhoneInput.Text, LoginInput.Text, PasswordInput.Password, ticket);
+                    //clientsController.SendInfo(FirstNameInput.Text, LastNameInput.Text);                 
                     this.NavigationService.Navigate(new AuthorizationPage());
                 }
 

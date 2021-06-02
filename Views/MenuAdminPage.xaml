@@ -69,6 +69,7 @@
             <TextBlock Style="{StaticResource PlaceholderAdminStyle}" Tag="{Binding ElementName=SearchAdminBooksBox}" Text="Введите ФИО автора или шифр ISBN">
             </TextBlock>
             <Image Style="{StaticResource SearchIcon}"/>
+            <Button Style="{StaticResource AdminBtn}" Click="Button_Click_4">csv</Button>
         </DockPanel>
         <DataGrid Grid.Row="1" x:Name="BookDataGrid" Style="{StaticResource BookDataGrid}" ColumnHeaderStyle="{StaticResource HeaderStyle}" ColumnWidth="*" AutoGenerateColumns="False"  IsReadOnly="True" SelectionMode="Single">
             <DataGrid.Columns>

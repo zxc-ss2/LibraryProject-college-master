@@ -1,4 +1,5 @@
 ﻿using LibraryProject.Controllers;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace LibraryProject.Views
     {
         readonly BooksController booksController = new BooksController();
         readonly ClientsController clientsController = new ClientsController();
+        readonly FormularController formularController = new FormularController();
         public MenuAdminPage()
         {
             InitializeComponent();
@@ -78,6 +80,21 @@ namespace LibraryProject.Views
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new RegistrationPage());
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog file = new SaveFileDialog();
+            string nameFile = "formularInfo";
+
+            file.Filter = "Text files(*.csv)|*.csv";
+
+            file.Title = "Сохранение файла";
+            if(file.ShowDialog() == true)
+            {
+                nameFile = file.FileName;
+            }
+            formularController.FormularFile(nameFile);
         }
     }
 }

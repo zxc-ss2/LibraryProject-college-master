@@ -21,9 +21,6 @@ namespace LibraryProject.Classes
             //List<string> bbkParts = new List<string>();
             //bbkParts.Add(bbk.Split((",")));
 
-            char[] dilimiterChars = {',','.'};
-            string[] bbkParts = bbk.Split(dilimiterChars);
-
             //foreach (var item in fieldsController.GetBbkNumbers())
             //{
 
