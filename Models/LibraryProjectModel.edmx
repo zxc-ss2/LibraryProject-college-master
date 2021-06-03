@@ -39,13 +39,13 @@
           <Property Name="surname" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="patronymic" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="birthday" Type="date" Nullable="false" />
-          <Property Name="address" Type="nvarchar(max)" />
+          <Property Name="address" Type="nvarchar(max)" Nullable="false" />
           <Property Name="workplace" Type="nvarchar" MaxLength="50" />
           <Property Name="studyplace" Type="nvarchar" MaxLength="50" />
-          <Property Name="id_role" Type="int" />
-          <Property Name="phone" Type="nvarchar" MaxLength="11" />
-          <Property Name="login" Type="nvarchar" MaxLength="50" />
-          <Property Name="password" Type="varchar" MaxLength="25" />
+          <Property Name="id_role" Type="int" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="100" />
           <Property Name="ticket" Type="nvarchar" MaxLength="9" />
         </EntityType>
@@ -194,7 +194,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_client_roles">
-          <End Role="roles" Type="Self.roles" Multiplicity="0..1">
+          <End Role="roles" Type="Self.roles" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="clients" Type="Self.clients" Multiplicity="*" />
@@ -330,13 +330,13 @@
           <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="birthday" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="workplace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="studyplace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="id_role" Type="Int32" />
-          <Property Name="phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
-          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="password" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="id_role" Type="Int32" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="ticket" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="roles" Relationship="Self.FK_client_roles" FromRole="clients" ToRole="roles" />
@@ -509,7 +509,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_client_roles">
-          <End Role="roles" Type="Self.roles" Multiplicity="0..1">
+          <End Role="roles" Type="Self.roles" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="clients" Type="Self.clients" Multiplicity="*" />

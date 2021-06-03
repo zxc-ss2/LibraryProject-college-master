@@ -88,8 +88,13 @@
                     </Button>
                 </DockPanel>
             </DockPanel>
-
-            <Button  Style="{StaticResource StartBtn}" Click="StartBtnClick">Продолжить</Button>
+            <DockPanel>
+                <TextBlock Style="{StaticResource LeftLabelText}">Email</TextBlock>
+            </DockPanel>
+            <DockPanel>
+                <TextBox x:Name="EmailInput" Style="{StaticResource CenterInputBox}"></TextBox>
+            </DockPanel>
+            <Button Style="{StaticResource StartBtn}" Click="StartBtnClick">Продолжить</Button>
         </StackPanel >
     </Grid>
 </Page>

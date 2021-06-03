@@ -1,6 +1,7 @@
 ﻿using LibraryProject.Controllers;
 using LibraryProject.Models;
 using LibraryProject.Properties;
+using StringCheckLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,12 +66,15 @@ namespace LibraryProject.Views
 
         private void NewTicketInput_TextChanged(object sender, TextChangedEventArgs e)
         {
+            StringCheck check = new StringCheck();
+            bool trigger = check.CheckTradingTicket(NewTicketInput.Text);
+
             string word = NewTicketInput.Text;
 
             foreach (var item in tradingController.GetTradingString(Settings.Default.selectBook2))
             {
 
-                if (word != Convert.ToString(item.ticket) && word != "")
+                if (word != Convert.ToString(item.ticket) && word != "" && trigger)
                 {
                     SaveBtn.IsEnabled = true;
                 }

@@ -96,8 +96,8 @@ namespace LibraryProject.Views
                     }
 
                     string ticket = "X" + "-" + generator + "-" + DateTime.Now.ToString("yy");
-                    clientsController.AddNewUser(FirstNameInput.Text, LastNameInput.Text, PatronymicInput.Text, Convert.ToDateTime(DateInput.SelectedDate), AddressInput.Text, WorkplaceInput.Text, StudyplaceInput.Text, PhoneInput.Text, LoginInput.Text, PasswordInput.Password, ticket);
-                    //clientsController.SendInfo(FirstNameInput.Text, LastNameInput.Text);                 
+                    clientsController.AddNewUser(FirstNameInput.Text, LastNameInput.Text, PatronymicInput.Text, Convert.ToDateTime(DateInput.SelectedDate), AddressInput.Text, WorkplaceInput.Text, StudyplaceInput.Text, PhoneInput.Text, LoginInput.Text, PasswordInput.Password, EmailInput.Text, ticket);
+                    clientsController.SendInfo(LoginInput.Text, PasswordInput.Password, EmailInput.Text);
                     this.NavigationService.Navigate(new AuthorizationPage());
                 }
 

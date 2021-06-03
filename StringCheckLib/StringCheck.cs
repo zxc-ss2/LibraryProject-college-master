@@ -118,6 +118,45 @@ namespace StringCheckLib
             }
         }
 
+        public bool CheckBookIsbn(string bookName)
+        {
+            string pattern = @"\-|[0-9]$";
 
+            if (Regex.Match(bookName, pattern, RegexOptions.IgnoreCase).Success)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool CheckBookYear(string bookName)
+        {
+            string pattern = @"[0-9]{4}$";
+
+            if (Regex.Match(bookName, pattern, RegexOptions.IgnoreCase).Success)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool CheckTradingTicket(string bookName)
+        {
+            string pattern = @"(Х|А|Ч|О)\-([0-9]{4})\-[0-9]{2}$";
+
+            if (Regex.Match(bookName, pattern, RegexOptions.IgnoreCase).Success)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

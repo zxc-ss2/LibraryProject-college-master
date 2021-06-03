@@ -278,15 +278,15 @@ namespace LibraryProject.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (clientsController.UpdateClientInfo(NewFirstNameInput.Text, NewLastNameInput.Text, NewPatronymicInput.Text, NewAddressInput.Text, NewWorkplaceInput.Text, NewStudyplaceInput.Text, NewPhoneInput.Text, NewLoginInput.Text, NewPasswordInput.Password, SessionClient))
-            {
-                SaveBtn.IsEnabled = false;
-                MessageBox.Show("Данные успешно обновлены");
-            }
-            else
-            {
-                MessageBox.Show("Данные не были обновлены");
-            }
+            //if (clientsController.UpdateClientInfo(NewFirstNameInput.Text, NewLastNameInput.Text, NewPatronymicInput.Text, NewAddressInput.Text, NewWorkplaceInput.Text, NewStudyplaceInput.Text, NewPhoneInput.Text, NewLoginInput.Text, NewPasswordInput.Password, SessionClient))
+            //{
+            //    SaveBtn.IsEnabled = false;
+            //    MessageBox.Show("Данные успешно обновлены");
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Данные не были обновлены");
+            //}
         }
     }
 }

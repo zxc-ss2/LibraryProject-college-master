@@ -91,7 +91,7 @@
                 </DockPanel>
             </DockPanel>
             <DockPanel>
-                <TextBlock Style="{StaticResource CenterLabelText}">Издательство</TextBlock>
+                <TextBlock Style="{StaticResource LeftLabelText}">Издательство</TextBlock>
             </DockPanel>
             <DockPanel>
                 <DockPanel>

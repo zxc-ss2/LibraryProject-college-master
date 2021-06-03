@@ -2,6 +2,7 @@
 using LibraryProject.Properties;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -60,7 +61,7 @@ namespace LibraryProject.Controllers
 
         }
 
-        public void AddNewUser(string userName, string userSurname, string userPatronymic, DateTime userDate, string userAddress, string userWorkplace, string userStudyplace, string userPhone, string userLogin, string userPassword, string userTicket)
+        public bool AddNewUser(string userName, string userSurname, string userPatronymic, DateTime userDate, string userAddress, string userWorkplace, string userStudyplace, string userPhone, string userLogin, string userPassword, string email, string userTicket)
         {
             try
             {
@@ -78,14 +79,17 @@ namespace LibraryProject.Controllers
                     phone = userPhone,
                     login = userLogin,
                     password = userPassword,
+                    email = email,
                     ticket = userTicket
                 });
 
                 dbHelper.context.SaveChanges();
+                return true;
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                return false;
             }
            
         }
@@ -112,7 +116,7 @@ namespace LibraryProject.Controllers
             }
         }
 
-        public bool UpdateClientInfo(string newName, string newSurname, string newPatronymic, string newAddress, string newWorkplace, string newStudyplace, string newPhone, string newLogin, string newPassword, List<clients> qwe)
+        public bool UpdateClientInfo(string newName, string newSurname, string newPatronymic, DateTime newBirthday, string newAddress, string newWorkplace, string newStudyplace, string newPhone, string newLogin, string newPassword, string newEmail, string newTicket, List<clients> qwe)
         {
             try
             {
@@ -121,12 +125,15 @@ namespace LibraryProject.Controllers
                     item.name = newName;
                     item.surname = newSurname;
                     item.patronymic = newPatronymic;
+                    item.birthday = newBirthday;
                     item.address = newAddress;
                     item.workplace = newWorkplace;
                     item.studyplace = newStudyplace;
                     item.phone = newPhone;
                     item.login = newLogin;
                     item.password = newPassword;
+                    item.email = newEmail;
+                    item.ticket = newTicket;
                 }
 
                 dbHelper.context.SaveChanges();
@@ -143,32 +150,44 @@ namespace LibraryProject.Controllers
         {
             try
             {
-                dbHelper.context.clients.Remove(selectString);
-                dbHelper.context.SaveChanges();
-                MessageBox.Show("Удалена информация о" + selectString);
-                return true;
+                var selectTrading = from zxc in dbHelper.context.clients
+                                    where zxc.client_id == selectString.client_id
+                                    select zxc;
+
+                if (selectTrading != null)
+                {
+                    foreach (var item in selectTrading)
+                    {
+                        dbHelper.context.clients.Remove(item);
+                    }
+                    dbHelper.context.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 return false;
             }
-
         }
 
-        public void SendInfo(string userLogin, string userPassword)
+        public void SendInfo(string userLogin, string userPassword, string email)
         {
             try
             {
                 SmtpClient Smtp = new SmtpClient("smtp.gmail.com", 587);
                 Smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                 Smtp.EnableSsl = true;
-                Smtp.Credentials = new NetworkCredential("", "");
+                Smtp.Credentials = new NetworkCredential("enotik1enot@gmail.com", "890891506644Qq");
                 MailMessage Message = new MailMessage();
-                Message.From = new MailAddress("");
-                Message.To.Add(new MailAddress("skochkov.aleksey@yandex.ru"));
+                Message.From = new MailAddress("enotik1enot@gmail.com");
+                Message.To.Add(new MailAddress(email));
                 Message.Subject = "Данные для авторизации";
-                Message.Body = "Ваши данные для авторизации:\n Логин:" + userLogin + "Пароль:" + userPassword;
+                Message.Body = "Ваши данные для авторизации:\nЛогин:" + userLogin + "Пароль:" + userPassword;
 
                 Smtp.Send(Message);
             }

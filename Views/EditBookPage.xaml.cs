@@ -1,6 +1,7 @@
 ﻿using LibraryProject.Controllers;
 using LibraryProject.Models;
 using LibraryProject.Properties;
+using StringCheckLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,12 +49,15 @@ namespace LibraryProject.Views
 
         private void NewAuthorInput_TextChanged(object sender, TextChangedEventArgs e)
         {
+            StringCheck check = new StringCheck();
+
+            bool trigger = check.CheckName(NewAuthorInput.Text);
             string word = NewAuthorInput.Text;
 
             foreach (var item in booksController.GetBookWithId(Settings.Default.selectBook))
             {
 
-                if (word != item.author && word != "")
+                if (word != item.author && word != "" && trigger)
                 {
                     SaveBtn.IsEnabled = true;
                 }
@@ -71,12 +75,15 @@ namespace LibraryProject.Views
 
         private void NewNameInput_TextChanged(object sender, TextChangedEventArgs e)
         {
+            StringCheck check = new StringCheck();
+
+            bool trigger = check.CheckBookName(NewNameInput.Text);
             string word = NewNameInput.Text;
 
             foreach (var item in booksController.GetBookWithId(Settings.Default.selectBook))
             {
 
-                if (word != item.name && word != "")
+                if (word != item.name && word != "" && trigger)
                 {
                     SaveBtn.IsEnabled = true;
                 }
@@ -117,12 +124,15 @@ namespace LibraryProject.Views
 
         private void NewIsbnInput_TextChanged(object sender, TextChangedEventArgs e)
         {
+            StringCheck check = new StringCheck();
+
+            bool trigger = check.CheckBookIsbn(NewIsbnInput.Text);
             string word = NewIsbnInput.Text;
 
             foreach (var item in booksController.GetBookWithId(Settings.Default.selectBook))
             {
 
-                if (word != item.isbn && word != "")
+                if (word != item.isbn && word != "" && trigger)
                 {
                     SaveBtn.IsEnabled = true;
                 }
@@ -163,12 +173,15 @@ namespace LibraryProject.Views
 
         private void NewYearInput_TextChanged(object sender, TextChangedEventArgs e)
         {
+            StringCheck check = new StringCheck();
+
+            bool trigger = check.CheckBookYear(NewYearInput.Text);
             string word = NewYearInput.Text;
 
             foreach (var item in booksController.GetBookWithId(Settings.Default.selectBook))
             {
 
-                if (word != Convert.ToString(item.year) && word != "")
+                if (word != Convert.ToString(item.year) && word != "" && trigger)
                 {
                     SaveBtn.IsEnabled = true;
                 }

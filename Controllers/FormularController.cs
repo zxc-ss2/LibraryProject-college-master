@@ -67,10 +67,10 @@ namespace LibraryProject.Controllers
 
             using (StreamWriter wr = new StreamWriter(nameFile, false, Encoding.UTF8))
             {
-                wr.WriteLine($";Дата выдачи {deliveryDate}");
-                wr.WriteLine($";Максимальная дата возврата {receptionDate}");
-                wr.WriteLine($";Фактическая дата возврата {returnBook}");
-                wr.WriteLine($";Номер чит. билета {ticket}");
+                wr.WriteLine($"; Дата выдачи {deliveryDate}");
+                wr.WriteLine($"; Максимальная дата возврата {receptionDate}");
+                wr.WriteLine($" Фактическая дата возврата {returnBook}");
+                wr.WriteLine($"; Номер чит. билета {ticket}");
             }
         }
     }
