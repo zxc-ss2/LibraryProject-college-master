@@ -77,8 +77,8 @@ namespace LibraryProject.Controllers
 
         public bool UpdateTradingInfo(int newBook_id, string newTicket, DateTime newDelivery, DateTime newReception, List<trading> oldBook)
         {
-            try
-            {
+            //try
+            //{
                 foreach (var item in oldBook)
                 {
                     item.book_id = newBook_id;
@@ -89,12 +89,12 @@ namespace LibraryProject.Controllers
 
                 dbHelper.context.SaveChanges();
                 return true;
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return false;
-            }
+            //}
+            //catch(Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //    return false;
+            //}
 
         }
 

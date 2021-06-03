@@ -84,7 +84,14 @@
                     </Button>
                 </DockPanel>
             </DockPanel>
-
+            <DockPanel>
+                <TextBlock Style="{StaticResource LeftLabelText}">Email</TextBlock>
+                <TextBlock Style="{StaticResource RightLabelText}">Чит. билет</TextBlock>
+            </DockPanel>
+            <DockPanel>
+                <TextBox x:Name="NewEmailInput" Style="{StaticResource LeftInputBox}"></TextBox>
+                <TextBox x:Name="NewTicketInput" Style="{StaticResource RightInputBox}"></TextBox>
+            </DockPanel>
             <Button x:Name="SaveBtn" Style="{StaticResource StartBtn}" Click="Button_Click">Сохранить изменения</Button>
         </StackPanel >
     </Grid>
