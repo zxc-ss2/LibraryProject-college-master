@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="20de0b30664a4b599a8ffbd76cc89a79" Name="Diagram1">
+      <Diagram DiagramId="e01df5bac0744eeeb94c72d389b61ea8" Name="Diagram1">
         <EntityTypeShape EntityType="LibraryModel.books" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="LibraryModel.chambers" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="LibraryModel.clients" Width="1.5" PointX="6" PointY="4" IsExpanded="true" />

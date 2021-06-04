@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace LibraryProject.Controllers
 {
-    class QuantityController
+    public class QuantityController
     {
         readonly DbHelper dbHelper = new DbHelper();
 

@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace LibraryProject.Controllers
 {
-    class FormularController
+    public class FormularController
     {
         DbHelper dbHelper = new DbHelper();
         public bool AddFormularInfo(string ticket, DateTime dateDelivery, DateTime dateReception, int bookId)

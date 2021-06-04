@@ -19,10 +19,10 @@ namespace LibraryProject.Controllers
             return dbHelper.context.trading.ToList();
         }
 
-        public List<trading> TradingInfoOutput()
-        {
-            return dbHelper.context.trading.Where(x=>x.login == "UliyaBay").ToList();
-        }
+        //public List<trading> TradingInfoOutput()
+        //{
+        //    return dbHelper.context.trading.Where(x=>x.login == "UliyaBay").ToList();
+        //}
 
         public bool AddNewTrading(int bookId, string ticket, DateTime deliveryDate, DateTime receptionDate, string userLogin)
         {
@@ -88,7 +88,14 @@ namespace LibraryProject.Controllers
                 }
 
                 dbHelper.context.SaveChanges();
+            if(dbHelper.context.SaveChanges() == 0)
+            {
                 return true;
+            }
+            else
+            {
+                return false;
+            }
             //}
             //catch(Exception ex)
             //{

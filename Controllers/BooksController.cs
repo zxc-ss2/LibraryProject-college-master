@@ -1,5 +1,6 @@
 ﻿using LibraryProject.Models;
 using LibraryProject.Properties;
+using StringCheckLib;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -39,23 +40,33 @@ namespace LibraryProject.Controllers
         {
             try
             {
-                dbHelper.context.books.Add(new books
-                {
-                    author = bookAuthor,
-                    field_knowledge_id = bookKnowledgeField,
-                    name = bookName,
-                    isbn = bookISBN,
-                    place = bookPlace,
-                    year = bookYear,
-                    quantity_id = null,
-                    storage_id = null,
-                    interpreter_id = bookInterpreter,
-                    chamber_id = bookChamber,
-                    trading_id = null
-                });
+                StringCheck check = new StringCheck();
 
-                dbHelper.context.SaveChanges();
-                return true;
+                if (!check.CheckName(bookAuthor)|| !check.CheckBookName(bookName) || !check.CheckBookIsbn(bookISBN) || !check.CheckBookYear(Convert.ToString(bookYear)) 
+                    || bookInterpreter == 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    dbHelper.context.books.Add(new books
+                    {
+                        author = bookAuthor,
+                        field_knowledge_id = bookKnowledgeField,
+                        name = bookName,
+                        isbn = bookISBN,
+                        place = bookPlace,
+                        year = bookYear,
+                        quantity_id = null,
+                        storage_id = null,
+                        interpreter_id = bookInterpreter,
+                        chamber_id = bookChamber,
+                        trading_id = null
+                    });
+
+                    dbHelper.context.SaveChanges();
+                    return true;
+                }
             }
             catch(Exception ex)
             {
@@ -70,17 +81,32 @@ namespace LibraryProject.Controllers
         /// </summary>
         /// <param name="selectString" - выбранная пользователем строка DataGrid>
         /// </param>
-        public void DeleteBookInfo(books selectString)
+        public bool DeleteBookInfo(books selectString)
         {
             try
             {
-                dbHelper.context.books.Remove(selectString);
-                dbHelper.context.SaveChanges();
-                MessageBox.Show("Удалена информация о" + selectString);
+                var selectTrading = from zxc in dbHelper.context.books
+                                    where zxc.book_id == selectString.book_id
+                                    select zxc;
+
+                if (selectTrading != null)
+                {
+                    foreach (var item in selectTrading)
+                    {
+                        dbHelper.context.books.Remove(item);
+                    }
+                    dbHelper.context.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                return false;
             }
             
         }
@@ -178,24 +204,35 @@ namespace LibraryProject.Controllers
         {
             try
             {
-                foreach (var item in oldBook)
-                {
-                    item.author = newAuthor;
-                    item.field_knowledge_id = newfFieldKnowledgeId;
-                    item.name = newName;
-                    item.isbn = newIsbn;
-                    item.place = newPlace;
-                    item.year = newYear;
-                    item.quantity_id = newQuantityId;
-                    item.storage_id = newStorageId;
-                    item.interpreter_id = newInterpretorId;
-                    item.chamber_id = newChamberId;
-                    item.trading_id = null;
-                }
+                StringCheck check = new StringCheck();
 
-                dbHelper.context.SaveChanges();
-                return true;
+                if (!check.CheckName(newAuthor) || !check.CheckBookName(newName) || !check.CheckBookIsbn(newIsbn) || !check.CheckBookYear(Convert.ToString(newYear))
+                    || newInterpretorId == 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    foreach (var item in oldBook)
+                    {
+                        item.author = newAuthor;
+                        item.field_knowledge_id = newfFieldKnowledgeId;
+                        item.name = newName;
+                        item.isbn = newIsbn;
+                        item.place = newPlace;
+                        item.year = newYear;
+                        item.quantity_id = newQuantityId;
+                        item.storage_id = newStorageId;
+                        item.interpreter_id = newInterpretorId;
+                        item.chamber_id = newChamberId;
+                        item.trading_id = null;
+                    }
+
+                    dbHelper.context.SaveChanges();
+                    return true;
+                }
             }
+                
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);

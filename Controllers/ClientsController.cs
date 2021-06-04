@@ -1,5 +1,6 @@
 ﻿using LibraryProject.Models;
 using LibraryProject.Properties;
+using StringCheckLib;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -65,27 +66,38 @@ namespace LibraryProject.Controllers
         {
             try
             {
-                dbHelper.context.clients.Add(new clients
-                {
-                    id_trading = null,
-                    id_role = 3,
-                    name = userName,
-                    surname = userSurname,
-                    patronymic = userPatronymic,
-                    birthday = userDate,
-                    address = userAddress,
-                    workplace = userWorkplace,
-                    studyplace = userStudyplace,
-                    phone = userPhone,
-                    login = userLogin,
-                    password = userPassword,
-                    email = email,
-                    ticket = userTicket
-                });
+                StringCheck check = new StringCheck();
 
-                dbHelper.context.SaveChanges();
-                return true;
+                if (!check.CheckName(userName) || (!check.CheckName(userSurname) || (!check.CheckName(userPatronymic) || userDate == null
+                    || !check.CheckAddress(userAddress) || !check.CheckPhone(userPhone) || check.CheckLogin(userLogin) || check.CheckPassword(userPassword))))
+                {
+                    return false;
+                }
+                else
+                {
+                    dbHelper.context.clients.Add(new clients
+                    {
+                        id_trading = null,
+                        id_role = 3,
+                        name = userName,
+                        surname = userSurname,
+                        patronymic = userPatronymic,
+                        birthday = userDate,
+                        address = userAddress,
+                        workplace = userWorkplace,
+                        studyplace = userStudyplace,
+                        phone = userPhone,
+                        login = userLogin,
+                        password = userPassword,
+                        email = email,
+                        ticket = userTicket
+                    });
+
+                    dbHelper.context.SaveChanges();
+                    return true;
+                }
             }
+                    
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);

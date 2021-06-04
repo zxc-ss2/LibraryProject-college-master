@@ -15,7 +15,6 @@ namespace LibraryProject.Models
     public partial class clients
     {
         public int client_id { get; set; }
-        public Nullable<int> id_trading { get; set; }
         public string name { get; set; }
         public string surname { get; set; }
         public string patronymic { get; set; }
@@ -28,6 +27,7 @@ namespace LibraryProject.Models
         public string login { get; set; }
         public string password { get; set; }
         public string email { get; set; }
+        public Nullable<int> id_trading { get; set; }
         public string ticket { get; set; }
     
         public virtual roles roles { get; set; }
