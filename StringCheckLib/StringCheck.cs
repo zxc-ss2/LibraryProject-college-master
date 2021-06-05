@@ -158,5 +158,19 @@ namespace StringCheckLib
                 return false;
             }
         }
+
+        public bool CheckDate(string bookName)
+        {
+            string pattern = @"[0-9]{1,4}\.|\-[0-1][0-9]\.|\-[0-3][0-9]$";
+
+            if (Regex.Match(bookName, pattern, RegexOptions.IgnoreCase).Success)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

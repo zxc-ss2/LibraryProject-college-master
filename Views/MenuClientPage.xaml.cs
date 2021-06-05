@@ -55,11 +55,6 @@ namespace LibraryProject.Views
                 ClientTakenBooksDataGrid.Visibility = Visibility.Visible;
                 ClientTakenBooksDataGrid.ItemsSource = booksController.GetTradingBooks();
             }
-
-        }
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
         }
 
         private void GetBookBtn_Click(object sender, RoutedEventArgs e)
@@ -92,23 +87,47 @@ namespace LibraryProject.Views
             else
             {
                 var firstSelectedCellContent = new DataGridCellInfo(AvailableBooksDataGrid.SelectedItem, AvailableBooksDataGrid.Columns[0]);
-                TextBlock firstSelectedCell = firstSelectedCellContent.Column.GetCellContent(firstSelectedCellContent.Item) as TextBlock;
 
-
-                if (firstSelectedCell == null)
+                if (AvailableBooksDataGrid.SelectedItem == null)
                 {
                     MessageBox.Show("Выберите книгу");
                 }
                 else
                 {
+                    TextBlock firstSelectedCell = firstSelectedCellContent.Column.GetCellContent(firstSelectedCellContent.Item) as TextBlock;
                     booksQuantity = quantityController.GetQuantity(Convert.ToInt32(firstSelectedCell.Text));
+
                     if (tradingController.AddNewTrading(Convert.ToInt32(firstSelectedCell.Text), ticket, DateTime.Now, DateTime.Now.AddMonths(1), Settings.Default.login))
                     {
-                        quantityController.ChangeQuantityMinus(Convert.ToInt32(firstSelectedCell.Text), booksQuantity);
-                        booksController.AssignIdTradingToBook(Convert.ToInt32(firstSelectedCell.Text), tradingController.GetNeededTradingId(Convert.ToInt32(firstSelectedCell.Text)));
-                        formularController.AddFormularInfo(ticket, DateTime.Now, DateTime.Now.AddMonths(1), Convert.ToInt32(firstSelectedCell.Text));
-                        AvailableBooksDataGrid.ItemsSource = booksController.GetAvailableBooks(Settings.Default.login);
-                        ClientTakenBooksDataGrid.ItemsSource = booksController.GetTradingBooks();
+                        if (quantityController.ChangeQuantityMinus(Convert.ToInt32(firstSelectedCell.Text), booksQuantity)){
+                            AllBooksDataGrid.ItemsSource = booksController.BooksInfoOutput();
+
+                            if (booksController.AssignIdTradingToBook(Convert.ToInt32(firstSelectedCell.Text), tradingController.GetNeededTradingId(Convert.ToInt32(firstSelectedCell.Text))))
+                            {
+                                if (formularController.AddFormularInfo(ticket, DateTime.Now, DateTime.Now.AddMonths(1), Convert.ToInt32(firstSelectedCell.Text)))
+                                {
+                                    AllBooksDataGrid.ItemsSource = booksController.BooksInfoOutput();
+                                    AvailableBooksDataGrid.ItemsSource = booksController.GetAvailableBooks(Settings.Default.login);
+                                    ClientTakenBooksDataGrid.ItemsSource = booksController.GetTradingBooks();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Формуляр не был заполнен");
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Номер обмена не был присвоен выбранной книге((");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Количетсво не было перезаписано");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Выдача не была произведена, попробуйте позже");
                     }
                 }
             }
@@ -117,29 +136,52 @@ namespace LibraryProject.Views
         private void ReturnBookBtn_Click(object sender, RoutedEventArgs e)
         {
             var firstSelectedCellContent = new DataGridCellInfo(ClientTakenBooksDataGrid.SelectedItem, ClientTakenBooksDataGrid.Columns[0]);
-            TextBlock firstSelectedCell = firstSelectedCellContent.Column.GetCellContent(firstSelectedCellContent.Item) as TextBlock;
+
             var item = ClientTakenBooksDataGrid.SelectedItem as books;
 
-            if (item == null)
+            if (ClientTakenBooksDataGrid.SelectedItem == null)
             {
-                MessageBox.Show("Вы не выбрали ни одной строки");
+                MessageBox.Show("Вы не выбрали ни одной книги");
             }
             else
             {
-                int zxc = Convert.ToInt32(item.trading_id);
-                formularController.AddBookReturnDate(DateTime.Now, clientsController.GetTicket(Settings.Default.login));
-                if (booksController.RemoveIdTradingFromBook(Convert.ToInt32(firstSelectedCell.Text)))
+                TextBlock firstSelectedCell = firstSelectedCellContent.Column.GetCellContent(firstSelectedCellContent.Item) as TextBlock;
+                int tradingId = Convert.ToInt32(item.trading_id);
+                if (formularController.AddBookReturnDate(DateTime.Now, clientsController.GetTicket(Settings.Default.login)))
                 {
-                    booksQuantity = quantityController.GetQuantity(Convert.ToInt32(firstSelectedCell.Text));
-                    if (tradingController.RemoveTrading(zxc))
+                    if (booksController.RemoveIdTradingFromBook(Convert.ToInt32(firstSelectedCell.Text)))
                     {
-                        AvailableBooksDataGrid.ItemsSource = booksController.GetAvailableBooks(Settings.Default.login);
-                        ClientTakenBooksDataGrid.ItemsSource = booksController.GetTradingBooks();
-                        quantityController.ChangeQuantityPlus(Convert.ToInt32(firstSelectedCell.Text), booksQuantity);
-                        MessageBox.Show("Данные успешно обновлены");
+                        booksQuantity = quantityController.GetQuantity(Convert.ToInt32(firstSelectedCell.Text));
+                        if (tradingController.RemoveTrading(tradingId))
+                        {
+                            if(quantityController.ChangeQuantityPlus(Convert.ToInt32(firstSelectedCell.Text), booksQuantity))
+                            {
+                                AvailableBooksDataGrid.ItemsSource = booksController.GetAvailableBooks(Settings.Default.login);
+                                ClientTakenBooksDataGrid.ItemsSource = booksController.GetTradingBooks();
+                                MessageBox.Show("Данные успешно обновлены");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Количетсво не было перезаписано");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Возврат не был произведен, попробуйте позже");
+                        }
                     }
-                }              
+                    else
+                    {
+                        MessageBox.Show("Возврат не был произведен, попробуйте позже");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Данные в формуляр не были добавлены, попробуйте позже");
+                }
             } 
         }
+
+
     }
 }

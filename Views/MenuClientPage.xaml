@@ -39,6 +39,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Row="1">
+            <TextBlock Style="{StaticResource LeftOfferText}">Доступные книги</TextBlock>
             <DataGrid x:Name="AvailableBooksDataGrid" Style="{StaticResource AvailableBooksDataGrid}" ColumnHeaderStyle="{StaticResource HeaderStyle}" ColumnWidth="*" AutoGenerateColumns="False"  IsReadOnly="True" SelectionMode="Single">
                 <DataGrid.Columns>
                     <DataGridTextColumn  Width="30" Header="id" Binding="{Binding book_id}"></DataGridTextColumn>
@@ -48,7 +49,7 @@
                 </DataGrid.Columns>
             </DataGrid>
             <DockPanel>
-                <ComboBox x:Name="AbonementsTypeList" Style="{StaticResource AccessRightComboBox}" SelectionChanged="ComboBox_SelectionChanged">
+                <ComboBox x:Name="AbonementsTypeList" Style="{StaticResource AccessRightComboBox}">
                     <TextBlock>А - только абонемент</TextBlock>
                     <TextBlock>Ч - только читальный зал</TextBlock>
                     <TextBlock>О - читальный зал и абонемент</TextBlock>

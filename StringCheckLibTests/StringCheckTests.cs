@@ -255,9 +255,9 @@ namespace StringCheckLibTests
             string stringPassword = "ThatStuffW1llKillYa!";
             //Act 
             StringCheck isPassword = new StringCheck();
-            bool correctLogin = isPassword.CheckPassword(stringPassword);
+            bool correctPassword = isPassword.CheckPassword(stringPassword);
             //Assert
-            Assert.IsTrue(correctLogin);
+            Assert.IsTrue(correctPassword);
         }
 
         [TestMethod]
@@ -267,9 +267,9 @@ namespace StringCheckLibTests
             string stringPassword = "zxcV1_";
             //Act 
             StringCheck isPassword = new StringCheck();
-            bool correctLogin = isPassword.CheckPassword(stringPassword);
+            bool correctPassword = isPassword.CheckPassword(stringPassword);
             //Assert
-            Assert.IsFalse(correctLogin);
+            Assert.IsFalse(correctPassword);
         }
 
         [TestMethod]
@@ -279,9 +279,9 @@ namespace StringCheckLibTests
             string stringPassword = "zxcvQWER1234";
             //Act 
             StringCheck isPassword = new StringCheck();
-            bool correctLogin = isPassword.CheckPassword(stringPassword);
+            bool correctPassword = isPassword.CheckPassword(stringPassword);
             //Assert
-            Assert.IsFalse(correctLogin);
+            Assert.IsFalse(correctPassword);
         }
 
         [TestMethod]
@@ -291,9 +291,9 @@ namespace StringCheckLibTests
             string stringPassword = "zxcQWER_!gf";
             //Act 
             StringCheck isPassword = new StringCheck();
-            bool correctLogin = isPassword.CheckPassword(stringPassword);
+            bool correctPassword = isPassword.CheckPassword(stringPassword);
             //Assert
-            Assert.IsFalse(correctLogin);
+            Assert.IsFalse(correctPassword);
         }
 
         [TestMethod]
@@ -303,9 +303,9 @@ namespace StringCheckLibTests
             string stringPassword = "zxcvbb!_f32";
             //Act 
             StringCheck isPassword = new StringCheck();
-            bool correctLogin = isPassword.CheckPassword(stringPassword);
+            bool correctPassword = isPassword.CheckPassword(stringPassword);
             //Assert
-            Assert.IsFalse(correctLogin);
+            Assert.IsFalse(correctPassword);
         }
 
         [TestMethod]
@@ -315,9 +315,9 @@ namespace StringCheckLibTests
             string stringPassword = "FSFSD123_!fd";
             //Act 
             StringCheck isPassword = new StringCheck();
-            bool correctLogin = isPassword.CheckPassword(stringPassword);
+            bool correctPassword = isPassword.CheckPassword(stringPassword);
             //Assert
-            Assert.IsFalse(correctLogin);
+            Assert.IsFalse(correctPassword);
         }
 
         [TestMethod]
@@ -327,9 +327,9 @@ namespace StringCheckLibTests
             string stringPassword = "йцукячс!_АВ";
             //Act 
             StringCheck isPassword = new StringCheck();
-            bool correctLogin = isPassword.CheckPassword(stringPassword);
+            bool correctPassword = isPassword.CheckPassword(stringPassword);
             //Assert
-            Assert.IsFalse(correctLogin);
+            Assert.IsFalse(correctPassword);
         }
 
         [TestMethod]
@@ -339,9 +339,58 @@ namespace StringCheckLibTests
             string stringPassword = "";
             //Act 
             StringCheck isPassword = new StringCheck();
-            bool correctLogin = isPassword.CheckPassword(stringPassword);
+            bool correctPassword = isPassword.CheckPassword(stringPassword);
             //Assert
-            Assert.IsFalse(correctLogin);
+            Assert.IsFalse(correctPassword);
         }
+
+        [TestMethod]
+        public void CheckBookName_isCorrectRus_TrueReturned()
+        {
+            //Arrange
+            string stringBookName = "Ведьмак";
+            //Act 
+            StringCheck isBookName = new StringCheck();
+            bool correctBooks = isBookName.CheckBookName(stringBookName);
+            //Assert
+            Assert.IsTrue(correctBooks);
+        }
+
+        [TestMethod]
+        public void CheckBookName_isCorrectEng_TrueReturned()
+        {
+            //Arrange
+            string stringBookName = "The Witcher";
+            //Act 
+            StringCheck isBookName = new StringCheck();
+            bool correctBooks = isBookName.CheckBookName(stringBookName);
+            //Assert
+            Assert.IsTrue(correctBooks);
+        }
+
+        [TestMethod]
+        public void CheckBookName_isSpecialCharacters_FalseReturned()
+        {
+            //Arrange
+            string stringBookName = "!!__&%^$";
+            //Act 
+            StringCheck isBookName = new StringCheck();
+            bool correctBooks = isBookName.CheckBookName(stringBookName);
+            //Assert
+            Assert.IsFalse(correctBooks);
+        }
+
+        [TestMethod]
+        public void CheckBookName_isEmpty_FalseReturned()
+        {
+            //Arrange
+            string stringBookName = "";
+            //Act 
+            StringCheck isBookName = new StringCheck();
+            bool correctBooks = isBookName.CheckBookName(stringBookName);
+            //Assert
+            Assert.IsFalse(correctBooks);
+        }
+
     }
 }

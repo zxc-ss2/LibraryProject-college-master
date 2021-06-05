@@ -29,7 +29,7 @@ namespace LibraryProject.Views
         {
             InitializeComponent();
             BookDataGrid.ItemsSource = booksController.BooksInfoOutput();
-            ClientDataGrid.ItemsSource = clientsController.ClientsInfoOutput();
+            ClientDataGrid.ItemsSource = clientsController.ClientsInfoOutputWithOutAdmin();
         }
 
         private void SearchAdminBooksBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -42,50 +42,66 @@ namespace LibraryProject.Views
             ClientDataGrid.ItemsSource = clientsController.ClientsMatchUpInfoOutput(SearchAdminReadersBox.Text);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void DeleteClientBtn_Click(object sender, RoutedEventArgs e)
         {
             var item = ClientDataGrid.SelectedItem as Models.clients;
 
-            if(item == null)
+            if(ClientDataGrid.SelectedItem == null)
             {
-                MessageBox.Show("Вы не выбрали ни одной строки");
+                MessageBox.Show("Вы не выбрали ни одного пользователя.");
             }
+
             else
             {
-                clientsController.DeleteClientInfo(item);
-                ClientDataGrid.ItemsSource = clientsController.ClientsInfoOutput();
+                if (clientsController.DeleteClientInfo(item))
+                {
+                    ClientDataGrid.ItemsSource = clientsController.ClientsInfoOutputWithOutAdmin();
+                }
+
+                else
+                {
+                    MessageBox.Show("Данные не были удалены, попробуйте позже.");
+                }
             }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void AddBookBtn_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new AddBookPage());
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void DelteBookBtn_Click(object sender, RoutedEventArgs e)
         {
             var item = BookDataGrid.SelectedItem as Models.books;
 
-            if (item == null)
+            if (BookDataGrid.SelectedItem == null)
             {
-                MessageBox.Show("Вы не выбрали ни одной строки");
+                MessageBox.Show("Вы не выбрали ни одной книги");
             }
+
             else
             {
-                booksController.DeleteBookInfo(item);
-                BookDataGrid.ItemsSource = booksController.BooksInfoOutput();
+                if (booksController.DeleteBookInfo(item))
+                {
+                    BookDataGrid.ItemsSource = booksController.BooksInfoOutput();
+                }
+
+                else
+                {
+                    MessageBox.Show("Данные не были удалены, попробуйте позже");
+                }
             }
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private void AddClientBtn_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new RegistrationPage());
         }
 
-        private void Button_Click_4(object sender, RoutedEventArgs e)
+        private void GetCsvFileBtn_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog file = new SaveFileDialog();
-            string nameFile = "formularInfo";
+            string nameFile;
 
             file.Filter = "Text files(*.csv)|*.csv";
 
@@ -93,8 +109,16 @@ namespace LibraryProject.Views
             if(file.ShowDialog() == true)
             {
                 nameFile = file.FileName;
+                if (formularController.FormularFile(nameFile))
+                {
+                    MessageBox.Show("Файл был успешно сохранен");
+                }
+                else
+                {
+                    MessageBox.Show("Файл не был сохранен");
+                }
             }
-            formularController.FormularFile(nameFile);
         }
+
     }
 }

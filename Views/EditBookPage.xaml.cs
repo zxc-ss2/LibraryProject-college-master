@@ -25,10 +25,19 @@ namespace LibraryProject.Views
     public partial class EditBookPage : Page
     {
         readonly BooksController booksController = new BooksController();
-        readonly List<books> UpdatingBook = new List<books>();
+        readonly ChambersController chambersController = new ChambersController();
+        readonly InterpretorsController interpretorsController = new InterpretorsController();
+        readonly List<books> updatingBook = new List<books>();
         public EditBookPage()
         {
             InitializeComponent();
+            NewChamberComboBox.ItemsSource = chambersController.GetChambers();
+            NewChamberComboBox.DisplayMemberPath = "chamber_id";
+            NewChamberComboBox.SelectedValuePath = "chamber_id";
+
+            NewInterpreterComboBox.ItemsSource = interpretorsController.GetInterpretors();
+            NewInterpreterComboBox.DisplayMemberPath = "interpreter_name";
+            NewInterpreterComboBox.SelectedValuePath = "interpreter_id";
 
             foreach (var item in booksController.GetBookWithId(Settings.Default.selectBook))
             {
@@ -38,13 +47,11 @@ namespace LibraryProject.Views
                 NewIsbnInput.Text = item.isbn;
                 NewPlaceInput.Text = item.place;
                 NewYearInput.Text = Convert.ToString(item.year);
-                NewQuantityIdInput.Text = Convert.ToString(item.quantity_id);
-                NewStorageIdInput.Text = Convert.ToString(item.storage_id);
-                NewInterpreterInput.Text = Convert.ToString(item.interpreter_id);
-                NewChamberInput.Text = Convert.ToString(item.chamber_id);
+                NewInterpreterComboBox.Text = Convert.ToString(item.interpreter_id);
+                NewChamberComboBox.Text = Convert.ToString(item.chamber_id);
             }
 
-            UpdatingBook = booksController.GetBookWithId(Settings.Default.selectBook);
+            updatingBook = booksController.GetBookWithId(Settings.Default.selectBook);
         }
 
         private void NewAuthorInput_TextChanged(object sender, TextChangedEventArgs e)
@@ -67,7 +74,7 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBbkInput.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterInput.Text == "")
+            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBbkInput.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -93,7 +100,7 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBbkInput.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterInput.Text == "")
+            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBbkInput.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -116,7 +123,7 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBbkInput.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterInput.Text == "")
+            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBbkInput.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -142,7 +149,7 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBbkInput.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterInput.Text == "")
+            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBbkInput.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -165,7 +172,7 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBbkInput.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterInput.Text == "")
+            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBbkInput.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -191,53 +198,7 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBbkInput.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterInput.Text == "")
-            {
-                SaveBtn.IsEnabled = false;
-            }
-        }
-
-        private void NewQuantityIdInput_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            string word = NewQuantityIdInput.Text;
-
-            foreach (var item in booksController.GetBookWithId(Settings.Default.selectBook))
-            {
-
-                if (word != Convert.ToString(item.quantity_id))
-                {
-                    SaveBtn.IsEnabled = true;
-                }
-                else
-                {
-                    SaveBtn.IsEnabled = false;
-                }
-            }
-
-            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBbkInput.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterInput.Text == "")
-            {
-                SaveBtn.IsEnabled = false;
-            }
-        }
-
-        private void NewStorageIdInput_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            string word = NewStorageIdInput.Text;
-
-            foreach (var item in booksController.GetBookWithId(Settings.Default.selectBook))
-            {
-
-                if (word != Convert.ToString(item.storage_id))
-                {
-                    SaveBtn.IsEnabled = true;
-                }
-                else
-                {
-                    SaveBtn.IsEnabled = false;
-                }
-            }
-
-            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBbkInput.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterInput.Text == "")
+            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBbkInput.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -245,7 +206,7 @@ namespace LibraryProject.Views
 
         private void NewInterpreterInput_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string word = NewInterpreterInput.Text;
+            string word = NewInterpreterComboBox.Text;
 
             foreach (var item in booksController.GetBookWithId(Settings.Default.selectBook))
             {
@@ -260,7 +221,7 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBbkInput.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterInput.Text == "")
+            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBbkInput.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -268,7 +229,7 @@ namespace LibraryProject.Views
 
         private void NewChamberInput_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string word = NewChamberInput.Text;
+            string word = NewChamberComboBox.Text;
 
             foreach (var item in booksController.GetBookWithId(Settings.Default.selectBook))
             {
@@ -283,7 +244,7 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBbkInput.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterInput.Text == "")
+            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBbkInput.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -291,7 +252,7 @@ namespace LibraryProject.Views
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (booksController.UpdateBookInfo(NewAuthorInput.Text, Convert.ToInt32(NewBbkInput.Text), NewNameInput.Text, NewIsbnInput.Text, NewPlaceInput.Text, Convert.ToInt32(NewYearInput.Text), Convert.ToInt32(NewQuantityIdInput.Text), Convert.ToInt32(NewStorageIdInput.Text), Convert.ToInt32(NewInterpreterInput.Text), Convert.ToInt32(NewChamberInput.Text), UpdatingBook))
+            if (booksController.UpdateBookInfo(NewAuthorInput.Text, Convert.ToInt32(NewBbkInput.Text), NewNameInput.Text, NewIsbnInput.Text, NewPlaceInput.Text, Convert.ToInt32(NewYearInput.Text), Convert.ToInt32(NewInterpreterComboBox.Text), Convert.ToInt32(NewChamberComboBox.Text), updatingBook))
             {
                 SaveBtn.IsEnabled = false;
                 MessageBox.Show("Данные успешно обновлены");

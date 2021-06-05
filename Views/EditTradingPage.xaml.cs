@@ -25,7 +25,7 @@ namespace LibraryProject.Views
     public partial class EditTradingPage : Page
     {
         readonly TradingController tradingController = new TradingController();
-        readonly List<trading> UpdatingTrading = new List<trading>();
+        readonly List<trading> updatingTrading = new List<trading>();
         public EditTradingPage()
         {
             InitializeComponent();
@@ -38,7 +38,7 @@ namespace LibraryProject.Views
                 NewReceptionInput.Text = Convert.ToString(item.reception);
             }
 
-            UpdatingTrading = tradingController.GetTradingString(Settings.Default.selectBook2);
+            updatingTrading = tradingController.GetTradingString(Settings.Default.selectBook2);
         }
 
         private void NewBookIdInput_TextChanged(object sender, TextChangedEventArgs e)
@@ -138,7 +138,7 @@ namespace LibraryProject.Views
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (tradingController.UpdateTradingInfo(Convert.ToInt32(NewBookIdInput.Text), NewTicketInput.Text, Convert.ToDateTime(NewDeliveryInput.Text), Convert.ToDateTime(NewReceptionInput.Text), UpdatingTrading))
+            if (tradingController.UpdateTradingInfo(Convert.ToInt32(NewBookIdInput.Text), NewTicketInput.Text, Convert.ToDateTime(NewDeliveryInput.Text), Convert.ToDateTime(NewReceptionInput.Text), updatingTrading))
             {
                 SaveBtn.IsEnabled = false;
                 MessageBox.Show("Данные успешно обновлены");

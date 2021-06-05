@@ -15,11 +15,10 @@ namespace LibraryProject.Controllers
     {
         readonly DbHelper dbHelper = new DbHelper();
 
-        public List<clients> ClientsInfoOutput()
+        public List<clients> ClientsInfoOutputWithOutAdmin()
         {
-            return dbHelper.context.clients.ToList();
+            return dbHelper.context.clients.Where(t => t.id_role != 1).ToList();
         }
-
         public List<clients> ClientsMatchUpInfoOutput(string info)
         {
             return dbHelper.context.clients.Where(t => t.name.Contains(info) || t.surname.Contains(info) ||
@@ -69,7 +68,7 @@ namespace LibraryProject.Controllers
                 StringCheck check = new StringCheck();
 
                 if (!check.CheckName(userName) || (!check.CheckName(userSurname) || (!check.CheckName(userPatronymic) || userDate == null
-                    || !check.CheckAddress(userAddress) || !check.CheckPhone(userPhone) || check.CheckLogin(userLogin) || check.CheckPassword(userPassword))))
+                    || !check.CheckAddress(userAddress) || !check.CheckPhone(userPhone) || !check.CheckPhone(userLogin) || check.CheckPassword(userPassword))))
                 {
                     return false;
                 }
@@ -128,29 +127,40 @@ namespace LibraryProject.Controllers
             }
         }
 
-        public bool UpdateClientInfo(string newName, string newSurname, string newPatronymic, DateTime newBirthday, string newAddress, string newWorkplace, string newStudyplace, string newPhone, string newLogin, string newPassword, string newEmail, string newTicket, List<clients> qwe)
+        public bool UpdateClientInfo(string newName, string newSurname, string newPatronymic, DateTime newBirthday, string newAddress, string newWorkplace, string newStudyplace, string newPhone, string newLogin, string newPassword, string newEmail, string newTicket, List<clients> oldUser)
         {
             try
             {
-                foreach (var item in qwe)
-                {
-                    item.name = newName;
-                    item.surname = newSurname;
-                    item.patronymic = newPatronymic;
-                    item.birthday = newBirthday;
-                    item.address = newAddress;
-                    item.workplace = newWorkplace;
-                    item.studyplace = newStudyplace;
-                    item.phone = newPhone;
-                    item.login = newLogin;
-                    item.password = newPassword;
-                    item.email = newEmail;
-                    item.ticket = newTicket;
-                }
+                StringCheck check = new StringCheck();
 
-                dbHelper.context.SaveChanges();
-                return true;
+                if (!check.CheckName(newName) || (!check.CheckName(newSurname) || (!check.CheckName(newPatronymic) || newBirthday == null
+                    || !check.CheckAddress(newAddress) || !check.CheckPhone(newPhone) || !check.CheckLogin(newLogin) || check.CheckPassword(newPassword))))
+                {
+                    return false;
+                }
+                else
+                {
+                    foreach (var item in oldUser)
+                    {
+                        item.name = newName;
+                        item.surname = newSurname;
+                        item.patronymic = newPatronymic;
+                        item.birthday = newBirthday;
+                        item.address = newAddress;
+                        item.workplace = newWorkplace;
+                        item.studyplace = newStudyplace;
+                        item.phone = newPhone;
+                        item.login = newLogin;
+                        item.password = newPassword;
+                        item.email = newEmail;
+                        item.ticket = newTicket;
+                    }
+
+                    dbHelper.context.SaveChanges();
+                    return true;
+                }
             }
+              
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -162,24 +172,32 @@ namespace LibraryProject.Controllers
         {
             try
             {
-                var selectTrading = from zxc in dbHelper.context.clients
-                                    where zxc.client_id == selectString.client_id
-                                    select zxc;
-
-                if (selectTrading != null)
-                {
-                    foreach (var item in selectTrading)
-                    {
-                        dbHelper.context.clients.Remove(item);
-                    }
-                    dbHelper.context.SaveChanges();
-                    return true;
-                }
-                else
+                if(selectString == null)
                 {
                     return false;
                 }
+                else
+                {
+                    var selectTrading = from search in dbHelper.context.clients
+                                        where search.client_id == selectString.client_id
+                                        select search;
+
+                    if (selectTrading != null)
+                    {
+                        foreach (var item in selectTrading)
+                        {
+                            dbHelper.context.clients.Remove(item);
+                        }
+                        dbHelper.context.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
             }
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);

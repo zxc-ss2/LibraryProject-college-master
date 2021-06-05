@@ -58,19 +58,37 @@ namespace LibraryProject.Controllers
             }
         }
 
-        public void FormularFile(string nameFile)
+        public bool FormularFile(string nameFile)
         {
-            DateTime deliveryDate = Convert.ToDateTime(dbHelper.context.formular.FirstOrDefault().book_delivery);
-            DateTime receptionDate = Convert.ToDateTime(dbHelper.context.formular.FirstOrDefault().book_reception);
-            DateTime returnBook = Convert.ToDateTime(dbHelper.context.formular.FirstOrDefault().book_return);
-            string ticket = dbHelper.context.formular.FirstOrDefault().ticket;
-
-            using (StreamWriter wr = new StreamWriter(nameFile, false, Encoding.UTF8))
+            try
             {
-                wr.WriteLine($"; Дата выдачи {deliveryDate}");
-                wr.WriteLine($"; Максимальная дата возврата {receptionDate}");
-                wr.WriteLine($" Фактическая дата возврата {returnBook}");
-                wr.WriteLine($"; Номер чит. билета {ticket}");
+                int check = dbHelper.context.formular.ToList().Count();
+                if (check == 0 || string.IsNullOrEmpty(nameFile))
+                {
+                    return false;
+                }
+
+                else
+                {
+                    DateTime deliveryDate = Convert.ToDateTime(dbHelper.context.formular.FirstOrDefault().book_delivery);
+                    DateTime receptionDate = Convert.ToDateTime(dbHelper.context.formular.FirstOrDefault().book_reception);
+                    DateTime returnBook = Convert.ToDateTime(dbHelper.context.formular.FirstOrDefault().book_return);
+                    string ticket = dbHelper.context.formular.FirstOrDefault().ticket;
+
+                    using (StreamWriter wr = new StreamWriter(nameFile, false, Encoding.UTF8))
+                    {
+                        wr.WriteLine($"; Дата выдачи {deliveryDate}");
+                        wr.WriteLine($"; Максимальная дата возврата {receptionDate}");
+                        wr.WriteLine($" Фактическая дата возврата {returnBook}");
+                        wr.WriteLine($"; Номер чит. билета {ticket}");
+                    }
+                    return true;
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
             }
         }
     }

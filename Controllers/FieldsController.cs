@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LibraryProject.Controllers
 {
-    class FieldsController
+    public class FieldsController
     {
         readonly DbHelper dbHelper = new DbHelper();
 
@@ -24,10 +24,6 @@ namespace LibraryProject.Controllers
                 bbk.Add(item.field_knowledge_bbk);
             }
 
-            List<char> delimiterChars = new List<char>();
-            delimiterChars.Add(',');
-            delimiterChars.Add(';');
-
             return bbk;
         }
 
@@ -41,9 +37,5 @@ namespace LibraryProject.Controllers
             return dbHelper.context.fields.Where(t => t.field_knowledge_name.Contains(userField) || t.field_knowledge_bbk.Contains(userField)).ToList();
         }
 
-        //public string ConversionBbkNameToBbkId(string selectedBbkName)
-        //{
-        //    return dbHelper.context.fields.Where(t => t.field_knowledge_bbk == selectedBbkId || t.field_knowledge_name == selectedBbkName).First().field_knowledge_bbk;
-        //}
     }
 }

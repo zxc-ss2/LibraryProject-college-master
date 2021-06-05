@@ -47,9 +47,18 @@ namespace LibraryProject.Views
                     page.password = PasswordTextBox.Text;
                 }
 
-               else if (Settings.Default.role == 3)
+                else if (Settings.Default.role == 2)
                 {
                     this.NavigationService.Navigate(new MenuLibrarianPage());
+
+                    MainWindow page = (MainWindow)Application.Current.MainWindow;
+                    page.login = LoginTextBox.Text;
+                    page.password = PasswordTextBox.Text;
+                }
+
+                else if (Settings.Default.role == 3)
+                {
+                    this.NavigationService.Navigate(new MenuClientPage());
 
                     MainWindow page = (MainWindow)Application.Current.MainWindow;
                     page.login = LoginTextBox.Text;

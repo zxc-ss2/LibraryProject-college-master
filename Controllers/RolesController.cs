@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryProject.Controllers
 {
-    class RolesController
+    public class RolesController
     {
     }
 }

@@ -103,7 +103,7 @@
             <PropertyRef Name="trading_id" />
           </Key>
           <Property Name="trading_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="book_id" Type="int" />
+          <Property Name="book_id" Type="int" Nullable="false" />
           <Property Name="ticket" Type="nvarchar" MaxLength="9" Nullable="false" />
           <Property Name="delivery" Type="date" Nullable="false" />
           <Property Name="reception" Type="date" Nullable="false" />
@@ -401,7 +401,7 @@
             <PropertyRef Name="trading_id" />
           </Key>
           <Property Name="trading_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="book_id" Type="Int32" />
+          <Property Name="book_id" Type="Int32" Nullable="false" />
           <Property Name="ticket" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="delivery" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="reception" Type="DateTime" Nullable="false" Precision="0" />

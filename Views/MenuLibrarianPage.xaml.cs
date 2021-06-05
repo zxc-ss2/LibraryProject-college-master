@@ -1,5 +1,6 @@
 ﻿using LibraryProject.Classes;
 using LibraryProject.Controllers;
+using LibraryProject.Models;
 using LibraryProject.Properties;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,7 @@ namespace LibraryProject.Views
         TradingController tradingController = new TradingController();
         BooksController booksController = new BooksController();
         BbkCheckClass bbkCheckClass = new BbkCheckClass(); 
+        QuantityController quantityController = new QuantityController(); 
         public MenuLibrarianPage()
         {
             InitializeComponent();
@@ -36,7 +38,47 @@ namespace LibraryProject.Views
 
         private void DeleteTradingInfoBtn_Click(object sender, RoutedEventArgs e)
         {
-            //bbkCheckClass.CheckBbk("28,01");
+            var secondSelectedCellContent = new DataGridCellInfo(TradingDataGrid.SelectedItem, TradingDataGrid.Columns[1]);
+
+            if(TradingDataGrid.SelectedItem == null)
+            {
+                MessageBox.Show("Вы не выбрали ни одной выдачи");
+            }
+
+            else
+            {
+                List<quantity> booksQuantity = new List<quantity>();
+                TextBlock secondSelectedCell = secondSelectedCellContent.Column.GetCellContent(secondSelectedCellContent.Item) as TextBlock;
+                var item = TradingDataGrid.SelectedItem as trading;
+                int tradingId = Convert.ToInt32(item.trading_id);
+
+
+                if (booksController.RemoveIdTradingFromBook(Convert.ToInt32(secondSelectedCell.Text)))
+                {
+                    booksQuantity = quantityController.GetQuantity(Convert.ToInt32(secondSelectedCell.Text));
+                    if (tradingController.RemoveTrading(tradingId))
+                    {
+                        if (quantityController.ChangeQuantityPlus(Convert.ToInt32(secondSelectedCell.Text), booksQuantity))
+                        {
+                            TradingDataGrid.ItemsSource = tradingController.GetTradingInfo();
+                            MessageBox.Show("Данные успешно обновлены");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Количетсво не было перезаписано");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Возврат не был произведен, попробуйте позже");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Возврат не был произведен, попробуйте позже");
+                }
+            }
+            
         }
 
         private void AddTradingInfoBtn_Click(object sender, RoutedEventArgs e)
@@ -48,14 +90,20 @@ namespace LibraryProject.Views
         {
             var item = BookDataGrid.SelectedItem as Models.books;
 
-            if (item == null)
+            if (BookDataGrid.SelectedItem == null)
             {
                 MessageBox.Show("Вы не выбрали ни одной строки");
             }
             else
             {
-                booksController.DeleteBookInfo(item);
-                BookDataGrid.ItemsSource = booksController.BooksInfoOutput();
+                if (booksController.DeleteBookInfo(item))
+                {
+                    BookDataGrid.ItemsSource = booksController.BooksInfoOutput();
+                }
+                else
+                {
+                    MessageBox.Show("Данные не были удалены, попробуйте позже.");
+                }
             }
         }
 
@@ -67,24 +115,29 @@ namespace LibraryProject.Views
         private void EditBookInfoBtn_Click(object sender, RoutedEventArgs e)
         {
             var firstSelectedCellContent = new DataGridCellInfo(BookDataGrid.SelectedItem, BookDataGrid.Columns[0]);
-            TextBlock firstSelectedCell = firstSelectedCellContent.Column.GetCellContent(firstSelectedCellContent.Item) as TextBlock;
 
-            Settings.Default.selectBook = Convert.ToInt32(firstSelectedCell.Text);
-
-            this.NavigationService.Navigate(new EditBookPage());
+            if(BookDataGrid.SelectedItem == null)
+            {
+                MessageBox.Show("Вы не выбрали ни одной книги");
+            }
+            else
+            {
+                TextBlock firstSelectedCell = firstSelectedCellContent.Column.GetCellContent(firstSelectedCellContent.Item) as TextBlock;
+                Settings.Default.selectBook = Convert.ToInt32(firstSelectedCell.Text);
+                this.NavigationService.Navigate(new EditBookPage());
+            }
         }
 
         private void EditTradingInfoBtn_Click(object sender, RoutedEventArgs e)
         {
             var firstSelectedCellContent = new DataGridCellInfo(TradingDataGrid.SelectedItem, TradingDataGrid.Columns[0]);
-            TextBlock firstSelectedCell = firstSelectedCellContent.Column.GetCellContent(firstSelectedCellContent.Item) as TextBlock;
-
-            if(firstSelectedCell == null)
+            if(TradingDataGrid.SelectedItem == null)
             {
-                MessageBox.Show("Выберите книгу из раздела 'мои книги'");
+                MessageBox.Show("Вы не выбрали ни одной выдачи");
             }
             else
             {
+                TextBlock firstSelectedCell = firstSelectedCellContent.Column.GetCellContent(firstSelectedCellContent.Item) as TextBlock;
                 Settings.Default.selectBook2 = Convert.ToInt32(firstSelectedCell.Text);
 
                 this.NavigationService.Navigate(new EditTradingPage());

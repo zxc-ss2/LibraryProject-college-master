@@ -42,8 +42,8 @@ namespace LibraryProject.Controllers
             {
                 StringCheck check = new StringCheck();
 
-                if (!check.CheckName(bookAuthor)|| !check.CheckBookName(bookName) || !check.CheckBookIsbn(bookISBN) || !check.CheckBookYear(Convert.ToString(bookYear)) 
-                    || bookInterpreter == 0)
+                if ((!check.CheckName(bookAuthor) || bookAuthor == "") ||(!check.CheckBookName(bookName) || bookName == "") ||(!check.CheckBookIsbn(bookISBN) || bookISBN == "") || (!check.CheckBookYear(Convert.ToString(bookYear)) || bookYear == 0) 
+                    || (bookInterpreter == 0))
                 {
                     return false;
                 }
@@ -85,24 +85,31 @@ namespace LibraryProject.Controllers
         {
             try
             {
-                var selectTrading = from zxc in dbHelper.context.books
-                                    where zxc.book_id == selectString.book_id
-                                    select zxc;
-
-                if (selectTrading != null)
-                {
-                    foreach (var item in selectTrading)
-                    {
-                        dbHelper.context.books.Remove(item);
-                    }
-                    dbHelper.context.SaveChanges();
-                    return true;
-                }
-                else
+                if(selectString == null)
                 {
                     return false;
                 }
-            }
+                else
+                {
+                    var selectTrading = from search in dbHelper.context.books
+                                        where search.book_id == selectString.book_id
+                                        select search;
+
+                    if (selectTrading != null)
+                    {
+                        foreach (var item in selectTrading)
+                        {
+                            dbHelper.context.books.Remove(item);
+                        }
+                        dbHelper.context.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }    
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -200,7 +207,7 @@ namespace LibraryProject.Controllers
             return dbHelper.context.books.Where(t => t.book_id == selectBookId).ToList();
         }
 
-        public bool UpdateBookInfo(string newAuthor, int newfFieldKnowledgeId, string newName, string newIsbn, string newPlace, int newYear, int newQuantityId, int newStorageId, int newInterpretorId, int newChamberId, List<books> oldBook)
+        public bool UpdateBookInfo(string newAuthor, int newfFieldKnowledgeId, string newName, string newIsbn, string newPlace, int newYear, int newInterpretorId, int newChamberId, List<books> oldBook)
         {
             try
             {
@@ -221,8 +228,6 @@ namespace LibraryProject.Controllers
                         item.isbn = newIsbn;
                         item.place = newPlace;
                         item.year = newYear;
-                        item.quantity_id = newQuantityId;
-                        item.storage_id = newStorageId;
                         item.interpreter_id = newInterpretorId;
                         item.chamber_id = newChamberId;
                         item.trading_id = null;

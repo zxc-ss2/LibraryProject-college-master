@@ -58,7 +58,7 @@ namespace LibraryProject.Controllers
 
             foreach (var item in dbHelper.context.trading.ToList())
             {
-                tradingBooksId.Add(item.book_id.Value);
+                tradingBooksId.Add(item.book_id);
             }
 
             if(tradingBooksId != null)
@@ -77,8 +77,8 @@ namespace LibraryProject.Controllers
 
         public bool UpdateTradingInfo(int newBook_id, string newTicket, DateTime newDelivery, DateTime newReception, List<trading> oldBook)
         {
-            //try
-            //{
+            try
+            {
                 foreach (var item in oldBook)
                 {
                     item.book_id = newBook_id;
@@ -96,12 +96,12 @@ namespace LibraryProject.Controllers
             {
                 return false;
             }
-            //}
-            //catch(Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //    return false;
-            //}
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
 
         }
 
@@ -109,9 +109,9 @@ namespace LibraryProject.Controllers
         {
             try
             {
-                var selectTrading = from zxc in dbHelper.context.trading
-                                    where zxc.trading_id == selectString
-                                    select zxc;
+                var selectTrading = from search in dbHelper.context.trading
+                                    where search.trading_id == selectString
+                                    select search;
 
                 if (selectTrading != null)
                 {

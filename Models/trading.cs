@@ -22,7 +22,7 @@ namespace LibraryProject.Models
         }
     
         public int trading_id { get; set; }
-        public Nullable<int> book_id { get; set; }
+        public int book_id { get; set; }
         public string ticket { get; set; }
         public System.DateTime delivery { get; set; }
         public System.DateTime reception { get; set; }

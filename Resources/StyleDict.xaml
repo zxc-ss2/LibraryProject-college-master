@@ -853,6 +853,18 @@ Value="{x:Static sys:String.Empty}">
         <Setter Property="Margin" Value="0 10 0 0"/>
     </Style>
 
+    <Style TargetType="ComboBox" x:Key="InterpreterComboBox" BasedOn="{StaticResource ComboBoxDefault}">
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="Width" Value="180"/>
+        <Setter Property="Margin" Value="0 10 0 0"/>
+    </Style>
+    
+    <Style TargetType="ComboBox" x:Key="ChamberComboBox" BasedOn="{StaticResource ComboBoxDefault}">
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="Width" Value="180"/>
+        <Setter Property="Margin" Value="0 10 0 0"/>
+    </Style>
+    
     <Style TargetType="TextBox" x:Key="RightISBNInputBox" BasedOn="{StaticResource RightInputBox}">
         <Setter Property="Height" Value="25"/>
     </Style>

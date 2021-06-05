@@ -92,7 +92,7 @@
                 <TextBox x:Name="NewEmailInput" Style="{StaticResource LeftInputBox}"></TextBox>
                 <TextBox x:Name="NewTicketInput" Style="{StaticResource RightInputBox}"></TextBox>
             </DockPanel>
-            <Button x:Name="SaveBtn" Style="{StaticResource StartBtn}" Click="Button_Click">Сохранить изменения</Button>
+            <Button x:Name="SaveBtn" Style="{StaticResource StartBtn}" Click="SaveBtn_Click">Сохранить изменения</Button>
         </StackPanel >
     </Grid>
 </Page>

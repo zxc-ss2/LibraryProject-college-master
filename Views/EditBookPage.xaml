@@ -53,23 +53,15 @@
                 <TextBox x:Name="NewYearInput" Style="{StaticResource RightInputBox}" TextChanged="NewYearInput_TextChanged"></TextBox>
             </DockPanel>
             <DockPanel>
-                <TextBlock Style="{StaticResource LeftLabelText}">Наличие (библиотека)</TextBlock>
-                <TextBlock Style="{StaticResource RightLabelText}">Наличие (склад)</TextBlock>
-            </DockPanel>
-            <DockPanel>
-                <TextBox x:Name="NewQuantityIdInput" Style="{StaticResource LeftInputBox}" TextChanged="NewQuantityIdInput_TextChanged"></TextBox>
-                <TextBox x:Name="NewStorageIdInput" Style="{StaticResource RightInputBox}" TextChanged="NewStorageIdInput_TextChanged"></TextBox>
-            </DockPanel>
-            <DockPanel>
-                <TextBlock Style="{StaticResource LeftLabelText}">Издательство (ID)</TextBlock>
-                <TextBlock Style="{StaticResource RightLabelText}">Отсек (№)</TextBlock>
+                <TextBlock Style="{StaticResource LeftLabelText}">Издательство</TextBlock>
+                <TextBlock Style="{StaticResource RightLabelText}">Отсек</TextBlock>
             </DockPanel>
             <DockPanel>
                 <DockPanel>
-                    <TextBox x:Name="NewInterpreterInput" Style="{StaticResource LeftInputBox}" TextChanged="NewInterpreterInput_TextChanged"></TextBox>
+                    <ComboBox x:Name="NewInterpreterComboBox" MaxDropDownHeight="100" Style="{DynamicResource InterpreterComboBox}" HorizontalAlignment="Left" ></ComboBox>
                 </DockPanel>
                 <DockPanel HorizontalAlignment="Right">
-                    <TextBox x:Name="NewChamberInput" Style="{StaticResource RightInputBox}" TextChanged="NewChamberInput_TextChanged"></TextBox>
+                    <ComboBox x:Name="NewChamberComboBox" MaxDropDownHeight="100" Style="{DynamicResource ChamberComboBox}" HorizontalAlignment="Left" ></ComboBox>
                 </DockPanel>
             </DockPanel>
 
