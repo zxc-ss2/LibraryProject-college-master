@@ -120,9 +120,6 @@
     <Compile Include="Models\roles.cs">
       <DependentUpon>LibraryProjectModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\storage.cs">
-      <DependentUpon>LibraryProjectModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\trading.cs">
       <DependentUpon>LibraryProjectModel.tt</DependentUpon>
     </Compile>
@@ -237,6 +234,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="Resources\fonts\Raleway.ttf" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="StringCheckLib\StringCheckLib.csproj">

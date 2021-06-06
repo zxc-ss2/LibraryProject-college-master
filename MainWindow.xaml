@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:LibraryProject"
         mc:Ignorable="d"
         Title="Library" Height="650" Width="900"
-        MinHeight="650" MinWidth="900" MaxHeight="1080" MaxWidth="1920"
+        MinHeight="650" MinWidth="900" MaxHeight="1080" MaxWidth="1940"
         Icon="/Resources/images/drftgyh.png">
 
     
@@ -22,7 +22,7 @@
         <Image Style="{StaticResource BackIcon}" MouseDown="Image_MouseDown"/>
         <DockPanel HorizontalAlignment="Center">
             <Image Style="{StaticResource LogoIcon}"/>
-            <TextBlock Style="{StaticResource NameTextBlock}">lorem ipsum dolor sit amet</TextBlock>
+            <TextBlock Style="{StaticResource NameTextBlock}">Calcium</TextBlock>
         </DockPanel>
         <Image x:Name="PersonalAreaImage" Style="{StaticResource PersonalAreaIcon}" MouseDown="PersonalAreaImage_MouseDown"/>
         <Button x:Name="ExitBtn" Grid.Row="2" Style="{StaticResource FooterBtn}" Click="ExitBtn_Click">Выйти</Button>

@@ -33,7 +33,6 @@ namespace LibraryProject.Models
         public virtual DbSet<interpretors> interpretors { get; set; }
         public virtual DbSet<quantity> quantity { get; set; }
         public virtual DbSet<roles> roles { get; set; }
-        public virtual DbSet<storage> storage { get; set; }
         public virtual DbSet<trading> trading { get; set; }
     }
 }

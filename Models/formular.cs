@@ -16,8 +16,8 @@ namespace LibraryProject.Models
     {
         public int formular_id { get; set; }
         public string ticket { get; set; }
-        public Nullable<System.DateTime> book_delivery { get; set; }
-        public Nullable<System.DateTime> book_reception { get; set; }
+        public System.DateTime book_delivery { get; set; }
+        public System.DateTime book_reception { get; set; }
         public Nullable<System.DateTime> book_return { get; set; }
         public Nullable<int> book_id { get; set; }
     

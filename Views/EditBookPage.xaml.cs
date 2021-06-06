@@ -24,20 +24,28 @@ namespace LibraryProject.Views
     /// </summary>
     public partial class EditBookPage : Page
     {
+        readonly DbHelper dbHelper = new DbHelper();
         readonly BooksController booksController = new BooksController();
         readonly ChambersController chambersController = new ChambersController();
         readonly InterpretorsController interpretorsController = new InterpretorsController();
         readonly List<books> updatingBook = new List<books>();
-        public EditBookPage()
+        public EditBookPage(LibraryEntities context, books bookDataContext)
         {
             InitializeComponent();
-            NewChamberComboBox.ItemsSource = chambersController.GetChambers();
+            NewInterpreterComboBox.DisplayMemberPath = "interpreter_id";
+            NewInterpreterComboBox.SelectedValuePath = "interpreter_id";
+
             NewChamberComboBox.DisplayMemberPath = "chamber_id";
-            NewChamberComboBox.SelectedValuePath = "chamber_id";
+            NewInterpreterComboBox.SelectedValuePath = "chamber_id";
+
+            NewChamberComboBox.ItemsSource = chambersController.GetChambers();
+            NewChamberComboBox.SelectedIndex = chambersController.SelectedIndexChamberComboBox(bookDataContext, NewChamberComboBox);
 
             NewInterpreterComboBox.ItemsSource = interpretorsController.GetInterpretors();
-            NewInterpreterComboBox.DisplayMemberPath = "interpreter_name";
-            NewInterpreterComboBox.SelectedValuePath = "interpreter_id";
+            NewInterpreterComboBox.SelectedIndex = interpretorsController.SelectedIndexInterpretorComboBox(bookDataContext, NewInterpreterComboBox);
+
+
+            updatingBook = booksController.GetBookWithId(Settings.Default.selectBook);
 
             foreach (var item in booksController.GetBookWithId(Settings.Default.selectBook))
             {
@@ -47,11 +55,7 @@ namespace LibraryProject.Views
                 NewIsbnInput.Text = item.isbn;
                 NewPlaceInput.Text = item.place;
                 NewYearInput.Text = Convert.ToString(item.year);
-                NewInterpreterComboBox.Text = Convert.ToString(item.interpreter_id);
-                NewChamberComboBox.Text = Convert.ToString(item.chamber_id);
             }
-
-            updatingBook = booksController.GetBookWithId(Settings.Default.selectBook);
         }
 
         private void NewAuthorInput_TextChanged(object sender, TextChangedEventArgs e)
@@ -250,9 +254,58 @@ namespace LibraryProject.Views
             }
         }
 
+        private void NewInterpreterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var word = NewInterpreterComboBox.SelectedItem as interpretors;
+
+            foreach (var item in booksController.GetBookWithId(Settings.Default.selectBook))
+            {
+
+                if (word.interpreter_id != item.interpreter_id && NewInterpreterComboBox.Text != "")
+                {
+                    SaveBtn.IsEnabled = true;
+                }
+                else
+                {
+                    SaveBtn.IsEnabled = false;
+                }
+            }
+
+            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBbkInput.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
+            {
+                SaveBtn.IsEnabled = false;
+            }
+        }
+
+        private void NewChamberComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var word = NewChamberComboBox.SelectedItem as chambers;
+
+            foreach (var item in booksController.GetBookWithId(Settings.Default.selectBook))
+            {
+
+                if (word.chamber_id != item.chamber_id)
+                {
+                    SaveBtn.IsEnabled = true;
+                }
+                else
+                {
+                    SaveBtn.IsEnabled = false;
+                }
+            }
+
+            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBbkInput.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
+            {
+                SaveBtn.IsEnabled = false;
+            }
+        }
+
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (booksController.UpdateBookInfo(NewAuthorInput.Text, Convert.ToInt32(NewBbkInput.Text), NewNameInput.Text, NewIsbnInput.Text, NewPlaceInput.Text, Convert.ToInt32(NewYearInput.Text), Convert.ToInt32(NewInterpreterComboBox.Text), Convert.ToInt32(NewChamberComboBox.Text), updatingBook))
+            var chamber = NewChamberComboBox.SelectedItem as chambers;
+            var interpretor = NewInterpreterComboBox.SelectedItem as interpretors;
+
+            if (booksController.UpdateBookInfo(NewAuthorInput.Text, Convert.ToInt32(NewBbkInput.Text), NewNameInput.Text, NewIsbnInput.Text, NewPlaceInput.Text, Convert.ToInt32(NewYearInput.Text), Convert.ToInt32(interpretor.interpreter_id.ToString()), Convert.ToInt32(chamber.chamber_id.ToString()), updatingBook))
             {
                 SaveBtn.IsEnabled = false;
                 MessageBox.Show("Данные успешно обновлены");

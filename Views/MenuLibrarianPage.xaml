@@ -22,12 +22,6 @@
                         <TextBlock VerticalAlignment="Center" Margin="10 0 10 0"><Run Text="Удалить"/></TextBlock>
                     </StackPanel>
                 </Button>
-                <Button x:Name="AddTradingInfoBtn" Style="{StaticResource AdminBtn}" Click="AddTradingInfoBtn_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="/Resources/images/add.png"></Image>
-                        <TextBlock VerticalAlignment="Center" Margin="10 0 10 0">Добавить</TextBlock>
-                    </StackPanel>
-                </Button>
                 <Button x:Name="EditTradingInfoBtn" Style="{StaticResource AdminBtn}" Click="EditTradingInfoBtn_Click">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Resources/images/add.png"></Image>

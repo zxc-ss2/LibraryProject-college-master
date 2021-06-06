@@ -14,7 +14,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <DockPanel>
-            <ComboBox x:Name="FilterList" Style="{StaticResource FilterComboBox}" SelectionChanged="FilterList_SelectionChanged">
+            <ComboBox x:Name="FilterList" Style="{DynamicResource FilterComboBox}" SelectionChanged="FilterList_SelectionChanged">
                 <TextBlock>Все книги</TextBlock>
                 <TextBlock>Мои книги</TextBlock>
             </ComboBox>
@@ -49,7 +49,7 @@
                 </DataGrid.Columns>
             </DataGrid>
             <DockPanel>
-                <ComboBox x:Name="AbonementsTypeList" Style="{StaticResource AccessRightComboBox}">
+                <ComboBox x:Name="AbonementsTypeList" Style="{DynamicResource AbonementComboBox}">
                     <TextBlock>А - только абонемент</TextBlock>
                     <TextBlock>Ч - только читальный зал</TextBlock>
                     <TextBlock>О - читальный зал и абонемент</TextBlock>

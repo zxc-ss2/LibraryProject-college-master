@@ -17,7 +17,6 @@
           <Property Name="place" Type="nvarchar" MaxLength="50" />
           <Property Name="year" Type="int" Nullable="false" />
           <Property Name="quantity_id" Type="int" />
-          <Property Name="storage_id" Type="int" />
           <Property Name="interpreter_id" Type="int" Nullable="false" />
           <Property Name="chamber_id" Type="int" />
           <Property Name="trading_id" Type="int" />
@@ -62,10 +61,10 @@
             <PropertyRef Name="formular_id" />
           </Key>
           <Property Name="formular_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ticket" Type="nvarchar" MaxLength="9" />
-          <Property Name="book_delivery" Type="datetime" />
-          <Property Name="book_reception" Type="datetime" />
-          <Property Name="book_return" Type="datetime" />
+          <Property Name="ticket" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="book_delivery" Type="date" Nullable="false" />
+          <Property Name="book_reception" Type="date" Nullable="false" />
+          <Property Name="book_return" Type="date" />
           <Property Name="book_id" Type="int" />
         </EntityType>
         <EntityType Name="interpretors">
@@ -89,14 +88,6 @@
           </Key>
           <Property Name="role_id" Type="int" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="storage">
-          <Key>
-            <PropertyRef Name="storage_id" />
-          </Key>
-          <Property Name="storage_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="book_id" Type="int" Nullable="false" />
-          <Property Name="quantity" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="trading">
           <Key>
@@ -165,20 +156,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_books_storage">
-          <End Role="storage" Type="Self.storage" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="books" Type="Self.books" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="storage">
-              <PropertyRef Name="storage_id" />
-            </Principal>
-            <Dependent Role="books">
-              <PropertyRef Name="storage_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_books_trading">
           <End Role="trading" Type="Self.trading" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -244,7 +221,6 @@
           <EntitySet Name="interpretors" EntityType="Self.interpretors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="quantity" EntityType="Self.quantity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="roles" EntityType="Self.roles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="storage" EntityType="Self.storage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="trading" EntityType="Self.trading" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_books_chambers" Association="Self.FK_books_chambers">
             <End Role="chambers" EntitySet="chambers" />
@@ -260,10 +236,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_books_quantity" Association="Self.FK_books_quantity">
             <End Role="quantity" EntitySet="quantity" />
-            <End Role="books" EntitySet="books" />
-          </AssociationSet>
-          <AssociationSet Name="FK_books_storage" Association="Self.FK_books_storage">
-            <End Role="storage" EntitySet="storage" />
             <End Role="books" EntitySet="books" />
           </AssociationSet>
           <AssociationSet Name="FK_books_trading" Association="Self.FK_books_trading">
@@ -299,7 +271,6 @@
           <Property Name="place" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="year" Type="Int32" Nullable="false" />
           <Property Name="quantity_id" Type="Int32" />
-          <Property Name="storage_id" Type="Int32" />
           <Property Name="interpreter_id" Type="Int32" Nullable="false" />
           <Property Name="chamber_id" Type="Int32" />
           <Property Name="trading_id" Type="Int32" />
@@ -307,7 +278,6 @@
           <NavigationProperty Name="fields" Relationship="Self.FK_books_fields" FromRole="books" ToRole="fields" />
           <NavigationProperty Name="interpretors" Relationship="Self.FK_books_interpretors" FromRole="books" ToRole="interpretors" />
           <NavigationProperty Name="quantity" Relationship="Self.FK_books_quantity" FromRole="books" ToRole="quantity" />
-          <NavigationProperty Name="storage" Relationship="Self.FK_books_storage" FromRole="books" ToRole="storage" />
           <NavigationProperty Name="trading" Relationship="Self.FK_books_trading" FromRole="books" ToRole="trading" />
           <NavigationProperty Name="formular" Relationship="Self.FK_formular_books" FromRole="books" ToRole="formular" />
         </EntityType>
@@ -355,10 +325,10 @@
             <PropertyRef Name="formular_id" />
           </Key>
           <Property Name="formular_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ticket" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
-          <Property Name="book_delivery" Type="DateTime" Precision="3" />
-          <Property Name="book_reception" Type="DateTime" Precision="3" />
-          <Property Name="book_return" Type="DateTime" Precision="3" />
+          <Property Name="ticket" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="book_delivery" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="book_reception" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="book_return" Type="DateTime" Precision="0" />
           <Property Name="book_id" Type="Int32" />
           <NavigationProperty Name="books" Relationship="Self.FK_formular_books" FromRole="formular" ToRole="books" />
         </EntityType>
@@ -386,15 +356,6 @@
           <Property Name="role_id" Type="Int32" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="clients" Relationship="Self.FK_client_roles" FromRole="roles" ToRole="clients" />
-        </EntityType>
-        <EntityType Name="storage">
-          <Key>
-            <PropertyRef Name="storage_id" />
-          </Key>
-          <Property Name="storage_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="book_id" Type="Int32" Nullable="false" />
-          <Property Name="quantity" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="books" Relationship="Self.FK_books_storage" FromRole="storage" ToRole="books" />
         </EntityType>
         <EntityType Name="trading">
           <Key>
@@ -465,20 +426,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_books_storage">
-          <End Role="storage" Type="Self.storage" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="books" Type="Self.books" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="storage">
-              <PropertyRef Name="storage_id" />
-            </Principal>
-            <Dependent Role="books">
-              <PropertyRef Name="storage_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_books_trading">
           <End Role="trading" Type="Self.trading" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -544,7 +491,6 @@
           <EntitySet Name="interpretors" EntityType="Self.interpretors" />
           <EntitySet Name="quantity" EntityType="Self.quantity" />
           <EntitySet Name="roles" EntityType="Self.roles" />
-          <EntitySet Name="storage" EntityType="Self.storage" />
           <EntitySet Name="trading" EntityType="Self.trading" />
           <AssociationSet Name="FK_books_chambers" Association="Self.FK_books_chambers">
             <End Role="chambers" EntitySet="chambers" />
@@ -560,10 +506,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_books_quantity" Association="Self.FK_books_quantity">
             <End Role="quantity" EntitySet="quantity" />
-            <End Role="books" EntitySet="books" />
-          </AssociationSet>
-          <AssociationSet Name="FK_books_storage" Association="Self.FK_books_storage">
-            <End Role="storage" EntitySet="storage" />
             <End Role="books" EntitySet="books" />
           </AssociationSet>
           <AssociationSet Name="FK_books_trading" Association="Self.FK_books_trading">
@@ -600,7 +542,6 @@
                 <ScalarProperty Name="place" ColumnName="place" />
                 <ScalarProperty Name="year" ColumnName="year" />
                 <ScalarProperty Name="quantity_id" ColumnName="quantity_id" />
-                <ScalarProperty Name="storage_id" ColumnName="storage_id" />
                 <ScalarProperty Name="interpreter_id" ColumnName="interpreter_id" />
                 <ScalarProperty Name="chamber_id" ColumnName="chamber_id" />
                 <ScalarProperty Name="trading_id" ColumnName="trading_id" />
@@ -679,15 +620,6 @@
               <MappingFragment StoreEntitySet="roles">
                 <ScalarProperty Name="role_id" ColumnName="role_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="storage">
-            <EntityTypeMapping TypeName="LibraryModel.storage">
-              <MappingFragment StoreEntitySet="storage">
-                <ScalarProperty Name="storage_id" ColumnName="storage_id" />
-                <ScalarProperty Name="book_id" ColumnName="book_id" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

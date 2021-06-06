@@ -1,4 +1,5 @@
-﻿using StringCheckLib;
+﻿using LibraryProject.Properties;
+using StringCheckLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,26 +43,26 @@ namespace LibraryProject.Views
             bool resultName = isName.CheckName(FirstNameInput.Text);
             if (!resultName)
             {
-                resultString += "Неправильно введено Имя";
+                resultString += "Неправильно введено Имя\n";
             }
 
             bool resultSurname = isName.CheckName(LastNameInput.Text);
             if (!resultSurname)
             {
-                resultString += "Неправильно введена Фамилия";
+                resultString += "Неправильно введена Фамилия\n";
             }
 
             bool resultPatronymic = isName.CheckName(PatronymicInput.Text);
             if (!resultPatronymic)
             {
-                resultString += "Неправильно введено Отчество";
+                resultString += "Неправильно введено Отчество\n";
             }
 
             StringCheck isAddress = new StringCheck();
             bool resultAddress = isAddress.CheckAddress(AddressInput.Text);
             if (!resultAddress)
             {
-                resultString += "Неправильно введен Адрес";
+                resultString += "Неправильно введен Адрес\n";
             }
 
 
@@ -69,21 +70,28 @@ namespace LibraryProject.Views
             bool resultPhone = isPhone.CheckPhone(PhoneInput.Text);
             if (!resultPhone)
             {
-                resultString += "Неправильно введен Телефон";
+                resultString += "Неправильно введен Телефон\n";
             }
 
             StringCheck isLogin = new StringCheck();
             bool resultLogin = isLogin.CheckLogin(LoginInput.Text);
             if (!resultLogin)
             {
-                resultString += "Неправильно введен Логин";
+                resultString += "Неправильно введен Логин\n";
             }
 
             StringCheck isPassword = new StringCheck();
             bool resultPassword = isPassword.CheckPassword(PasswordInput.Password);
             if (!resultPassword)
             {
-                resultString += "Неправильно введен Пароль";
+                resultString += "Неправильно введен Пароль\n";
+            }
+
+            StringCheck isEmail = new StringCheck();
+            bool resultEmail = isEmail.CheckEmail(EmailInput.Text);
+            if (!resultEmail)
+            {
+                resultString += "Неправильно введен email\n";
             }
 
             if (resultString == "")
@@ -96,9 +104,22 @@ namespace LibraryProject.Views
                     }
 
                     string ticket = "X" + "-" + generator + "-" + DateTime.Now.ToString("yy");
-                    clientsController.AddNewUser(FirstNameInput.Text, LastNameInput.Text, PatronymicInput.Text, Convert.ToDateTime(DateInput.SelectedDate), AddressInput.Text, WorkplaceInput.Text, StudyplaceInput.Text, PhoneInput.Text, LoginInput.Text, PasswordInput.Password, EmailInput.Text, ticket);
-                    clientsController.SendInfo(LoginInput.Text, PasswordInput.Password, EmailInput.Text);
-                    this.NavigationService.Navigate(new AuthorizationPage());
+                    if(clientsController.AddNewUser(FirstNameInput.Text, LastNameInput.Text, PatronymicInput.Text, Convert.ToDateTime(DateInput.SelectedDate), AddressInput.Text, WorkplaceInput.Text, StudyplaceInput.Text, PhoneInput.Text, LoginInput.Text, PasswordInput.Password, EmailInput.Text, ticket))
+                    {
+                        MessageBox.Show("Регистрация прошла успешно.");
+                        try
+                        {
+                            clientsController.SendInfo(LoginInput.Text, PasswordInput.Password, EmailInput.Text);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ошибка регистрации");
+                    }
                 }
 
                 else

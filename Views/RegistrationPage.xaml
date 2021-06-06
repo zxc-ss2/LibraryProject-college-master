@@ -15,7 +15,7 @@
 
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="400">
             <DockPanel HorizontalAlignment="Center">
-                <Button Style="{StaticResource GrayBtn}" BorderThickness="0">Зарегистрироваться</Button>
+                <Button Style="{StaticResource GrayBtn}" BorderThickness="0">Кнопка</Button>
                 <Button Style="{StaticResource GreenBtn}" BorderThickness="0" Click="LoginBtnClick">Войти</Button>
             </DockPanel>
             <DockPanel>

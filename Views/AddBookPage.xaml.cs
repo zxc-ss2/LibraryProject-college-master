@@ -85,10 +85,10 @@ namespace LibraryProject.Views
 
             if(resultString == "")
             {
-                if (booksController.AddNewBook(AuthorInput.Text, fieldsController.GetBbkId(BBkInputComboBox.Text), NameInput.Text, ISBNInput.Text, PlaceInput.Text, Convert.ToInt32(YearInput.Text), Convert.ToInt32(InterpreterComboBox.Text), Convert.ToInt32(ChamberComboBox.Text)))
+                if (booksController.AddNewBook(AuthorInput.Text, fieldsController.GetBbkId(BBkInputComboBox.Text), NameInput.Text, ISBNInput.Text, PlaceInput.Text, Convert.ToInt32(YearInput.Text), interpretorsController.GetInterpretorId(InterpreterComboBox.Text), Convert.ToInt32(ChamberComboBox.Text)))
                 {
                     MessageBoxResult result = MessageBox.Show("Вернуться на страницу добавления?", "Книга добавлена", MessageBoxButton.YesNoCancel);
-                    if (result == MessageBoxResult.No)
+                    if (result == MessageBoxResult.No) 
                     {
                         this.NavigationService.Navigate(new MenuAdminPage());
                     }

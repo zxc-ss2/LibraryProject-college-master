@@ -55,6 +55,7 @@ namespace LibraryProject.Views
             {
                 if (clientsController.DeleteClientInfo(item))
                 {
+                    MessageBox.Show("Данные успешно удалены.");
                     ClientDataGrid.ItemsSource = clientsController.ClientsInfoOutputWithOutAdmin();
                 }
 
@@ -83,6 +84,7 @@ namespace LibraryProject.Views
             {
                 if (booksController.DeleteBookInfo(item))
                 {
+                    MessageBox.Show("Данные успешно удалены.");
                     BookDataGrid.ItemsSource = booksController.BooksInfoOutput();
                 }
 

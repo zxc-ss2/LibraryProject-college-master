@@ -24,6 +24,7 @@ namespace LibraryProject.Views
     /// </summary>
     public partial class MenuLibrarianPage : Page
     {
+        DbHelper dbHelper = new DbHelper();
         TradingController tradingController = new TradingController();
         BooksController booksController = new BooksController();
         BbkCheckClass bbkCheckClass = new BbkCheckClass(); 
@@ -98,6 +99,7 @@ namespace LibraryProject.Views
             {
                 if (booksController.DeleteBookInfo(item))
                 {
+                    MessageBox.Show("Данные успешно удалены.");
                     BookDataGrid.ItemsSource = booksController.BooksInfoOutput();
                 }
                 else
@@ -124,7 +126,8 @@ namespace LibraryProject.Views
             {
                 TextBlock firstSelectedCell = firstSelectedCellContent.Column.GetCellContent(firstSelectedCellContent.Item) as TextBlock;
                 Settings.Default.selectBook = Convert.ToInt32(firstSelectedCell.Text);
-                this.NavigationService.Navigate(new EditBookPage());
+                var updateBook = BookDataGrid.SelectedItem as books;
+                this.NavigationService.Navigate(new EditBookPage(dbHelper.context, updateBook));
             }
         }
 

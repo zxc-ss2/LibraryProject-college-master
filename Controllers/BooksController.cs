@@ -58,7 +58,6 @@ namespace LibraryProject.Controllers
                         place = bookPlace,
                         year = bookYear,
                         quantity_id = null,
-                        storage_id = null,
                         interpreter_id = bookInterpreter,
                         chamber_id = bookChamber,
                         trading_id = null

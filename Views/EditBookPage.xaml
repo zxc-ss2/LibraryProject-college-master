@@ -58,10 +58,10 @@
             </DockPanel>
             <DockPanel>
                 <DockPanel>
-                    <ComboBox x:Name="NewInterpreterComboBox" MaxDropDownHeight="100" Style="{DynamicResource InterpreterComboBox}" HorizontalAlignment="Left" ></ComboBox>
+                    <ComboBox x:Name="NewInterpreterComboBox" MaxDropDownHeight="100" Style="{DynamicResource InterpreterComboBox}" HorizontalAlignment="Left" SelectionChanged="NewInterpreterComboBox_SelectionChanged" ></ComboBox>
                 </DockPanel>
                 <DockPanel HorizontalAlignment="Right">
-                    <ComboBox x:Name="NewChamberComboBox" MaxDropDownHeight="100" Style="{DynamicResource ChamberComboBox}" HorizontalAlignment="Left" ></ComboBox>
+                    <ComboBox x:Name="NewChamberComboBox" MaxDropDownHeight="100" Style="{DynamicResource ChamberComboBox}" HorizontalAlignment="Left" SelectionChanged="NewChamberComboBox_SelectionChanged"></ComboBox>
                 </DockPanel>
             </DockPanel>
 

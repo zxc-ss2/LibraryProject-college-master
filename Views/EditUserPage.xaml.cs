@@ -41,6 +41,8 @@ namespace LibraryProject.Views
                 NewPhoneInput.Text = item.phone;
                 NewLoginInput.Text = item.login;
                 NewPasswordInput.Password = item.password;
+                NewEmailInput.Text = item.email;
+                NewTicketInput.Text = item.ticket;
             }
 
             sessionClient = clientsController.ClientsPasswordMatchUp(password);

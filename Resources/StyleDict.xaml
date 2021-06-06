@@ -5,12 +5,15 @@
     <SolidColorBrush x:Key="MainColor" Color="#24313c"/>
     <SolidColorBrush x:Key="SecondColor" Color="#1a242c"/>
 
+    <FontFamily x:Key="Raleway">Fonts/#Raleway</FontFamily>
+    
     <Style TargetType="{x:Type Button}" x:Key="GreenBtn">
         <Setter Property="Padding" Value="8"/>
         <Setter Property="Width" Value="200"/>
         <Setter Property="Background" Value="#16798c"/>
         <Setter Property="Foreground" Value="#fff"/>
         <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
     <Style TargetType="{x:Type Button}" x:Key="GrayBtn" BasedOn="{StaticResource GreenBtn}">
@@ -27,15 +30,7 @@
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="Padding" Value="8"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Background="{TemplateBinding Background}" CornerRadius="6">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
     <Style TargetType="{x:Type Button}" x:Key="UserBtn">
@@ -46,6 +41,7 @@
         <Setter Property="Foreground" Value="#fff"/>
         <Setter Property="Background" Value="#16798c"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
     <Style TargetType="{x:Type Button}" x:Key="StartBtn">
@@ -54,6 +50,7 @@
         <Setter Property="FontSize" Value="15px"/>
         <Setter Property="Margin" Value="0 20 0 0"/>
         <Setter Property="Height" Value="30"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -78,6 +75,7 @@
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="FontSize" Value="18px"/>
         <Setter Property="Margin" Value="0 5 0 0"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
     <Style TargetType="Button" x:Key="CorrectEnterBtn">
@@ -86,6 +84,7 @@
         <Setter Property="FontSize" Value="8"/>
         <Setter Property="Foreground" Value="#ffffff"/>
         <Setter Property="Background" Value="#16798c"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
     <Style TargetType="{x:Type TextBlock}" x:Key="LeftOfferText" BasedOn="{StaticResource OfferText}">
@@ -99,6 +98,7 @@
         <Setter Property="FontSize" Value="16px"/>
         <Setter Property="Margin" Value="0 5 0 0"/>
         <Setter Property="Width" Value="180"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
     <Style TargetType="{x:Type TextBlock}" x:Key="RightLabelText" BasedOn="{StaticResource LeftLabelText}">
@@ -120,6 +120,7 @@
         <Setter Property="Padding" Value="3"/>
         <Setter Property="Margin" Value="0 10 0 0"/>
         <Setter Property="Foreground" Value="#fff"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
     <Style TargetType="{x:Type TextBox}" x:Key="AuthoInputBox" BasedOn="{StaticResource LeftInputBox}">
@@ -144,10 +145,12 @@
         <Setter Property="Padding" Value="3"/>
         <Setter Property="Margin" Value="0 10 0 0"/>
         <Setter Property="Foreground" Value="#fff"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
     <Style TargetType="{x:Type DatePickerTextBox}">
         <Setter Property="Background" Value="{StaticResource SecondColor}"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
@@ -165,6 +168,7 @@
         <Setter Property="Height" Value="25"/>
         <Setter Property="Foreground" Value="#fff"/>
         <Setter Property="Margin" Value="0 0 30 0"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
     <Style TargetType="{x:Type TextBox}" x:Key="SearchAdminBox" BasedOn="{StaticResource SearchBox}">
@@ -183,6 +187,7 @@
 
     <Style TargetType="{x:Type Image}" x:Key="LogoIcon">
         <Setter Property="Source" Value="/Resources/images/logo.png"/>
+        <Setter Property="Width" Value="100"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="Height" Value="40"/>
     </Style>
@@ -192,6 +197,7 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="#fff"/>
         <Setter Property="Margin" Value="15 0 0 0"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
     <Style TargetType="{x:Type PasswordBox}" x:Key="Password">
@@ -203,6 +209,7 @@
         <Setter Property="Padding" Value="5"/>
         <Setter Property="Margin" Value="0 10 0 0"/>
         <Setter Property="Foreground" Value="#fff"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
     <Style TargetType="{x:Type Button}" x:Key="RecoverBtn">
@@ -212,11 +219,12 @@
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="Margin" Value="30 10 30 0"/>
         <Setter Property="Background" Value="#24543c"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
-    <Style
-xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBlock}" x:Key="PlaceholderStyle"
->
+    <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBlock}" x:Key="PlaceholderStyle">
+        
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
         <Setter Property="IsHitTestVisible" Value="False"/>
         <Setter Property="Visibility" Value="Hidden"/>
         <Setter Property="FontStyle" Value="Italic"/>
@@ -248,6 +256,7 @@ Value="{x:Static sys:String.Empty}">
         <Setter Property="Margin" Value="-295 0 0 8"/>
         <Setter Property="VerticalAlignment" Value="Bottom"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
     <Style TargetType="TextBlock" x:Key="PlaceholderBbkStyle" BasedOn="{StaticResource PlaceholderStyle}">
@@ -255,6 +264,7 @@ Value="{x:Static sys:String.Empty}">
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Right"/>
         <Setter Property="FontSize" Value="7"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
     <Style x:Key="BookDataGrid" TargetType="{x:Type DataGrid}">
@@ -262,6 +272,12 @@ Value="{x:Static sys:String.Empty}">
         <Setter Property="Background" Value="{StaticResource MainColor}"/>
         <Setter Property="Foreground" Value="#ffffff"/>
         <Setter Property="Margin" Value="20 130 20 0"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsActive}" Value="true">
+                <Setter Property="Background" Value="Red"/>
+            </DataTrigger>
+        </Style.Triggers>
     </Style>
 
     <LinearGradientBrush x:Key="GradientBtn" EndPoint="0,1" StartPoint="1,0">
@@ -285,6 +301,7 @@ Value="{x:Static sys:String.Empty}">
         <Setter Property="Foreground" Value="#fff"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="Background" Value="#16798c"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
     <Style x:Key="AdminDocPanel" TargetType="{x:Type DockPanel}" >
@@ -314,6 +331,7 @@ Value="{x:Static sys:String.Empty}">
         <Setter Property="MinWidth" Value="0" />
         <Setter Property="MinHeight" Value="30" />
         <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
     <Style x:Key="BorderNone" TargetType="{x:Type DataGridCell}">
@@ -332,11 +350,13 @@ Value="{x:Static sys:String.Empty}">
         <Setter Property="Background" Value="{StaticResource MainColor}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Visibility" Value="Collapsed"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
     <Style x:Key="DatePickerStyle1" TargetType="{x:Type DatePicker}">
         <Setter Property="Foreground" Value="#ffffff"/>
         <Setter Property="IsTodayHighlighted" Value="True"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
         <Setter Property="SelectedDateFormat" Value="Short"/>
         <Setter Property="Background" Value="{StaticResource MainColor}"/>
         <Setter Property="Padding" Value="2"/>
@@ -498,59 +518,55 @@ Value="{x:Static sys:String.Empty}">
         <Setter Property="HorizontalAlignment" Value="Right"/>
         <Setter Property="Source" Value="images/user.png"/>
         <Setter Property="Margin" Value="0 0 20 0"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Cursor" Value="Hand" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style x:Key="BackIcon" TargetType="{x:Type Image}">
         <Setter Property="Height" Value="60"/>
         <Setter Property="Source" Value="images/logout.png"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
-    </Style>
-
-    <Style x:Key="FilterComboBox" TargetType="{x:Type ComboBox}">
-        <Setter Property="Height" Value="30"/>
-        <Setter Property="Width" Value="100"/>
-        <Setter Property="Background" Value="Green" />
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>
-        <Setter Property="Margin" Value="20 10 0 0"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="Foreground" Value="#ffffff"/>
         <Style.Triggers>
-            <Trigger Property="SelectedItem" Value="{x:Null}">
-                <Setter Property="SelectedIndex" Value="0"/>
-                <Setter Property="Background" Value="{StaticResource MainColor}"/>
-            </Trigger>
-            <Trigger Property="IsDropDownOpen" Value="True">
-                <Setter Property="Background" Value="Red" />
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Cursor" Value="Hand" />
             </Trigger>
         </Style.Triggers>
     </Style>
 
     <Style TargetType="{x:Type ComboBoxItem}">
         <Setter Property="Background" Value="{StaticResource MainColor}"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
     <Style x:Key="AccessPermissionComboBox" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource FilterComboBox}">
         <Setter Property="Margin" Value="20 10 0 0"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="Width" Value="200"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
     <Style x:Key="AllBooksDataGrid" TargetType="{x:Type DataGrid}" BasedOn="{StaticResource BookDataGrid}">
         <Setter Property="Margin" Value="20 50 20 0"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
     <Style x:Key="ClientTakenBooksDataGrid" TargetType="{x:Type DataGrid}" BasedOn="{StaticResource BookDataGrid}">
         <Setter Property="Margin" Value="20 50 20 0"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
     <Style x:Key="AvailableBooksDataGrid" TargetType="{x:Type DataGrid}" BasedOn="{StaticResource BookDataGrid}">
         <Setter Property="Margin" Value="20 10 20 0"/>
         <Setter Property="Height" Value="100"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
     <Style x:Key="AccessRightComboBox" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource FilterComboBox}">
         <Setter Property="Width" Value="200"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
     <Style x:Key="GetBookBtn" TargetType="{x:Type Button}" BasedOn="{StaticResource AdminBtn}">
@@ -558,11 +574,13 @@ Value="{x:Static sys:String.Empty}">
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="Margin" Value="20 10 0 0"/>
         <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
     <Style x:Key="GiveBookBtn" TargetType="{x:Type Button}" BasedOn="{StaticResource GetBookBtn}">
         <Setter Property="HorizontalAlignment" Value="Right"/>
         <Setter Property="Margin" Value="20 10 20 0"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
     
     <Style x:Key="FocusVisual">
@@ -824,7 +842,9 @@ Value="{x:Static sys:String.Empty}">
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
+    
     <Style x:Key="ComboBoxDefault" TargetType="{x:Type ComboBox}">
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
         <Setter Property="Background" Value="{StaticResource ComboBox.Static.Background}"/>
         <Setter Property="BorderBrush" Value="{StaticResource ComboBox.Static.Border}"/>
@@ -846,27 +866,49 @@ Value="{x:Static sys:String.Empty}">
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="FilterComboBox" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource ComboBoxDefault}">
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Margin" Value="20 10 0 0"/>
+        <Setter Property="Foreground" Value="#ffffff"/>
+        <Setter Property="Padding" Value="0 5 0 0"/>
+    </Style>
 
     <Style TargetType="ComboBox" x:Key="BbkComboBox" BasedOn="{StaticResource ComboBoxDefault}">
         <Setter Property="Height" Value="25"/>
         <Setter Property="Width" Value="180"/>
         <Setter Property="Margin" Value="0 10 0 0"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
+    <Style TargetType="ComboBox" x:Key="AbonementComboBox" BasedOn="{StaticResource ComboBoxDefault}">
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="Width" Value="180"/>
+        <Setter Property="Margin" Value="20 0 0 0"/>
+        <Setter Property="Padding" Value="0 5 0 0"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
+    </Style>
+    
     <Style TargetType="ComboBox" x:Key="InterpreterComboBox" BasedOn="{StaticResource ComboBoxDefault}">
         <Setter Property="Height" Value="25"/>
         <Setter Property="Width" Value="180"/>
         <Setter Property="Margin" Value="0 10 0 0"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
     
     <Style TargetType="ComboBox" x:Key="ChamberComboBox" BasedOn="{StaticResource ComboBoxDefault}">
         <Setter Property="Height" Value="25"/>
         <Setter Property="Width" Value="180"/>
         <Setter Property="Margin" Value="0 10 0 0"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
     
     <Style TargetType="TextBox" x:Key="RightISBNInputBox" BasedOn="{StaticResource RightInputBox}">
         <Setter Property="Height" Value="25"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
     <Style TargetType="TextBox" x:Key="SearchBBkBox" BasedOn="{StaticResource SearchBox}">
@@ -874,20 +916,24 @@ Value="{x:Static sys:String.Empty}">
         <Setter Property="Height" Value="15"/>
         <Setter Property="HorizontalAlignment" Value="Right"/>
         <Setter Property="Margin" Value="0 5 0 0"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
     <Style TargetType="TextBlock" x:Key="BbkOrFieldNameChange">
         <Setter Property="Foreground" Value="#ffffff"/>
         <Setter Property="FontSize" Value="10"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
     <Style TargetType="TextBlock" x:Key="UserChoiceTextBlock" BasedOn="{StaticResource BbkOrFieldNameChange}">
         <Setter Property="Margin" Value="0 1 0 0"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
     <Style TargetType="RadioButton" x:Key="RadioButtonDefault">
         <Setter Property="Background" Value="{StaticResource MainColor}"/>
         <Setter Property="Margin" Value="10 0 0 0"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
     
 </ResourceDictionary>

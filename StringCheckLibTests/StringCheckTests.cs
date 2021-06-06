@@ -44,6 +44,18 @@ namespace StringCheckLibTests
         }
 
         [TestMethod]
+        public void CheckName_isEngLetters_FalseReturned()
+        {
+            //Arrange
+            string stringName = "Alexey";
+            //Act 
+            StringCheck isName = new StringCheck();
+            bool correctName = isName.CheckName(stringName);
+            //Assert
+            Assert.IsFalse(correctName);
+        }
+
+        [TestMethod]
         public void CheckAddress_isRusSpaceDelimiter_TrueReturned()
         {
             //Arrange
@@ -104,6 +116,30 @@ namespace StringCheckLibTests
         }
 
         [TestMethod]
+        public void CheckAddress_isEng_FalseReturned()
+        {
+            //Arrange
+            string stringAddress = "Shorsa 56";
+            //Act 
+            StringCheck isAddress = new StringCheck();
+            bool correctAddress = isAddress.CheckAddress(stringAddress);
+            //Assert
+            Assert.IsFalse(correctAddress);
+        }
+
+        [TestMethod]
+        public void CheckAddress_isEngWithOutDilimiter_FalseReturned()
+        {
+            //Arrange
+            string stringAddress = "Щорса56";
+            //Act 
+            StringCheck isAddress = new StringCheck();
+            bool correctAddress = isAddress.CheckAddress(stringAddress);
+            //Assert
+            Assert.IsFalse(correctAddress);
+        }
+
+        [TestMethod]
         public void CheckPhone_isCorrectPhoneThatStartsWithNumber8_TrueReturned()
         {
             //Arrange
@@ -145,6 +181,30 @@ namespace StringCheckLibTests
         {
             //Arrange
             string stringPhone = "";
+            //Act 
+            StringCheck isPhone = new StringCheck();
+            bool correctPhone = isPhone.CheckPhone(stringPhone);
+            //Assert
+            Assert.IsFalse(correctPhone);
+        }
+
+        [TestMethod]
+        public void CheckPhone_isTooMuchChars_FalseReturned()
+        {
+            //Arrange
+            string stringPhone = "89089150662265";
+            //Act 
+            StringCheck isPhone = new StringCheck();
+            bool correctPhone = isPhone.CheckPhone(stringPhone);
+            //Assert
+            Assert.IsFalse(correctPhone);
+        }
+
+        [TestMethod]
+        public void CheckPhone_isDataWithLetters_FalseReturned()
+        {
+            //Arrange
+            string stringPhone = "89089g15п";
             //Act 
             StringCheck isPhone = new StringCheck();
             bool correctPhone = isPhone.CheckPhone(stringPhone);
@@ -241,6 +301,18 @@ namespace StringCheckLibTests
         {
             //Arrange
             string stringLogin = "cursed_12_3_4";
+            //Act 
+            StringCheck isLogin = new StringCheck();
+            bool correctLogin = isLogin.CheckLogin(stringLogin);
+            //Assert
+            Assert.IsFalse(correctLogin);
+        }
+
+        [TestMethod]
+        public void CheckLogin_isRus_FalseReturned()
+        {
+            //Arrange
+            string stringLogin = "юзер123";
             //Act 
             StringCheck isLogin = new StringCheck();
             bool correctLogin = isLogin.CheckLogin(stringLogin);
@@ -392,5 +464,294 @@ namespace StringCheckLibTests
             Assert.IsFalse(correctBooks);
         }
 
+        [TestMethod]
+        public void CheckBookIsbn_isCorrect_TrueReturned()
+        {
+            //Arrange
+            string stringBookIsbn = "123-4567-3345-11";
+            //Act 
+            StringCheck isBookIsbn = new StringCheck();
+            bool correctIsbn = isBookIsbn.CheckBookIsbn(stringBookIsbn);
+            //Assert
+            Assert.IsTrue(correctIsbn);
+        }
+
+        [TestMethod]
+        public void CheckBookIsbn_isEmpty_FalseReturned()
+        {
+            //Arrange
+            string stringBookIsbn = "";
+            //Act 
+            StringCheck isBookIsbn = new StringCheck();
+            bool correctIsbn = isBookIsbn.CheckBookIsbn(stringBookIsbn);
+            //Assert
+            Assert.IsFalse(correctIsbn);
+        }
+
+
+        [TestMethod]
+        public void CheckBookIsbn_isEngLetters_FalseReturned()
+        {
+            //Arrange
+            string stringBookIsbn = "Test Data";
+            //Act 
+            StringCheck isBookIsbn = new StringCheck();
+            bool correctIsbn = isBookIsbn.CheckBookIsbn(stringBookIsbn);
+            //Assert
+            Assert.IsFalse(correctIsbn);
+        }
+
+        [TestMethod]
+        public void CheckBookIsbn_isRusLetters_FalseReturned()
+        {
+            //Arrange
+            string stringBookIsbn = "Тестовый ввод";
+            //Act 
+            StringCheck isBookIsbn = new StringCheck();
+            bool correctIsbn = isBookIsbn.CheckBookIsbn(stringBookIsbn);
+            //Assert
+            Assert.IsFalse(correctIsbn);
+        }
+
+        [TestMethod]
+        public void CheckBookYear_isCorrect_TrueReturned()
+        {
+            //Arrange
+            string stringBookYear = "1994";
+            //Act 
+            StringCheck isBookYear = new StringCheck();
+            bool correctYear = isBookYear.CheckBookYear(stringBookYear);
+            //Assert
+            Assert.IsTrue(correctYear);
+        }
+
+        [TestMethod]
+        public void CheckBookYear_isEmpty_FalseReturned()
+        {
+            //Arrange
+            string stringBookYear = "";
+            //Act 
+            StringCheck isBookYear = new StringCheck();
+            bool correctYear = isBookYear.CheckBookYear(stringBookYear);
+            //Assert
+            Assert.IsFalse(correctYear);
+        }
+
+        [TestMethod]
+        public void CheckBookYear_isTooLowNumbers_FalseReturned()
+        {
+            //Arrange
+            string stringBookYear = "222";
+            //Act 
+            StringCheck isBookYear = new StringCheck();
+            bool correctYear = isBookYear.CheckBookYear(stringBookYear);
+            //Assert
+            Assert.IsFalse(correctYear);
+        }
+
+
+        [TestMethod]
+        public void CheckBookYear_isTooMuchNumbers_FalseReturned()
+        {
+            //Arrange
+            string stringBookYear = "222222222";
+            //Act 
+            StringCheck isBookYear = new StringCheck();
+            bool correctYear = isBookYear.CheckBookYear(stringBookYear);
+            //Assert
+            Assert.IsFalse(correctYear);
+        }
+
+        [TestMethod]
+        public void CheckBookYear_isRusLetters_FalseReturned()
+        {
+            //Arrange
+            string stringBookYear = "ываываыва";
+            //Act 
+            StringCheck isBookYear = new StringCheck();
+            bool correctYear = isBookYear.CheckBookYear(stringBookYear);
+            //Assert
+            Assert.IsFalse(correctYear);
+        }
+
+        [TestMethod]
+        public void CheckBookYear_isEngLetters_FalseReturned()
+        {
+            //Arrange
+            string stringBookYear = "dfgdfgdfg";
+            //Act 
+            StringCheck isBookYear = new StringCheck();
+            bool correctYear = isBookYear.CheckBookYear(stringBookYear);
+            //Assert
+            Assert.IsFalse(correctYear);
+        }
+
+        [TestMethod]
+        public void CheckTicket_isCorrect_TrueReturned()
+        {
+            //Arrange
+            string stringTicket = "А-1243-23";
+            //Act 
+            StringCheck isBookTicket = new StringCheck();
+            bool correctTicket = isBookTicket.CheckTradingTicket(stringTicket);
+            //Assert
+            Assert.IsTrue(correctTicket);
+        }
+
+        [TestMethod]
+        public void CheckTicket_isEmpty_TrueReturned()
+        {
+            //Arrange
+            string stringTicket = "";
+            //Act 
+            StringCheck isBookTicket = new StringCheck();
+            bool correctTicket = isBookTicket.CheckTradingTicket(stringTicket);
+            //Assert
+            Assert.IsFalse(correctTicket);
+        }
+
+        [TestMethod]
+        public void CheckTicket_isOnlyRusLetters_TrueReturned()
+        {
+            //Arrange
+            string stringTicket = "выааываыва";
+            //Act 
+            StringCheck isBookTicket = new StringCheck();
+            bool correctTicket = isBookTicket.CheckTradingTicket(stringTicket);
+            //Assert
+            Assert.IsFalse(correctTicket);
+        }
+
+        [TestMethod]
+        public void CheckTicket_isOnlyEngLetters_TrueReturned()
+        {
+            //Arrange
+            string stringTicket = "dfgdfgg";
+            //Act 
+            StringCheck isBookTicket = new StringCheck();
+            bool correctTicket = isBookTicket.CheckTradingTicket(stringTicket);
+            //Assert
+            Assert.IsFalse(correctTicket);
+        }
+
+        [TestMethod]
+        public void CheckTicket_isOnlyNumbers_TrueReturned()
+        {
+            //Arrange
+            string stringTicket = "1231231";
+            //Act 
+            StringCheck isBookTicket = new StringCheck();
+            bool correctTicket = isBookTicket.CheckTradingTicket(stringTicket);
+            //Assert
+            Assert.IsFalse(correctTicket);
+        }
+
+        [TestMethod]
+        public void CheckDate_isCorrect_TrueReturned()
+        {
+            //Arrange
+            string stringDate = "2020.05.14";
+            //Act 
+            StringCheck isDate = new StringCheck();
+            bool correctDate = isDate.CheckDate(stringDate);
+            //Assert
+            Assert.IsTrue(correctDate);
+        }
+
+        [TestMethod]
+        public void CheckDate_isEmpty_FalseReturned()
+        {
+            //Arrange
+            string stringDate = "";
+            //Act 
+            StringCheck isDate = new StringCheck();
+            bool correctDate = isDate.CheckDate(stringDate);
+            //Assert
+            Assert.IsFalse(correctDate);
+        }
+
+        [TestMethod]
+        public void CheckDate_isRusLetters_FalseReturned()
+        {
+            //Arrange
+            string stringDate = "вапвапвапва";
+            //Act 
+            StringCheck isDate = new StringCheck();
+            bool correctDate = isDate.CheckDate(stringDate);
+            //Assert
+            Assert.IsFalse(correctDate);
+        }
+
+        [TestMethod]
+        public void CheckDate_isEngLetters_FalseReturned()
+        {
+            //Arrange
+            string stringDate = "fdgdfgdfgdf";
+            //Act 
+            StringCheck isDate = new StringCheck();
+            bool correctDate = isDate.CheckDate(stringDate);
+            //Assert
+            Assert.IsFalse(correctDate);
+        }
+
+        [TestMethod]
+        public void CheckDate_isDateWithOutCharacters_FalseReturned()
+        {
+            //Arrange
+            string stringDate = "20020514";
+            //Act 
+            StringCheck isDate = new StringCheck();
+            bool correctDate = isDate.CheckDate(stringDate);
+            //Assert
+            Assert.IsFalse(correctDate);
+        }
+
+        [TestMethod]
+        public void CheckEmail_isCorrect_TrueReturned()
+        {
+            //Arrange
+            string stringEmail = "skochkov@gmail.com";
+            //Act 
+            StringCheck isEmail = new StringCheck();
+            bool correctEmail = isEmail.CheckEmail(stringEmail);
+            //Assert
+            Assert.IsTrue(correctEmail);
+        }
+
+        [TestMethod]
+        public void CheckEmail_isEmpty_FalseReturned()
+        {
+            //Arrange
+            string stringEmail = "";
+            //Act 
+            StringCheck isEmail = new StringCheck();
+            bool correctEmail = isEmail.CheckEmail(stringEmail);
+            //Assert
+            Assert.IsFalse(correctEmail);
+        }
+
+        [TestMethod]
+        public void CheckEmail_isRusLetters_FalseReturned()
+        {
+            //Arrange
+            string stringEmail = "выаыва.попр@аыва";
+            //Act 
+            StringCheck isEmail = new StringCheck();
+            bool correctEmail = isEmail.CheckEmail(stringEmail);
+            //Assert
+            Assert.IsFalse(correctEmail);
+        }
+
+        [TestMethod]
+        public void CheckEmail_isOnlyNumbers_FalseReturned()
+        {
+            //Arrange
+            string stringEmail = "1111@2131232";
+            //Act 
+            StringCheck isEmail = new StringCheck();
+            bool correctEmail = isEmail.CheckEmail(stringEmail);
+            //Assert
+            Assert.IsFalse(correctEmail);
+        }
     }
 }

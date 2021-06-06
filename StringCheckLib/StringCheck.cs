@@ -92,7 +92,7 @@ namespace StringCheckLib
         /// <returns></returns>
         public bool CheckPassword(string userPassword)
         {
-            string pattern = @"(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}$";
+            string pattern = @"(?=.*[0-9])(?=.*[!@#$%^&*/])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}$";
 
             if (Regex.Match(userPassword, pattern, RegexOptions.IgnoreCase).Success)
             {
@@ -133,7 +133,7 @@ namespace StringCheckLib
         }
         public bool CheckBookYear(string bookName)
         {
-            string pattern = @"[0-9]{4}$";
+            string pattern = "^[0-9]{4}$";
 
             if (Regex.Match(bookName, pattern, RegexOptions.IgnoreCase).Success)
             {
@@ -147,7 +147,7 @@ namespace StringCheckLib
 
         public bool CheckTradingTicket(string bookName)
         {
-            string pattern = @"(Х|А|Ч|О)\-([0-9]{4})\-[0-9]{2}$";
+            string pattern = @"^(Х|А|Ч|О)\-([0-9]{4})\-[0-9]{2}$";
 
             if (Regex.Match(bookName, pattern, RegexOptions.IgnoreCase).Success)
             {
@@ -162,6 +162,20 @@ namespace StringCheckLib
         public bool CheckDate(string bookName)
         {
             string pattern = @"[0-9]{1,4}\.|\-[0-1][0-9]\.|\-[0-3][0-9]$";
+
+            if (Regex.Match(bookName, pattern, RegexOptions.IgnoreCase).Success)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool CheckEmail(string bookName)
+        {
+            string pattern = @"^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$";
 
             if (Regex.Match(bookName, pattern, RegexOptions.IgnoreCase).Success)
             {

@@ -28,7 +28,6 @@ namespace LibraryProject.Models
         public string place { get; set; }
         public int year { get; set; }
         public Nullable<int> quantity_id { get; set; }
-        public Nullable<int> storage_id { get; set; }
         public int interpreter_id { get; set; }
         public Nullable<int> chamber_id { get; set; }
         public Nullable<int> trading_id { get; set; }
@@ -37,7 +36,6 @@ namespace LibraryProject.Models
         public virtual fields fields { get; set; }
         public virtual interpretors interpretors { get; set; }
         public virtual quantity quantity { get; set; }
-        public virtual storage storage { get; set; }
         public virtual trading trading { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<formular> formular { get; set; }

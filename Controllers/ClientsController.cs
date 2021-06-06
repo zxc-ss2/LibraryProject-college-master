@@ -61,17 +61,18 @@ namespace LibraryProject.Controllers
 
         }
 
-        public bool AddNewUser(string userName, string userSurname, string userPatronymic, DateTime userDate, string userAddress, string userWorkplace, string userStudyplace, string userPhone, string userLogin, string userPassword, string email, string userTicket)
+        public bool AddNewUser(string userName, string userSurname, string userPatronymic, DateTime userDate, string userAddress, string userWorkplace, string userStudyplace, string userPhone, string userLogin, string userPassword, string userEmail, string userTicket)
         {
             try
             {
                 StringCheck check = new StringCheck();
 
-                if (!check.CheckName(userName) || (!check.CheckName(userSurname) || (!check.CheckName(userPatronymic) || userDate == null
-                    || !check.CheckAddress(userAddress) || !check.CheckPhone(userPhone) || !check.CheckPhone(userLogin) || check.CheckPassword(userPassword))))
+                if (!check.CheckName(userName) || !check.CheckName(userSurname) || !check.CheckName(userPatronymic) || !check.CheckDate(Convert.ToString(userDate))
+                    || !check.CheckAddress(userAddress) || !check.CheckPhone(userPhone) || !check.CheckLogin(userLogin) || !check.CheckPassword(userPassword) || !check.CheckEmail(userEmail))
                 {
                     return false;
                 }
+
                 else
                 {
                     dbHelper.context.clients.Add(new clients
@@ -88,16 +89,17 @@ namespace LibraryProject.Controllers
                         phone = userPhone,
                         login = userLogin,
                         password = userPassword,
-                        email = email,
+                        email = userEmail,
                         ticket = userTicket
                     });
 
                     dbHelper.context.SaveChanges();
                     return true;
+                    //}
                 }
             }
-                    
-            catch(Exception ex)
+
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 return false;
@@ -133,8 +135,8 @@ namespace LibraryProject.Controllers
             {
                 StringCheck check = new StringCheck();
 
-                if (!check.CheckName(newName) || (!check.CheckName(newSurname) || (!check.CheckName(newPatronymic) || newBirthday == null
-                    || !check.CheckAddress(newAddress) || !check.CheckPhone(newPhone) || !check.CheckLogin(newLogin) || check.CheckPassword(newPassword))))
+                if (!check.CheckName(newName) || !check.CheckName(newSurname) || !check.CheckName(newPatronymic) || !check.CheckDate(Convert.ToString(newBirthday))
+                    || !check.CheckAddress(newAddress) || !check.CheckPhone(newPhone) || !check.CheckLogin(newLogin) || !check.CheckPassword(newPassword))
                 {
                     return false;
                 }
