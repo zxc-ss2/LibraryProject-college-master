@@ -233,6 +233,45 @@ namespace LibraryProject.Controllers
             return dbHelper.context.clients.Where(t => t.login == userLogin).FirstOrDefault().ticket;
         }
 
+        public bool AddTradingIdToCLient(string userLogin, int newTradingId)
+        {
+            try
+            {
+                foreach (var item in dbHelper.context.clients.Where(t => t.login == userLogin).ToList())
+                {
+                    item.id_trading = newTradingId;
+                }
+
+                dbHelper.context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+        }
+
+        public bool RemoveIdTradingFromClient(string userLogin)
+        {
+            try
+            {
+                foreach (var item in dbHelper.context.clients.Where(t => t.login == userLogin).ToList())
+                {
+                    item.id_trading = null;
+                }
+
+                dbHelper.context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+
+        }
+
         public bool UpdateUserTicket(string userLogin, string newTicket)
         {
             try
