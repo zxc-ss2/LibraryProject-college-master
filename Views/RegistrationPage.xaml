@@ -48,8 +48,8 @@
                     </Button>
                 </DockPanel>
                 <DockPanel HorizontalAlignment="Right">
-                    <DatePicker x:Name="DateInput" Style="{DynamicResource DatePickerStyle1}" Height="24" Margin="0,10,0,0"></DatePicker>
-                    <Button Grid.Column="1" Style="{StaticResource WarningBtn}" Height="20" Width="20" VerticalContentAlignment="Center">
+                    <DatePicker x:Name="DateInput" Style="{DynamicResource DatePickerStyle1}" Height="24" Margin="0,10,0,0" SelectedDateChanged="DateInput_SelectedDateChanged"></DatePicker>
+                    <Button x:Name="DateWarningBtn" Grid.Column="1" Style="{StaticResource WarningBtn}" Height="20" Width="20" VerticalContentAlignment="Center">
                         <Image Source="/Resources/images/warning-removebg-preview.png"/>
                     </Button>
                 </DockPanel>
@@ -59,7 +59,12 @@
                 <TextBlock Style="{StaticResource RightLabelText}">Место работы</TextBlock>
             </DockPanel>
             <DockPanel>
-                <TextBox x:Name="AddressInput" Style="{StaticResource LeftInputBox}"></TextBox>
+                <DockPanel>
+                    <TextBox x:Name="AddressInput" Style="{StaticResource LeftInputBox}" TextChanged="AddressInput_TextChanged"></TextBox>
+                    <Button x:Name="AddressWarningBtn" Style="{StaticResource WarningBtn}" Height="20" Width="20" VerticalContentAlignment="Center">
+                        <Image Source="/Resources/images/warning-removebg-preview.png" />
+                    </Button>
+                </DockPanel>
                 <TextBox x:Name="WorkplaceInput" Style="{StaticResource RightInputBox}"></TextBox>
             </DockPanel>
             <DockPanel>
@@ -68,7 +73,12 @@
             </DockPanel>
             <DockPanel>
                 <TextBox x:Name="StudyplaceInput" Style="{StaticResource LeftInputBox}"></TextBox>
-                <TextBox x:Name="PhoneInput" Style="{StaticResource RightInputBox}"></TextBox>
+                <DockPanel HorizontalAlignment="Right">
+                    <TextBox x:Name="PhoneInput" Style="{StaticResource RightInputBox}" TextChanged="PhoneInput_TextChanged"></TextBox>
+                    <Button x:Name="PhoneWarningBtn" Style="{StaticResource WarningBtn}" Height="20" Width="20" VerticalContentAlignment="Center">
+                        <Image Source="/Resources/images/warning-removebg-preview.png" />
+                    </Button>
+                </DockPanel>
             </DockPanel>
             <DockPanel>
                 <TextBlock Style="{StaticResource LeftLabelText}">Логин</TextBlock>
@@ -76,14 +86,14 @@
             </DockPanel>
             <DockPanel>
                 <DockPanel>
-                    <TextBox x:Name="LoginInput" Style="{StaticResource LeftInputBox}"></TextBox>
-                    <Button Style="{StaticResource WarningBtn}" Height="20" Width="20" VerticalContentAlignment="Center">
+                    <TextBox x:Name="LoginInput" Style="{StaticResource LeftInputBox}" TextChanged="LoginInput_TextChanged"></TextBox>
+                    <Button x:Name="LoginWarningBtn"  Style="{StaticResource WarningBtn}" Height="20" Width="20" VerticalContentAlignment="Center">
                         <Image Source="/Resources/images/warning-removebg-preview.png" />
                     </Button>
                 </DockPanel>
                 <DockPanel HorizontalAlignment="Right">
-                    <PasswordBox x:Name="PasswordInput" Style="{StaticResource CenterPasswordInputBox}"></PasswordBox>
-                    <Button Style="{StaticResource WarningBtn}" Height="20" Width="20" VerticalContentAlignment="Center">
+                    <PasswordBox x:Name="PasswordInput" Style="{StaticResource CenterPasswordInputBox}" PasswordChanged="PasswordInput_PasswordChanged"></PasswordBox>
+                    <Button x:Name="PasswordWarningBtn" Style="{StaticResource WarningBtn}" Height="20" Width="20" VerticalContentAlignment="Center">
                         <Image Source="/Resources/images/warning-removebg-preview.png"/>
                     </Button>
                 </DockPanel>
@@ -92,7 +102,12 @@
                 <TextBlock Style="{StaticResource LeftLabelText}">Email</TextBlock>
             </DockPanel>
             <DockPanel>
-                <TextBox x:Name="EmailInput" Style="{StaticResource CenterInputBox}"></TextBox>
+                <DockPanel>
+                    <TextBox x:Name="EmailInput" Style="{StaticResource CenterInputBox}"></TextBox>
+                    <Button x:Name="EmailWarningBtn" Style="{StaticResource WarningBtn}" Height="20" Width="20" VerticalContentAlignment="Center">
+                        <Image Source="/Resources/images/warning-removebg-preview.png"/>
+                    </Button>
+                </DockPanel>
             </DockPanel>
             <Button Style="{StaticResource StartBtn}" Click="StartBtnClick">Продолжить</Button>
         </StackPanel >

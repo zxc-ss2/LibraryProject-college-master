@@ -58,6 +58,12 @@ namespace LibraryProject.Views
                 resultString += "Неправильно введено Отчество\n";
             }
 
+            bool resultDate = isName.CheckDate(Convert.ToString(DateInput.SelectedDate));
+            if (!resultDate)
+            {
+                resultString += "Неправильно введена Дата\n";
+            }
+
             StringCheck isAddress = new StringCheck();
             bool resultAddress = isAddress.CheckAddress(AddressInput.Text);
             if (!resultAddress)
@@ -177,6 +183,81 @@ namespace LibraryProject.Views
             else
             {
                 PatronymicWarningBtn.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void DateInput_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            StringCheck check = new StringCheck();
+
+            bool trigger = check.CheckDate(Convert.ToString(DateInput.SelectedDate));
+            if (!trigger)
+            {
+                DateWarningBtn.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                DateWarningBtn.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void AddressInput_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            StringCheck check = new StringCheck();
+
+            bool trigger = check.CheckAddress(Convert.ToString(AddressInput.Text));
+            if (!trigger)
+            {
+                AddressWarningBtn.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                AddressWarningBtn.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void PhoneInput_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            StringCheck check = new StringCheck();
+
+            bool trigger = check.CheckPhone(Convert.ToString(PhoneInput.Text));
+            if (!trigger)
+            {
+                PhoneWarningBtn.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                PhoneWarningBtn.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void LoginInput_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            StringCheck check = new StringCheck();
+
+            bool trigger = check.CheckLogin(Convert.ToString(LoginInput.Text));
+            if (!trigger)
+            {
+                LoginWarningBtn.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                LoginWarningBtn.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void PasswordInput_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            StringCheck check = new StringCheck();
+
+            bool trigger = check.CheckPassword(Convert.ToString(PasswordInput.Password));
+            if (!trigger)
+            {
+                PasswordWarningBtn.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                PasswordWarningBtn.Visibility = Visibility.Collapsed;
             }
         }
     }

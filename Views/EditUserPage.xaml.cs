@@ -1,5 +1,6 @@
 ﻿using LibraryProject.Controllers;
 using LibraryProject.Models;
+using LibraryProject.Properties;
 using StringCheckLib;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace LibraryProject.Views
         {
             InitializeComponent();
 
-            foreach (var item in clientsController.ClientsPasswordMatchUp(password))
+            foreach (var item in clientsController.ClientsLoginMatchUp(Settings.Default.login))
             {
                 NewFirstNameInput.Text = item.name;
                 NewLastNameInput.Text = item.surname;
@@ -45,7 +46,7 @@ namespace LibraryProject.Views
                 NewTicketInput.Text = item.ticket;
             }
 
-            sessionClient = clientsController.ClientsPasswordMatchUp(password);
+            sessionClient = clientsController.ClientsLoginMatchUp(Settings.Default.login);
         }
 
         private void FirstNameInput_TextChanged(object sender, TextChangedEventArgs e)
@@ -55,7 +56,7 @@ namespace LibraryProject.Views
             bool trigger = check.CheckName(NewFirstNameInput.Text);
             string word = NewFirstNameInput.Text;
 
-            foreach (var item in clientsController.ClientsPasswordMatchUp(NewPasswordInput.Password))
+            foreach (var item in clientsController.ClientsLoginMatchUp(Settings.Default.login))
             {
 
                 if (trigger && word != item.name && word != "")
@@ -69,7 +70,7 @@ namespace LibraryProject.Views
             }
 
             if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" ||
-                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "" || NewTicketInput.Text == "")
+                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "" )
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -82,7 +83,7 @@ namespace LibraryProject.Views
             bool trigger = check.CheckName(NewLastNameInput.Text);
             string word = NewLastNameInput.Text;
 
-            foreach (var item in clientsController.ClientsPasswordMatchUp(NewPasswordInput.Password))
+            foreach (var item in clientsController.ClientsLoginMatchUp(Settings.Default.login))
             {
 
                 if (trigger && word != item.surname && word != "")
@@ -95,8 +96,8 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" || 
-                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "" || NewTicketInput.Text == "")
+            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" ||
+                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -109,7 +110,7 @@ namespace LibraryProject.Views
             bool trigger = check.CheckName(NewPatronymicInput.Text);
             string word = NewPatronymicInput.Text;
 
-            foreach (var item in clientsController.ClientsPasswordMatchUp(NewPasswordInput.Password))
+            foreach (var item in clientsController.ClientsLoginMatchUp(Settings.Default.login))
             {
 
                 if (trigger && word != item.patronymic && word != "")
@@ -122,8 +123,8 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" || 
-                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "" || NewTicketInput.Text == "")
+            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" ||
+                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -136,7 +137,7 @@ namespace LibraryProject.Views
             bool trigger = check.CheckAddress(NewAddressInput.Text);
             string word = NewAddressInput.Text;
 
-            foreach (var item in clientsController.ClientsPasswordMatchUp(NewPasswordInput.Password))
+            foreach (var item in clientsController.ClientsLoginMatchUp(Settings.Default.login))
             {
 
                 if (trigger && word != item.address && word != "")
@@ -149,8 +150,8 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" || 
-                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "" || NewTicketInput.Text == "")
+            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" ||
+                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -161,7 +162,7 @@ namespace LibraryProject.Views
 
             string word = NewWorkplaceInput.Text;
 
-            foreach (var item in clientsController.ClientsPasswordMatchUp(NewPasswordInput.Password))
+            foreach (var item in clientsController.ClientsLoginMatchUp(Settings.Default.login))
             {
 
                 if (word != item.workplace)
@@ -175,7 +176,7 @@ namespace LibraryProject.Views
             }
 
             if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" ||
-                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "" || NewTicketInput.Text == "")
+                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -186,7 +187,7 @@ namespace LibraryProject.Views
 
             string word = NewStudyplaceInput.Text;
 
-            foreach (var item in clientsController.ClientsPasswordMatchUp(NewPasswordInput.Password))
+            foreach (var item in clientsController.ClientsLoginMatchUp(Settings.Default.login))
             {
 
                 if (word != item.studyplace)
@@ -199,8 +200,8 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" || 
-                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "" || NewTicketInput.Text == "")
+            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" ||
+                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -213,7 +214,7 @@ namespace LibraryProject.Views
             bool trigger = check.CheckPhone(NewPhoneInput.Text);
             string word = NewPhoneInput.Text;
 
-            foreach (var item in clientsController.ClientsPasswordMatchUp(NewPasswordInput.Password))
+            foreach (var item in clientsController.ClientsLoginMatchUp(Settings.Default.login))
             {
 
                 if (trigger && word != item.phone && word != "")
@@ -226,8 +227,8 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" || 
-                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "" || NewTicketInput.Text == "")
+            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" ||
+                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -240,7 +241,7 @@ namespace LibraryProject.Views
             bool trigger = check.CheckLogin(NewLoginInput.Text);
             string word = NewLoginInput.Text;
 
-            foreach (var item in clientsController.ClientsPasswordMatchUp(NewPasswordInput.Password))
+            foreach (var item in clientsController.ClientsLoginMatchUp(Settings.Default.login))
             {
 
                 if (trigger && word != item.login && word != "")
@@ -253,8 +254,8 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" || 
-                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "" || NewTicketInput.Text == "")
+            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" ||
+                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -267,7 +268,7 @@ namespace LibraryProject.Views
             bool trigger = check.CheckPassword(NewPasswordInput.Password);
             string word = NewPasswordInput.Password;
 
-            foreach (var item in clientsController.ClientsPasswordMatchUp(NewPasswordInput.Password))
+            foreach (var item in clientsController.ClientsLoginMatchUp(Settings.Default.login))
             {
 
                 if (trigger && word != item.password && word != "")
@@ -280,8 +281,8 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" || 
-                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "" || NewTicketInput.Text == "")
+            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" ||
+                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -294,7 +295,7 @@ namespace LibraryProject.Views
             bool trigger = check.CheckEmail(NewEmailInput.Text);
             string word = NewEmailInput.Text;
 
-            foreach (var item in clientsController.ClientsPasswordMatchUp(NewPasswordInput.Password))
+            foreach (var item in clientsController.ClientsLoginMatchUp(Settings.Default.login))
             {
 
                 if (trigger && word != item.email && word != "")
@@ -307,8 +308,8 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" || 
-                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "" || NewTicketInput.Text == "")
+            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" ||
+                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -322,7 +323,7 @@ namespace LibraryProject.Views
             bool trigger = check.CheckTradingTicket(NewTicketInput.Text);
             string word = NewTicketInput.Text;
 
-            foreach (var item in clientsController.ClientsPasswordMatchUp(NewPasswordInput.Password))
+            foreach (var item in clientsController.ClientsLoginMatchUp(Settings.Default.login))
             {
 
                 if (trigger && word != item.ticket && word != "")
@@ -336,7 +337,7 @@ namespace LibraryProject.Views
             }
 
             if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" ||
-                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "" || NewTicketInput.Text == "")
+                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }

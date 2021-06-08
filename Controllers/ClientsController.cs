@@ -25,9 +25,9 @@ namespace LibraryProject.Controllers
                                                   t.patronymic.Contains(info) || t.ticket.Contains(info)).ToList();
         }
 
-        public List<clients> ClientsPasswordMatchUp(string password)
+        public List<clients> ClientsLoginMatchUp(string login)
         {
-            return dbHelper.context.clients.Where(t => t.password == password).ToList();
+            return dbHelper.context.clients.Where(t => t.login == login).ToList();
         }
 
         public List<clients> GetClientsWithTrading()

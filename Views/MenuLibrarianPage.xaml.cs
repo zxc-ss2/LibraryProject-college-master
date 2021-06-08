@@ -57,10 +57,12 @@ namespace LibraryProject.Views
                 var item = TradingDataGrid.SelectedItem as trading;
                 int tradingId = Convert.ToInt32(item.trading_id);
 
+                var lastSelectedCellContent = new DataGridCellInfo(TradingDataGrid.SelectedItem, TradingDataGrid.Columns[5]);
+                TextBlock selectedLogin = lastSelectedCellContent.Column.GetCellContent(lastSelectedCellContent.Item) as TextBlock;
 
                 if (booksController.RemoveIdTradingFromBook(Convert.ToInt32(secondSelectedCell.Text)))
                 {
-                    if (clientsController.RemoveIdTradingFromClient("zxcasd"))
+                    if (clientsController.RemoveIdTradingFromClient(selectedLogin.Text))
                     {
                         booksQuantity = quantityController.GetQuantity(Convert.ToInt32(secondSelectedCell.Text));
                         if (tradingController.RemoveTrading(tradingId))

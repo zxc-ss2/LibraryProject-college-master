@@ -202,12 +202,12 @@ namespace LibraryProject.Controllers
             
         }
 
-        public books GetBookWithId(int selectBookId)
+        public List<books> GetBookWithId(int selectBookId)
         {
-            return dbHelper.context.books.Where(t => t.book_id == selectBookId).First();
+            return dbHelper.context.books.Where(t => t.book_id == selectBookId).ToList();
         }
 
-        public bool UpdateBookInfo(string newAuthor, int newfFieldKnowledgeId, string newName, string newIsbn, string newPlace, int newYear, int newInterpretorId, int newChamberId, books oldBook)
+        public bool UpdateBookInfo(string newAuthor, int newfFieldKnowledgeId, string newName, string newIsbn, string newPlace, int newYear, int newInterpretorId, int newChamberId, List<books> oldBook)
         {
             try
             {
@@ -220,16 +220,18 @@ namespace LibraryProject.Controllers
                 }
                 else
                 {
-
-                    oldBook.author = newAuthor;
-                    oldBook.field_knowledge_id = newfFieldKnowledgeId;
-                    oldBook.name = newName;
-                    oldBook.isbn = newIsbn;
-                    oldBook.place = newPlace;
-                    oldBook.year = newYear;
-                    oldBook.interpreter_id = newInterpretorId;
-                    oldBook.chamber_id = newChamberId;
-                    oldBook.trading_id = null;
+                    foreach (var item in oldBook)
+                    {
+                        item.author = newAuthor;
+                        item.field_knowledge_id = newfFieldKnowledgeId;
+                        item.name = newName;
+                        item.isbn = newIsbn;
+                        item.place = newPlace;
+                        item.year = newYear;
+                        item.interpreter_id = newInterpretorId;
+                        item.chamber_id = newChamberId;
+                        item.trading_id = null;
+                    }
 
                     dbHelper.context.SaveChanges();
                     if(dbHelper.context.SaveChanges() == 0)
