@@ -177,6 +177,12 @@
         <Setter Property="Background" Value="{StaticResource SecondColor}"/>
     </Style>
 
+    <Style TargetType="TextBox" x:Key="SearchLibrarianBox" BasedOn="{StaticResource SearchBox}">
+        <Setter Property="Margin" Value="20 35 0 0"/>
+        <Setter Property="Width" Value="300"/>
+        <Setter Property="Background" Value="{StaticResource SecondColor}"/>
+    </Style>
+
     <Style TargetType="{x:Type Image}" x:Key="SearchIcon">
         <Setter Property="Source" Value="/Resources/images/search.png"/>
         <Setter Property="Width" Value="15"/>
@@ -259,6 +265,13 @@ Value="{x:Static sys:String.Empty}">
         <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
+    <Style TargetType="{x:Type TextBlock}" x:Key="PlaceholderLibrarianStyle" BasedOn="{StaticResource PlaceholderStyle}">
+        <Setter Property="Margin" Value="28 41 0 0"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
+    </Style>
+
     <Style TargetType="TextBlock" x:Key="PlaceholderBbkStyle" BasedOn="{StaticResource PlaceholderStyle}">
         <Setter Property="Margin" Value="0 0 0 8"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -271,13 +284,25 @@ Value="{x:Static sys:String.Empty}">
         <Setter Property="RowBackground" Value="{StaticResource SecondColor}"/>
         <Setter Property="Background" Value="{StaticResource MainColor}"/>
         <Setter Property="Foreground" Value="#ffffff"/>
-        <Setter Property="Margin" Value="20 130 20 0"/>
+        <Setter Property="Margin" Value="20 120 20 0"/>
         <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
         <Style.Triggers>
             <DataTrigger Binding="{Binding IsActive}" Value="true">
                 <Setter Property="Background" Value="Red"/>
             </DataTrigger>
         </Style.Triggers>
+    </Style>
+
+    <Style x:Key="WaitingBooksDataGrid" TargetType="DataGrid" BasedOn="{StaticResource BookDataGrid}">
+        <Setter Property="Margin" Value="20 110 20 0"/>
+    </Style>
+
+    <Style x:Key="AllBookDataGrid" TargetType="DataGrid" BasedOn="{StaticResource BookDataGrid}">
+        <Setter Property="Margin" Value="20 100 20 0"/>
+    </Style>
+
+    <Style x:Key="ClientsTradingDataGrid" TargetType="DataGrid" BasedOn="{StaticResource BookDataGrid}">
+        <Setter Property="Margin" Value="20 80 20 0"/>
     </Style>
 
     <LinearGradientBrush x:Key="GradientBtn" EndPoint="0,1" StartPoint="1,0">
@@ -572,14 +597,14 @@ Value="{x:Static sys:String.Empty}">
     <Style x:Key="GetBookBtn" TargetType="{x:Type Button}" BasedOn="{StaticResource AdminBtn}">
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
-        <Setter Property="Margin" Value="20 10 0 0"/>
+        <Setter Property="Margin" Value="20 20 0 0"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
 
     <Style x:Key="GiveBookBtn" TargetType="{x:Type Button}" BasedOn="{StaticResource GetBookBtn}">
         <Setter Property="HorizontalAlignment" Value="Right"/>
-        <Setter Property="Margin" Value="20 10 20 0"/>
+        <Setter Property="Margin" Value="20 20 20 0"/>
         <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
     
@@ -887,7 +912,7 @@ Value="{x:Static sys:String.Empty}">
     <Style TargetType="ComboBox" x:Key="AbonementComboBox" BasedOn="{StaticResource ComboBoxDefault}">
         <Setter Property="Height" Value="25"/>
         <Setter Property="Width" Value="180"/>
-        <Setter Property="Margin" Value="20 0 0 0"/>
+        <Setter Property="Margin" Value="20 8 0 0"/>
         <Setter Property="Padding" Value="0 5 0 0"/>
         <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
@@ -935,5 +960,43 @@ Value="{x:Static sys:String.Empty}">
         <Setter Property="Margin" Value="10 0 0 0"/>
         <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
     </Style>
+
+    <Style x:Key="FirstTabItem" TargetType="TabItem">
+        <Setter Property="Foreground" Value="#ffffff"/>
+        <Setter Property="Margin" Value="20 0 0 0"/>
+        <Setter Property="Padding" Value="20"/>
+        <Setter Property="Width" Value="120"/>
+        <Setter Property="FontFamily" Value="{StaticResource Raleway}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabItem">
+                    <Grid Name="Panel">
+                        <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,2"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Panel" Property="Background" Value="#16798c" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="False">
+                            <Setter TargetName="Panel" Property="Background" Value="#435158"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="TabItem" x:Key="SecondTabItem" BasedOn="{StaticResource FirstTabItem}">
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="Margin" Value="0"/>
+    </Style>
     
+    <Style x:Key="TabItemHeaderText" TargetType="TextBlock" BasedOn="{StaticResource LeftLabelText}">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Padding" Value="5 1 5 3"/>
+    </Style>
 </ResourceDictionary>

@@ -79,5 +79,16 @@ namespace LibraryProject.Properties {
                 this["selectBook2"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public int userSelecredBookId {
+            get {
+                return ((int)(this["userSelecredBookId"]));
+            }
+            set {
+                this["userSelecredBookId"] = value;
+            }
+        }
     }
 }

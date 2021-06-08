@@ -19,10 +19,10 @@
         <Rectangle Grid.Row="0" Fill="{StaticResource SecondColor}"></Rectangle>
         <Rectangle Grid.Row="1" Fill="{StaticResource MainColor}"></Rectangle>
         <Rectangle Grid.Row="2" Fill="{StaticResource SecondColor}"></Rectangle>
-        <Image Style="{StaticResource BackIcon}" MouseDown="Image_MouseDown"/>
+        <Image x:Name="BackIcon" Style="{StaticResource BackIcon}" MouseDown="Image_MouseDown"/>
         <DockPanel HorizontalAlignment="Center">
             <Image Style="{StaticResource LogoIcon}"/>
-            <TextBlock Style="{StaticResource NameTextBlock}">Calcium</TextBlock>
+            <TextBlock x:Name="MainTitle" Style="{StaticResource NameTextBlock}">Calcium</TextBlock>
         </DockPanel>
         <Image x:Name="PersonalAreaImage" Style="{StaticResource PersonalAreaIcon}" MouseDown="PersonalAreaImage_MouseDown"/>
         <Button x:Name="ExitBtn" Grid.Row="2" Style="{StaticResource FooterBtn}" Click="ExitBtn_Click">Выйти</Button>

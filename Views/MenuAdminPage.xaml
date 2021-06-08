@@ -13,7 +13,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Style="{StaticResource LeftOfferText}">Читатели</TextBlock>
+        <TextBlock Style="{StaticResource LeftOfferText}">Пользователи</TextBlock>
         <DockPanel Style="{StaticResource AdminDocPanel}">
             <Button x:Name="DeleteClientBtn" Style="{StaticResource AdminBtn}" Click="DeleteClientBtn_Click">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
@@ -37,9 +37,9 @@
                 <DataGridTextColumn Width="100" Header="Имя" Binding="{Binding name}"></DataGridTextColumn>
                 <DataGridTextColumn Width="100" Header="Фамилия" Binding="{Binding surname}"></DataGridTextColumn>
                 <DataGridTextColumn Width="100" Header="Отчество"  Binding="{Binding patronymic}"></DataGridTextColumn>
-                <DataGridTextColumn Width="100" Header="Логни"  Binding="{Binding login}"></DataGridTextColumn>
+                <DataGridTextColumn Width="100" Header="Логин"  Binding="{Binding login}"></DataGridTextColumn>
                 <DataGridTextColumn Width="100" Header="Пароль"  Binding="{Binding password}"></DataGridTextColumn>
-                <DataGridTextColumn Width="100" Header="Билет"  Binding="{Binding trading.ticket}"></DataGridTextColumn>
+                <DataGridTextColumn Width="100" Header="Билет"  Binding="{Binding ticket}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <TextBlock Grid.Row="1" Style="{StaticResource LeftOfferText}">Книги</TextBlock>
@@ -60,14 +60,14 @@
             <TextBlock Style="{StaticResource PlaceholderAdminStyle}" Tag="{Binding ElementName=SearchAdminBooksBox}" Text="Введите ФИО автора или шифр ISBN">
             </TextBlock>
             <Image Style="{StaticResource SearchIcon}"/>
-            <Button x:Name="GetCsvFileBtn" Style="{StaticResource AdminBtn}" Click="GetCsvFileBtn_Click">csv</Button>
+            <Button x:Name="GetCsvFileBtn" Style="{StaticResource AdminBtn}" Click="GetCsvFileBtn_Click">Выгрузить выдачи</Button>
         </DockPanel>
         <DataGrid Grid.Row="1" x:Name="BookDataGrid" Style="{StaticResource BookDataGrid}" ColumnHeaderStyle="{StaticResource HeaderStyle}" ColumnWidth="*" AutoGenerateColumns="False"  IsReadOnly="True" SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="30" Header="#" Binding="{Binding client_id}"></DataGridTextColumn>
                 <DataGridTextColumn Width="80" Header="Автор" Binding="{Binding author}"></DataGridTextColumn>
                 <DataGridTextColumn Width="160" Header="Название"  Binding="{Binding name}"></DataGridTextColumn>
-                <DataGridTextColumn Width="70" Header="BBK" Binding="{Binding bbk}"></DataGridTextColumn>
+                <DataGridTextColumn Width="70" Header="BBK" Binding="{Binding fields.field_knowledge_bbk}"></DataGridTextColumn>
                 <DataGridTextColumn Width="70" Header="ISBN" Binding="{Binding isbn}"></DataGridTextColumn>
                 <DataGridTextColumn Width="80" Header="Год издания"  Binding="{Binding year}"></DataGridTextColumn>
             </DataGrid.Columns>

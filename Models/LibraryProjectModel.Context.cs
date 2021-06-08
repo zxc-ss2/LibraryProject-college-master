@@ -34,5 +34,6 @@ namespace LibraryProject.Models
         public virtual DbSet<quantity> quantity { get; set; }
         public virtual DbSet<roles> roles { get; set; }
         public virtual DbSet<trading> trading { get; set; }
+        public virtual DbSet<waiting> waiting { get; set; }
     }
 }

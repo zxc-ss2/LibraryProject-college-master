@@ -22,12 +22,17 @@ namespace LibraryProject.Controllers
         public List<clients> ClientsMatchUpInfoOutput(string info)
         {
             return dbHelper.context.clients.Where(t => t.name.Contains(info) || t.surname.Contains(info) ||
-                                                  t.patronymic.Contains(info) || t.trading.ticket.Contains(info)).ToList();
+                                                  t.patronymic.Contains(info) || t.ticket.Contains(info)).ToList();
         }
 
         public List<clients> ClientsPasswordMatchUp(string password)
         {
             return dbHelper.context.clients.Where(t => t.password == password).ToList();
+        }
+
+        public List<clients> GetClientsWithTrading()
+        {
+            return dbHelper.context.clients.Where(t => t.id_trading != null).ToList();
         }
 
         /// <summary>
@@ -38,8 +43,8 @@ namespace LibraryProject.Controllers
         /// <returns></returns>
         public bool CheckUser(string userLogin, string userPassword)
         {
-            try
-            {
+            //try
+            //{
                 clients user = dbHelper.context.clients.AsNoTracking().FirstOrDefault(t => t.login == userLogin && t.password == userPassword);
 
                 if (user == null)
@@ -52,12 +57,12 @@ namespace LibraryProject.Controllers
                 Settings.Default.password = userPassword;
                 Settings.Default.role = Convert.ToInt32(dbHelper.context.clients.Where(t => t.login == userLogin).First().id_role);
                 return true;
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return false;
-            }
+            //}
+            //catch(Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //    return false;
+            //}
 
         }
 
@@ -207,30 +212,39 @@ namespace LibraryProject.Controllers
             }
         }
 
-        public void SendInfo(string userLogin, string userPassword, string email)
+        public bool SendInfo(string userLogin, string userPassword, string email)
         {
             try
             {
                 SmtpClient Smtp = new SmtpClient("smtp.gmail.com", 587);
                 Smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                 Smtp.EnableSsl = true;
-                Smtp.Credentials = new NetworkCredential("enotik1enot@gmail.com", "890891506644Qq");
+                Smtp.Credentials = new NetworkCredential("libraryautho.data@gmail.com", "QcNjxh472kc3rUN");
                 MailMessage Message = new MailMessage();
-                Message.From = new MailAddress("enotik1enot@gmail.com");
+                Message.From = new MailAddress("libraryautho.data@gmail.com");
                 Message.To.Add(new MailAddress(email));
                 Message.Subject = "Данные для авторизации";
-                Message.Body = "Ваши данные для авторизации:\nЛогин:" + userLogin + "Пароль:" + userPassword;
+                Message.Body = "Ваши данные для авторизации:\nЛогин:" + userLogin + "\nПароль:" + userPassword;
 
                 Smtp.Send(Message);
+                return true;
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                return false;
             }
         }
-        public string GetTicket(string userLogin)
+        public string CheckTicketOnExistence(string userLogin)
         {
-            return dbHelper.context.clients.Where(t => t.login == userLogin).FirstOrDefault().ticket;
+            string ticket = dbHelper.context.clients.Where(t => t.login == userLogin).FirstOrDefault().ticket;
+
+            return ticket;
+        }
+
+        public string GetTicketNumber(string userLogin)
+        {
+            return  dbHelper.context.clients.Where(t => t.login == userLogin).FirstOrDefault().ticket;
         }
 
         public bool AddTradingIdToCLient(string userLogin, int newTradingId)

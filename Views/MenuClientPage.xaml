@@ -49,11 +49,14 @@
                 </DataGrid.Columns>
             </DataGrid>
             <DockPanel>
-                <ComboBox x:Name="AbonementsTypeList" Style="{DynamicResource AbonementComboBox}">
-                    <TextBlock>А - только абонемент</TextBlock>
-                    <TextBlock>Ч - только читальный зал</TextBlock>
-                    <TextBlock>О - читальный зал и абонемент</TextBlock>
-                </ComboBox>
+                <StackPanel>
+                    <TextBlock Style="{StaticResource LeftOfferText}">Выберите тип абонемента</TextBlock>
+                    <ComboBox x:Name="AbonementsTypeList" Style="{DynamicResource AbonementComboBox}" HorizontalAlignment="Left">
+                        <TextBlock>А - только абонемент</TextBlock>
+                        <TextBlock>Ч - только читальный зал</TextBlock>
+                        <TextBlock>О - читальный зал и абонемент</TextBlock>
+                    </ComboBox>
+                </StackPanel>
                 <Button x:Name="GetBookBtn" Style="{StaticResource GetBookBtn}" Click="GetBookBtn_Click">Взять книгу</Button>
                 <Button x:Name="ReturnBookBtn" Style="{StaticResource GiveBookBtn}" Click="ReturnBookBtn_Click">Вернуть книгу</Button>
             </DockPanel>

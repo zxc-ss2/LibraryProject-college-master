@@ -4,22 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3ef16826cbbd439fae464c95c7986006" Name="Diagram1">
-        <EntityTypeShape EntityType="LibraryModel.books" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="LibraryModel.chambers" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="LibraryModel.clients" Width="1.5" PointX="6" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="LibraryModel.fields" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="LibraryModel.formular" Width="1.5" PointX="5.25" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="LibraryModel.interpretors" Width="1.5" PointX="0.75" PointY="12.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="LibraryModel.quantity" Width="1.5" PointX="0.75" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LibraryModel.roles" Width="1.5" PointX="3.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="LibraryModel.trading" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+      <Diagram DiagramId="2e46c3165f80412da60b4a05393966bf" Name="Diagram1">
+        <EntityTypeShape EntityType="LibraryModel.books" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryModel.chambers" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryModel.clients" Width="1.5" PointX="6" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryModel.fields" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryModel.formular" Width="1.5" PointX="5.25" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryModel.interpretors" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryModel.quantity" Width="1.5" PointX="0.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryModel.roles" Width="1.5" PointX="3.75" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryModel.trading" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryModel.waiting" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
         <AssociationConnector Association="LibraryModel.FK_books_chambers" ManuallyRouted="false" />
         <AssociationConnector Association="LibraryModel.FK_books_fields" ManuallyRouted="false" />
         <AssociationConnector Association="LibraryModel.FK_books_interpretors" ManuallyRouted="false" />
         <AssociationConnector Association="LibraryModel.FK_books_quantity" ManuallyRouted="false" />
         <AssociationConnector Association="LibraryModel.FK_books_trading" ManuallyRouted="false" />
         <AssociationConnector Association="LibraryModel.FK_formular_books" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryModel.FK_waiting_books" ManuallyRouted="false" />
         <AssociationConnector Association="LibraryModel.FK_client_roles" ManuallyRouted="false" />
         <AssociationConnector Association="LibraryModel.FK_clients_trading" ManuallyRouted="false" />
       </Diagram>

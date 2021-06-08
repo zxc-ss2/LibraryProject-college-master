@@ -89,8 +89,8 @@
                 <TextBlock Style="{StaticResource RightLabelText}">Чит. билет</TextBlock>
             </DockPanel>
             <DockPanel>
-                <TextBox x:Name="NewEmailInput" Style="{StaticResource LeftInputBox}"></TextBox>
-                <TextBox x:Name="NewTicketInput" Style="{StaticResource RightInputBox}"></TextBox>
+                <TextBox x:Name="NewEmailInput" Style="{StaticResource LeftInputBox}" SelectionChanged="NewEmailInput_SelectionChanged"></TextBox>
+                <TextBox x:Name="NewTicketInput" Style="{StaticResource RightInputBox}" SelectionChanged="NewTicketInput_SelectionChanged"></TextBox>
             </DockPanel>
             <Button x:Name="SaveBtn" Style="{StaticResource StartBtn}" Click="SaveBtn_Click">Сохранить изменения</Button>
         </StackPanel >

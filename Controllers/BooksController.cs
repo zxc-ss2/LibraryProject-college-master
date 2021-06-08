@@ -14,7 +14,7 @@ namespace LibraryProject.Controllers
 {
     public class BooksController
     {
-        readonly DbHelper dbHelper = new DbHelper();
+        DbHelper dbHelper = new DbHelper();
         readonly TradingController tradingController = new TradingController();
 
         /// <summary>
@@ -33,6 +33,7 @@ namespace LibraryProject.Controllers
         /// <returns></returns>
         public List<books> BooksMatchUpInfoOutput(string author)
         {
+
             return dbHelper.context.books.Where(t => t.author.Contains(author) || t.isbn.Contains(author)).ToList();
         }
 
@@ -84,7 +85,7 @@ namespace LibraryProject.Controllers
         {
             try
             {
-                if(selectString == null)
+                if (selectString == null)
                 {
                     return false;
                 }
@@ -201,12 +202,12 @@ namespace LibraryProject.Controllers
             
         }
 
-        public List<books> GetBookWithId(int selectBookId)
+        public books GetBookWithId(int selectBookId)
         {
-            return dbHelper.context.books.Where(t => t.book_id == selectBookId).ToList();
+            return dbHelper.context.books.Where(t => t.book_id == selectBookId).First();
         }
 
-        public bool UpdateBookInfo(string newAuthor, int newfFieldKnowledgeId, string newName, string newIsbn, string newPlace, int newYear, int newInterpretorId, int newChamberId, List<books> oldBook)
+        public bool UpdateBookInfo(string newAuthor, int newfFieldKnowledgeId, string newName, string newIsbn, string newPlace, int newYear, int newInterpretorId, int newChamberId, books oldBook)
         {
             try
             {
@@ -219,21 +220,26 @@ namespace LibraryProject.Controllers
                 }
                 else
                 {
-                    foreach (var item in oldBook)
-                    {
-                        item.author = newAuthor;
-                        item.field_knowledge_id = newfFieldKnowledgeId;
-                        item.name = newName;
-                        item.isbn = newIsbn;
-                        item.place = newPlace;
-                        item.year = newYear;
-                        item.interpreter_id = newInterpretorId;
-                        item.chamber_id = newChamberId;
-                        item.trading_id = null;
-                    }
+
+                    oldBook.author = newAuthor;
+                    oldBook.field_knowledge_id = newfFieldKnowledgeId;
+                    oldBook.name = newName;
+                    oldBook.isbn = newIsbn;
+                    oldBook.place = newPlace;
+                    oldBook.year = newYear;
+                    oldBook.interpreter_id = newInterpretorId;
+                    oldBook.chamber_id = newChamberId;
+                    oldBook.trading_id = null;
 
                     dbHelper.context.SaveChanges();
-                    return true;
+                    if(dbHelper.context.SaveChanges() == 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
                 
@@ -244,5 +250,10 @@ namespace LibraryProject.Controllers
             }
 
         }
+
+        //public List<books> GetExtradites(string userLogin, int bookId)
+        //{
+        //    return dbHelper.context.books.Where(t => t.book_id = bookId && t.)
+        //}
     }
 }

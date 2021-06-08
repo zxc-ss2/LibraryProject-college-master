@@ -28,6 +28,7 @@ namespace LibraryProject.Views
         readonly QuantityController quantityController = new QuantityController();
         readonly FormularController formularController = new FormularController();
         readonly ClientsController clientsController = new ClientsController();
+        readonly WaitingController waitingController = new WaitingController();
 
         public MenuClientPage()
         {
@@ -35,10 +36,10 @@ namespace LibraryProject.Views
             AllBooksDataGrid.ItemsSource = booksController.BooksInfoOutput();
             AvailableBooksDataGrid.ItemsSource = booksController.GetAvailableBooks(Settings.Default.login);
             ClientTakenBooksDataGrid.ItemsSource = booksController.GetTradingBooks();
+
+            FilterList.SelectedIndex = 0;
         }
         List<quantity> booksQuantity = new List<quantity>();
-        string ticket = "";
-        int generator = 0;
         private void FilterList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -60,11 +61,19 @@ namespace LibraryProject.Views
 
         private void GetBookBtn_Click(object sender, RoutedEventArgs e)
         {
-            string[] strList = clientsController.GetTicket(Settings.Default.login).Split('-');
+            string ticket = "";
+            string generator = "";
 
             if (AbonementsTypeList.Text == "А - только абонемент")
             {
-                if(strList == null)
+                if (clientsController.CheckTicketOnExistence(Settings.Default.login) != "")
+                {
+                    string[] strList = clientsController.GetTicketNumber(Settings.Default.login).Split('-');
+
+                    strList[0] = "А";
+                    ticket = strList[0] + "-" + strList[1] + "-" + strList[2];
+                }
+                else
                 {
                     Random rnd = new Random();
                     for (int i = 0; i < 4; i++)
@@ -74,16 +83,18 @@ namespace LibraryProject.Views
 
                     ticket = "А" + "-" + generator + "-" + DateTime.Now.ToString("yy");
                 }
-                else
-                {
-                    strList[0] = "А";
-                    ticket = strList[0] + "-" + strList[1] + "-" + strList[2];
-                }
             }
 
             if (AbonementsTypeList.Text == "Ч - только читальный зал")
             {
-                if (strList == null)
+                if (clientsController.CheckTicketOnExistence(Settings.Default.login) != "")
+                {
+                    string[] strList = clientsController.GetTicketNumber(Settings.Default.login).Split('-');
+
+                    strList[0] = "Ч";
+                    ticket = strList[0] + "-" + strList[1] + "-" + strList[2];
+                }
+                else
                 {
                     Random rnd = new Random();
                     for (int i = 0; i < 4; i++)
@@ -93,16 +104,18 @@ namespace LibraryProject.Views
 
                     ticket = "Ч" + "-" + generator + "-" + DateTime.Now.ToString("yy");
                 }
-                else
-                {
-                    strList[0] = "Ч";
-                    ticket = strList[0] + "-" + strList[1] + "-" + strList[2];
-                }
             }
 
             if (AbonementsTypeList.Text == "О - читальный зал и абонемент")
             {
-                if (strList == null)
+                if (clientsController.CheckTicketOnExistence(Settings.Default.login) != "")
+                {
+                    string[] strList = clientsController.GetTicketNumber(Settings.Default.login).Split('-');
+
+                    strList[0] = "О";
+                    ticket = strList[0] + "-" + strList[1] + "-" + strList[2];
+                }
+                else
                 {
                     Random rnd = new Random();
                     for (int i = 0; i < 4; i++)
@@ -111,11 +124,6 @@ namespace LibraryProject.Views
                     }
 
                     ticket = "О" + "-" + generator + "-" + DateTime.Now.ToString("yy");
-                }
-                else
-                {
-                    strList[0] = "О";
-                    ticket = strList[0] + "-" + strList[1] + "-" + strList[2];
                 }
             }
 
@@ -127,55 +135,65 @@ namespace LibraryProject.Views
             else
             {
                 var firstSelectedCellContent = new DataGridCellInfo(AvailableBooksDataGrid.SelectedItem, AvailableBooksDataGrid.Columns[0]);
+                TextBlock firstSelectedCell = firstSelectedCellContent.Column.GetCellContent(firstSelectedCellContent.Item) as TextBlock;
 
+                Settings.Default.userSelecredBookId = Convert.ToInt32(firstSelectedCell.Text);
                 if (AvailableBooksDataGrid.SelectedItem == null)
                 {
                     MessageBox.Show("Выберите книгу");
                 }
                 else
                 {
-                    TextBlock firstSelectedCell = firstSelectedCellContent.Column.GetCellContent(firstSelectedCellContent.Item) as TextBlock;
-                    booksQuantity = quantityController.GetQuantity(Convert.ToInt32(firstSelectedCell.Text));
-
-                    if (tradingController.AddNewTrading(Convert.ToInt32(firstSelectedCell.Text), ticket, DateTime.Now, DateTime.Now.AddMonths(1), Settings.Default.login))
+                    if (waitingController.AddNewWaiting(Settings.Default.login, Convert.ToInt32(firstSelectedCell.Text), ticket))
                     {
-                        if (quantityController.ChangeQuantityMinus(Convert.ToInt32(firstSelectedCell.Text), booksQuantity)){
-                            AllBooksDataGrid.ItemsSource = booksController.BooksInfoOutput();
-
-                            if (booksController.AssignIdTradingToBook(Convert.ToInt32(firstSelectedCell.Text), tradingController.GetNeededTradingId(Convert.ToInt32(firstSelectedCell.Text))))
-                            {
-                                if (clientsController.AddTradingIdToCLient(Settings.Default.login, tradingController.GetNeededTradingId(Convert.ToInt32(firstSelectedCell.Text))))
-                                {
-                                    if (formularController.AddFormularInfo(ticket, DateTime.Now, DateTime.Now.AddMonths(1), Convert.ToInt32(firstSelectedCell.Text)))
-                                    {
-                                        AllBooksDataGrid.ItemsSource = booksController.BooksInfoOutput();
-                                        AvailableBooksDataGrid.ItemsSource = booksController.GetAvailableBooks(Settings.Default.login);
-                                        ClientTakenBooksDataGrid.ItemsSource = booksController.GetTradingBooks();
-                                    }
-                                    else
-                                    {
-                                        MessageBox.Show("Формуляр не был заполнен");
-                                    }
-                                }
-                                else
-                                {
-                                    MessageBox.Show("Ошибка базы данных, попробуйте позже.");
-                                }
-                            }
-                            else
-                            {
-                                MessageBox.Show("Номер обмена не был присвоен выбранной книге((");
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show("Количетсво не было перезаписано");
-                        }
+                        MessageBox.Show("Ваш запрос на получение будет обработан в ближайшее время");
                     }
                     else
                     {
-                        MessageBox.Show("Выдача не была произведена, попробуйте позже");
+                        MessageBox.Show("Ошибка базы данных, попробуйте позже.");
                     }
+                    //TextBlock firstSelectedCell = firstSelectedCellContent.Column.GetCellContent(firstSelectedCellContent.Item) as TextBlock;
+                    //booksQuantity = quantityController.GetQuantity(Convert.ToInt32(firstSelectedCell.Text));
+
+                    //if (tradingController.AddNewTrading(Convert.ToInt32(firstSelectedCell.Text), ticket, DateTime.Now, DateTime.Now.AddMonths(1), Settings.Default.login))
+                    //{
+                    //    if (quantityController.ChangeQuantityMinus(Convert.ToInt32(firstSelectedCell.Text), booksQuantity)){
+                    //        AllBooksDataGrid.ItemsSource = booksController.BooksInfoOutput();
+
+                    //        if (booksController.AssignIdTradingToBook(Convert.ToInt32(firstSelectedCell.Text), tradingController.GetNeededTradingId(Convert.ToInt32(firstSelectedCell.Text))))
+                    //        {
+                    //            if (clientsController.AddTradingIdToCLient(Settings.Default.login, tradingController.GetNeededTradingId(Convert.ToInt32(firstSelectedCell.Text))))
+                    //            {
+                    //                if (formularController.AddFormularInfo(ticket, DateTime.Now, DateTime.Now.AddMonths(1), Convert.ToInt32(firstSelectedCell.Text)))
+                    //                {
+                    //                    AllBooksDataGrid.ItemsSource = booksController.BooksInfoOutput();
+                    //                    AvailableBooksDataGrid.ItemsSource = booksController.GetAvailableBooks(Settings.Default.login);
+                    //                    ClientTakenBooksDataGrid.ItemsSource = booksController.GetTradingBooks();
+                    //                }
+                    //                else
+                    //                {
+                    //                    MessageBox.Show("Формуляр не был заполнен");
+                    //                }
+                    //            }
+                    //            else
+                    //            {
+                    //                MessageBox.Show("Ошибка базы данных, попробуйте позже.");
+                    //            }
+                    //        }
+                    //        else
+                    //        {
+                    //            MessageBox.Show("Номер обмена не был присвоен выбранной книге((");
+                    //        }
+                    //    }
+                    //    else
+                    //    {
+                    //        MessageBox.Show("Количетсво не было перезаписано");
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    MessageBox.Show("Выдача не была произведена, попробуйте позже");
+                    //}
                 }
             }
         }
@@ -194,7 +212,7 @@ namespace LibraryProject.Views
             {
                 TextBlock firstSelectedCell = firstSelectedCellContent.Column.GetCellContent(firstSelectedCellContent.Item) as TextBlock;
                 int tradingId = Convert.ToInt32(item.trading_id);
-                if (formularController.AddBookReturnDate(DateTime.Now, clientsController.GetTicket(Settings.Default.login)))
+                if (formularController.AddBookReturnDate(DateTime.Now, clientsController.GetTicketNumber(Settings.Default.login)))
                 {
                     if (booksController.RemoveIdTradingFromBook(Convert.ToInt32(firstSelectedCell.Text)))
                     {

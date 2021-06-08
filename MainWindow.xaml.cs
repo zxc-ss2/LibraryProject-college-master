@@ -48,17 +48,63 @@ namespace LibraryProject
         {
             if (e.Content is AuthorizationPage || e.Content is RegistrationPage)
             {
+                BackIcon.Visibility = Visibility.Collapsed;
                 PersonalAreaImage.Visibility = Visibility.Collapsed;
                 LogOutBtn.Visibility = Visibility.Collapsed;
                 ExitBtn.Visibility = Visibility.Visible;
             }
             else
             {
+                BackIcon.Visibility = Visibility.Visible;
                 PersonalAreaImage.Visibility = Visibility.Visible;
                 LogOutBtn.Visibility = Visibility.Visible;
                 ExitBtn.Visibility = Visibility.Collapsed;
             }
 
+            if(e.Content is AuthorizationPage)
+            {
+                MainTitle.Text = "Авторизация";
+            }
+
+            if (e.Content is AddBookPage)
+            {
+                MainTitle.Text = "Добавление книги";
+            }
+
+            if (e.Content is EditBookPage)
+            {
+                MainTitle.Text = "Редактирование книги";
+            }
+
+            if (e.Content is EditTradingPage)
+            {
+                MainTitle.Text = "Редактирование выдачи";
+            }
+
+            if (e.Content is EditUserPage)
+            {
+                MainTitle.Text = "Редактирование аккаунта";
+            }
+
+            if (e.Content is MenuAdminPage)
+            {
+                MainTitle.Text = "Меню администратора";
+            }
+
+            if (e.Content is MenuClientPage)
+            {
+                MainTitle.Text = "Меню читателя";
+            }
+
+            if (e.Content is MenuLibrarianPage)
+            {
+                MainTitle.Text = "Меню библиотекаря";
+            }
+
+            if (e.Content is RegistrationPage)
+            {
+                MainTitle.Text = "Регистриция";
+            }
         }
 
         private void ExitBtn_Click(object sender, RoutedEventArgs e)

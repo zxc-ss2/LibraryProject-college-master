@@ -113,7 +113,7 @@ namespace CheckDatabaseIntegrationTests
             //Arrange
             string author = "Андрей";
             int field_knowledge_id = 23;
-            string name = "Сергеевич";
+            string name = "qwqwe";
             string isbn = "1234-5634-34";
             string place = "Куйбышевf";
             int year = 1755;
@@ -121,23 +121,25 @@ namespace CheckDatabaseIntegrationTests
             int chamber_id = 2;
             string newName = "Аываы";
 
-            string expectedName = "";
             //Act
             List<books> updatingBook = new List<books>();
-            updatingBook = booksController.GetBookWithId(1);
+ 
             if (booksController.AddNewBook(author, field_knowledge_id, name, isbn, place, year, interpreter_id, chamber_id))
             {
+                books selectUpdateString = dbHelper.context.books.Where(t => t.name == name).First();
+                //updatingBook = booksController.GetBookWithId(selectUpdateString);
 
-                if (booksController.UpdateBookInfo(author, field_knowledge_id, name, isbn, place, year, interpreter_id, chamber_id, updatingBook))
+                booksController.UpdateBookInfo(author, field_knowledge_id, newName, isbn, place, year, interpreter_id, chamber_id, selectUpdateString);
                 {
-                    dbHelper = new DbHelper();
-                    expectedName = dbHelper.context.books.Where(t => t.name == newName).FirstOrDefault().name;
+                    //DbHelper dbHelper = new DbHelper();
 
-                    var selectString = dbHelper.context.books.AsNoTracking().OrderByDescending(t => t.book_id).Take(1);
-                    foreach (var item in selectString)
-                    {
-                        booksController.DeleteBookInfo(item);
-                    }
+                    books expectedName = dbHelper.context.books.Where(t => t.name == newName).First();
+
+                    //var selectString = dbHelper.context.books.AsNoTracking().OrderByDescending(t => t.book_id).Take(1);
+                    //foreach (var item in selectString)
+                    //{
+                    //    booksController.DeleteBookInfo(item);
+                    //}
                     //Assert
                     Assert.AreEqual(expectedName, newName);
                 }

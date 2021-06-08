@@ -18,6 +18,7 @@ namespace LibraryProject.Models
         public books()
         {
             this.formular = new HashSet<formular>();
+            this.waiting = new HashSet<waiting>();
         }
     
         public int book_id { get; set; }
@@ -39,5 +40,7 @@ namespace LibraryProject.Models
         public virtual trading trading { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<formular> formular { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<waiting> waiting { get; set; }
     }
 }

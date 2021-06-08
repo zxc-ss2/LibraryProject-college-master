@@ -68,7 +68,8 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" || NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "")
+            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" ||
+                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "" || NewTicketInput.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -94,7 +95,8 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" || NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "")
+            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" || 
+                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "" || NewTicketInput.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -120,7 +122,8 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" || NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "")
+            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" || 
+                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "" || NewTicketInput.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -146,7 +149,8 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" || NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "")
+            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" || 
+                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "" || NewTicketInput.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -170,7 +174,8 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" || NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "")
+            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" ||
+                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "" || NewTicketInput.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -194,7 +199,8 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" || NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "")
+            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" || 
+                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "" || NewTicketInput.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -220,7 +226,8 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" || NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "")
+            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" || 
+                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "" || NewTicketInput.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -246,7 +253,8 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" || NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "")
+            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" || 
+                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "" || NewTicketInput.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -272,7 +280,63 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" || NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "")
+            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" || 
+                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "" || NewTicketInput.Text == "")
+            {
+                SaveBtn.IsEnabled = false;
+            }
+        }
+
+        private void NewEmailInput_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            StringCheck check = new StringCheck();
+
+            bool trigger = check.CheckEmail(NewEmailInput.Text);
+            string word = NewEmailInput.Text;
+
+            foreach (var item in clientsController.ClientsPasswordMatchUp(NewPasswordInput.Password))
+            {
+
+                if (trigger && word != item.email && word != "")
+                {
+                    SaveBtn.IsEnabled = true;
+                }
+                else
+                {
+                    SaveBtn.IsEnabled = false;
+                }
+            }
+
+            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" || 
+                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "" || NewTicketInput.Text == "")
+            {
+                SaveBtn.IsEnabled = false;
+            }
+        }
+
+
+        private void NewTicketInput_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            StringCheck check = new StringCheck();
+
+            bool trigger = check.CheckTradingTicket(NewTicketInput.Text);
+            string word = NewTicketInput.Text;
+
+            foreach (var item in clientsController.ClientsPasswordMatchUp(NewPasswordInput.Password))
+            {
+
+                if (trigger && word != item.ticket && word != "")
+                {
+                    SaveBtn.IsEnabled = true;
+                }
+                else
+                {
+                    SaveBtn.IsEnabled = false;
+                }
+            }
+
+            if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" ||
+                NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "" || NewTicketInput.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }

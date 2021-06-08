@@ -9,75 +9,134 @@
       Title="MenuLibrarianPage">
 
     <Grid>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <TextBlock Style="{StaticResource LeftOfferText}">Выдача книг</TextBlock>
-            <DockPanel Style="{StaticResource AdminDocPanel}">
-                <Button x:Name="DeleteTradingInfoBtn" Style="{StaticResource AdminBtn}" Click="DeleteTradingInfoBtn_Click">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        <Image Source="/Resources/images/trash.png"/>
-                        <TextBlock VerticalAlignment="Center" Margin="10 0 10 0"><Run Text="Удалить"/></TextBlock>
-                    </StackPanel>
-                </Button>
-                <Button x:Name="EditTradingInfoBtn" Style="{StaticResource AdminBtn}" Click="EditTradingInfoBtn_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="/Resources/images/add.png"></Image>
-                        <TextBlock VerticalAlignment="Center" Margin="10 0 10 0">Редактировать</TextBlock>
-                    </StackPanel>
-                </Button>
-                <TextBox  x:Name="SearchAdminReadersBox" Style="{StaticResource SearchAdminBox}"></TextBox>
-                <TextBlock Style="{StaticResource PlaceholderAdminStyle}" Tag="{Binding ElementName=SearchAdminReadersBox}" Text="Введите номер чит. билета ">
-                </TextBlock>
-                <Image Style="{StaticResource SearchIcon}"/>
-            </DockPanel>
-            <DataGrid x:Name="TradingDataGrid" Style="{StaticResource BookDataGrid}" ColumnHeaderStyle="{StaticResource HeaderStyle}" ColumnWidth="*" AutoGenerateColumns="False"  IsReadOnly="True" SelectionMode="Single">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Width="30" Header="№" Binding="{Binding trading_id}"></DataGridTextColumn>
-                    <DataGridTextColumn Width="100" Header="Номер книги" Binding="{Binding book_id}"></DataGridTextColumn>
-                    <DataGridTextColumn Width="100" Header="Билет"  Binding="{Binding ticket}"></DataGridTextColumn>
-                    <DataGridTextColumn Width="100" Header="Дата выдачч"  Binding="{Binding delivery}"></DataGridTextColumn>
-                    <DataGridTextColumn Width="100" Header="Дата возврата"  Binding="{Binding reception}"></DataGridTextColumn>
-                    <DataGridTextColumn Width="100" Header="Логин пользователя"  Binding="{Binding login}"></DataGridTextColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-            <TextBlock Grid.Row="1" Style="{StaticResource LeftOfferText}">Книги</TextBlock>
-            <DockPanel Grid.Row="1" Style="{StaticResource AdminDocPanel}">
-                <Button x:Name="DeleteBookInfoBtn" Style="{StaticResource AdminBtn}" Click="DeleteBookInfoBtn_Click">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        <Image Source="/Resources/images/trash.png"/>
-                        <TextBlock VerticalAlignment="Center" Margin="10 0 10 0"><Run Text="Удалить"/></TextBlock>
-                    </StackPanel>
-                </Button>
-                <Button x:Name="AddBookInfoBtn" Style="{StaticResource AdminBtn}" Click="AddBookInfoBtn_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="/Resources/images/add.png"></Image>
-                        <TextBlock VerticalAlignment="Center" Margin="10 0 10 0">Добавить</TextBlock>
-                    </StackPanel>
-                </Button>
-                <Button x:Name="EditBookInfoBtn" Style="{StaticResource AdminBtn}" Click="EditBookInfoBtn_Click">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        <Image Source="/Resources/images/trash.png"/>
-                        <TextBlock VerticalAlignment="Center" Margin="10 0 10 0"><Run Text="Редактировать"/></TextBlock>
-                    </StackPanel>
-                </Button>
-                <TextBox x:Name="SearchAdminBooksBox" Style="{StaticResource SearchAdminBox }"></TextBox>
-                <TextBlock Style="{StaticResource PlaceholderAdminStyle}" Tag="{Binding ElementName=SearchAdminBooksBox}" Text="Введите ФИО автора или шифр ISBN">
-                </TextBlock>
-                <Image Style="{StaticResource SearchIcon}"/>
-            </DockPanel>
-            <DataGrid Grid.Row="1" x:Name="BookDataGrid" Style="{StaticResource BookDataGrid}" ColumnHeaderStyle="{StaticResource HeaderStyle}" ColumnWidth="*" AutoGenerateColumns="False"  IsReadOnly="True" SelectionMode="Single">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Width="30" Header="№" Binding="{Binding book_id}"></DataGridTextColumn>
-                    <DataGridTextColumn Width="120" Header="Автор" Binding="{Binding author}"></DataGridTextColumn>
-                    <DataGridTextColumn Width="180" Header="Название"  Binding="{Binding name}"></DataGridTextColumn>
-                    <DataGridTextColumn Width="70" Header="ББК" Binding="{Binding bbk}"></DataGridTextColumn>
-                    <DataGridTextColumn Width="100" Header="Место издания" Binding="{Binding place}"></DataGridTextColumn>
-                    <DataGridTextColumn Width="80" Header="Год издания"  Binding="{Binding year}"></DataGridTextColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
+        <TabControl Background="{StaticResource MainColor}" BorderThickness="0">
+            <TabItem Style="{StaticResource FirstTabItem}">
+                <TabItem.Header>
+                    <TextBlock Style="{StaticResource TabItemHeaderText}">Просмотр</TextBlock>
+                </TabItem.Header>
+                <Grid>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Style="{StaticResource LeftOfferText}">Пользователи с книгами</TextBlock>
+                        <DockPanel Style="{StaticResource AdminDocPanel}">
+                            <TextBox  x:Name="SearchAdminReader4sBox" Style="{StaticResource SearchLibrarianBox}"></TextBox>
+
+                        </DockPanel>
+                        <TextBlock Style="{StaticResource PlaceholderLibrarianStyle}" Tag="{Binding ElementName=SearchAdminReader4sBox}" Text="Введите номер чит. билета " VerticalAlignment="Top">
+                        </TextBlock>
+                        <DataGrid x:Name="TradingClientsGrid" Style="{StaticResource ClientsTradingDataGrid}" ColumnHeaderStyle="{StaticResource HeaderStyle}" ColumnWidth="*" AutoGenerateColumns="False"  IsReadOnly="True" SelectionMode="Single">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="30" Header="№" Binding="{Binding client_id}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="100" Header="Телефон" Binding="{Binding phone}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="80" Header="Логин"  Binding="{Binding login}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="150" Header="Email" Binding="{Binding email}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="120" Header="Номер выдачи"  Binding="{Binding id_trading}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="120" Header="Чит. билет"  Binding="{Binding ticket}"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <TextBlock Grid.Row="1" Style="{StaticResource LeftOfferText}">Книги</TextBlock>
+                        <DockPanel Grid.Row="1" Style="{StaticResource AdminDocPanel}">
+                            <Button x:Name="DeleteBookInfoBt2n" Style="{StaticResource AdminBtn}" Click="DeleteBookInfoBtn_Click">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <Image Source="/Resources/images/trash.png"/>
+                                    <TextBlock VerticalAlignment="Center" Margin="10 0 10 0"><Run Text="Удалить"/></TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="AddBookI2nfoBtn" Style="{StaticResource AdminBtn}" Click="AddBookInfoBtn_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="/Resources/images/add.png"></Image>
+                                    <TextBlock VerticalAlignment="Center" Margin="10 0 10 0">Добавить</TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="EditBook2InfoBtn" Style="{StaticResource AdminBtn}" Click="EditBookInfoBtn_Click">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <Image Source="/Resources/images/pencil.png"/>
+                                    <TextBlock VerticalAlignment="Center" Margin="10 0 10 0"><Run Text="Редактировать"/></TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <TextBox x:Name="SearchAdm5inBooksBox" Style="{StaticResource SearchAdminBox }"></TextBox>
+                            <TextBlock Style="{StaticResource PlaceholderAdminStyle}" Tag="{Binding ElementName=SearchAdminBooksBox}" Text="Введите ФИО автора или шифр ISBN">
+                            </TextBlock>
+                            <Image Style="{StaticResource SearchIcon}"/>
+                        </DockPanel>
+                        <DataGrid Grid.Row="1" x:Name="BookDataGrid" Style="{StaticResource AllBookDataGrid}" ColumnHeaderStyle="{StaticResource HeaderStyle}" ColumnWidth="*" AutoGenerateColumns="False"  IsReadOnly="True" SelectionMode="Single">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="30" Header="№" Binding="{Binding book_id}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="120" Header="Автор" Binding="{Binding author}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="180" Header="Название"  Binding="{Binding name}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="70" Header="ББК" Binding="{Binding fields.field_knowledge_bbk}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="80" Header="Год издания"  Binding="{Binding year}"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Style="{StaticResource SecondTabItem}">
+                <TabItem.Header>
+                    <TextBlock Style="{StaticResource TabItemHeaderText}">Выдача</TextBlock>
+                </TabItem.Header>
+                <Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="101*"/>
+                            <ColumnDefinition Width="297*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Style="{StaticResource LeftOfferText}" Width="182">Выданные книги</TextBlock>
+                        <DockPanel Style="{StaticResource AdminDocPanel}" Grid.ColumnSpan="2" Height="95" Width="630">
+                            <Button x:Name="DeleteTradingInfoBtn" Style="{StaticResource AdminBtn}" Click="DeleteTradingInfoBtn_Click">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <Image Source="/Resources/images/trash.png"/>
+                                    <TextBlock VerticalAlignment="Center" Margin="10 0 10 0"><Run Text="Удалить"/></TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="EditTradingInfoBtn" Style="{StaticResource AdminBtn}" Click="EditTradingInfoBtn_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="/Resources/images/pencil.png"></Image>
+                                    <TextBlock VerticalAlignment="Center" Margin="10 0 10 0">Редактировать</TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <TextBox  x:Name="SearchAdminReadersBox" Style="{StaticResource SearchAdminBox}"></TextBox>
+                            <TextBlock Style="{StaticResource PlaceholderAdminStyle}" Tag="{Binding ElementName=SearchAdminReadersBox}" Text="Введите номер чит. билета ">
+                            </TextBlock>
+                            <Image Style="{StaticResource SearchIcon}"/>
+                        </DockPanel>
+                        <DataGrid x:Name="TradingDataGrid" Style="{StaticResource BookDataGrid}" ColumnHeaderStyle="{StaticResource HeaderStyle}" ColumnWidth="*" AutoGenerateColumns="False"  IsReadOnly="True" SelectionMode="Single" Grid.ColumnSpan="2">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="30" Header="№" Binding="{Binding trading_id}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="100" Header="Номер книги" Binding="{Binding book_id}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="100" Header="Билет"  Binding="{Binding ticket}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="100" Header="Дата выдачч"  Binding="{Binding delivery}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="100" Header="Дата возврата"  Binding="{Binding reception}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="100" Header="Логин"  Binding="{Binding login}"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <TextBlock Grid.Row="1" Style="{StaticResource LeftOfferText}" Width="182">Запросы на выдачу</TextBlock>
+                        <DockPanel Grid.Row="1" Style="{StaticResource AdminDocPanel}" Grid.ColumnSpan="2" Height="95" Width="775">
+                            <Button x:Name="ApproveBtn" Style="{StaticResource AdminBtn}" Click="ApproveBtn_Click">Одобрить</Button>
+                            <Button x:Name="DeniedBtn" Style="{StaticResource AdminBtn}" Click="DeniedBtn_Click">Отказать</Button>
+                            <TextBox x:Name="SearchAdminBooksBox" Style="{StaticResource SearchAdminBox }"></TextBox>
+                            <TextBlock Style="{StaticResource PlaceholderAdminStyle}" Tag="{Binding ElementName=SearchAdminBooksBox}" Text="Введите номер чит. билета">
+                            </TextBlock>
+                            <Image Style="{StaticResource SearchIcon}"/>
+                        </DockPanel>
+                        <DataGrid Grid.Row="1" x:Name="GiveOutBooksDataGrid" Style="{StaticResource WaitingBooksDataGrid}" ColumnHeaderStyle="{StaticResource HeaderStyle}" ColumnWidth="*" AutoGenerateColumns="False"  IsReadOnly="True" SelectionMode="Single" Grid.ColumnSpan="2">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="30" Header="№" Binding="{Binding waiting_id}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="100" Header="Номер книги" Binding="{Binding book_id}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="100" Header="Билет" Binding="{Binding ticket}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="100" Header="Логин" Binding="{Binding login}"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Page>

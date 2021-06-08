@@ -107,13 +107,15 @@ namespace LibraryProject.Views
                     if(clientsController.AddNewUser(FirstNameInput.Text, LastNameInput.Text, PatronymicInput.Text, Convert.ToDateTime(DateInput.SelectedDate), AddressInput.Text, WorkplaceInput.Text, StudyplaceInput.Text, PhoneInput.Text, LoginInput.Text, PasswordInput.Password, EmailInput.Text, ticket))
                     {
                         MessageBox.Show("Регистрация прошла успешно.");
-                        try
+
+                        if(clientsController.SendInfo(LoginInput.Text, PasswordInput.Password, EmailInput.Text))
                         {
-                            clientsController.SendInfo(LoginInput.Text, PasswordInput.Password, EmailInput.Text);
+                            MessageBox.Show("Данные для авторизации были отправлены на вашу электронную почту. Если письмо не пришло, убедитесь, что оно не попало в папку Спам.");
+                            this.NavigationService.Navigate(new AuthorizationPage());
                         }
-                        catch (Exception ex)
+                        else
                         {
-                            MessageBox.Show(ex.Message);
+                            MessageBox.Show("Данные для авторизации не были отправлены, повторная попытка будет произведена позже.");
                         }
                     }
                     else
