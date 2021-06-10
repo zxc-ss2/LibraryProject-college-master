@@ -50,37 +50,37 @@ namespace LibraryProject.Views
             bool resultAuthor = check.CheckName(AuthorInput.Text);
             if (!resultAuthor || AuthorInput.Text == "")
             {
-                resultString += "Неправильно введено имя Автора ";
+                resultString += "Неправильно введено имя Автора\n";
             }
 
             bool resultName = check.CheckBookName(NameInput.Text);
             if (!resultName || NameInput.Text == "")
             {
-                resultString += "Неправильно введено название ";
+                resultString += "Неправильно введено название\n";
             }
 
             string resultBbk = BBkInputComboBox.Text;
             if (resultBbk == "")
             {
-                resultString += "Неправильно введено BBK ";
+                resultString += "Неправильно введено BBK\n";
             }
 
             bool resultIsbn = check.CheckBookIsbn(ISBNInput.Text);
             if (!resultIsbn || ISBNInput.Text == "")
             {
-                resultString += "Неправильно введен ISBN ";
+                resultString += "Неправильно введен ISBN\n";
             }
 
             bool resultYear = check.CheckBookYear(YearInput.Text);
             if (!resultYear || YearInput.Text == "")
             {
-                resultString += "Неправильно введен год ";
+                resultString += "Неправильно введен год\n";
             }
 
             string resultInterpretor = InterpreterComboBox.Text;
             if (resultInterpretor == "")
             {
-                resultString += "Неправильно введено имя Издания ";
+                resultString += "Неправильно введено имя Издания\n";
             }
 
             if(resultString == "")
@@ -153,6 +153,66 @@ namespace LibraryProject.Views
             DirectInputTextBox.Visibility = Visibility.Collapsed;
             BBkInputComboBox.Visibility = Visibility.Visible;
             SelectShowDocPanel.Visibility = Visibility.Visible;
+        }
+
+        private void AuthorInput_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            StringCheck check = new StringCheck();
+
+            bool trigger = check.CheckName(AuthorInput.Text);
+            if (!trigger)
+            {
+                AuthorWarningBtn.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                AuthorWarningBtn.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void NameInput_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            StringCheck check = new StringCheck();
+
+            bool trigger = check.CheckBookName(NameInput.Text);
+            if (!trigger)
+            {
+                NameWarningBtn.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                NameWarningBtn.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void ISBNInput_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            StringCheck check = new StringCheck();
+
+            bool trigger = check.CheckBookIsbn(ISBNInput.Text);
+            if (!trigger)
+            {
+                ISBNWarningBtn.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                ISBNWarningBtn.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void YearInput_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            StringCheck check = new StringCheck();
+
+            bool trigger = check.CheckBookYear(YearInput.Text);
+            if (!trigger)
+            {
+                YearWarningBtn.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                YearWarningBtn.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

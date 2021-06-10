@@ -38,7 +38,7 @@ namespace LibraryProject.Views
             TradingDataGrid.ItemsSource = tradingController.GetTradingInfo();
             BookDataGrid.ItemsSource = booksController.BooksInfoOutput();
             TradingClientsGrid.ItemsSource = clientsController.GetClientsWithTrading();
-            GiveOutBooksDataGrid.ItemsSource = waitingController.GetWaitingInfo();
+            WaitingBooksDataGrid.ItemsSource = waitingController.GetWaitingInfo();
         }
 
         private void DeleteTradingInfoBtn_Click(object sender, RoutedEventArgs e)
@@ -70,8 +70,9 @@ namespace LibraryProject.Views
                             if (quantityController.ChangeQuantityPlus(Convert.ToInt32(secondSelectedCell.Text), booksQuantity))
                             {
                                 TradingDataGrid.ItemsSource = tradingController.GetTradingInfo();
-                                TradingClientsGrid.ItemsSource = clientsController.GetClientsWithTrading();
                                 BookDataGrid.ItemsSource = booksController.BooksInfoOutput();
+                                TradingClientsGrid.ItemsSource = clientsController.GetClientsWithTrading();
+                                WaitingBooksDataGrid.ItemsSource = waitingController.GetWaitingInfo();
                                 MessageBox.Show("Данные успешно обновлены");
                             }
                             else
@@ -116,8 +117,9 @@ namespace LibraryProject.Views
                 {
                     MessageBox.Show("Данные успешно удалены.");
                     TradingDataGrid.ItemsSource = tradingController.GetTradingInfo();
-                    TradingClientsGrid.ItemsSource = clientsController.GetClientsWithTrading();
                     BookDataGrid.ItemsSource = booksController.BooksInfoOutput();
+                    TradingClientsGrid.ItemsSource = clientsController.GetClientsWithTrading();
+                    WaitingBooksDataGrid.ItemsSource = waitingController.GetWaitingInfo();
                 }
                 else
                 {
@@ -166,7 +168,7 @@ namespace LibraryProject.Views
 
         private void ApproveBtn_Click(object sender, RoutedEventArgs e)
         {
-            if(GiveOutBooksDataGrid.SelectedItem == null)
+            if(WaitingBooksDataGrid.SelectedItem == null)
             {
                 MessageBox.Show("Не выбрано ни одной книги");
             }
@@ -174,13 +176,13 @@ namespace LibraryProject.Views
             {
                 List<quantity> booksQuantity = new List<quantity>();
 
-                var firstSelectedCellContent = new DataGridCellInfo(GiveOutBooksDataGrid.SelectedItem, GiveOutBooksDataGrid.Columns[0]);
+                var firstSelectedCellContent = new DataGridCellInfo(WaitingBooksDataGrid.SelectedItem, WaitingBooksDataGrid.Columns[0]);
                 TextBlock selectedWaiting = firstSelectedCellContent.Column.GetCellContent(firstSelectedCellContent.Item) as TextBlock;
-                var secondSelectedCellContent = new DataGridCellInfo(GiveOutBooksDataGrid.SelectedItem, GiveOutBooksDataGrid.Columns[1]);
+                var secondSelectedCellContent = new DataGridCellInfo(WaitingBooksDataGrid.SelectedItem, WaitingBooksDataGrid.Columns[1]);
                 TextBlock selectedBook = secondSelectedCellContent.Column.GetCellContent(secondSelectedCellContent.Item) as TextBlock;
-                var thirdSelectedCellContent = new DataGridCellInfo(GiveOutBooksDataGrid.SelectedItem, GiveOutBooksDataGrid.Columns[2]);
+                var thirdSelectedCellContent = new DataGridCellInfo(WaitingBooksDataGrid.SelectedItem, WaitingBooksDataGrid.Columns[2]);
                 TextBlock selectedTicket = thirdSelectedCellContent.Column.GetCellContent(thirdSelectedCellContent.Item) as TextBlock;
-                var fourSelectedCellContent = new DataGridCellInfo(GiveOutBooksDataGrid.SelectedItem, GiveOutBooksDataGrid.Columns[3]);
+                var fourSelectedCellContent = new DataGridCellInfo(WaitingBooksDataGrid.SelectedItem, WaitingBooksDataGrid.Columns[3]);
                 TextBlock selectedLogin = fourSelectedCellContent.Column.GetCellContent(fourSelectedCellContent.Item) as TextBlock;
 
                 if (tradingController.AddNewTrading(Convert.ToInt32(selectedBook.Text), selectedTicket.Text, DateTime.Now, DateTime.Now.AddMonths(1), selectedLogin.Text))
@@ -197,8 +199,12 @@ namespace LibraryProject.Views
                                 {
                                     if (waitingController.DeleteEaitingBook(Convert.ToInt32(selectedWaiting.Text)))
                                     {
-                                        GiveOutBooksDataGrid.ItemsSource = waitingController.GetWaitingInfo();
-                                        MessageBox.Show("Книга была выдана пользователю:" + selectedLogin);
+                                        WaitingBooksDataGrid.ItemsSource = waitingController.GetWaitingInfo();
+                                        MessageBox.Show("Книга была выдана пользователю:" + selectedLogin.Text);
+                                        TradingDataGrid.ItemsSource = tradingController.GetTradingInfo();
+                                        BookDataGrid.ItemsSource = booksController.BooksInfoOutput();
+                                        TradingClientsGrid.ItemsSource = clientsController.GetClientsWithTrading();
+                                        WaitingBooksDataGrid.ItemsSource = waitingController.GetWaitingInfo();
                                     }
                                     else
                                     {
@@ -234,16 +240,16 @@ namespace LibraryProject.Views
 
         private void DeniedBtn_Click(object sender, RoutedEventArgs e)
         {
-            var firstSelectedCellContent = new DataGridCellInfo(GiveOutBooksDataGrid.SelectedItem, GiveOutBooksDataGrid.Columns[0]);
+            var firstSelectedCellContent = new DataGridCellInfo(WaitingBooksDataGrid.SelectedItem, WaitingBooksDataGrid.Columns[0]);
             TextBlock selectedWaiting = firstSelectedCellContent.Column.GetCellContent(firstSelectedCellContent.Item) as TextBlock;
-            var secondSelectedCellContent = new DataGridCellInfo(GiveOutBooksDataGrid.SelectedItem, GiveOutBooksDataGrid.Columns[1]);
+            var secondSelectedCellContent = new DataGridCellInfo(WaitingBooksDataGrid.SelectedItem, WaitingBooksDataGrid.Columns[1]);
             TextBlock selectedBook = secondSelectedCellContent.Column.GetCellContent(secondSelectedCellContent.Item) as TextBlock;
-            var thirdSelectedCellContent = new DataGridCellInfo(GiveOutBooksDataGrid.SelectedItem, GiveOutBooksDataGrid.Columns[2]);
+            var thirdSelectedCellContent = new DataGridCellInfo(WaitingBooksDataGrid.SelectedItem, WaitingBooksDataGrid.Columns[2]);
             TextBlock selectedTicket = thirdSelectedCellContent.Column.GetCellContent(thirdSelectedCellContent.Item) as TextBlock;
-            var fourSelectedCellContent = new DataGridCellInfo(GiveOutBooksDataGrid.SelectedItem, GiveOutBooksDataGrid.Columns[3]);
+            var fourSelectedCellContent = new DataGridCellInfo(WaitingBooksDataGrid.SelectedItem, WaitingBooksDataGrid.Columns[3]);
             TextBlock selectedLogin = fourSelectedCellContent.Column.GetCellContent(fourSelectedCellContent.Item) as TextBlock;
 
-            if (GiveOutBooksDataGrid.SelectedItem == null)
+            if (WaitingBooksDataGrid.SelectedItem == null)
             {
                 MessageBox.Show("Не выбрано ни одной книги");
             }
@@ -251,7 +257,7 @@ namespace LibraryProject.Views
             {
                 if (waitingController.DeleteEaitingBook(Convert.ToInt32(selectedWaiting.Text)))
                 {
-                    GiveOutBooksDataGrid.ItemsSource = waitingController.GetWaitingInfo();
+                    WaitingBooksDataGrid.ItemsSource = waitingController.GetWaitingInfo();
                     MessageBox.Show("Книга была выдана пользователю:" + selectedLogin);
                 }
                 else
@@ -259,6 +265,26 @@ namespace LibraryProject.Views
                     MessageBox.Show("Ошибка базы данных попроьуйте позже.");
                 }
             }
+        }
+
+        private void SearchLibrarianReadersBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TradingClientsGrid.ItemsSource = clientsController.ClientsMatchUpInfoOutput(SearchLibrarianReadersBox.Text);
+        }
+
+        private void SearchLibrarianBooksBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            BookDataGrid.ItemsSource = booksController.BooksMatchUpInfoOutput(SearchLibrarianBooksBox.Text);
+        }
+
+        private void SearchLibrarianTradingBooksBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TradingDataGrid.ItemsSource = booksController.BooksMatchUpInfoOutput(SearchLibrarianTradingBooksBox.Text);
+        }
+
+        private void SearchLibrarianWaitingBooksBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            WaitingBooksDataGrid.ItemsSource = waitingController.WaitingMatchUpInfoOutput(SearchLibrarianWaitingBooksBox.Text);
         }
     }
 }

@@ -19,7 +19,7 @@
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="400">
             <DockPanel HorizontalAlignment="Center">
                 <Button Style="{StaticResource GreenBtn}" BorderThickness="0" Click="SignUpBtnClick">Зарегистрироваться</Button>
-                <Button Style="{StaticResource GrayBtn}" BorderThickness="0">Войти</Button>
+                <Button Style="{StaticResource GrayBtn}" BorderThickness="0">Авторизироваться</Button>
             </DockPanel>
 
             <TextBlock Style="{StaticResource LeftLabelText}" Margin="0 20 0 0">Email</TextBlock>

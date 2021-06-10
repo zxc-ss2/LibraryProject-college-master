@@ -22,10 +22,10 @@
                         </Grid.RowDefinitions>
                         <TextBlock Style="{StaticResource LeftOfferText}">Пользователи с книгами</TextBlock>
                         <DockPanel Style="{StaticResource AdminDocPanel}">
-                            <TextBox  x:Name="SearchAdminReader4sBox" Style="{StaticResource SearchLibrarianBox}"></TextBox>
-
+                            <TextBox  x:Name="SearchLibrarianReadersBox" Style="{StaticResource SearchLibrarianBox}" TextChanged="SearchLibrarianReadersBox_TextChanged"></TextBox>
+                            
                         </DockPanel>
-                        <TextBlock Style="{StaticResource PlaceholderLibrarianStyle}" Tag="{Binding ElementName=SearchAdminReader4sBox}" Text="Введите номер чит. билета " VerticalAlignment="Top">
+                        <TextBlock Style="{StaticResource PlaceholderLibrarianStyle}" Tag="{Binding ElementName=SearchLibrarianReadersBox}" Text="Введите номер чит. билета " VerticalAlignment="Top">
                         </TextBlock>
                         <DataGrid x:Name="TradingClientsGrid" Style="{StaticResource ClientsTradingDataGrid}" ColumnHeaderStyle="{StaticResource HeaderStyle}" ColumnWidth="*" AutoGenerateColumns="False"  IsReadOnly="True" SelectionMode="Single">
                             <DataGrid.Columns>
@@ -39,26 +39,26 @@
                         </DataGrid>
                         <TextBlock Grid.Row="1" Style="{StaticResource LeftOfferText}">Книги</TextBlock>
                         <DockPanel Grid.Row="1" Style="{StaticResource AdminDocPanel}">
-                            <Button x:Name="DeleteBookInfoBt2n" Style="{StaticResource AdminBtn}" Click="DeleteBookInfoBtn_Click">
+                            <Button x:Name="DeleteBookInfoBtn" Style="{StaticResource AdminBtn}" Click="DeleteBookInfoBtn_Click">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                                     <Image Source="/Resources/images/trash.png"/>
                                     <TextBlock VerticalAlignment="Center" Margin="10 0 10 0"><Run Text="Удалить"/></TextBlock>
                                 </StackPanel>
                             </Button>
-                            <Button x:Name="AddBookI2nfoBtn" Style="{StaticResource AdminBtn}" Click="AddBookInfoBtn_Click">
+                            <Button x:Name="AddBookInfoBtn" Style="{StaticResource AdminBtn}" Click="AddBookInfoBtn_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <Image Source="/Resources/images/add.png"></Image>
                                     <TextBlock VerticalAlignment="Center" Margin="10 0 10 0">Добавить</TextBlock>
                                 </StackPanel>
                             </Button>
-                            <Button x:Name="EditBook2InfoBtn" Style="{StaticResource AdminBtn}" Click="EditBookInfoBtn_Click">
+                            <Button x:Name="EditBookInfoBtn" Style="{StaticResource AdminBtn}" Click="EditBookInfoBtn_Click">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                                     <Image Source="/Resources/images/pencil.png"/>
-                                    <TextBlock VerticalAlignment="Center" Margin="10 0 10 0"><Run Text="Редактировать"/></TextBlock>
+                                    <TextBlock VerticalAlignment="Center" Margin="10 0 10 0"><Run Text="Изменить"/></TextBlock>
                                 </StackPanel>
                             </Button>
-                            <TextBox x:Name="SearchAdm5inBooksBox" Style="{StaticResource SearchAdminBox }"></TextBox>
-                            <TextBlock Style="{StaticResource PlaceholderAdminStyle}" Tag="{Binding ElementName=SearchAdminBooksBox}" Text="Введите ФИО автора или шифр ISBN">
+                            <TextBox x:Name="SearchLibrarianBooksBox" Style="{StaticResource SearchAdminBox }" TextChanged="SearchLibrarianBooksBox_TextChanged"></TextBox>
+                            <TextBlock Style="{StaticResource PlaceholderAdminStyle}" Tag="{Binding ElementName=SearchLibrarianBooksBox}" Text="Введите ФИО автора или шифр ISBN">
                             </TextBlock>
                             <Image Style="{StaticResource SearchIcon}"/>
                         </DockPanel>
@@ -102,8 +102,8 @@
                                     <TextBlock VerticalAlignment="Center" Margin="10 0 10 0">Редактировать</TextBlock>
                                 </StackPanel>
                             </Button>
-                            <TextBox  x:Name="SearchAdminReadersBox" Style="{StaticResource SearchAdminBox}"></TextBox>
-                            <TextBlock Style="{StaticResource PlaceholderAdminStyle}" Tag="{Binding ElementName=SearchAdminReadersBox}" Text="Введите номер чит. билета ">
+                            <TextBox  x:Name="SearchLibrarianTradingBooksBox" Style="{StaticResource SearchAdminBox}" TextChanged="SearchLibrarianTradingBooksBox_TextChanged"></TextBox>
+                            <TextBlock Style="{StaticResource PlaceholderAdminStyle}" Tag="{Binding ElementName=SearchLibrarianTradingBooksBox}" Text="Введите номер чит. билета ">
                             </TextBlock>
                             <Image Style="{StaticResource SearchIcon}"/>
                         </DockPanel>
@@ -121,12 +121,12 @@
                         <DockPanel Grid.Row="1" Style="{StaticResource AdminDocPanel}" Grid.ColumnSpan="2" Height="95" Width="775">
                             <Button x:Name="ApproveBtn" Style="{StaticResource AdminBtn}" Click="ApproveBtn_Click">Одобрить</Button>
                             <Button x:Name="DeniedBtn" Style="{StaticResource AdminBtn}" Click="DeniedBtn_Click">Отказать</Button>
-                            <TextBox x:Name="SearchAdminBooksBox" Style="{StaticResource SearchAdminBox }"></TextBox>
-                            <TextBlock Style="{StaticResource PlaceholderAdminStyle}" Tag="{Binding ElementName=SearchAdminBooksBox}" Text="Введите номер чит. билета">
+                            <TextBox x:Name="SearchLibrarianWaitingBooksBox" Style="{StaticResource SearchAdminBox }" TextChanged="SearchLibrarianWaitingBooksBox_TextChanged"></TextBox>
+                            <TextBlock Style="{StaticResource PlaceholderAdminStyle}" Tag="{Binding ElementName=SearchLibrarianWaitingBooksBox}" Text="Введите номер чит. билета">
                             </TextBlock>
                             <Image Style="{StaticResource SearchIcon}"/>
                         </DockPanel>
-                        <DataGrid Grid.Row="1" x:Name="GiveOutBooksDataGrid" Style="{StaticResource WaitingBooksDataGrid}" ColumnHeaderStyle="{StaticResource HeaderStyle}" ColumnWidth="*" AutoGenerateColumns="False"  IsReadOnly="True" SelectionMode="Single" Grid.ColumnSpan="2">
+                        <DataGrid Grid.Row="1" x:Name="WaitingBooksDataGrid" Style="{StaticResource WaitingBooksDataGrid}" ColumnHeaderStyle="{StaticResource HeaderStyle}" ColumnWidth="*" AutoGenerateColumns="False"  IsReadOnly="True" SelectionMode="Single" Grid.ColumnSpan="2">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Width="30" Header="№" Binding="{Binding waiting_id}"></DataGridTextColumn>
                                 <DataGridTextColumn Width="100" Header="Номер книги" Binding="{Binding book_id}"></DataGridTextColumn>

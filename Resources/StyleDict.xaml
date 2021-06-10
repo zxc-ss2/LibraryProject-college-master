@@ -186,7 +186,7 @@
     <Style TargetType="{x:Type Image}" x:Key="SearchIcon">
         <Setter Property="Source" Value="/Resources/images/search.png"/>
         <Setter Property="Width" Value="15"/>
-        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Margin" Value="5 60 0 0"/>
     </Style>

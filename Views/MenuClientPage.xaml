@@ -58,7 +58,6 @@
                     </ComboBox>
                 </StackPanel>
                 <Button x:Name="GetBookBtn" Style="{StaticResource GetBookBtn}" Click="GetBookBtn_Click">Взять книгу</Button>
-                <Button x:Name="ReturnBookBtn" Style="{StaticResource GiveBookBtn}" Click="ReturnBookBtn_Click">Вернуть книгу</Button>
             </DockPanel>
         </StackPanel>
     </Grid>

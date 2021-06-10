@@ -47,7 +47,7 @@ namespace CheckDatabaseIntegrationTests
             }
 
             //Assert
-            Assert.AreEqual(updatedFormularLength, oldFormularLength + 1);
+            Assert.AreEqual(oldFormularLength + 1, updatedFormularLength);
         }
 
         [TestMethod]

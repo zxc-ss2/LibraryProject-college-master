@@ -21,13 +21,13 @@
             </DockPanel>
             <DockPanel>
                 <DockPanel>
-                    <TextBox x:Name="AuthorInput" Style="{StaticResource LeftInputBox}"></TextBox>
+                    <TextBox x:Name="AuthorInput" Style="{StaticResource LeftInputBox}" TextChanged="AuthorInput_TextChanged"></TextBox>
                     <Button x:Name="AuthorWarningBtn" Style="{StaticResource WarningBtn}">
                         <Image Source="/Resources/images/warning-removebg-preview.png" />
                     </Button>
                 </DockPanel>
                 <DockPanel HorizontalAlignment="Right">
-                    <TextBox x:Name="NameInput" Style="{StaticResource RightInputBox}"></TextBox>
+                    <TextBox x:Name="NameInput" Style="{StaticResource RightInputBox}" TextChanged="NameInput_TextChanged"></TextBox>
                     <Button x:Name="NameWarningBtn" Style="{StaticResource WarningBtn}">
                         <Image Source="/Resources/images/warning-removebg-preview.png" />
                     </Button>
@@ -40,7 +40,7 @@
             <DockPanel>
                 <DockPanel>
                     <StackPanel>
-                        <DockPanel Width="180">
+                        <DockPanel>
                             <Button x:Name="DirectInputBtn" Style="{StaticResource CorrectEnterBtn}" Click="DirectInputBtn_Click" >Ввести вручную</Button>
                             <Button x:Name="SelectInputBtn" Style="{StaticResource CorrectEnterBtn}" Click="SelectInputBtn_Click" Visibility="Collapsed">Вернуться к списку</Button>
                             <StackPanel Width="100">
@@ -68,21 +68,25 @@
                     </StackPanel>
                 </DockPanel>
                 <DockPanel HorizontalAlignment="Right">
-                    <TextBox Style="{StaticResource RightISBNInputBox}" x:Name="ISBNInput"></TextBox>
-                    <Button x:Name="ISBNWarningBtn" Style="{StaticResource WarningBtn}">
-                        <Image Source="/Resources/images/warning-removebg-preview.png" />
-                    </Button>
+                        <TextBox Style="{StaticResource RightISBNInputBox}" x:Name="ISBNInput" TextChanged="ISBNInput_TextChanged"></TextBox>
+                        <Button x:Name="ISBNWarningBtn" Style="{StaticResource WarningBtn}">
+                            <Image Source="/Resources/images/warning-removebg-preview.png" />
+                        </Button>
                 </DockPanel>
             </DockPanel>
             <DockPanel>
-
                 <TextBlock Style="{StaticResource LeftLabelText}">Место издания</TextBlock>
                 <TextBlock Style="{StaticResource RightLabelText}">Год издания</TextBlock>
             </DockPanel>
             <DockPanel>
-                <TextBox x:Name="PlaceInput" Style="{StaticResource LeftInputBox}"></TextBox>
+                <DockPanel>
+                    <TextBox x:Name="PlaceInput" Style="{StaticResource LeftInputBox}"></TextBox>
+                    <Button x:Name="PlaceWarningBtn" Style="{StaticResource WarningBtn}">
+                        <Image Source="/Resources/images/warning-removebg-preview.png" />
+                    </Button>
+                </DockPanel>
                 <DockPanel HorizontalAlignment="Right">
-                    <TextBox x:Name="YearInput" Style="{StaticResource RightInputBox}"></TextBox>
+                    <TextBox x:Name="YearInput" Style="{StaticResource RightInputBox}" TextChanged="YearInput_TextChanged"></TextBox>
                     <Button x:Name="YearWarningBtn" Style="{StaticResource WarningBtn}">
                         <Image Source="/Resources/images/warning-removebg-preview.png" />
                     </Button>
@@ -100,15 +104,6 @@
                     <ComboBox x:Name="ChamberComboBox" MaxDropDownHeight="100" Style="{DynamicResource ChamberComboBox}" HorizontalAlignment="Left" ></ComboBox>
                 </DockPanel>
             </DockPanel>
-            <DockPanel>
-                <TextBlock Style="{StaticResource CenterLabelText}">Номер обмена</TextBlock>
-            </DockPanel>
-            <DockPanel>
-                <DockPanel HorizontalAlignment="Right">
-                    <TextBox x:Name="TradingInput" Style="{StaticResource CenterInputBox}"></TextBox>
-                </DockPanel>
-            </DockPanel>
-
             <Button x:Name="SaveBtn" Style="{StaticResource StartBtn}" Click="SaveBtn_Click">Продолжить</Button>
         </StackPanel >
     </Grid>

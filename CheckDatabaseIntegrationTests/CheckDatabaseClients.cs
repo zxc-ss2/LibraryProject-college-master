@@ -71,7 +71,7 @@ namespace CheckDatabaseIntegrationTests
             string ticket = "Х-1234-21";
 
             //Act
-            if (!clientsController.CheckForAnExistingkUser(login))
+            if (clientsController.CheckForAnExistingkUser(login))
             {
                 bool check = clientsController.AddNewUser(name, surname, patronymic, Convert.ToDateTime(birthday), address, workplace, studyplace, phone, login, password, email, ticket);
 
@@ -146,6 +146,37 @@ namespace CheckDatabaseIntegrationTests
                     //Assert
                     Assert.AreEqual(expectedName, newName);
                 }
+            }
+        }
+
+        [TestMethod]
+        public void EditUser_InCorrectData_TrueReturned()
+        {
+            //Arrange
+            string name = "Андрей";
+            string surname = "Петров";
+            string patronymic = "Сергеевич";
+            string birthday = "2002.03.01";
+            string address = "Куйбышева 12";
+            string studyplace = "ЕМК";
+            string workplace = "";
+            string phone = "89505585644";
+            string login = "User";
+            string password = "zxcQWE!123";
+            string email = "andrey@gmail.com";
+            string ticket = "Х-1234-21";
+            string newName = "23423423";
+
+            //Act
+            List<clients> updatingClient = new List<clients>();
+
+            if (clientsController.AddNewUser(name, surname, patronymic, Convert.ToDateTime(birthday), address, workplace, studyplace, phone, login, password, email, ticket))
+            {
+                int updatedClientsLength = dbHelper.context.clients.Count();
+                bool check = clientsController.UpdateClientInfo(newName, surname, patronymic, Convert.ToDateTime(birthday), address, studyplace, workplace, phone, login, password, email, ticket, updatingClient);
+                
+                    //Assert
+                    Assert.IsFalse(check);
             }
         }
 

@@ -28,6 +28,7 @@ namespace LibraryProject.Views
         readonly BooksController booksController = new BooksController();
         readonly ChambersController chambersController = new ChambersController();
         readonly InterpretorsController interpretorsController = new InterpretorsController();
+        readonly FieldsController fieldsController = new FieldsController();
         readonly List<books> updatingBook = new List<books>();
         public EditBookPage(LibraryEntities context, books bookDataContext)
         {
@@ -38,20 +39,23 @@ namespace LibraryProject.Views
             NewChamberComboBox.DisplayMemberPath = "chamber_id";
             NewInterpreterComboBox.SelectedValuePath = "chamber_id";
 
+            NewBBkInputComboBox.DisplayMemberPath = "field_knowledge_bbk";
+            NewBBkInputComboBox.SelectedValuePath = "field_knowledge_id";
+
             NewChamberComboBox.ItemsSource = chambersController.GetChambers();
             NewChamberComboBox.SelectedIndex = chambersController.SelectedIndexChamberComboBox(bookDataContext, NewChamberComboBox);
 
             NewInterpreterComboBox.ItemsSource = interpretorsController.GetInterpretors();
             NewInterpreterComboBox.SelectedIndex = interpretorsController.SelectedIndexInterpretorComboBox(bookDataContext, NewInterpreterComboBox);
 
-
+            NewBBkInputComboBox.ItemsSource = fieldsController.GetBbk();
+            NewBBkInputComboBox.SelectedIndex = fieldsController.SelectedIndexNewBBkInputComboBoxComboBox(bookDataContext, NewBBkInputComboBox);
             updatingBook = booksController.GetBookWithId(Settings.Default.selectBook);
 
             foreach (var item in updatingBook)
             {
                 NewAuthorInput.Text = item.author;
                 NewNameInput.Text = item.name;
-                NewBbkInput.Text = Convert.ToString(item.field_knowledge_id);
                 NewIsbnInput.Text = item.isbn;
                 NewPlaceInput.Text = item.place;
                 NewYearInput.Text = Convert.ToString(item.year);
@@ -78,7 +82,7 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBbkInput.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
+            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBBkInputComboBox.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -104,7 +108,7 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBbkInput.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
+            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBBkInputComboBox.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -112,7 +116,7 @@ namespace LibraryProject.Views
 
         private void NewBbkInput_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string word = NewBbkInput.Text;
+            string word = NewBBkInputComboBox.Text;
 
             foreach (var item in booksController.GetBookWithId(Settings.Default.selectBook))
             {
@@ -127,7 +131,7 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBbkInput.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
+            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBBkInputComboBox.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -153,7 +157,7 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBbkInput.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
+            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBBkInputComboBox.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -176,7 +180,7 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBbkInput.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
+            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBBkInputComboBox.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -202,7 +206,7 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBbkInput.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
+            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBBkInputComboBox.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -225,7 +229,7 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBbkInput.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
+            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBBkInputComboBox.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -248,7 +252,7 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBbkInput.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
+            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBBkInputComboBox.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -271,7 +275,7 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBbkInput.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
+            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBBkInputComboBox.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -294,7 +298,7 @@ namespace LibraryProject.Views
                 }
             }
 
-            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBbkInput.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
+            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBBkInputComboBox.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
             {
                 SaveBtn.IsEnabled = false;
             }
@@ -304,8 +308,9 @@ namespace LibraryProject.Views
         {
             var chamber = NewChamberComboBox.SelectedItem as chambers;
             var interpretor = NewInterpreterComboBox.SelectedItem as interpretors;
+            var field = NewBBkInputComboBox.SelectedItem as fields;
 
-            if (booksController.UpdateBookInfo(NewAuthorInput.Text, Convert.ToInt32(NewBbkInput.Text), NewNameInput.Text, NewIsbnInput.Text, NewPlaceInput.Text, Convert.ToInt32(NewYearInput.Text), Convert.ToInt32(interpretor.interpreter_id.ToString()), Convert.ToInt32(chamber.chamber_id.ToString()), updatingBook))
+            if (booksController.UpdateBookInfo(NewAuthorInput.Text, Convert.ToInt32(field.field_knowledge_id.ToString()), NewNameInput.Text, NewIsbnInput.Text, NewPlaceInput.Text, Convert.ToInt32(NewYearInput.Text), Convert.ToInt32(interpretor.interpreter_id.ToString()), Convert.ToInt32(chamber.chamber_id.ToString()), updatingBook))
             {
                 SaveBtn.IsEnabled = false;
                 MessageBox.Show("Данные успешно обновлены");

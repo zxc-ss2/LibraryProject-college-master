@@ -58,7 +58,7 @@ namespace LibraryProject.Views
                 resultString += "Неправильно введено Отчество\n";
             }
 
-            bool resultDate = isName.CheckDate(Convert.ToString(DateInput.SelectedDate));
+            bool resultDate = isName.CheckDate(DateInput.SelectedDate.Value.Date.ToString("yyyy.MM.dd"));
             if (!resultDate)
             {
                 resultString += "Неправильно введена Дата\n";
@@ -183,21 +183,6 @@ namespace LibraryProject.Views
             else
             {
                 PatronymicWarningBtn.Visibility = Visibility.Collapsed;
-            }
-        }
-
-        private void DateInput_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        {
-            StringCheck check = new StringCheck();
-
-            bool trigger = check.CheckDate(Convert.ToString(DateInput.SelectedDate));
-            if (!trigger)
-            {
-                DateWarningBtn.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                DateWarningBtn.Visibility = Visibility.Collapsed;
             }
         }
 

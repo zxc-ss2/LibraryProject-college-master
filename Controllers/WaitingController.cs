@@ -13,6 +13,10 @@ namespace LibraryProject.Controllers
     {
         readonly DbHelper dbHelper = new DbHelper();
 
+        public List<waiting> WaitingMatchUpInfoOutput(string searchInfo)
+        {
+            return dbHelper.context.waiting.Where(t => t.ticket.Contains(searchInfo)).ToList();
+        }
 
         public bool AddNewWaiting(string userLogin, int bookId, string ticket)
         {

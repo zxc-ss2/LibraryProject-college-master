@@ -231,6 +231,7 @@ namespace LibraryProject.Controllers
                         item.interpreter_id = newInterpretorId;
                         item.chamber_id = newChamberId;
                         item.trading_id = null;
+                        item.quantity_id = null;
                     }
 
                     dbHelper.context.SaveChanges();

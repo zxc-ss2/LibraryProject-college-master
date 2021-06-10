@@ -468,7 +468,7 @@ namespace StringCheckLibTests
         public void CheckBookIsbn_isCorrect_TrueReturned()
         {
             //Arrange
-            string stringBookIsbn = "123-4567-3345-11";
+            string stringBookIsbn = "123-4-33455-111-5";
             //Act 
             StringCheck isBookIsbn = new StringCheck();
             bool correctIsbn = isBookIsbn.CheckBookIsbn(stringBookIsbn);
@@ -506,6 +506,42 @@ namespace StringCheckLibTests
         {
             //Arrange
             string stringBookIsbn = "Тестовый ввод";
+            //Act 
+            StringCheck isBookIsbn = new StringCheck();
+            bool correctIsbn = isBookIsbn.CheckBookIsbn(stringBookIsbn);
+            //Assert
+            Assert.IsFalse(correctIsbn);
+        }
+
+        [TestMethod]
+        public void CheckBookIsbn_isWithOutDilimiter_FalseReturned()
+        {
+            //Arrange
+            string stringBookIsbn = "1234567890152";
+            //Act 
+            StringCheck isBookIsbn = new StringCheck();
+            bool correctIsbn = isBookIsbn.CheckBookIsbn(stringBookIsbn);
+            //Assert
+            Assert.IsFalse(correctIsbn);
+        }
+
+        [TestMethod]
+        public void CheckBookIsbn_isNotEnoughChars_FalseReturned()
+        {
+            //Arrange
+            string stringBookIsbn = "536-2-5637-363-2";
+            //Act 
+            StringCheck isBookIsbn = new StringCheck();
+            bool correctIsbn = isBookIsbn.CheckBookIsbn(stringBookIsbn);
+            //Assert
+            Assert.IsFalse(correctIsbn);
+        }
+
+        [TestMethod]
+        public void CheckBookIsbn_isTooMuchChars_FalseReturned()
+        {
+            //Arrange
+            string stringBookIsbn = "536-2-56237-3653-2";
             //Act 
             StringCheck isBookIsbn = new StringCheck();
             bool correctIsbn = isBookIsbn.CheckBookIsbn(stringBookIsbn);

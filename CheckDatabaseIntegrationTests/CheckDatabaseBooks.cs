@@ -110,41 +110,84 @@ namespace CheckDatabaseIntegrationTests
         [TestMethod]
         public void EditBook_CorrectData_TrueReturned()
         {
+            ////Arrange
+            //string author = "Андрей";
+            //int field_knowledge_id = 23;
+            //string name = "qwqwe";
+            //string isbn = "1234-5634-34";
+            //string place = "Куйбышевf";
+            //int year = 1755;
+            //int interpreter_id = 2;
+            //int chamber_id = 2;
+            //string newName = "Аываы";
+
+            ////Act
+            //List<books> updatingBook = new List<books>();
+ 
+            //if (booksController.AddNewBook(author, field_knowledge_id, name, isbn, place, year, interpreter_id, chamber_id))
+            //{
+            //    books selectUpdateString = dbHelper.context.books.Where(t => t.name == name).First();
+            //    //updatingBook = booksController.GetBookWithId(selectUpdateString);
+
+            //    booksController.UpdateBookInfo(author, field_knowledge_id, newName, isbn, place, year, interpreter_id, chamber_id, selectUpdateString);
+            //    {
+            //        //DbHelper dbHelper = new DbHelper();
+
+            //        books expectedName = dbHelper.context.books.Where(t => t.name == newName).First();
+
+            //        //var selectString = dbHelper.context.books.AsNoTracking().OrderByDescending(t => t.book_id).Take(1);
+            //        //foreach (var item in selectString)
+            //        //{
+            //        //    booksController.DeleteBookInfo(item);
+            //        //}
+            //        //Assert
+            //        Assert.AreEqual(expectedName, newName);
+            //    }
+            //}
+        }
+
+        [TestMethod]
+        public void EditBook4_CorrectData_TrueReturned()
+        {
+            //Arrange
             //Arrange
             string author = "Андрей";
             int field_knowledge_id = 23;
-            string name = "qwqwe";
-            string isbn = "1234-5634-34";
-            string place = "Куйбышевf";
+            string name = "Пваиванв";
+            string isbn = "143-5-64573-125-8";
+            string place = "Куйбышева";
             int year = 1755;
             int interpreter_id = 2;
             int chamber_id = 2;
             string newName = "Аываы";
 
             //Act
-            List<books> updatingBook = new List<books>();
- 
+            List<books> updatingClient = new List<books>();
+
             if (booksController.AddNewBook(author, field_knowledge_id, name, isbn, place, year, interpreter_id, chamber_id))
             {
-                books selectUpdateString = dbHelper.context.books.Where(t => t.name == name).First();
-                //updatingBook = booksController.GetBookWithId(selectUpdateString);
-
-                booksController.UpdateBookInfo(author, field_knowledge_id, newName, isbn, place, year, interpreter_id, chamber_id, selectUpdateString);
+                var selectTrading = dbHelper.context.books.OrderByDescending(t => t.book_id).ToList().Take(1);
+                foreach (var item in selectTrading)
                 {
-                    //DbHelper dbHelper = new DbHelper();
+                    updatingClient.Add(item);
+                };
 
-                    books expectedName = dbHelper.context.books.Where(t => t.name == newName).First();
+                if (booksController.UpdateBookInfo(author, field_knowledge_id, newName, isbn, place, year, interpreter_id, chamber_id, updatingClient))
+                {
+                    dbHelper = new DbHelper();
+                    string expectedName = dbHelper.context.books.Where(t => t.name == newName).FirstOrDefault().name;
 
-                    //var selectString = dbHelper.context.books.AsNoTracking().OrderByDescending(t => t.book_id).Take(1);
-                    //foreach (var item in selectString)
-                    //{
-                    //    booksController.DeleteBookInfo(item);
-                    //}
+                    var selectString = dbHelper.context.books.AsNoTracking().OrderByDescending(t => t.book_id).Take(1);
+                    foreach (var item in selectString)
+                    {
+                        booksController.DeleteBookInfo(item);
+                    }
                     //Assert
                     Assert.AreEqual(expectedName, newName);
                 }
             }
         }
+
 
         [TestMethod]
         public void DeleteBook_CorrectData_TrueReturned()
