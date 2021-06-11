@@ -65,34 +65,41 @@ namespace LibraryProject.Views
                     if (clientsController.RemoveIdTradingFromClient(selectedLogin.Text))
                     {
                         booksQuantity = quantityController.GetQuantity(Convert.ToInt32(secondSelectedCell.Text));
-                        if (tradingController.RemoveTrading(tradingId))
+                        string ticket = tradingController.GetNeededTicket(tradingId);
+                        if (formularController.AddBookReturnDate(DateTime.Now, ticket))
                         {
-                            if (quantityController.ChangeQuantityPlus(Convert.ToInt32(secondSelectedCell.Text), booksQuantity))
+                            if (tradingController.RemoveTrading(tradingId))
                             {
-                                TradingDataGrid.ItemsSource = tradingController.GetTradingInfo();
-                                BookDataGrid.ItemsSource = booksController.BooksInfoOutput();
-                                TradingClientsGrid.ItemsSource = clientsController.GetClientsWithTrading();
-                                WaitingBooksDataGrid.ItemsSource = waitingController.GetWaitingInfo();
-                                MessageBox.Show("Данные успешно обновлены");
+                                if (quantityController.ChangeQuantityPlus(Convert.ToInt32(secondSelectedCell.Text), booksQuantity))
+                                {
+                                    TradingDataGrid.ItemsSource = tradingController.GetTradingInfo();
+                                    BookDataGrid.ItemsSource = booksController.BooksInfoOutput();
+                                    TradingClientsGrid.ItemsSource = clientsController.GetClientsWithTrading();
+                                    WaitingBooksDataGrid.ItemsSource = waitingController.GetWaitingInfo();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Ошибка базы данных, попробуйте позже.");
+                                }
                             }
                             else
                             {
-                                MessageBox.Show("Количетсво не было перезаписано");
+                                MessageBox.Show("Ошибка базы данных, попробуйте позже.");
                             }
                         }
                         else
                         {
-                            MessageBox.Show("Возврат не был произведен, попробуйте позже");
+                            MessageBox.Show("Ошибка базы данных, попробуйте позже.");
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Возврат не был произведен, попробуйте позже");
+                        MessageBox.Show("Ошибка базы данных, попробуйте позже.");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Возврат не был произведен, попробуйте позже");
+                     MessageBox.Show("Ошибка базы данных, попробуйте позже.");
                 }
             }
             

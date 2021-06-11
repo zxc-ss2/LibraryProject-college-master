@@ -30,7 +30,7 @@ namespace LibraryProject.Controllers
             try
             {
                 StringCheck check = new StringCheck();
-                if(bookId != 0 && check.CheckTradingTicket(ticket) && check.CheckDate(Convert.ToString(deliveryDate)) && check.CheckDate(Convert.ToString(receptionDate)) && check.CheckLogin(userLogin))
+                if (bookId != 0 && check.CheckTradingTicket(ticket) && check.CheckDate(Convert.ToString(deliveryDate.ToString("yyyy.MM.dd"))) && check.CheckDate(Convert.ToString(receptionDate.ToString("yyyy.MM.dd"))) && check.CheckLogin(userLogin))
                 {
                     dbHelper.context.trading.Add(new trading
                     {
@@ -53,6 +53,20 @@ namespace LibraryProject.Controllers
             {
                 MessageBox.Show(ex.Message);
                 return false;
+            }
+        }
+
+        public string GetNeededTicket(int tradingId)
+        {
+            try
+            {
+                return dbHelper.context.trading.Where(t => t.trading_id == tradingId).First().ticket;
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return "";
             }
         }
 
