@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace LibraryProject.Controllers
 {
-    class WaitingController
+    public class WaitingController
     {
         readonly DbHelper dbHelper = new DbHelper();
 
@@ -58,22 +58,29 @@ namespace LibraryProject.Controllers
         {
             try
             {
-                var selectWaiting = from search in dbHelper.context.waiting
-                                    where search.waiting_id == selectString
-                                    select search;
-
-                if (selectWaiting != null)
+                if(selectString == 0)
                 {
-                    foreach (var item in selectWaiting)
-                    {
-                        dbHelper.context.waiting.Remove(item);
-                    }
-                    dbHelper.context.SaveChanges();
-                    return true;
+                    return false;
                 }
                 else
                 {
-                    return false;
+                    var selectWaiting = from search in dbHelper.context.waiting
+                                        where search.waiting_id == selectString
+                                        select search;
+
+                    if (selectWaiting != null)
+                    {
+                        foreach (var item in selectWaiting)
+                        {
+                            dbHelper.context.waiting.Remove(item);
+                        }
+                        dbHelper.context.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
             catch (Exception ex)

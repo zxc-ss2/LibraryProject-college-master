@@ -174,7 +174,6 @@ namespace CheckDatabaseIntegrationTests
 
                 if (booksController.UpdateBookInfo(author, field_knowledge_id, newName, isbn, place, year, interpreter_id, chamber_id, updatingClient))
                 {
-                    dbHelper = new DbHelper();
                     string expectedName = dbHelper.context.books.Where(t => t.name == newName).FirstOrDefault().name;
 
                     var selectString = dbHelper.context.books.AsNoTracking().OrderByDescending(t => t.book_id).Take(1);

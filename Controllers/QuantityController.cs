@@ -21,15 +21,22 @@ namespace LibraryProject.Controllers
         {
             try
             {
-                var book = dbHelper.context.quantity.Where(t => t.book_id == selectBook).First().library_quantity;
-
-                foreach (var item in bookQuantityList)
+                if (selectBook == 0)
                 {
-                    item.library_quantity = book -= 1;
+                    return false;
                 }
+                else
+                {
+                    var book = dbHelper.context.quantity.Where(t => t.book_id == selectBook).First().library_quantity;
 
-                dbHelper.context.SaveChanges();
-                return true;
+                    foreach (var item in bookQuantityList)
+                    {
+                        item.library_quantity = book -= 1;
+                    }
+
+                    dbHelper.context.SaveChanges();
+                    return true;
+                }
             }
             catch(Exception ex)
             {
@@ -43,15 +50,22 @@ namespace LibraryProject.Controllers
         {
             try
             {
-                var book = dbHelper.context.quantity.Where(t => t.book_id == selectBook).First().library_quantity;
-
-                foreach (var item in bookQuantityList)
+                if(selectBook == 0)
                 {
-                    item.library_quantity = book += 1;
+                    return false;
                 }
+                else
+                {
+                    var book = dbHelper.context.quantity.Where(t => t.book_id == selectBook).First().library_quantity;
 
-                dbHelper.context.SaveChanges();
-                return true;
+                    foreach (var item in bookQuantityList)
+                    {
+                        item.library_quantity = book += 1;
+                    }
+
+                    dbHelper.context.SaveChanges();
+                    return true;
+                }
             }
             catch(Exception ex)
             {

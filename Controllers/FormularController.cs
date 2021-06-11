@@ -17,17 +17,24 @@ namespace LibraryProject.Controllers
         {
             try
             {
-                dbHelper.context.formular.Add(new formular
+                if(bookId == 0)
                 {
-                    ticket = ticket,
-                    book_delivery = dateDelivery,
-                    book_reception = dateReception,
-                    book_return = null,
-                    book_id = bookId
-                });
+                    return false;
+                }
+                else
+                {
+                    dbHelper.context.formular.Add(new formular
+                    {
+                        ticket = ticket,
+                        book_delivery = dateDelivery,
+                        book_reception = dateReception,
+                        book_return = null,
+                        book_id = bookId
+                    });
 
-                dbHelper.context.SaveChanges();
-                return true;
+                    dbHelper.context.SaveChanges();
+                    return true;
+                }
             }
             catch(Exception ex)
             {
@@ -41,15 +48,23 @@ namespace LibraryProject.Controllers
         {
             try
             {
-                var formularList = dbHelper.context.formular.Where(t => t.ticket == userTicket).ToList();
-
-                foreach (var item in formularList)
+                if(returnDate == null)
                 {
-                    item.book_return = returnDate;
+                    return false;
                 }
+                else
+                {
+                    var formularList = dbHelper.context.formular.Where(t => t.ticket == userTicket).ToList();
 
-                dbHelper.context.SaveChanges();
-                return true;
+                    foreach (var item in formularList)
+                    {
+                        item.book_return = returnDate;
+                    }
+
+                    dbHelper.context.SaveChanges();
+                    return true;
+                }
+               
             }
             catch(Exception ex)
             {

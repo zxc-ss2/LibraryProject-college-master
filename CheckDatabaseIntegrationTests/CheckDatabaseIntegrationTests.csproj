@@ -62,6 +62,7 @@
     <Compile Include="CheckDatabaseFormular.cs" />
     <Compile Include="CheckDatabaseQuantity.cs" />
     <Compile Include="CheckDatabaseTrading.cs" />
+    <Compile Include="CheckDatabaseWaiting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

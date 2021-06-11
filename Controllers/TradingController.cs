@@ -1,5 +1,6 @@
 ﻿using LibraryProject.Models;
 using LibraryProject.Properties;
+using StringCheckLib;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -28,17 +29,25 @@ namespace LibraryProject.Controllers
         {
             try
             {
-                dbHelper.context.trading.Add(new trading
+                StringCheck check = new StringCheck();
+                if(bookId != 0 && check.CheckTradingTicket(ticket) && check.CheckDate(Convert.ToString(deliveryDate)) && check.CheckDate(Convert.ToString(receptionDate)) && check.CheckLogin(userLogin))
                 {
-                    book_id = bookId,
-                    ticket = ticket,
-                    delivery = deliveryDate,
-                    reception = receptionDate,
-                    login = userLogin
-                });
+                    dbHelper.context.trading.Add(new trading
+                    {
+                        book_id = bookId,
+                        ticket = ticket,
+                        delivery = deliveryDate,
+                        reception = receptionDate,
+                        login = userLogin
+                    });
 
-                dbHelper.context.SaveChanges();
-                return true;
+                    dbHelper.context.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             catch(Exception ex)
             {
@@ -109,23 +118,31 @@ namespace LibraryProject.Controllers
         {
             try
             {
-                var selectTrading = from search in dbHelper.context.trading
-                                    where search.trading_id == selectString
-                                    select search;
-
-                if (selectTrading != null)
-                {
-                    foreach (var item in selectTrading)
-                    {
-                        dbHelper.context.trading.Remove(item);
-                    }
-                    dbHelper.context.SaveChanges();
-                    return true;
-                }
-                else
+                if(selectString == 0)
                 {
                     return false;
                 }
+                else
+                {
+                    var selectTrading = from search in dbHelper.context.trading
+                                        where search.trading_id == selectString
+                                        select search;
+
+                    if (selectTrading != null)
+                    {
+                        foreach (var item in selectTrading)
+                        {
+                            dbHelper.context.trading.Remove(item);
+                        }
+                        dbHelper.context.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                
             }
             catch(Exception ex)
             {
