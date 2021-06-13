@@ -116,28 +116,5 @@ namespace LibraryProject.Views
         {
             this.NavigationService.Navigate(new RegistrationPage());
         }
-
-        private void GetCsvFileBtn_Click(object sender, RoutedEventArgs e)
-        {
-            SaveFileDialog file = new SaveFileDialog();
-            string nameFile;
-
-            file.Filter = "Text files(*.csv)|*.csv";
-
-            file.Title = "Сохранение файла";
-            if(file.ShowDialog() == true)
-            {
-                nameFile = file.FileName;
-                if (formularController.FormularFile(nameFile))
-                {
-                    MessageBox.Show("Файл был успешно сохранен");
-                }
-                else
-                {
-                    MessageBox.Show("Файл не был сохранен");
-                }
-            }
-        }
-
     }
 }

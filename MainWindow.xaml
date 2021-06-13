@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Library" Height="650" Width="900"
         MinHeight="650" MinWidth="900" MaxHeight="1080" MaxWidth="1940"
-        Icon="/Resources/images/drftgyh.png">
+        Icon="/Resources/images/logo.png">
 
     
     <Grid>

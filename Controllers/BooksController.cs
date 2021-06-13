@@ -18,7 +18,7 @@ namespace LibraryProject.Controllers
         readonly TradingController tradingController = new TradingController();
 
         /// <summary>
-        /// 
+        /// Вывод всей информации о книгах
         /// </summary>
         /// <returns></returns>
         public List<books> BooksInfoOutput()
@@ -29,7 +29,8 @@ namespace LibraryProject.Controllers
         /// <summary>
         /// Проверка на совпадение вводимых данных с данными в бд
         /// </summary>
-        /// <param name="author"></param>
+        /// <param name="author" - Вводимое имя автора>
+        /// </param>
         /// <returns></returns>
         public List<books> BooksMatchUpInfoOutput(string author)
         {

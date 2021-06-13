@@ -226,14 +226,14 @@ namespace LibraryProject.Views
 
                 if (booksController.AddNewBook(AuthorInput.Text, userBbk, NameInput.Text, ISBNInput.Text, PlaceInput.Text, Convert.ToInt32(YearInput.Text), interpretorsController.GetInterpretorId(InterpreterComboBox.Text), Convert.ToInt32(ChamberComboBox.Text)))
                 {
-                    MessageBoxResult result = MessageBox.Show("Вернуться на страницу добавления?", "Книга добавлена", MessageBoxButton.YesNoCancel);
-                    if (result == MessageBoxResult.No) 
+                    MessageBox.Show("Книга добавлена");
+                    if (Settings.Default.role == 1)
                     {
                         this.NavigationService.Navigate(new MenuAdminPage());
                     }
-                    else
+                    if (Settings.Default.role == 2)
                     {
-                        this.NavigationService.Navigate(new AddBookPage());
+                        this.NavigationService.Navigate(new MenuLibrarianPage());
                     }
                 }
             }

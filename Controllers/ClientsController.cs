@@ -80,6 +80,7 @@ namespace LibraryProject.Controllers
 
                 else
                 {
+                    DateTime dateTime = Convert.ToDateTime(userDate.ToString("yyyy.MM.dd"));
                     dbHelper.context.clients.Add(new clients
                     {
                         id_trading = null,
@@ -87,7 +88,7 @@ namespace LibraryProject.Controllers
                         name = userName,
                         surname = userSurname,
                         patronymic = userPatronymic,
-                        birthday = userDate.Date,
+                        birthday = dateTime,
                         address = userAddress,
                         workplace = userWorkplace,
                         studyplace = userStudyplace,

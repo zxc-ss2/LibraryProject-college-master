@@ -90,7 +90,7 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <TextBlock Style="{StaticResource LeftOfferText}" Width="182">Выданные книги</TextBlock>
-                        <DockPanel Style="{StaticResource AdminDocPanel}" Grid.ColumnSpan="2" Height="95" Width="630">
+                        <DockPanel Style="{StaticResource AdminDocPanel}" Grid.ColumnSpan="2" Height="95" Width="776">
                             <Button x:Name="DeleteTradingInfoBtn" Style="{StaticResource AdminBtn}" Click="DeleteTradingInfoBtn_Click">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                                     <Image Source="/Resources/images/trash.png"/>
@@ -107,6 +107,7 @@
                             <TextBlock Style="{StaticResource PlaceholderAdminStyle}" Tag="{Binding ElementName=SearchLibrarianTradingBooksBox}" Text="Введите номер чит. билета ">
                             </TextBlock>
                             <Image Style="{StaticResource SearchIcon}"/>
+                            <Button x:Name="GetCsvFileBtn" Style="{StaticResource AdminBtn}" Click="GetCsvFileBtn_Click">Выгрузить csv</Button>
                         </DockPanel>
                         <DataGrid x:Name="TradingDataGrid" Style="{StaticResource BookDataGrid}" ColumnHeaderStyle="{StaticResource HeaderStyle}" ColumnWidth="*" AutoGenerateColumns="False"  IsReadOnly="True" SelectionMode="Single" Grid.ColumnSpan="2">
                             <DataGrid.Columns>

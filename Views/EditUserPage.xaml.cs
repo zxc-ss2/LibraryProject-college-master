@@ -375,6 +375,18 @@ namespace LibraryProject.Views
             {
                 SaveBtn.IsEnabled = false;
                 MessageBox.Show("Данные успешно обновлены");
+                if (Settings.Default.role == 1)
+                {
+                    this.NavigationService.Navigate(new MenuAdminPage());
+                }
+                if (Settings.Default.role == 2)
+                {
+                    this.NavigationService.Navigate(new MenuLibrarianPage());
+                }
+                if (Settings.Default.role == 3)
+                {
+                    this.NavigationService.Navigate(new MenuClientPage());
+                }
             }
             else
             {

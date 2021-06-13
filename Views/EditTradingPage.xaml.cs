@@ -142,6 +142,7 @@ namespace LibraryProject.Views
             {
                 SaveBtn.IsEnabled = false;
                 MessageBox.Show("Данные успешно обновлены");
+                this.NavigationService.Navigate(new MenuLibrarianPage());
             }
             else
             {

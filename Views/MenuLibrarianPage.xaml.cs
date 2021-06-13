@@ -2,6 +2,7 @@
 using LibraryProject.Controllers;
 using LibraryProject.Models;
 using LibraryProject.Properties;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -309,6 +310,28 @@ namespace LibraryProject.Views
         private void SearchLibrarianWaitingBooksBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             WaitingBooksDataGrid.ItemsSource = waitingController.WaitingMatchUpInfoOutput(SearchLibrarianWaitingBooksBox.Text);
+        }
+
+        private void GetCsvFileBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog file = new SaveFileDialog();
+            string nameFile;
+
+            file.Filter = "Text files(*.csv)|*.csv";
+
+            file.Title = "Сохранение файла";
+            if (file.ShowDialog() == true)
+            {
+                nameFile = file.FileName;
+                if (formularController.FormularFile(nameFile))
+                {
+                    MessageBox.Show("Файл был успешно сохранен");
+                }
+                else
+                {
+                    MessageBox.Show("Файл не был сохранен");
+                }
+            }
         }
     }
 }
