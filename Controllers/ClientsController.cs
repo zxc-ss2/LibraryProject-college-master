@@ -68,11 +68,11 @@ namespace LibraryProject.Controllers
 
         public bool AddNewUser(string userName, string userSurname, string userPatronymic, DateTime userDate, string userAddress, string userWorkplace, string userStudyplace, string userPhone, string userLogin, string userPassword, string userEmail, string userTicket)
         {
-            try
-            {
+            //try
+            //{
                 StringCheck check = new StringCheck();
 
-                if (!check.CheckName(userName) || !check.CheckName(userSurname) || !check.CheckName(userPatronymic) || !check.CheckDate(Convert.ToString(userDate))
+                if (!check.CheckName(userName) || !check.CheckName(userSurname) || !check.CheckName(userPatronymic) || !check.CheckDate(Convert.ToString(userDate.Date.ToString("yyyy.MM.dd")))
                     || !check.CheckAddress(userAddress) || !check.CheckPhone(userPhone) || !check.CheckLogin(userLogin) || !check.CheckPassword(userPassword) || !check.CheckEmail(userEmail))
                 {
                     return false;
@@ -87,7 +87,7 @@ namespace LibraryProject.Controllers
                         name = userName,
                         surname = userSurname,
                         patronymic = userPatronymic,
-                        birthday = userDate,
+                        birthday = userDate.Date,
                         address = userAddress,
                         workplace = userWorkplace,
                         studyplace = userStudyplace,
@@ -102,13 +102,13 @@ namespace LibraryProject.Controllers
                     return true;
                     //}
                 }
-            }
+            //}
 
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return false;
-            }
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //    return false;
+            //}
            
         }
 
@@ -134,13 +134,13 @@ namespace LibraryProject.Controllers
             }
         }
 
-        public bool UpdateClientInfo(string newName, string newSurname, string newPatronymic, DateTime newBirthday, string newAddress, string newWorkplace, string newStudyplace, string newPhone, string newLogin, string newPassword, string newEmail, string newTicket, List<clients> oldUser)
+        public bool UpdateClientInfo(string newName, string newSurname, string newPatronymic, DateTime newBirthday, string newAddress, string newWorkplace, string newStudyplace, string newPhone, string newLogin, string newPassword, string newEmail, List<clients> oldUser)
         {
             try
             {
                 StringCheck check = new StringCheck();
 
-                if (!check.CheckName(newName) || !check.CheckName(newSurname) || !check.CheckName(newPatronymic) || !check.CheckDate(Convert.ToString(newBirthday))
+                if (!check.CheckName(newName) || !check.CheckName(newSurname) || !check.CheckName(newPatronymic) || !check.CheckDate(Convert.ToString(newBirthday.ToString("yyyy.MM.dd")))
                     || !check.CheckAddress(newAddress) || !check.CheckPhone(newPhone) || !check.CheckLogin(newLogin) || !check.CheckPassword(newPassword))
                 {
                     return false;
@@ -152,7 +152,7 @@ namespace LibraryProject.Controllers
                         item.name = newName;
                         item.surname = newSurname;
                         item.patronymic = newPatronymic;
-                        item.birthday = newBirthday;
+                        item.birthday = newBirthday.Date;
                         item.address = newAddress;
                         item.workplace = newWorkplace;
                         item.studyplace = newStudyplace;
@@ -160,7 +160,6 @@ namespace LibraryProject.Controllers
                         item.login = newLogin;
                         item.password = newPassword;
                         item.email = newEmail;
-                        item.ticket = newTicket;
                     }
 
                     dbHelper.context.SaveChanges();

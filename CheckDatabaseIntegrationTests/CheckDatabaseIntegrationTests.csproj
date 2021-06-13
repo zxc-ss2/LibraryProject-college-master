@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="CheckDatabaseBooks.cs" />
     <Compile Include="CheckDatabaseClients.cs" />
+    <Compile Include="CheckDatabaseFields.cs" />
     <Compile Include="CheckDatabaseFormular.cs" />
     <Compile Include="CheckDatabaseQuantity.cs" />
     <Compile Include="CheckDatabaseTrading.cs" />
@@ -70,6 +71,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CheckBbkLib\CheckBbkLib.csproj">
+      <Project>{ADCA1835-55E0-4AD0-8EB0-1F691C1E24DA}</Project>
+      <Name>CheckBbkLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LibraryProject.csproj">
       <Project>{D631D4E8-91DE-4101-AC6F-0907FA50E940}</Project>
       <Name>LibraryProject</Name>

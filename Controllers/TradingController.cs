@@ -102,24 +102,35 @@ namespace LibraryProject.Controllers
         {
             try
             {
-                foreach (var item in oldBook)
+                StringCheck check = new StringCheck();
+                if (newBook_id == 0 || !check.CheckTradingTicket(newTicket) || !check.CheckDate(Convert.ToString(newDelivery.ToString("yyyy.MM.dd"))) || !check.CheckDate(Convert.ToString(newReception.ToString("yyyy.MM.dd"))))
                 {
-                    item.book_id = newBook_id;
-                    item.ticket = newTicket;
-                    item.delivery = newDelivery;
-                    item.reception = newReception;
+                    return false;
                 }
 
-                dbHelper.context.SaveChanges();
-            if(dbHelper.context.SaveChanges() == 0)
-            {
-                return true;
+                else
+                {
+                    foreach (var item in oldBook)
+                    {
+                        item.book_id = newBook_id;
+                        item.ticket = newTicket;
+                        item.delivery = newDelivery;
+                        item.reception = newReception;
+                    }
+
+                    dbHelper.context.SaveChanges();
+                    if (dbHelper.context.SaveChanges() == 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
+                }
             }
-            else
-            {
-                return false;
-            }
-            }
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);

@@ -60,8 +60,26 @@ namespace LibraryProject.Views
                 NewPlaceInput.Text = item.place;
                 NewYearInput.Text = Convert.ToString(item.year);
             }
+
         }
 
+        private void DirectInputBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SelectInputBtn.Visibility = Visibility.Visible;
+            DirectInputBtn.Visibility = Visibility.Collapsed;
+            DirectInputTextBox.Visibility = Visibility.Visible;
+            NewBBkInputComboBox.Visibility = Visibility.Collapsed;
+            SelectShowDocPanel.Visibility = Visibility.Collapsed;
+        }
+
+        private void SelectInputBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SelectInputBtn.Visibility = Visibility.Collapsed;
+            DirectInputBtn.Visibility = Visibility.Visible;
+            DirectInputTextBox.Visibility = Visibility.Collapsed;
+            NewBBkInputComboBox.Visibility = Visibility.Visible;
+            SelectShowDocPanel.Visibility = Visibility.Visible;
+        }
         private void NewAuthorInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             StringCheck check = new StringCheck();
@@ -212,51 +230,7 @@ namespace LibraryProject.Views
             }
         }
 
-        private void NewInterpreterInput_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            string word = NewInterpreterComboBox.Text;
 
-            foreach (var item in booksController.GetBookWithId(Settings.Default.selectBook))
-            {
-
-                if (word != Convert.ToString(item.interpreter_id) && word != "")
-                {
-                    SaveBtn.IsEnabled = true;
-                }
-                else
-                {
-                    SaveBtn.IsEnabled = false;
-                }
-            }
-
-            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBBkInputComboBox.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
-            {
-                SaveBtn.IsEnabled = false;
-            }
-        }
-
-        private void NewChamberInput_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            string word = NewChamberComboBox.Text;
-
-            foreach (var item in booksController.GetBookWithId(Settings.Default.selectBook))
-            {
-
-                if (word != Convert.ToString(item.chamber_id))
-                {
-                    SaveBtn.IsEnabled = true;
-                }
-                else
-                {
-                    SaveBtn.IsEnabled = false;
-                }
-            }
-
-            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBBkInputComboBox.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
-            {
-                SaveBtn.IsEnabled = false;
-            }
-        }
 
         private void NewInterpreterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -304,13 +278,89 @@ namespace LibraryProject.Views
             }
         }
 
+        private void NewBBkInputComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var word = NewBBkInputComboBox.SelectedItem as fields;
+
+            foreach (var item in booksController.GetBookWithId(Settings.Default.selectBook))
+            {
+
+                if (word.field_knowledge_id != item.field_knowledge_id)
+                {
+                    SaveBtn.IsEnabled = true;
+                }
+                else
+                {
+                    SaveBtn.IsEnabled = false;
+                }
+            }
+
+            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBBkInputComboBox.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
+            {
+                SaveBtn.IsEnabled = false;
+            }
+        }
+        private void DirectInputTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            List<string> zxc = fieldsController.GetBbkNumbers();
+            string word = DirectInputTextBox.Text;
+
+            //foreach (var item in fieldsController.GetBbkNumbers())
+            //{
+            //    if (item.Contains(word))
+            //    {
+            //        return true;
+            //    }
+            //}
+
+            if (zxc.Contains(word))
+            {
+                BbkWarningBtn.Visibility = Visibility.Collapsed;
+                foreach (var item in booksController.GetBookWithId(Settings.Default.selectBook))
+                {
+
+                    if (word != item.fields.field_knowledge_bbk && word != "")
+                    {
+                        SaveBtn.IsEnabled = true;
+                    }
+                    else
+                    {
+                        SaveBtn.IsEnabled = false;
+                    }
+                }
+            }
+            else
+            {
+                BbkWarningBtn.Visibility = Visibility.Visible;
+                SaveBtn.IsEnabled = false;
+            }
+
+            if (NewAuthorInput.Text == "" || NewNameInput.Text == "" || NewBBkInputComboBox.Text == "" || NewIsbnInput.Text == "" || NewYearInput.Text == "" || NewInterpreterComboBox.Text == "" || NewChamberComboBox.Text == "")
+            {
+                SaveBtn.IsEnabled = false;
+            }
+        }
+
+
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
             var chamber = NewChamberComboBox.SelectedItem as chambers;
             var interpretor = NewInterpreterComboBox.SelectedItem as interpretors;
             var field = NewBBkInputComboBox.SelectedItem as fields;
 
-            if (booksController.UpdateBookInfo(NewAuthorInput.Text, Convert.ToInt32(field.field_knowledge_id.ToString()), NewNameInput.Text, NewIsbnInput.Text, NewPlaceInput.Text, Convert.ToInt32(NewYearInput.Text), Convert.ToInt32(interpretor.interpreter_id.ToString()), Convert.ToInt32(chamber.chamber_id.ToString()), updatingBook))
+            int userBbk = 0;
+
+            if (SelectInputBtn.Visibility == Visibility.Collapsed)
+            {
+                BbkWarningBtn.Visibility = Visibility.Collapsed;
+                userBbk = Convert.ToInt32(NewBBkInputComboBox.SelectedValue);
+            }
+            else if(SelectInputBtn.Visibility == Visibility.Visible)
+            {
+                userBbk = fieldsController.GetBbkId(DirectInputTextBox.Text);
+            }
+
+            if (booksController.UpdateBookInfo(NewAuthorInput.Text, userBbk, NewNameInput.Text, NewIsbnInput.Text, NewPlaceInput.Text, Convert.ToInt32(NewYearInput.Text), Convert.ToInt32(interpretor.interpreter_id.ToString()), Convert.ToInt32(chamber.chamber_id.ToString()), updatingBook))
             {
                 SaveBtn.IsEnabled = false;
                 MessageBox.Show("Данные успешно обновлены");

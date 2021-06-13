@@ -21,7 +21,6 @@ namespace CheckDatabaseIntegrationTests
             string ticket = "А-1234-21";
             string book_delivery = "2002.01.23";
             string book_reception = "2002.02.23";
-            string book_return = "2002.03.01";
             int book_id = 3;
 
             int oldFormularLength = dbHelper.context.formular.Count();
@@ -58,7 +57,6 @@ namespace CheckDatabaseIntegrationTests
             string ticket = "А-1234-12";
             string book_delivery = "2002.01.23";
             string book_reception = "2002.02.23";
-            string book_return = "2002.03.01";
             int book_id = 0;
 
             //Act
@@ -72,11 +70,10 @@ namespace CheckDatabaseIntegrationTests
         public void AddFormular_IsEmptytData_FalseReturned()
         {
             //Arrange
-            string ticket = "";
+            string ticket = null;
             string book_delivery = "2007.05.26";
             string book_reception = "2007.06.26";
-            string book_return = "";
-            int book_id = 0;
+            int book_id = 3;
 
             //Act
             bool check = formularController.AddFormularInfo(ticket, Convert.ToDateTime(book_delivery), Convert.ToDateTime(book_reception), book_id);

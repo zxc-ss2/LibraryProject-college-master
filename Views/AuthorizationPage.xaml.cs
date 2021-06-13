@@ -27,6 +27,8 @@ namespace LibraryProject.Views
         {
             InitializeComponent();
 
+            LoginTextBox.Text = String.Empty;
+            PasswordTextBox.Text = String.Empty;
         }
 
         private void SignUpBtnClick(object sender, RoutedEventArgs e)

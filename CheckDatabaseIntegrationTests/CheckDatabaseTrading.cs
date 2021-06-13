@@ -46,9 +46,25 @@ namespace CheckDatabaseIntegrationTests
             //Arrange
             int book_id = 3;
             string ticket = "А-1234-21324234";
-            string delivery = "2004.12.11";
-            string reception = "2004.11.11";
+            string delivery = "2004.11.11";
+            string reception = "2004.12.11";
             string login = "UliyaBay";
+
+            //Act
+            bool check = tradingController.AddNewTrading(book_id, ticket, Convert.ToDateTime(delivery), Convert.ToDateTime(reception), login);
+            //Assert
+            Assert.IsFalse(check);
+        }
+
+        [TestMethod]
+        public void AddTrading_IsEmptytData_FalseReturned()
+        {
+            //Arrange
+            int book_id = 3;
+            string ticket = "";
+            string delivery = "2004.11.11";
+            string reception = "2004.12.11";
+            string login = "";
 
             //Act
             bool check = tradingController.AddNewTrading(book_id, ticket, Convert.ToDateTime(delivery), Convert.ToDateTime(reception), login);
@@ -62,8 +78,8 @@ namespace CheckDatabaseIntegrationTests
             //Arrange
             int book_id = 3;
             string ticket = "А-1234-21";
-            string delivery = "2002.03.01";
-            string reception = "2002.04.01";
+            string delivery = "2004.11.11";
+            string reception = "2004.12.11";
             string login = "UliyaBay";
             string newTicket = "А-2134-21";
             //Act
@@ -78,9 +94,10 @@ namespace CheckDatabaseIntegrationTests
 
                 if (tradingController.UpdateTradingInfo(Convert.ToInt32(book_id), newTicket, Convert.ToDateTime(delivery), Convert.ToDateTime(reception), updatingTrading))
                 {
+                    dbHelper = new DbHelper();
                     string expectedTicket = dbHelper.context.trading.Where(t => t.ticket == newTicket).First().ticket;
 
-                    var selectString = dbHelper.context.trading.OrderByDescending(t => t.trading_id).FirstOrDefault().trading_id;
+                    var selectString = dbHelper.context.trading.OrderByDescending(t => t.trading_id).First().trading_id;
                     tradingController.RemoveTrading(selectString);
 
                     //Assert
@@ -90,6 +107,61 @@ namespace CheckDatabaseIntegrationTests
             }
         }
 
+        [TestMethod]
+        public void EditTrading_InCorrectData_FalseReturned()
+        {
+            //Arrange
+            int book_id = 3;
+            string ticket = "А-1234-21";
+            string delivery = "2004.11.11";
+            string reception = "2004.12.11";
+            string login = "UliyaBay";
+            string newTicket = "А-1234-214343";
+            //Act
+            List<trading> updatingTrading = new List<trading>();
+            if (tradingController.AddNewTrading(book_id, ticket, Convert.ToDateTime(delivery), Convert.ToDateTime(reception), login))
+            {
+                var selectTrading = dbHelper.context.trading.OrderByDescending(t => t.trading_id).ToList().Take(1);
+                foreach (var item in selectTrading)
+                {
+                    updatingTrading.Add(item);
+                }
+
+                bool check = tradingController.UpdateTradingInfo(Convert.ToInt32(book_id), newTicket, Convert.ToDateTime(delivery), Convert.ToDateTime(reception), updatingTrading);
+                
+                 //Assert
+                 Assert.IsFalse(check);
+
+            }
+        }
+
+        [TestMethod]
+        public void EditTrading_IsEmptyData_FalseReturned()
+        {
+            //Arrange
+            int book_id = 3;
+            string ticket = "А-1234-21";
+            string delivery = "2004.11.11";
+            string reception = "2004.12.11";
+            string login = "UliyaBay";
+            string newTicket = "";
+            //Act
+            List<trading> updatingTrading = new List<trading>();
+            if (tradingController.AddNewTrading(book_id, ticket, Convert.ToDateTime(delivery), Convert.ToDateTime(reception), login))
+            {
+                var selectTrading = dbHelper.context.trading.OrderByDescending(t => t.trading_id).ToList().Take(1);
+                foreach (var item in selectTrading)
+                {
+                    updatingTrading.Add(item);
+                }
+
+                bool check = tradingController.UpdateTradingInfo(Convert.ToInt32(book_id), newTicket, Convert.ToDateTime(delivery), Convert.ToDateTime(reception), updatingTrading);
+
+                //Assert
+                Assert.IsFalse(check);
+
+            }
+        }
 
         [TestMethod]
         public void DeleteTrading_CorrectData_TrueReturned()
@@ -118,7 +190,7 @@ namespace CheckDatabaseIntegrationTests
         }
 
         [TestMethod]
-        public void DeleteUser_NullData_FalseReturned()
+        public void DeleteTrading_NullData_FalseReturned()
         {
             //Arrange
             int selectString = 0;

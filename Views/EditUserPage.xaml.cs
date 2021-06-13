@@ -43,7 +43,6 @@ namespace LibraryProject.Views
                 NewLoginInput.Text = item.login;
                 NewPasswordInput.Password = item.password;
                 NewEmailInput.Text = item.email;
-                NewTicketInput.Text = item.ticket;
             }
 
             sessionClient = clientsController.ClientsLoginMatchUp(Settings.Default.login);
@@ -315,18 +314,17 @@ namespace LibraryProject.Views
             }
         }
 
-
-        private void NewTicketInput_SelectionChanged(object sender, RoutedEventArgs e)
+        private void NewDateInput_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             StringCheck check = new StringCheck();
 
-            bool trigger = check.CheckTradingTicket(NewTicketInput.Text);
-            string word = NewTicketInput.Text;
-
+            bool trigger = check.CheckDate(Convert.ToString(NewDateInput.SelectedDate.Value.Date.ToString("yyyy.MM.dd")));
+            bool word = check.CheckDate(Convert.ToString(Convert.ToDateTime(NewDateInput.Text).ToString("yyyy.MM.dd")));
+            string word2 = Convert.ToDateTime(NewDateInput.Text).ToString("yyyy.MM.dd");
             foreach (var item in clientsController.ClientsLoginMatchUp(Settings.Default.login))
             {
 
-                if (trigger && word != item.ticket && word != "")
+                if (trigger && word2 != Convert.ToString(item.birthday.ToString("yyyy.MM.dd")) && word2 != "" && word)
                 {
                     SaveBtn.IsEnabled = true;
                 }
@@ -343,9 +341,37 @@ namespace LibraryProject.Views
             }
         }
 
+        private void NewDateInput_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //StringCheck check = new StringCheck();
+
+            //bool trigger = check.CheckDate(Convert.ToString(Convert.ToDateTime(NewDateInput.Text).ToString("yyyy.MM.dd")));
+            //string word = Convert.ToString(Convert.ToDateTime(NewDateInput.Text).ToString("yyyy.MM.dd"));
+
+
+            //foreach (var item in clientsController.ClientsLoginMatchUp(Settings.Default.login))
+            //{
+
+            //    if (trigger && word != Convert.ToString(item.birthday.ToString("yyyy.MM.dd")) && word != "")
+            //    {
+            //        SaveBtn.IsEnabled = true;
+            //    }
+            //    else
+            //    {
+            //        SaveBtn.IsEnabled = false;
+            //    }
+            //}
+
+            //if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" ||
+            //    NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "")
+            //{
+            //    SaveBtn.IsEnabled = false;
+            //}
+        }
+
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (clientsController.UpdateClientInfo(NewFirstNameInput.Text, NewLastNameInput.Text,  NewPatronymicInput.Text, Convert.ToDateTime(NewDateInput.SelectedDate), NewAddressInput.Text, NewWorkplaceInput.Text, NewStudyplaceInput.Text, NewPhoneInput.Text, NewLoginInput.Text, NewPasswordInput.Password, NewEmailInput.Text, NewTicketInput.Text, sessionClient))
+            if (clientsController.UpdateClientInfo(NewFirstNameInput.Text, NewLastNameInput.Text,  NewPatronymicInput.Text, Convert.ToDateTime(NewDateInput.SelectedDate), NewAddressInput.Text, NewWorkplaceInput.Text, NewStudyplaceInput.Text, NewPhoneInput.Text, NewLoginInput.Text, NewPasswordInput.Password, NewEmailInput.Text, sessionClient))
             {
                 SaveBtn.IsEnabled = false;
                 MessageBox.Show("Данные успешно обновлены");
@@ -355,5 +381,6 @@ namespace LibraryProject.Views
                 MessageBox.Show("Данные не были обновлены");
             }
         }
+
     }
 }

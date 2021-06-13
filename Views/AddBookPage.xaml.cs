@@ -1,4 +1,5 @@
 ﻿using LibraryProject.Controllers;
+using LibraryProject.Properties;
 using StringCheckLib;
 using System;
 using System.Collections.Generic;
@@ -40,69 +41,6 @@ namespace LibraryProject.Views
             InterpreterComboBox.ItemsSource = interpretorsController.GetInterpretors();
             InterpreterComboBox.DisplayMemberPath = "interpreter_name";
             InterpreterComboBox.SelectedValuePath = "interpreter_id";
-        }
-
-        private void SaveBtn_Click(object sender, RoutedEventArgs e)
-        {
-            StringCheck check = new StringCheck();
-            string resultString = "";
-
-            bool resultAuthor = check.CheckName(AuthorInput.Text);
-            if (!resultAuthor || AuthorInput.Text == "")
-            {
-                resultString += "Неправильно введено имя Автора\n";
-            }
-
-            bool resultName = check.CheckBookName(NameInput.Text);
-            if (!resultName || NameInput.Text == "")
-            {
-                resultString += "Неправильно введено название\n";
-            }
-
-            string resultBbk = BBkInputComboBox.Text;
-            if (resultBbk == "")
-            {
-                resultString += "Неправильно введено BBK\n";
-            }
-
-            bool resultIsbn = check.CheckBookIsbn(ISBNInput.Text);
-            if (!resultIsbn || ISBNInput.Text == "")
-            {
-                resultString += "Неправильно введен ISBN\n";
-            }
-
-            bool resultYear = check.CheckBookYear(YearInput.Text);
-            if (!resultYear || YearInput.Text == "")
-            {
-                resultString += "Неправильно введен год\n";
-            }
-
-            string resultInterpretor = InterpreterComboBox.Text;
-            if (resultInterpretor == "")
-            {
-                resultString += "Неправильно введено имя Издания\n";
-            }
-
-            if(resultString == "")
-            {
-                if (booksController.AddNewBook(AuthorInput.Text, fieldsController.GetBbkId(BBkInputComboBox.Text), NameInput.Text, ISBNInput.Text, PlaceInput.Text, Convert.ToInt32(YearInput.Text), interpretorsController.GetInterpretorId(InterpreterComboBox.Text), Convert.ToInt32(ChamberComboBox.Text)))
-                {
-                    MessageBoxResult result = MessageBox.Show("Вернуться на страницу добавления?", "Книга добавлена", MessageBoxButton.YesNoCancel);
-                    if (result == MessageBoxResult.No) 
-                    {
-                        this.NavigationService.Navigate(new MenuAdminPage());
-                    }
-                    else
-                    {
-                        this.NavigationService.Navigate(new AddBookPage());
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show(resultString);
-            }
-            
         }
 
         private void BbkSearchBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -213,6 +151,102 @@ namespace LibraryProject.Views
             {
                 YearWarningBtn.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void DirectInputTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            List<string> zxc = fieldsController.GetBbkNumbers();
+            string word = DirectInputTextBox.Text;
+
+            if (zxc.Contains(word))
+            {
+                BbkWarningBtn.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                BbkWarningBtn.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void SaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            StringCheck check = new StringCheck();
+            string resultString = "";
+
+            bool resultAuthor = check.CheckName(AuthorInput.Text);
+            if (!resultAuthor || AuthorInput.Text == "")
+            {
+                resultString += "Неправильно введено имя Автора\n";
+            }
+
+            bool resultName = check.CheckBookName(NameInput.Text);
+            if (!resultName || NameInput.Text == "")
+            {
+                resultString += "Неправильно введено название\n";
+            }
+
+            string resultBbk = BBkInputComboBox.Text;
+            string resultDirectBbk = DirectInputTextBox.Text;
+            if (resultBbk == "" && resultDirectBbk == "")
+            {
+                resultString += "Неправильно введено BBK\n";
+            }
+
+            bool resultIsbn = check.CheckBookIsbn(ISBNInput.Text);
+            if (!resultIsbn || ISBNInput.Text == "")
+            {
+                resultString += "Неправильно введен ISBN\n";
+            }
+
+            bool resultYear = check.CheckBookYear(YearInput.Text);
+            if (!resultYear || YearInput.Text == "")
+            {
+                resultString += "Неправильно введен год\n";
+            }
+
+            string resultInterpretor = InterpreterComboBox.Text;
+            if (resultInterpretor == "")
+            {
+                resultString += "Неправильно введено имя Издания\n";
+            }
+
+            if(resultString == "")
+            {
+                int userBbk = 0;
+
+                if (SelectInputBtn.Visibility == Visibility.Collapsed)
+                {
+                    BbkWarningBtn.Visibility = Visibility.Collapsed;
+                    userBbk = Convert.ToInt32(BBkInputComboBox.SelectedValue);
+                }
+                else if (SelectInputBtn.Visibility == Visibility.Visible)
+                {
+                    userBbk = fieldsController.GetBbkId(DirectInputTextBox.Text);
+                }
+
+                if (booksController.AddNewBook(AuthorInput.Text, userBbk, NameInput.Text, ISBNInput.Text, PlaceInput.Text, Convert.ToInt32(YearInput.Text), interpretorsController.GetInterpretorId(InterpreterComboBox.Text), Convert.ToInt32(ChamberComboBox.Text)))
+                {
+                    MessageBoxResult result = MessageBox.Show("Вернуться на страницу добавления?", "Книга добавлена", MessageBoxButton.YesNoCancel);
+                    if (result == MessageBoxResult.No) 
+                    {
+                        this.NavigationService.Navigate(new MenuAdminPage());
+                    }
+                    else
+                    {
+                        this.NavigationService.Navigate(new AddBookPage());
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show(resultString);
+            }
+            
+        }
+
+        private void BBkInputComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

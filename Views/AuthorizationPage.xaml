@@ -22,7 +22,7 @@
                 <Button Style="{StaticResource GrayBtn}" BorderThickness="0">Авторизироваться</Button>
             </DockPanel>
 
-            <TextBlock Style="{StaticResource LeftLabelText}" Margin="0 20 0 0">Email</TextBlock>
+            <TextBlock Style="{StaticResource LeftLabelText}" Margin="0 20 0 0">Логин</TextBlock>
             <TextBox x:Name="LoginTextBox" Style="{StaticResource AuthoInputBox}"></TextBox>
 
             <TextBlock Style="{StaticResource LeftLabelText}">Пароль</TextBlock>

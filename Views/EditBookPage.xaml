@@ -40,15 +40,20 @@
                 <DockPanel>
                     <StackPanel>
                         <DockPanel>
-                            <Button x:Name="DirectInputBtn" Style="{StaticResource CorrectEnterBtn}"  >Ввести вручную</Button>
-                            <Button x:Name="SelectInputBtn" Style="{StaticResource CorrectEnterBtn}"  Visibility="Collapsed">Вернуться к списку</Button>
+                            <Button x:Name="DirectInputBtn" Style="{StaticResource CorrectEnterBtn}" Click="DirectInputBtn_Click"  >Ввести вручную</Button>
+                            <Button x:Name="SelectInputBtn" Style="{StaticResource CorrectEnterBtn}"  Visibility="Collapsed" Click="SelectInputBtn_Click">Вернуться к списку</Button>
                             <StackPanel Width="100">
                                 <TextBox  Style="{StaticResource SearchBBkBox}" x:Name="BbkSearchBox"></TextBox>
                                 <TextBlock Style="{StaticResource PlaceholderBbkStyle}" Tag="{Binding ElementName=BbkSearchBox}" Text="Введите ББК/название" HorizontalAlignment="Left" Margin="5,-13,0,8"></TextBlock>
                             </StackPanel>
                         </DockPanel>
-                        <ComboBox x:Name="NewBBkInputComboBox" MaxDropDownHeight="100" Style="{DynamicResource BbkComboBox}" HorizontalAlignment="Left" ></ComboBox>
-                        <TextBox x:Name="DirectInputTextBox" Style="{StaticResource LeftInputBox}" Visibility="Collapsed"></TextBox>
+                        <ComboBox x:Name="NewBBkInputComboBox" MaxDropDownHeight="100" Style="{DynamicResource BbkComboBox}" HorizontalAlignment="Left" SelectionChanged="NewBBkInputComboBox_SelectionChanged" ></ComboBox>
+                        <DockPanel HorizontalAlignment="Right">
+                            <TextBox x:Name="DirectInputTextBox" Style="{StaticResource LeftInputBox}" Visibility="Collapsed" TextChanged="DirectInputTextBox_TextChanged"></TextBox>
+                            <Button x:Name="BbkWarningBtn" Style="{StaticResource WarningBtn}">
+                                <Image Source="/Resources/images/warning-removebg-preview.png" />
+                            </Button>
+                        </DockPanel>
                         <DockPanel x:Name="SelectShowDocPanel" Margin="0 7 0 2">
                             <TextBlock Style="{StaticResource BbkOrFieldNameChange}">Показать:</TextBlock>
                             <StackPanel Orientation="Horizontal">

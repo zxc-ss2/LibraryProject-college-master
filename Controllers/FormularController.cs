@@ -17,7 +17,7 @@ namespace LibraryProject.Controllers
         {
             try
             {
-                if(bookId == 0)
+                if(bookId == 0 || ticket == null)
                 {
                     return false;
                 }

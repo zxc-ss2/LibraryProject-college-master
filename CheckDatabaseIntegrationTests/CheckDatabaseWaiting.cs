@@ -41,11 +41,10 @@ namespace CheckDatabaseIntegrationTests
         public void AddWaiting_InCorrectData_FalseReturned()
         {
             //Arrange
-            int book_id = 1;
+            int book_id = 3;
             string ticket = "А-1234-214545";
             string login = "UliyaBay";
 
-            int oldWaitingLength = dbHelper.context.waiting.Count();
             //Act
             bool check = waitingController.AddNewWaiting(login, book_id, ticket);
 

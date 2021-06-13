@@ -52,30 +52,39 @@ namespace LibraryProject.Views
 
             else
             {
-                List<quantity> booksQuantity = new List<quantity>();
-                TextBlock secondSelectedCell = secondSelectedCellContent.Column.GetCellContent(secondSelectedCellContent.Item) as TextBlock;
-                var item = TradingDataGrid.SelectedItem as trading;
-                int tradingId = Convert.ToInt32(item.trading_id);
-
-                var lastSelectedCellContent = new DataGridCellInfo(TradingDataGrid.SelectedItem, TradingDataGrid.Columns[5]);
-                TextBlock selectedLogin = lastSelectedCellContent.Column.GetCellContent(lastSelectedCellContent.Item) as TextBlock;
-
-                if (booksController.RemoveIdTradingFromBook(Convert.ToInt32(secondSelectedCell.Text)))
+                MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите удалить выбранную выдачу?", "Удаление выдачи", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
                 {
-                    if (clientsController.RemoveIdTradingFromClient(selectedLogin.Text))
+                    List<quantity> booksQuantity = new List<quantity>();
+                    TextBlock secondSelectedCell = secondSelectedCellContent.Column.GetCellContent(secondSelectedCellContent.Item) as TextBlock;
+                    var item = TradingDataGrid.SelectedItem as trading;
+                    int tradingId = Convert.ToInt32(item.trading_id);
+
+                    var lastSelectedCellContent = new DataGridCellInfo(TradingDataGrid.SelectedItem, TradingDataGrid.Columns[5]);
+                    TextBlock selectedLogin = lastSelectedCellContent.Column.GetCellContent(lastSelectedCellContent.Item) as TextBlock;
+
+                    if (booksController.RemoveIdTradingFromBook(Convert.ToInt32(secondSelectedCell.Text)))
                     {
-                        booksQuantity = quantityController.GetQuantity(Convert.ToInt32(secondSelectedCell.Text));
-                        string ticket = tradingController.GetNeededTicket(tradingId);
-                        if (formularController.AddBookReturnDate(DateTime.Now, ticket))
+                        if (clientsController.RemoveIdTradingFromClient(selectedLogin.Text))
                         {
-                            if (tradingController.RemoveTrading(tradingId))
+                            booksQuantity = quantityController.GetQuantity(Convert.ToInt32(secondSelectedCell.Text));
+                            string ticket = tradingController.GetNeededTicket(tradingId);
+                            if (formularController.AddBookReturnDate(DateTime.Now, ticket))
                             {
-                                if (quantityController.ChangeQuantityPlus(Convert.ToInt32(secondSelectedCell.Text), booksQuantity))
+                                if (tradingController.RemoveTrading(tradingId))
                                 {
-                                    TradingDataGrid.ItemsSource = tradingController.GetTradingInfo();
-                                    BookDataGrid.ItemsSource = booksController.BooksInfoOutput();
-                                    TradingClientsGrid.ItemsSource = clientsController.GetClientsWithTrading();
-                                    WaitingBooksDataGrid.ItemsSource = waitingController.GetWaitingInfo();
+                                    if (quantityController.ChangeQuantityPlus(Convert.ToInt32(secondSelectedCell.Text), booksQuantity))
+                                    {
+                                        TradingDataGrid.ItemsSource = tradingController.GetTradingInfo();
+                                        BookDataGrid.ItemsSource = booksController.BooksInfoOutput();
+                                        TradingClientsGrid.ItemsSource = clientsController.GetClientsWithTrading();
+                                        WaitingBooksDataGrid.ItemsSource = waitingController.GetWaitingInfo();
+                                        MessageBox.Show("Данные успешно удалены.");
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Ошибка базы данных, попробуйте позже.");
+                                    }
                                 }
                                 else
                                 {
@@ -99,7 +108,7 @@ namespace LibraryProject.Views
                 }
                 else
                 {
-                     MessageBox.Show("Ошибка базы данных, попробуйте позже.");
+                    this.NavigationService.Navigate(new MenuLibrarianPage());
                 }
             }
             
@@ -120,17 +129,25 @@ namespace LibraryProject.Views
             }
             else
             {
-                if (booksController.DeleteBookInfo(item))
+                MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите удалить выбранную книгу?", "Удаление книги", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
                 {
-                    MessageBox.Show("Данные успешно удалены.");
-                    TradingDataGrid.ItemsSource = tradingController.GetTradingInfo();
-                    BookDataGrid.ItemsSource = booksController.BooksInfoOutput();
-                    TradingClientsGrid.ItemsSource = clientsController.GetClientsWithTrading();
-                    WaitingBooksDataGrid.ItemsSource = waitingController.GetWaitingInfo();
+                    if (booksController.DeleteBookInfo(item))
+                    {
+                        MessageBox.Show("Данные успешно удалены.");
+                        TradingDataGrid.ItemsSource = tradingController.GetTradingInfo();
+                        BookDataGrid.ItemsSource = booksController.BooksInfoOutput();
+                        TradingClientsGrid.ItemsSource = clientsController.GetClientsWithTrading();
+                        WaitingBooksDataGrid.ItemsSource = waitingController.GetWaitingInfo();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Данные не были удалены, попробуйте позже.");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Данные не были удалены, попробуйте позже.");
+                    this.NavigationService.Navigate(new MenuLibrarianPage());
                 }
             }
         }

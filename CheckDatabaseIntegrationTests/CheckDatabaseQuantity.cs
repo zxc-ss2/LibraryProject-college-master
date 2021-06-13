@@ -40,22 +40,16 @@ namespace CheckDatabaseIntegrationTests
         public void EditQuantityMinus_InCorrectData_FalseReturned()
         {
             //Arrange
-            int book_id = 1;
+            int book_id = 0;
             List<quantity> quantityList = new List<quantity>();
-            string expectedName = "";
 
             //Act
-            int oldQuantity = dbHelper.context.quantity.Where(t => t.book_id == book_id).FirstOrDefault().library_quantity;
-            quantityList = quantityController.GetQuantity(book_id);
-            book_id = 0;
-            if (quantityController.ChangeQuantityMinus(book_id, quantityList))
-            {
-                dbHelper = new DbHelper();
-                int newQuantity = dbHelper.context.quantity.Where(t => t.book_id == book_id).FirstOrDefault().library_quantity;
+            quantityList = quantityController.GetQuantity(1);
+            bool check = quantityController.ChangeQuantityMinus(book_id, quantityList);
 
-                //Assert
-                Assert.AreEqual(oldQuantity, newQuantity);
-            }
+            //Assert
+            Assert.IsFalse(check);
+            
         }
 
         [TestMethod]
@@ -83,22 +77,15 @@ namespace CheckDatabaseIntegrationTests
         public void EditQuantityPlus_InCorrectData_FalseReturned()
         {
             //Arrange
-            int book_id = 1;
+            int book_id = 0;
             List<quantity> quantityList = new List<quantity>();
-            string expectedName = "";
 
             //Act
-            int oldQuantity = dbHelper.context.quantity.Where(t => t.book_id == book_id).FirstOrDefault().library_quantity;
-            quantityList = quantityController.GetQuantity(book_id);
-            book_id = 0;
-            if (quantityController.ChangeQuantityPlus(book_id, quantityList))
-            {
-                dbHelper = new DbHelper();
-                int newQuantity = dbHelper.context.quantity.Where(t => t.book_id == book_id).FirstOrDefault().library_quantity;
+            quantityList = quantityController.GetQuantity(1);
+            bool check = quantityController.ChangeQuantityPlus(book_id, quantityList);
 
-                //Assert
-                Assert.AreEqual(oldQuantity, newQuantity);
-            }
+            //Assert
+            Assert.IsFalse(check);
         }
     }
 }

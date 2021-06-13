@@ -120,7 +120,7 @@ namespace StringCheckLib
 
         public bool CheckBookIsbn(string bookName)
         {
-            string pattern = @"^[0-9]{3}\-[0-9]{1}\-[0-9]{5}\-[0-9]{3}\-[0-9]{1}$";
+            string pattern = @"^[0-9]{3}\-[0-9]{1}\-[0-9]{5}\-[0-9]{3}\-[0-9]{1}|[0-9]{3}\-[0-9]{1}\-[0-9]{3}\-[0-9]{5}\-[0-9]{1}$";
 
             if (Regex.Match(bookName, pattern, RegexOptions.IgnoreCase).Success)
             {

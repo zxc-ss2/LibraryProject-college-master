@@ -10,6 +10,7 @@ namespace CheckBbkLib
 {
     public class CheckBbk
     {
+        DbHelper dbHelper = new DbHelper();
         FieldsController fieldsController = new FieldsController();
         public bool CheckBbkString(string bbk)
         {
@@ -20,13 +21,9 @@ namespace CheckBbkLib
                 {
                     return true;
                 }
-                else
-                {
-                    return false;
-                }
             }
 
-            return true;
+            return false;
         }
     }
 }

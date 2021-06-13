@@ -82,7 +82,7 @@ namespace CheckDatabaseIntegrationTests
         }
 
         [TestMethod]
-        public void AddUser_IncorrectData_FalseReturned()
+        public void AddUser_EmptyData_FalseReturned()
         {
             //Arrange
             string name = "";
@@ -97,6 +97,33 @@ namespace CheckDatabaseIntegrationTests
             string password = "!1";
             string email = "";
             string ticket = "";
+
+            //Act
+            if (clientsController.CheckForAnExistingkUser(login))
+            {
+                bool check = clientsController.AddNewUser(name, surname, patronymic, Convert.ToDateTime(birthday), address, workplace, studyplace, phone, login, password, email, ticket);
+
+                //Assert
+                Assert.IsFalse(check);
+            }
+        }
+
+        [TestMethod]
+        public void AddUser_IncorrectData_FalseReturned()
+        {
+            //Arrange
+            string name = "Андрей";
+            string surname = "Петров";
+            string patronymic = "Сергеевич";
+            string birthday = "2002.03.01";
+            string address = "Куйбышев3243";
+            string studyplace = "ЕМК";
+            string workplace = "";
+            string phone = "895055857655644";
+            string login = "user123";
+            string password = "zxcQWE32!1";
+            string email = "andrey@gmail.com";
+            string ticket = "Х-1234-21";
 
             //Act
             if (clientsController.CheckForAnExistingkUser(login))
@@ -133,7 +160,7 @@ namespace CheckDatabaseIntegrationTests
             if (clientsController.AddNewUser(name, surname, patronymic, Convert.ToDateTime(birthday), address, workplace, studyplace, phone, login, password, email, ticket))
             {
                 int updatedClientsLength = dbHelper.context.clients.Count();
-                if (clientsController.UpdateClientInfo(newName, surname, patronymic, Convert.ToDateTime(birthday), address, studyplace, workplace, phone, login, password, email, ticket, updatingClient))
+                if (clientsController.UpdateClientInfo(newName, surname, patronymic, Convert.ToDateTime(birthday), address, studyplace, workplace, phone, login, password, email, updatingClient))
                 {
                     dbHelper = new DbHelper();
                     expectedName = dbHelper.context.clients.Where(t => t.name == newName).FirstOrDefault().name;
@@ -150,7 +177,7 @@ namespace CheckDatabaseIntegrationTests
         }
 
         [TestMethod]
-        public void EditUser_InCorrectData_TrueReturned()
+        public void EditUser_InCorrectData_FalseReturned()
         {
             //Arrange
             string name = "Андрей";
@@ -173,10 +200,41 @@ namespace CheckDatabaseIntegrationTests
             if (clientsController.AddNewUser(name, surname, patronymic, Convert.ToDateTime(birthday), address, workplace, studyplace, phone, login, password, email, ticket))
             {
                 int updatedClientsLength = dbHelper.context.clients.Count();
-                bool check = clientsController.UpdateClientInfo(newName, surname, patronymic, Convert.ToDateTime(birthday), address, studyplace, workplace, phone, login, password, email, ticket, updatingClient);
+                bool check = clientsController.UpdateClientInfo(newName, surname, patronymic, Convert.ToDateTime(birthday), address, studyplace, workplace, phone, login, password, email, updatingClient);
                 
                     //Assert
                     Assert.IsFalse(check);
+            }
+        }
+
+        [TestMethod]
+        public void EditUser_IsEmptyData_FalseReturned()
+        {
+            //Arrange
+            string name = "Андрей";
+            string surname = "Петров";
+            string patronymic = "Сергеевич";
+            string birthday = "2002.03.01";
+            string address = "Куйбышева 12";
+            string studyplace = "ЕМК";
+            string workplace = "";
+            string phone = "89505585644";
+            string login = "User";
+            string password = "zxcQWE!123";
+            string email = "andrey@gmail.com";
+            string ticket = "Х-1234-21";
+            string newName = "";
+
+            //Act
+            List<clients> updatingClient = new List<clients>();
+
+            if (clientsController.AddNewUser(name, surname, patronymic, Convert.ToDateTime(birthday), address, workplace, studyplace, phone, login, password, email, ticket))
+            {
+                int updatedClientsLength = dbHelper.context.clients.Count();
+                bool check = clientsController.UpdateClientInfo(newName, surname, patronymic, Convert.ToDateTime(birthday), address, studyplace, workplace, phone, login, password, email, updatingClient);
+
+                //Assert
+                Assert.IsFalse(check);
             }
         }
 

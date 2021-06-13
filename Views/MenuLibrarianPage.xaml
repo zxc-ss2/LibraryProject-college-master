@@ -67,6 +67,7 @@
                                 <DataGridTextColumn Width="30" Header="№" Binding="{Binding book_id}"></DataGridTextColumn>
                                 <DataGridTextColumn Width="120" Header="Автор" Binding="{Binding author}"></DataGridTextColumn>
                                 <DataGridTextColumn Width="180" Header="Название"  Binding="{Binding name}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="130" Header="ISBN"  Binding="{Binding isbn}"></DataGridTextColumn>
                                 <DataGridTextColumn Width="70" Header="ББК" Binding="{Binding fields.field_knowledge_bbk}"></DataGridTextColumn>
                                 <DataGridTextColumn Width="80" Header="Год издания"  Binding="{Binding year}"></DataGridTextColumn>
                             </DataGrid.Columns>
@@ -120,7 +121,7 @@
                         <TextBlock Grid.Row="1" Style="{StaticResource LeftOfferText}" Width="182">Запросы на выдачу</TextBlock>
                         <DockPanel Grid.Row="1" Style="{StaticResource AdminDocPanel}" Grid.ColumnSpan="2" Height="95" Width="775">
                             <Button x:Name="ApproveBtn" Style="{StaticResource AdminBtn}" Click="ApproveBtn_Click">Одобрить</Button>
-                            <Button x:Name="DeniedBtn" Style="{StaticResource AdminBtn}" Click="DeniedBtn_Click">Отказать</Button>
+                            <Button x:Name="DeniedBtn" Style="{StaticResource AdminBtn}" Click="DeniedBtn_Click">Отклонить</Button>
                             <TextBox x:Name="SearchLibrarianWaitingBooksBox" Style="{StaticResource SearchAdminBox }" TextChanged="SearchLibrarianWaitingBooksBox_TextChanged"></TextBox>
                             <TextBlock Style="{StaticResource PlaceholderAdminStyle}" Tag="{Binding ElementName=SearchLibrarianWaitingBooksBox}" Text="Введите номер чит. билета">
                             </TextBlock>

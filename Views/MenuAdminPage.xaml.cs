@@ -44,6 +44,7 @@ namespace LibraryProject.Views
 
         private void DeleteClientBtn_Click(object sender, RoutedEventArgs e)
         {
+
             var item = ClientDataGrid.SelectedItem as Models.clients;
 
             if(ClientDataGrid.SelectedItem == null)
@@ -53,15 +54,23 @@ namespace LibraryProject.Views
 
             else
             {
-                if (clientsController.DeleteClientInfo(item))
+                MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите удалить выбранного пользователя?", "Удаление пользователя", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
                 {
-                    MessageBox.Show("Данные успешно удалены.");
-                    ClientDataGrid.ItemsSource = clientsController.ClientsInfoOutputWithOutAdmin();
+                    if (clientsController.DeleteClientInfo(item))
+                    {
+                        MessageBox.Show("Данные успешно удалены.");
+                        ClientDataGrid.ItemsSource = clientsController.ClientsInfoOutputWithOutAdmin();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Данные не были удалены, попробуйте позже.");
+                    }
                 }
-
                 else
                 {
-                    MessageBox.Show("Данные не были удалены, попробуйте позже.");
+                    this.NavigationService.Navigate(new Views.MenuAdminPage());
+
                 }
             }
         }
@@ -82,15 +91,23 @@ namespace LibraryProject.Views
 
             else
             {
-                if (booksController.DeleteBookInfo(item))
+                MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите удалить выбранную книгу?", "Удаление книги", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
                 {
-                    MessageBox.Show("Данные успешно удалены.");
-                    BookDataGrid.ItemsSource = booksController.BooksInfoOutput();
+                    if (booksController.DeleteBookInfo(item))
+                    {
+                        MessageBox.Show("Данные успешно удалены.");
+                        BookDataGrid.ItemsSource = booksController.BooksInfoOutput();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Данные не были удалены, попробуйте позже");
+                    }
                 }
-
                 else
                 {
-                    MessageBox.Show("Данные не были удалены, попробуйте позже");
+                    this.NavigationService.Navigate(new Views.MenuAdminPage());
+
                 }
             }
         }

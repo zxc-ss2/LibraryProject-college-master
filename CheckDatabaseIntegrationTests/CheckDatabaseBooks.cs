@@ -16,11 +16,11 @@ namespace CheckDatabaseIntegrationTests
         public void AddBook_CorrectData_TrueReturned()
         {
             //Arrange
-            string author = "Андрей";
-            int field_knowledge_id = 23;
-            string name = "Сергеевич";
-            string isbn = "1234-5634-34";
-            string place = "Куйбышевf";
+            string author = "Джорджи Кроули";
+            int field_knowledge_id = 523;
+            string name = "Корги по имени Генри";
+            string isbn = "978-5-386-12347-5";
+            string place = "Москва";
             int year = 1755;
             int interpreter_id = 2;
             int chamber_id = 2;
@@ -71,11 +71,11 @@ namespace CheckDatabaseIntegrationTests
         public void AddBook_IncorrectDataFieldKnowledgeIdDoesntExists_FalseReturned()
         {
             //Arrange
-            string author = "Андрей";
+            string author = "Джорджи Кроули";
             int field_knowledge_id = 234534;
-            string name = "Сергеевич";
-            string isbn = "1234-5634-34";
-            string place = "Куйбышевf";
+            string name = "Корги по имени Генри";
+            string isbn = "978-5-386-12347-5";
+            string place = "Москва";
             int year = 1755;
             int interpreter_id = 2;
             int chamber_id = 2;
@@ -91,11 +91,11 @@ namespace CheckDatabaseIntegrationTests
         public void AddBook_IncorrectDataInterpreteriIdDoesntExists_FalseReturned()
         {
             //Arrange
-            string author = "Андрей";
+            string author = "Джорджи Кроули";
             int field_knowledge_id = 34;
-            string name = "Сергеевич";
-            string isbn = "1234-5634-34";
-            string place = "Куйбышевf";
+            string name = "Корги по имени Генри";
+            string isbn = "978-5-386-12347-5";
+            string place = "Москва";
             int year = 1755;
             int interpreter_id = 2342;
             int chamber_id = 2;
@@ -110,52 +110,13 @@ namespace CheckDatabaseIntegrationTests
         [TestMethod]
         public void EditBook_CorrectData_TrueReturned()
         {
-            ////Arrange
-            //string author = "Андрей";
-            //int field_knowledge_id = 23;
-            //string name = "qwqwe";
-            //string isbn = "1234-5634-34";
-            //string place = "Куйбышевf";
-            //int year = 1755;
-            //int interpreter_id = 2;
-            //int chamber_id = 2;
-            //string newName = "Аываы";
-
-            ////Act
-            //List<books> updatingBook = new List<books>();
- 
-            //if (booksController.AddNewBook(author, field_knowledge_id, name, isbn, place, year, interpreter_id, chamber_id))
-            //{
-            //    books selectUpdateString = dbHelper.context.books.Where(t => t.name == name).First();
-            //    //updatingBook = booksController.GetBookWithId(selectUpdateString);
-
-            //    booksController.UpdateBookInfo(author, field_knowledge_id, newName, isbn, place, year, interpreter_id, chamber_id, selectUpdateString);
-            //    {
-            //        //DbHelper dbHelper = new DbHelper();
-
-            //        books expectedName = dbHelper.context.books.Where(t => t.name == newName).First();
-
-            //        //var selectString = dbHelper.context.books.AsNoTracking().OrderByDescending(t => t.book_id).Take(1);
-            //        //foreach (var item in selectString)
-            //        //{
-            //        //    booksController.DeleteBookInfo(item);
-            //        //}
-            //        //Assert
-            //        Assert.AreEqual(expectedName, newName);
-            //    }
-            //}
-        }
-
-        [TestMethod]
-        public void EditBook4_CorrectData_TrueReturned()
-        {
             //Arrange
             //Arrange
-            string author = "Андрей";
-            int field_knowledge_id = 23;
-            string name = "Пваиванв";
-            string isbn = "143-5-64573-125-8";
-            string place = "Куйбышева";
+            string author = "Джорджи Кроули";
+            int field_knowledge_id = 34;
+            string name = "Корги по имени Генри";
+            string isbn = "978-5-386-12347-5";
+            string place = "Москва";
             int year = 1755;
             int interpreter_id = 2;
             int chamber_id = 2;
@@ -174,6 +135,7 @@ namespace CheckDatabaseIntegrationTests
 
                 if (booksController.UpdateBookInfo(author, field_knowledge_id, newName, isbn, place, year, interpreter_id, chamber_id, updatingClient))
                 {
+                    dbHelper = new DbHelper();
                     string expectedName = dbHelper.context.books.Where(t => t.name == newName).FirstOrDefault().name;
 
                     var selectString = dbHelper.context.books.AsNoTracking().OrderByDescending(t => t.book_id).Take(1);
@@ -187,16 +149,83 @@ namespace CheckDatabaseIntegrationTests
             }
         }
 
+        [TestMethod]
+        public void EditBook_IsEmptytData_FalseReturned()
+        {
+            //Arrange
+            //Arrange
+            string author = "Джорджи Кроули";
+            int field_knowledge_id = 34;
+            string name = "Корги по имени Генри";
+            string isbn = "978-5-386-12347-5";
+            string place = "Москва";
+            int year = 1755;
+            int interpreter_id = 2;
+            int chamber_id = 2;
+            string newName = "";
+
+            //Act
+            List<books> updatingClient = new List<books>();
+
+            if (booksController.AddNewBook(author, field_knowledge_id, name, isbn, place, year, interpreter_id, chamber_id))
+            {
+                var selectTrading = dbHelper.context.books.OrderByDescending(t => t.book_id).ToList().Take(1);
+                foreach (var item in selectTrading)
+                {
+                    updatingClient.Add(item);
+                };
+
+                bool check = booksController.UpdateBookInfo(author, field_knowledge_id, newName, isbn, place, year, interpreter_id, chamber_id, updatingClient);
+                {
+                    //Assert
+                    Assert.IsFalse(check);
+                }
+            }
+        }
+
+        [TestMethod]
+        public void EditBook_IncorrecttData_FalseReturned()
+        {
+            //Arrange
+            //Arrange
+            string author = "Джорджи Кроули";
+            int field_knowledge_id = 34;
+            string name = "Корги по имени Генри";
+            string isbn = "978-5-386-12347-5";
+            string place = "Москва";
+            int year = 1755;
+            int interpreter_id = 2;
+            int chamber_id = 2;
+            string newName = "#$%#$%^";
+
+            //Act
+            List<books> updatingClient = new List<books>();
+
+            if (booksController.AddNewBook(author, field_knowledge_id, name, isbn, place, year, interpreter_id, chamber_id))
+            {
+                var selectTrading = dbHelper.context.books.OrderByDescending(t => t.book_id).ToList().Take(1);
+                foreach (var item in selectTrading)
+                {
+                    updatingClient.Add(item);
+                };
+
+                bool check = booksController.UpdateBookInfo(author, field_knowledge_id, newName, isbn, place, year, interpreter_id, chamber_id, updatingClient);
+                {
+                    //Assert
+                    Assert.IsFalse(check);
+                }
+            }
+        }
 
         [TestMethod]
         public void DeleteBook_CorrectData_TrueReturned()
         {
             //Arrange
-            string author = "Андрей";
-            int field_knowledge_id = 23;
-            string name = "Сергеевич";
-            string isbn = "1234-5634-34";
-            string place = "Куйбышевf";
+            string author = "Джорджи Кроули";
+            int field_knowledge_id = 34;
+            string name = "Корги по имени Генри";
+            string isbn = "978-5-386-12347-5";
+            string place = "Москва";
             int year = 1755;
             int interpreter_id = 2;
             int chamber_id = 2;
@@ -223,7 +252,7 @@ namespace CheckDatabaseIntegrationTests
         }
 
         [TestMethod]
-        public void DeleteBook_CorrectData_FalseReturned()
+        public void DeleteBook_InCorrectData_FalseReturned()
         {
             //Arrange
             books selectString = null;

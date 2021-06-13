@@ -28,6 +28,7 @@ namespace LibraryProject.Controllers
             return bbk;
         }
 
+
         public int GetBbkId(string userField)
         {
             return dbHelper.context.fields.Where(t => t.field_knowledge_name.Contains(userField) || t.field_knowledge_bbk.Contains(userField)).First().field_knowledge_id;
