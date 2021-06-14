@@ -213,7 +213,7 @@ namespace LibraryProject.Views
             string resultChamber = ChamberComboBox.Text;
             if (resultChamber == "")
             {
-                resultString += "Неправильно введено имя Издания\n";
+                resultString += "Неправильно введен номер отсека\n";
             }
 
             if (resultString == "")
