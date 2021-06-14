@@ -20,7 +20,7 @@
             </DockPanel>
             <DockPanel>
                 <DockPanel>
-                    <TextBox Style="{StaticResource LeftInputBox}" x:Name="NewBookIdInput" TextChanged="NewBookIdInput_TextChanged"></TextBox>
+                    <ComboBox x:Name="NewBookComboBox" MaxDropDownHeight="100" Style="{DynamicResource ChamberComboBox}" HorizontalAlignment="Left" SelectionChanged="NewBookComboBox_SelectionChanged" ></ComboBox>
                     <Button x:Name="AuthorWarningBtn" Style="{StaticResource WarningBtn}">
                         <Image Source="/Resources/images/warning-removebg-preview.png" />
                     </Button>
@@ -38,10 +38,10 @@
             </DockPanel>
             <DockPanel>
                 <DockPanel>
-                    <TextBox Style="{StaticResource LeftInputBox}" x:Name="NewDeliveryInput" TextChanged="NewDeliveryInput_TextChanged"></TextBox>
+                    <DatePicker x:Name="NewDeliveryInput" Style="{DynamicResource DatePickerStyle1}" Height="24" Margin="0,10,0,0"  SelectedDateChanged="NewDeliveryInput_SelectedDateChanged"></DatePicker>
                 </DockPanel>
                 <DockPanel HorizontalAlignment="Right">
-                    <TextBox Style="{StaticResource RightInputBox}" x:Name="NewReceptionInput" TextChanged="NewReceptionInput_TextChanged"></TextBox>
+                    <DatePicker x:Name="NewReceptionInput" Style="{DynamicResource DatePickerStyle1}" Height="24" Margin="0,10,0,0"  SelectedDateChanged="NewReceptionInput_SelectedDateChanged"></DatePicker>
                 </DockPanel>
             </DockPanel>
             <Button x:Name="SaveBtn" Style="{StaticResource StartBtn}" Click="SaveBtn_Click">Сохранить изменения</Button>

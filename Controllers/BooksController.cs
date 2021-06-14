@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace LibraryProject.Controllers
 {
@@ -18,33 +19,52 @@ namespace LibraryProject.Controllers
         readonly TradingController tradingController = new TradingController();
 
         /// <summary>
-        /// Вывод всей информации о книгах
+        /// Формирование листа со всеми книгами
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// Лист со всеми книгами
+        /// </returns>
         public List<books> BooksInfoOutput()
         {
             return dbHelper.context.books.ToList();
         }
 
         /// <summary>
-        /// Проверка на совпадение вводимых данных с данными в бд
+        /// Поиск совпадений полей authoe, isbn с вводимыми данными
         /// </summary>
-        /// <param name="author" - Вводимое имя автора>
+        /// <param name="info" - строка, по которой ищутся совпадения>
         /// </param>
-        /// <returns></returns>
-        public List<books> BooksMatchUpInfoOutput(string author)
+        /// <returns>
+        /// Лист с совпадениями
+        /// </returns>
+        public List<books> BooksMatchUpInfoOutput(string info)
         {
 
-            return dbHelper.context.books.Where(t => t.author.Contains(author) || t.isbn.Contains(author)).ToList();
+            return dbHelper.context.books.Where(t => t.author.Contains(info) || t.isbn.Contains(info)).ToList();
         }
 
+        /// <summary>
+        /// Добавление новой книги
+        /// </summary>
+        /// <param name="bookAuthor" - имя автора></param>
+        /// <param name="bookKnowledgeField" - идентификатор ббк></param>
+        /// <param name="bookName" - название книги></param>
+        /// <param name="bookISBN" - шифр isbn></param>
+        /// <param name="bookPlace" - место издания книги></param>
+        /// <param name="bookYear" - год издания книги></param>
+        /// <param name="bookInterpreter" - идентификатор издательства></param>
+        /// <param name="bookChamber" - идентификатор отсека></param>
+        /// <returns>
+        /// true - в случае выполнения метода
+        /// false - в случае не выполения метода
+        /// </returns>
         public bool AddNewBook(string bookAuthor, int bookKnowledgeField, string bookName, string bookISBN, string bookPlace, int bookYear, int bookInterpreter, int bookChamber)
         {
             try
             {
                 StringCheck check = new StringCheck();
 
-                if ((!check.CheckName(bookAuthor) || bookAuthor == "") ||(!check.CheckBookName(bookName) || bookName == "") ||(!check.CheckBookIsbn(bookISBN) || bookISBN == "") || (!check.CheckBookYear(Convert.ToString(bookYear)) || bookYear == 0) 
+                if ((!check.CheckName(bookAuthor) || bookAuthor == "") ||(!check.CheckBookName(bookName) || bookName == "") ||(!check.CheckBookIsbn(bookISBN) || bookISBN == "") || (!check.CheckBookYear(Convert.ToString(bookYear)) || bookYear > DateTime.Now.Year || bookYear < 1500) 
                     || (bookInterpreter == 0))
                 {
                     return false;
@@ -59,13 +79,14 @@ namespace LibraryProject.Controllers
                         isbn = bookISBN,
                         place = bookPlace,
                         year = bookYear,
-                        quantity_id = 11,
+                        quantity_id = null,
                         interpreter_id = bookInterpreter,
                         chamber_id = bookChamber,
                         trading_id = null
                     });
 
                     dbHelper.context.SaveChanges();
+                    Settings.Default.bookId = dbHelper.context.books.OrderByDescending(t => t.book_id).FirstOrDefault().book_id;
                     return true;
                 }
             }
@@ -78,10 +99,14 @@ namespace LibraryProject.Controllers
         }
 
         /// <summary>
-        /// Удаляет всю информацию о выбранной книге
+        /// Удаление выбранной книги
         /// </summary>
         /// <param name="selectString" - выбранная пользователем строка DataGrid>
         /// </param>
+        /// /// <returns>
+        /// true - в случае выполнения метода
+        /// false - в случае не выполения метода
+        /// </returns>
         public bool DeleteBookInfo(books selectString)
         {
             try
@@ -120,16 +145,18 @@ namespace LibraryProject.Controllers
         }
 
         /// <summary>
-        /// Возвращает список книг, которые взял пользователь
+        /// Формирование листа книг, которые взял пользователь
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// Лист с книгами, которые взял пользователь
+        /// </returns>
         public List<books> GetTradingBooks()
         {
            return dbHelper.context.books.Where(t => t.trading.login == Settings.Default.login).ToList();
         }
 
         /// <summary>
-        /// 
+        /// Формирование листа книг, которые доступные для пользователя.
         /// </summary>
         /// <param name="userLogin"></param>
         /// <returns></returns>
@@ -255,9 +282,47 @@ namespace LibraryProject.Controllers
 
         }
 
-        //public List<books> GetExtradites(string userLogin, int bookId)
-        //{
-        //    return dbHelper.context.books.Where(t => t.book_id = bookId && t.)
-        //}
+        public bool UpdateBookQuantity(int newQuantity)
+        {
+            try
+            {
+                    foreach (var item in dbHelper.context.books.OrderByDescending(t => t.book_id).ToList().Take(1))
+                    {
+                        item.quantity_id = newQuantity;
+                    }
+
+                    dbHelper.context.SaveChanges();
+                    if (dbHelper.context.SaveChanges() == 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+
+        }
+
+        public int SelectedIndexBookComboBox(trading tradingInfoDataContext, ComboBox BookComboBox)
+        {
+            try
+            {
+                var comboBoxItem = BookComboBox.Items.OfType<books>().FirstOrDefault(x => x.book_id == tradingInfoDataContext.book_id);
+                int index = BookComboBox.SelectedIndex = BookComboBox.Items.IndexOf(comboBoxItem);
+                return index;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
     }
 }

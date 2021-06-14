@@ -1,4 +1,5 @@
 ﻿using LibraryProject.Models;
+using LibraryProject.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,28 @@ namespace LibraryProject.Controllers
         public List<quantity> GetQuantity(int selectBook)
         {
             return dbHelper.context.quantity.Where(t => t.book_id == selectBook).ToList();
+        }
+
+        public bool AddNewQuantity(int newBook)
+        {
+            try
+            {
+                Random rnd = new Random();
+                dbHelper.context.quantity.Add(new quantity
+                {
+                    book_id = newBook,
+                    library_quantity = rnd.Next(0, 15)
+                });
+                dbHelper.context.SaveChanges();
+                Settings.Default.quantityId = dbHelper.context.quantity.OrderByDescending(t => t.quantity_id).FirstOrDefault().quantity_id;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+
         }
 
         public bool ChangeQuantityMinus(int selectBook, List<quantity> bookQuantityList)

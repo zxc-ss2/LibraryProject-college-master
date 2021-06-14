@@ -186,8 +186,8 @@ namespace LibraryProject.Views
             {
                 TextBlock firstSelectedCell = firstSelectedCellContent.Column.GetCellContent(firstSelectedCellContent.Item) as TextBlock;
                 Settings.Default.selectBook2 = Convert.ToInt32(firstSelectedCell.Text);
-
-                this.NavigationService.Navigate(new EditTradingPage());
+                var updateTrading = TradingDataGrid.SelectedItem as trading;
+                this.NavigationService.Navigate(new EditTradingPage(dbHelper.context, updateTrading));
             }
         }
 
@@ -283,7 +283,6 @@ namespace LibraryProject.Views
                 if (waitingController.DeleteEaitingBook(Convert.ToInt32(selectedWaiting.Text)))
                 {
                     WaitingBooksDataGrid.ItemsSource = waitingController.GetWaitingInfo();
-                    MessageBox.Show("Книга была выдана пользователю:" + selectedLogin);
                 }
                 else
                 {

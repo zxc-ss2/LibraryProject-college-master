@@ -341,34 +341,6 @@ namespace LibraryProject.Views
             }
         }
 
-        private void NewDateInput_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            //StringCheck check = new StringCheck();
-
-            //bool trigger = check.CheckDate(Convert.ToString(Convert.ToDateTime(NewDateInput.Text).ToString("yyyy.MM.dd")));
-            //string word = Convert.ToString(Convert.ToDateTime(NewDateInput.Text).ToString("yyyy.MM.dd"));
-
-
-            //foreach (var item in clientsController.ClientsLoginMatchUp(Settings.Default.login))
-            //{
-
-            //    if (trigger && word != Convert.ToString(item.birthday.ToString("yyyy.MM.dd")) && word != "")
-            //    {
-            //        SaveBtn.IsEnabled = true;
-            //    }
-            //    else
-            //    {
-            //        SaveBtn.IsEnabled = false;
-            //    }
-            //}
-
-            //if (NewFirstNameInput.Text == "" || NewLastNameInput.Text == "" || NewPatronymicInput.Text == "" || NewAddressInput.Text == "" ||
-            //    NewPhoneInput.Text == "" || NewLoginInput.Text == "" || NewPasswordInput.Password == "" || NewEmailInput.Text == "")
-            //{
-            //    SaveBtn.IsEnabled = false;
-            //}
-        }
-
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
             if (clientsController.UpdateClientInfo(NewFirstNameInput.Text, NewLastNameInput.Text,  NewPatronymicInput.Text, Convert.ToDateTime(NewDateInput.SelectedDate), NewAddressInput.Text, NewWorkplaceInput.Text, NewStudyplaceInput.Text, NewPhoneInput.Text, NewLoginInput.Text, NewPasswordInput.Password, NewEmailInput.Text, sessionClient))

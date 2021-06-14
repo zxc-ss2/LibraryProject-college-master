@@ -27,6 +27,7 @@ namespace LibraryProject.Views
         readonly FieldsController fieldsController = new FieldsController();
         readonly ChambersController chambersController = new ChambersController();
         readonly InterpretorsController interpretorsController = new InterpretorsController();
+        readonly QuantityController quantityController = new QuantityController();
         public AddBookPage()
         {
             InitializeComponent();
@@ -143,7 +144,7 @@ namespace LibraryProject.Views
             StringCheck check = new StringCheck();
 
             bool trigger = check.CheckBookYear(YearInput.Text);
-            if (!trigger)
+            if (!trigger || Convert.ToInt32(YearInput.Text) < 1500 || Convert.ToInt32(YearInput.Text) > DateTime.Now.Year)
             {
                 YearWarningBtn.Visibility = Visibility.Visible;
             }
@@ -199,7 +200,7 @@ namespace LibraryProject.Views
             }
 
             bool resultYear = check.CheckBookYear(YearInput.Text);
-            if (!resultYear || YearInput.Text == "")
+            if (!resultYear || YearInput.Text == "" || Convert.ToInt32(YearInput.Text) < 1500 || Convert.ToInt32(YearInput.Text) > DateTime.Now.Year)
             {
                 resultString += "Неправильно введен год\n";
             }
@@ -232,14 +233,28 @@ namespace LibraryProject.Views
 
                 if (booksController.AddNewBook(AuthorInput.Text, userBbk, NameInput.Text, ISBNInput.Text, PlaceInput.Text, Convert.ToInt32(YearInput.Text), interpretorsController.GetInterpretorId(InterpreterComboBox.Text), Convert.ToInt32(ChamberComboBox.Text)))
                 {
-                    MessageBox.Show("Книга добавлена");
-                    if (Settings.Default.role == 1)
+                    if(quantityController.AddNewQuantity(Settings.Default.bookId))
                     {
-                        this.NavigationService.Navigate(new MenuAdminPage());
+                        if (booksController.UpdateBookQuantity(Settings.Default.quantityId))
+                        {
+                            MessageBox.Show("Книга добавлена");
+                            if (Settings.Default.role == 1)
+                            {
+                                this.NavigationService.Navigate(new MenuAdminPage());
+                            }
+                            if (Settings.Default.role == 2)
+                            {
+                                this.NavigationService.Navigate(new MenuLibrarianPage());
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Ошибка базы данных, попробуйте позже.");
+                        }
                     }
-                    if (Settings.Default.role == 2)
+                    else
                     {
-                        this.NavigationService.Navigate(new MenuLibrarianPage());
+                        MessageBox.Show("Ошибка базы данных, попробуйте позже.");
                     }
                 }
             }

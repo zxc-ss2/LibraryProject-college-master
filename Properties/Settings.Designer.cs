@@ -90,5 +90,38 @@ namespace LibraryProject.Properties {
                 this["userSelecredBookId"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public int bookId {
+            get {
+                return ((int)(this["bookId"]));
+            }
+            set {
+                this["bookId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public int quantityId {
+            get {
+                return ((int)(this["quantityId"]));
+            }
+            set {
+                this["quantityId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public int trading_id {
+            get {
+                return ((int)(this["trading_id"]));
+            }
+            set {
+                this["trading_id"] = value;
+            }
+        }
     }
 }

@@ -63,7 +63,7 @@
         </DockPanel>
         <DataGrid Grid.Row="1" x:Name="BookDataGrid" Style="{StaticResource BookDataGrid}" ColumnHeaderStyle="{StaticResource HeaderStyle}" ColumnWidth="*" AutoGenerateColumns="False"  IsReadOnly="True" SelectionMode="Single">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="30" Header="#" Binding="{Binding client_id}"></DataGridTextColumn>
+                <DataGridTextColumn Width="30" Header="#" Binding="{Binding book_id}"></DataGridTextColumn>
                 <DataGridTextColumn Width="80" Header="Автор" Binding="{Binding author}"></DataGridTextColumn>
                 <DataGridTextColumn Width="160" Header="Название"  Binding="{Binding name}"></DataGridTextColumn>
                 <DataGridTextColumn Width="70" Header="BBK" Binding="{Binding fields.field_knowledge_bbk}"></DataGridTextColumn>
