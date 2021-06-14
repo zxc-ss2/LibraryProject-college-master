@@ -86,11 +86,8 @@ namespace CheckDatabaseIntegrationTests
             List<trading> updatingTrading = new List<trading>();
             if (tradingController.AddNewTrading(book_id, ticket, Convert.ToDateTime(delivery), Convert.ToDateTime(reception), login))
             {
-                var selectTrading = dbHelper.context.trading.OrderByDescending(t => t.trading_id).ToList().Take(1);
-                foreach (var item in selectTrading)
-                {
-                    updatingTrading.Add(item);
-                }
+                int tradingId = dbHelper.context.trading.OrderByDescending(t => t.trading_id).FirstOrDefault().trading_id;
+                updatingTrading = tradingController.GetTradingString(tradingId);
 
                 if (tradingController.UpdateTradingInfo(Convert.ToInt32(book_id), newTicket, Convert.ToDateTime(delivery), Convert.ToDateTime(reception), updatingTrading))
                 {

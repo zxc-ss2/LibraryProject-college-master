@@ -1,4 +1,5 @@
 ﻿using CheckBbkLib;
+using LibraryProject.Controllers;
 using LibraryProject.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -13,6 +14,7 @@ namespace CheckDatabaseIntegrationTests
     public class CheckDatabaseFields
     {
         readonly DbHelper dbHelper = new DbHelper();
+        FieldsController fieldsController = new FieldsController();
         CheckBbk check = new CheckBbk();
 
 
@@ -29,30 +31,5 @@ namespace CheckDatabaseIntegrationTests
             Assert.IsTrue(trigger);
         }
 
-        [TestMethod]
-        public void CheckBbk_EmptyData_FalseReturned()
-        {
-            //Arrange
-            string bbk = "";
-
-            //Act
-            bool trigger = check.CheckBbkString(bbk);
-
-            //Assert
-            Assert.IsFalse(trigger);
-        }
-
-        [TestMethod]
-        public void CheckBbk_IncorrectData_FalseReturned()
-        {
-            //Arrange
-            string bbk = "234.234.12";
-
-            //Act
-            bool trigger = check.CheckBbkString(bbk);
-
-            //Assert
-            Assert.IsFalse(trigger);
-        }
     }
 }

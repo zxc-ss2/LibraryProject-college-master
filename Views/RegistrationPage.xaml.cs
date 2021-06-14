@@ -23,16 +23,26 @@ namespace LibraryProject.Views
     public partial class RegistrationPage : Page
     {
         readonly Controllers.ClientsController clientsController = new Controllers.ClientsController();
+
+        /// <summary>
+        /// Действия при инициализации страницы RegistrationPage
+        /// </summary>
         public RegistrationPage()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        ///  Событие при клике на кнопку "Войти"
+        /// </summary>
         private void LoginBtnClick(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new AuthorizationPage());
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "NewNameInput"
+        /// </summary>
         private void FirstNameInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             StringCheck check = new StringCheck();
@@ -48,6 +58,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "LastNameInput"
+        /// </summary>
         private void LastNameInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             StringCheck check = new StringCheck();
@@ -63,6 +76,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "PatronymicInput"
+        /// </summary>
         private void PatronymicInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             StringCheck check = new StringCheck();
@@ -78,6 +94,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "AddressInput"
+        /// </summary>
         private void AddressInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             StringCheck check = new StringCheck();
@@ -93,6 +112,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "PhoneInput"
+        /// </summary>
         private void PhoneInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             StringCheck check = new StringCheck();
@@ -108,6 +130,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "LoginInput"
+        /// </summary>
         private void LoginInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             StringCheck check = new StringCheck();
@@ -123,6 +148,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "PasswordInput"
+        /// </summary>
         private void PasswordInput_PasswordChanged(object sender, RoutedEventArgs e)
         {
             StringCheck check = new StringCheck();
@@ -138,6 +166,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        ///  Событие при клике на кнопку "Продолжить"
+        /// </summary>
         private void StartBtnClick(object sender, RoutedEventArgs e)
         {
             Random rnd = new Random();

@@ -23,7 +23,6 @@
                         <TextBlock Style="{StaticResource LeftOfferText}">Пользователи с книгами</TextBlock>
                         <DockPanel Style="{StaticResource AdminDocPanel}">
                             <TextBox  x:Name="SearchLibrarianReadersBox" Style="{StaticResource SearchLibrarianBox}" TextChanged="SearchLibrarianReadersBox_TextChanged"></TextBox>
-                            
                         </DockPanel>
                         <TextBlock Style="{StaticResource PlaceholderLibrarianStyle}" Tag="{Binding ElementName=SearchLibrarianReadersBox}" Text="Введите номер чит. билета " VerticalAlignment="Top">
                         </TextBlock>
@@ -114,7 +113,7 @@
                                 <DataGridTextColumn Width="30" Header="№" Binding="{Binding trading_id}"></DataGridTextColumn>
                                 <DataGridTextColumn Width="100" Header="Номер книги" Binding="{Binding book_id}"></DataGridTextColumn>
                                 <DataGridTextColumn Width="100" Header="Билет"  Binding="{Binding ticket}"></DataGridTextColumn>
-                                <DataGridTextColumn Width="100" Header="Дата выдачч"  Binding="{Binding delivery}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="100" Header="Дата выдачи"  Binding="{Binding delivery}"></DataGridTextColumn>
                                 <DataGridTextColumn Width="100" Header="Дата возврата"  Binding="{Binding reception}"></DataGridTextColumn>
                                 <DataGridTextColumn Width="100" Header="Логин"  Binding="{Binding login}"></DataGridTextColumn>
                             </DataGrid.Columns>

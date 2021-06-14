@@ -9,15 +9,36 @@ using System.Windows;
 
 namespace LibraryProject.Controllers
 {
+    /// <summary>
+    /// Класс для работы с данными таблицы "Quantity"
+    /// </summary>
     public class QuantityController
     {
+        /// <summary>
+        /// Обращение к контексту базы данных
+        /// </summary>
         readonly DbHelper dbHelper = new DbHelper();
 
+        /// <summary>
+        /// Формирование листа с количеством выбранной книги
+        /// </summary>
+        /// <param name="selectBook"></param>
+        /// <returns>
+        /// Лист с количеством выбранной книги
+        /// </returns>
         public List<quantity> GetQuantity(int selectBook)
         {
             return dbHelper.context.quantity.Where(t => t.book_id == selectBook).ToList();
         }
 
+        /// <summary>
+        /// Добавление нового счетчика количества
+        /// </summary>
+        /// <param name="newBook" - идентификатор книги></param>
+        /// <returns>
+        /// true - в случае выполнения метода
+        /// false - в случае не выполения метода
+        /// </returns>
         public bool AddNewQuantity(int newBook)
         {
             try
@@ -40,6 +61,15 @@ namespace LibraryProject.Controllers
 
         }
 
+        /// <summary>
+        /// Изменение количества выбранной книги на -1
+        /// </summary>
+        /// <param name="selectBook" - Идентификатор выбранной книги></param>
+        /// <param name="bookQuantityList" - Лист со старыми данными></param>
+        /// <returns>
+        /// true - в случае выполнения метода
+        /// false - в случае не выполения метода
+        /// </returns>
         public bool ChangeQuantityMinus(int selectBook, List<quantity> bookQuantityList)
         {
             try
@@ -69,6 +99,15 @@ namespace LibraryProject.Controllers
 
         }
 
+        /// <summary>
+        /// Изменеие количества выбранной книги на +1
+        /// </summary>
+        /// <param name="selectBook" - Идентификатор выбранной книги></param>
+        /// <param name="bookQuantityList" - Лист со старыми данными></param>
+        /// <returns>
+        /// true - в случае выполнения метода
+        /// false - в случае не выполения метода
+        /// </returns>
         public bool ChangeQuantityPlus(int selectBook, List<quantity> bookQuantityList)
         {
             try

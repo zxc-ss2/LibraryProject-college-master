@@ -27,6 +27,12 @@ namespace LibraryProject.Views
         readonly TradingController tradingController = new TradingController();
         readonly BooksController booksController = new BooksController();
         readonly List<trading> updatingTrading = new List<trading>();
+
+        /// <summary>
+        /// Действия при инициализации страницы EditTradingPage
+        /// </summary>
+        /// <param name="context" - контекст базы данных></param>
+        /// <param name="bookDataContext" - выбранная строка дата грид></param>
         public EditTradingPage(LibraryEntities context, trading bookDataContext)
         {
             InitializeComponent();
@@ -48,6 +54,9 @@ namespace LibraryProject.Views
         }
 
 
+        /// <summary>
+        /// Событие при вводе текста в поле "NewTicketInput"
+        /// </summary>
         private void NewTicketInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             StringCheck check = new StringCheck();
@@ -74,6 +83,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при выборе новой даты в поле "NewDeliveryInput"
+        /// </summary>
         private void NewDeliveryInput_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             StringCheck check = new StringCheck();
@@ -100,6 +112,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при выборе нового значения в поле "NewBookComboBox"
+        /// </summary>
         private void NewBookComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var word = NewBookComboBox.SelectedItem as books;
@@ -123,7 +138,9 @@ namespace LibraryProject.Views
             }
         }
 
-
+        /// <summary>
+        /// Событие при выборе новой даты в поле "NewReceptionInput"
+        /// </summary>
         private void NewReceptionInput_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             StringCheck check = new StringCheck();
@@ -150,6 +167,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при клике на кнопку "Продолжить"
+        /// </summary>
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
             var book = NewBookComboBox.SelectedItem as books;

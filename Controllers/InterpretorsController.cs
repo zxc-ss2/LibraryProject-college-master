@@ -8,25 +8,47 @@ using System.Windows.Controls;
 
 namespace LibraryProject.Controllers
 {
+    /// <summary>
+    /// Класс для работы с данными таблицы "Interpretors"
+    /// </summary>
     public class InterpretorsController
     {
+        /// <summary>
+        /// Обращение к контексту базы данных
+        /// </summary>
         DbHelper dbHelper = new DbHelper();
 
+        /// <summary>
+        /// Формирование листа со всеми издательствами
+        /// </summary>
+        /// <returns>
+        /// Лист со всемми со всеми издательствами
+        /// </returns>
         public List<interpretors> GetInterpretors()
         {
             return dbHelper.context.interpretors.ToList();
         }
 
+        /// <summary>
+        /// Поиск нужного номера издательства с помощью совпадений в поле interpreter_name
+        /// </summary>
+        /// <param name="userName" - строка, по которой ищутся совпадения></param>
+        /// <returns>
+        /// Икомый номер издательства
+        /// </returns>
         public int GetInterpretorId(string userName)
         {
             return dbHelper.context.interpretors.Where(t => t.interpreter_name.Contains(userName)).First().interpreter_id;
         }
 
-        public string GetInterpretorNameWithId(int userName)
-        {
-            return dbHelper.context.interpretors.Where(t => t.interpreter_id == userName).First().interpreter_name;
-        }
-
+        /// <summary>
+        /// Вывод текущего индекса в комбо бокс
+        /// </summary>
+        /// <param name="booksInfoDataContext" - выбранная строка дата грид></param>
+        /// <param name="newInterpretorComboBox" - Изменяемый комбо бокс></param>
+        /// <returns>
+        /// index - в случае выполнения метода
+        /// </returns>
         public int SelectedIndexInterpretorComboBox(books booksInfoDataContext, ComboBox newInterpretorComboBox)
         {
             try

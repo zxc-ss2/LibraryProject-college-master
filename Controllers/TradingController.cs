@@ -11,20 +11,39 @@ using System.Windows;
 
 namespace LibraryProject.Controllers
 {
-   public class TradingController
+    /// <summary>
+    /// Класс для работы с данными таблицы "Trading"
+    /// </summary>
+    public class TradingController
     {
+        /// <summary>
+        /// Обращение к контексту базы данных
+        /// </summary>
         readonly DbHelper dbHelper = new DbHelper();
 
+        /// <summary>
+        /// Формирование листа со всеми выдачами
+        /// </summary>
+        /// <returns>
+        /// Лист со всеми выдачами
+        /// </returns>
         public List<trading> GetTradingInfo()
         {
             return dbHelper.context.trading.ToList();
         }
 
-        //public List<trading> TradingInfoOutput()
-        //{
-        //    return dbHelper.context.trading.Where(x=>x.login == "UliyaBay").ToList();
-        //}
-
+        /// <summary>
+        /// Добавление новой выдачи
+        /// </summary>
+        /// <param name="bookId" - Идентификатор книги></param>
+        /// <param name="ticket" - Читательский билет></param>
+        /// <param name="deliveryDate" - Дата выдачи></param>
+        /// <param name="receptionDate" - Максимальная дата возврата></param>
+        /// <param name="userLogin" - Логин пользователя, который взял книгу></param>
+        /// <returns>
+        /// true - в случае выполнения метода
+        /// false - в случае не выполения метода
+        /// </returns>
         public bool AddNewTrading(int bookId, string ticket, DateTime deliveryDate, DateTime receptionDate, string userLogin)
         {
             try
@@ -56,6 +75,13 @@ namespace LibraryProject.Controllers
             }
         }
 
+        /// <summary>
+        /// Поиск нужного билета
+        /// </summary>
+        /// <param name="tradingId" - Идентификатор выбранной книги></param>
+        /// <returns>
+        /// Искомый билет
+        /// </returns>
         public string GetNeededTicket(int tradingId)
         {
             try
@@ -70,11 +96,24 @@ namespace LibraryProject.Controllers
             }
         }
 
+        /// <summary>
+        /// Поиск нужного идентификатора выдачи
+        /// </summary>
+        /// <param name="selectBook" - идентификатор выбранной книги></param>
+        /// <returns>
+        /// Искомый идентификатор выдачи
+        /// </returns>
         public int GetNeededTradingId(int selectBook)
         {
             return dbHelper.context.trading.Where(t => t.book_id == selectBook).First().trading_id;
         }
 
+        /// <summary>
+        /// Формирвоание листа со всеми идентификаторами книг выдач
+        /// </summary>
+        /// <returns>
+        /// Лист со всеми идентификаторами книг выдачи
+        /// </returns>
         public List<int> GetBooksId()
         {
             List<int> tradingBooksId = new List<int>();
@@ -93,11 +132,30 @@ namespace LibraryProject.Controllers
             }
         }
 
+        /// <summary>
+        /// Формирование листа с нужной выдачой
+        /// </summary>
+        /// <param name="selectedBook" - Идентификатор книги></param>
+        /// <returns>
+        /// Лист с нужной выдачой
+        /// </returns>
         public List<trading> GetTradingString(int selectedBook)
         {
             return dbHelper.context.trading.Where(t => t.trading_id == selectedBook).ToList();
-        } 
+        }
 
+        /// <summary>
+        /// Обновление выдачи
+        /// </summary>
+        /// <param name="newBook_id" - новый идентификатор книги></param>
+        /// <param name="newTicket" - новый читательский билет></param>
+        /// <param name="newDelivery" - новая дата выдачи></param>
+        /// <param name="newReception" - новая максимальная дата возврата></param>
+        /// <param name="oldBook" - лист со старыми данными></param>
+        /// <returns>
+        /// true - в случае выполнения метода
+        /// false - в случае не выполения метода
+        /// </returns>
         public bool UpdateTradingInfo(int newBook_id, string newTicket, DateTime newDelivery, DateTime newReception, List<trading> oldBook)
         {
             try
@@ -139,6 +197,14 @@ namespace LibraryProject.Controllers
 
         }
 
+        /// <summary>
+        /// Удаление выбранной выдачи
+        /// </summary>
+        /// <param name="selectString" - Идентификатор выбранной выдачи></param>
+        /// <returns>
+        /// true - в случае выполнения метода
+        /// false - в случае не выполения метода
+        /// </returns>
         public bool RemoveTrading(int selectString)
         {
             try

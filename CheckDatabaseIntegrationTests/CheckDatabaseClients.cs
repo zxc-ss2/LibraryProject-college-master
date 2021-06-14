@@ -160,6 +160,7 @@ namespace CheckDatabaseIntegrationTests
             if (clientsController.AddNewUser(name, surname, patronymic, Convert.ToDateTime(birthday), address, workplace, studyplace, phone, login, password, email, ticket))
             {
                 int updatedClientsLength = dbHelper.context.clients.Count();
+                updatingClient = clientsController.ClientsLoginMatchUp("User");
                 if (clientsController.UpdateClientInfo(newName, surname, patronymic, Convert.ToDateTime(birthday), address, studyplace, workplace, phone, login, password, email, updatingClient))
                 {
                     dbHelper = new DbHelper();

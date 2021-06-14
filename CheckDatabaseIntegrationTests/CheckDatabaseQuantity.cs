@@ -19,7 +19,7 @@ namespace CheckDatabaseIntegrationTests
         public void EditQuantityMinus_CorrectData_TrueReturned()
         {
             //Arrange
-            int book_id = 3;
+            int book_id = 5;
             List<quantity> quantityList = new List<quantity>();
             string expectedName = "";
 
@@ -56,7 +56,7 @@ namespace CheckDatabaseIntegrationTests
         public void EditQuantityPlus_CorrectData_TrueReturned()
         {
             //Arrange
-            int book_id = 3;
+            int book_id = 5;
             List<quantity> quantityList = new List<quantity>();
             string expectedName = "";
 

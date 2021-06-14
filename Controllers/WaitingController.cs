@@ -9,15 +9,38 @@ using System.Windows;
 
 namespace LibraryProject.Controllers
 {
+    /// <summary>
+    /// Класс для работы с данными таблицы "Waiting"
+    /// </summary>
     public class WaitingController
     {
+        /// <summary>
+        /// Обращение к контексту базы данных
+        /// </summary>
         readonly DbHelper dbHelper = new DbHelper();
 
+        /// <summary>
+        ///  Формирование листа с искомой ожидающей книгой
+        /// </summary>
+        /// <param name="searchInfo" - строка, по которой ищутся совпадения></param>
+        /// <returns>
+        /// Лист с искомой ожидающей книгой
+        /// </returns>
         public List<waiting> WaitingMatchUpInfoOutput(string searchInfo)
         {
             return dbHelper.context.waiting.Where(t => t.ticket.Contains(searchInfo)).ToList();
         }
 
+        /// <summary>
+        /// Добавление новой ожидающей книги
+        /// </summary>
+        /// <param name="userLogin" - логин></param>
+        /// <param name="bookId" - идентификатор книги></param>
+        /// <param name="ticket" - читательский билет></param>
+        /// <returns>
+        /// true - в случае выполнения метода
+        /// false - в случае не выполения метода
+        /// </returns>
         public bool AddNewWaiting(string userLogin, int bookId, string ticket)
         {
             try
@@ -49,11 +72,25 @@ namespace LibraryProject.Controllers
             }
         }
 
+        /// <summary>
+        /// Форсмрование листа со всеми ожидающими книгами
+        /// </summary>
+        /// <returns>
+        /// Лист со всеми ожидающими книгами
+        /// </returns>
         public List<waiting> GetWaitingInfo()
         {
             return dbHelper.context.waiting.ToList();
         }
 
+        /// <summary>
+        /// Удаление ожидающей книги
+        /// </summary>
+        /// <param name="selectString" - Иднетификатор книги></param>
+        /// <returns>
+        /// true - в случае выполнения метода
+        /// false - в случае не выполения метода
+        /// </returns>
         public bool DeleteEaitingBook(int selectString)
         {
             try

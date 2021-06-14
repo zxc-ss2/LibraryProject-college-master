@@ -30,6 +30,12 @@ namespace LibraryProject.Views
         readonly InterpretorsController interpretorsController = new InterpretorsController();
         readonly FieldsController fieldsController = new FieldsController();
         readonly List<books> updatingBook = new List<books>();
+
+        /// <summary>
+        /// Действия при инициализации страницы EditBookPage
+        /// </summary>
+        /// <param name="context" - контекст базы данных></param>
+        /// <param name="bookDataContext" - выбранная строка дата грид></param>
         public EditBookPage(LibraryEntities context, books bookDataContext)
         {
             InitializeComponent();
@@ -63,6 +69,9 @@ namespace LibraryProject.Views
 
         }
 
+        /// <summary>
+        /// Событие при клике на кнопку "Ввести вручную"
+        /// </summary>
         private void DirectInputBtn_Click(object sender, RoutedEventArgs e)
         {
             SelectInputBtn.Visibility = Visibility.Visible;
@@ -70,8 +79,13 @@ namespace LibraryProject.Views
             DirectInputTextBox.Visibility = Visibility.Visible;
             NewBBkInputComboBox.Visibility = Visibility.Collapsed;
             SelectShowDocPanel.Visibility = Visibility.Collapsed;
+            BbkSearchBox.Visibility = Visibility.Collapsed;
+            BbkPlaceholderTextBox.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// Событие при клике на кнопку "Вернуться к списку"
+        /// </summary>
         private void SelectInputBtn_Click(object sender, RoutedEventArgs e)
         {
             SelectInputBtn.Visibility = Visibility.Collapsed;
@@ -79,7 +93,13 @@ namespace LibraryProject.Views
             DirectInputTextBox.Visibility = Visibility.Collapsed;
             NewBBkInputComboBox.Visibility = Visibility.Visible;
             SelectShowDocPanel.Visibility = Visibility.Visible;
+            BbkSearchBox.Visibility = Visibility.Visible;
+            BbkPlaceholderTextBox.Visibility = Visibility.Visible;
         }
+
+        /// <summary>
+        /// Событие при вводе текста в поле "NewAuthorInput"
+        /// </summary>
         private void NewAuthorInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             StringCheck check = new StringCheck();
@@ -106,6 +126,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "NewNameInput"
+        /// </summary>
         private void NewNameInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             StringCheck check = new StringCheck();
@@ -132,6 +155,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "NewBbkInput"
+        /// </summary>
         private void NewBbkInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             string word = NewBBkInputComboBox.Text;
@@ -155,6 +181,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "NewIsbnInput"
+        /// </summary>
         private void NewIsbnInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             StringCheck check = new StringCheck();
@@ -181,6 +210,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "NewPlaceInput"
+        /// </summary>
         private void NewPlaceInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             string word = NewPlaceInput.Text;
@@ -204,6 +236,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "NewYearInput"
+        /// </summary>
         private void NewYearInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             StringCheck check = new StringCheck();
@@ -230,8 +265,9 @@ namespace LibraryProject.Views
             }
         }
 
-
-
+        /// <summary>
+        /// Событие при выборе нового значения в поле "NewInterpreterComboBox"
+        /// </summary>
         private void NewInterpreterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var word = NewInterpreterComboBox.SelectedItem as interpretors;
@@ -255,6 +291,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при выборе нового значения в поле "NewChamberComboBox"
+        /// </summary>
         private void NewChamberComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var word = NewChamberComboBox.SelectedItem as chambers;
@@ -278,6 +317,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при выборе нового значения в поле "NewBBkInputComboBox"
+        /// </summary>
         private void NewBBkInputComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var word = NewBBkInputComboBox.SelectedItem as fields;
@@ -300,18 +342,14 @@ namespace LibraryProject.Views
                 SaveBtn.IsEnabled = false;
             }
         }
+
+        /// <summary>
+        /// Событие при вводе текста в поле "DirectInputTextBox"
+        /// </summary>
         private void DirectInputTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             List<string> zxc = fieldsController.GetBbkNumbers();
             string word = DirectInputTextBox.Text;
-
-            //foreach (var item in fieldsController.GetBbkNumbers())
-            //{
-            //    if (item.Contains(word))
-            //    {
-            //        return true;
-            //    }
-            //}
 
             if (zxc.Contains(word))
             {
@@ -342,6 +380,9 @@ namespace LibraryProject.Views
         }
 
 
+        /// <summary>
+        /// Событие при клике на кнопку "Продолжить"
+        /// </summary>
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
             var chamber = NewChamberComboBox.SelectedItem as chambers;

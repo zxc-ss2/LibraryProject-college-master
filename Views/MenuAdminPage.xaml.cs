@@ -25,6 +25,10 @@ namespace LibraryProject.Views
         readonly BooksController booksController = new BooksController();
         readonly ClientsController clientsController = new ClientsController();
         readonly FormularController formularController = new FormularController();
+
+        /// <summary>
+        /// Действия при инициализации страницы MenuAdminPage
+        /// </summary>
         public MenuAdminPage()
         {
             InitializeComponent();
@@ -32,16 +36,35 @@ namespace LibraryProject.Views
             ClientDataGrid.ItemsSource = clientsController.ClientsInfoOutputWithOutAdmin();
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "SearchAdminBooksBox"
+        /// </summary>
+
         private void SearchAdminBooksBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             BookDataGrid.ItemsSource = booksController.BooksMatchUpInfoOutput(SearchAdminBooksBox.Text);
+            if(SearchAdminBooksBox.Text == string.Empty)
+            {
+                BookDataGrid.ItemsSource = booksController.BooksInfoOutput();
+            }
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "SearchAdminReadersBox"
+        /// </summary>
         private void SearchAdminReadersBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             ClientDataGrid.ItemsSource = clientsController.ClientsMatchUpInfoOutput(SearchAdminReadersBox.Text);
+            if (SearchAdminReadersBox.Text == string.Empty)
+            {
+                ClientDataGrid.ItemsSource = clientsController.ClientsInfoOutputWithOutAdmin();
+            }
         }
 
+
+        /// <summary>
+        /// Событие при клике на кнопку "Удалить"
+        /// </summary>
         private void DeleteClientBtn_Click(object sender, RoutedEventArgs e)
         {
 
@@ -75,11 +98,17 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при клике на кнопку "Добавить"
+        /// </summary>
         private void AddBookBtn_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new AddBookPage());
         }
 
+        /// <summary>
+        /// Событие при клике на кнопку "Удалить"
+        /// </summary>
         private void DelteBookBtn_Click(object sender, RoutedEventArgs e)
         {
             var item = BookDataGrid.SelectedItem as Models.books;
@@ -112,6 +141,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при клике на кнопку "Добавить"
+        /// </summary>
         private void AddClientBtn_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new RegistrationPage());

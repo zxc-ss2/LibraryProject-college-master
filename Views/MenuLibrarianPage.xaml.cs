@@ -28,11 +28,14 @@ namespace LibraryProject.Views
         DbHelper dbHelper = new DbHelper();
         TradingController tradingController = new TradingController();
         BooksController booksController = new BooksController();
-        BbkCheckClass bbkCheckClass = new BbkCheckClass(); 
         QuantityController quantityController = new QuantityController();
         ClientsController clientsController = new ClientsController(); 
         WaitingController waitingController = new WaitingController(); 
-        FormularController formularController = new FormularController(); 
+        FormularController formularController = new FormularController();
+
+        /// <summary>
+        /// Действия при инициализации страницы MenuLibrarianPage
+        /// </summary>
         public MenuLibrarianPage()
         {
             InitializeComponent();
@@ -42,6 +45,9 @@ namespace LibraryProject.Views
             WaitingBooksDataGrid.ItemsSource = waitingController.GetWaitingInfo();
         }
 
+        /// <summary>
+        /// Событие при клике на кнопку "Удалить"
+        /// </summary>
         private void DeleteTradingInfoBtn_Click(object sender, RoutedEventArgs e)
         {
             var secondSelectedCellContent = new DataGridCellInfo(TradingDataGrid.SelectedItem, TradingDataGrid.Columns[1]);
@@ -115,11 +121,17 @@ namespace LibraryProject.Views
             
         }
 
+        /// <summary>
+        /// Событие при клике на кнопку "Добавить"
+        /// </summary>
         private void AddTradingInfoBtn_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new AddBookPage());
         }
 
+        /// <summary>
+        /// Событие при клике на кнопку "Удалить"
+        /// </summary>
         private void DeleteBookInfoBtn_Click(object sender, RoutedEventArgs e)
         {
             var item = BookDataGrid.SelectedItem as Models.books;
@@ -153,11 +165,17 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при клике на кнопку "Добавить"
+        /// </summary>
         private void AddBookInfoBtn_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new AddBookPage());
         }
 
+        /// <summary>
+        /// Событие при клике на кнопку "Изменить"
+        /// </summary>
         private void EditBookInfoBtn_Click(object sender, RoutedEventArgs e)
         {
             var firstSelectedCellContent = new DataGridCellInfo(BookDataGrid.SelectedItem, BookDataGrid.Columns[0]);
@@ -175,6 +193,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при клике на кнопку "Изменить"
+        /// </summary>
         private void EditTradingInfoBtn_Click(object sender, RoutedEventArgs e)
         {
             var firstSelectedCellContent = new DataGridCellInfo(TradingDataGrid.SelectedItem, TradingDataGrid.Columns[0]);
@@ -191,6 +212,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при клике на кнопку "Одобрить"
+        /// </summary>
         private void ApproveBtn_Click(object sender, RoutedEventArgs e)
         {
             if(WaitingBooksDataGrid.SelectedItem == null)
@@ -263,23 +287,20 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при клике на кнопку "Отклонить"
+        /// </summary>
         private void DeniedBtn_Click(object sender, RoutedEventArgs e)
         {
-            var firstSelectedCellContent = new DataGridCellInfo(WaitingBooksDataGrid.SelectedItem, WaitingBooksDataGrid.Columns[0]);
-            TextBlock selectedWaiting = firstSelectedCellContent.Column.GetCellContent(firstSelectedCellContent.Item) as TextBlock;
-            var secondSelectedCellContent = new DataGridCellInfo(WaitingBooksDataGrid.SelectedItem, WaitingBooksDataGrid.Columns[1]);
-            TextBlock selectedBook = secondSelectedCellContent.Column.GetCellContent(secondSelectedCellContent.Item) as TextBlock;
-            var thirdSelectedCellContent = new DataGridCellInfo(WaitingBooksDataGrid.SelectedItem, WaitingBooksDataGrid.Columns[2]);
-            TextBlock selectedTicket = thirdSelectedCellContent.Column.GetCellContent(thirdSelectedCellContent.Item) as TextBlock;
-            var fourSelectedCellContent = new DataGridCellInfo(WaitingBooksDataGrid.SelectedItem, WaitingBooksDataGrid.Columns[3]);
-            TextBlock selectedLogin = fourSelectedCellContent.Column.GetCellContent(fourSelectedCellContent.Item) as TextBlock;
-
             if (WaitingBooksDataGrid.SelectedItem == null)
             {
                 MessageBox.Show("Не выбрано ни одной книги");
             }
             else
             {
+                var firstSelectedCellContent = new DataGridCellInfo(WaitingBooksDataGrid.SelectedItem, WaitingBooksDataGrid.Columns[0]);
+                TextBlock selectedWaiting = firstSelectedCellContent.Column.GetCellContent(firstSelectedCellContent.Item) as TextBlock;
+
                 if (waitingController.DeleteEaitingBook(Convert.ToInt32(selectedWaiting.Text)))
                 {
                     WaitingBooksDataGrid.ItemsSource = waitingController.GetWaitingInfo();
@@ -291,26 +312,57 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "SearchLibrarianReadersBox"
+        /// </summary>
         private void SearchLibrarianReadersBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             TradingClientsGrid.ItemsSource = clientsController.ClientsMatchUpInfoOutput(SearchLibrarianReadersBox.Text);
+            if(SearchLibrarianReadersBox.Text == string.Empty)
+            {
+                TradingClientsGrid.ItemsSource = clientsController.GetClientsWithTrading();
+            }
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "SearchLibrarianBooksBox"
+        /// </summary>
         private void SearchLibrarianBooksBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             BookDataGrid.ItemsSource = booksController.BooksMatchUpInfoOutput(SearchLibrarianBooksBox.Text);
+            if (SearchLibrarianBooksBox.Text == string.Empty)
+            {
+                BookDataGrid.ItemsSource = booksController.BooksInfoOutput();
+            }
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "SearchLibrarianTradingBooksBox"
+        /// </summary>
         private void SearchLibrarianTradingBooksBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             TradingDataGrid.ItemsSource = booksController.BooksMatchUpInfoOutput(SearchLibrarianTradingBooksBox.Text);
+            if (SearchLibrarianTradingBooksBox.Text == string.Empty)
+            {
+                TradingDataGrid.ItemsSource = tradingController.GetTradingInfo();
+            }
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "SearchLibrarianWaitingBooksBox"
+        /// </summary>
         private void SearchLibrarianWaitingBooksBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             WaitingBooksDataGrid.ItemsSource = waitingController.WaitingMatchUpInfoOutput(SearchLibrarianWaitingBooksBox.Text);
+            if (SearchLibrarianWaitingBooksBox.Text == string.Empty)
+            {
+                WaitingBooksDataGrid.ItemsSource = waitingController.GetWaitingInfo();
+            }
         }
 
+        /// <summary>
+        /// Событие при клике на кнопку "Выгрузить csv"
+        /// </summary>
         private void GetCsvFileBtn_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog file = new SaveFileDialog();

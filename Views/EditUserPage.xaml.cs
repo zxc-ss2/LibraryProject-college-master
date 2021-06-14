@@ -26,6 +26,11 @@ namespace LibraryProject.Views
     {
         readonly ClientsController clientsController = new ClientsController();
         readonly List<clients> sessionClient = new List<clients>();
+
+        /// <summary>
+        /// Действия при инициализации страницы EditUserPage
+        /// </summary>
+        /// <param name="password" - пароль авторизованного пользователя></param>
         public EditUserPage(string password)
         {
             InitializeComponent();
@@ -48,6 +53,9 @@ namespace LibraryProject.Views
             sessionClient = clientsController.ClientsLoginMatchUp(Settings.Default.login);
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "FirstNameInput"
+        /// </summary>
         private void FirstNameInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             StringCheck check = new StringCheck();
@@ -75,6 +83,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "LastNameInput"
+        /// </summary>
         private void LastNameInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             StringCheck check = new StringCheck();
@@ -102,6 +113,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "PatronymicInput"
+        /// </summary>
         private void PatronymicInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             StringCheck check = new StringCheck();
@@ -129,6 +143,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "AddressInput"
+        /// </summary>
         private void AddressInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             StringCheck check = new StringCheck();
@@ -156,6 +173,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "WorkplaceInput"
+        /// </summary>
         private void WorkplaceInput_TextChanged(object sender, TextChangedEventArgs e)
         {
 
@@ -181,6 +201,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "StudyplaceInput"
+        /// </summary>
         private void StudyplaceInput_TextChanged(object sender, TextChangedEventArgs e)
         {
 
@@ -206,6 +229,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "PhoneInput"
+        /// </summary>
         private void PhoneInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             StringCheck check = new StringCheck();
@@ -233,6 +259,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "LoginInput"
+        /// </summary>
         private void LoginInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             StringCheck check = new StringCheck();
@@ -260,6 +289,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "PasswordInput"
+        /// </summary>
         private void PasswordInput_PasswordChanged(object sender, RoutedEventArgs e)
         {
             StringCheck check = new StringCheck();
@@ -287,7 +319,10 @@ namespace LibraryProject.Views
             }
         }
 
-        private void NewEmailInput_SelectionChanged(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Событие при вводе текста в поле "NewEmailInput"
+        /// </summary>
+        private void NewEmailInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             StringCheck check = new StringCheck();
 
@@ -314,6 +349,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при выборе новой даты в поле "NewDateInput"
+        /// </summary>
         private void NewDateInput_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             StringCheck check = new StringCheck();
@@ -341,6 +379,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при клике на кнопку "Продолжить"
+        /// </summary>
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
             if (clientsController.UpdateClientInfo(NewFirstNameInput.Text, NewLastNameInput.Text,  NewPatronymicInput.Text, Convert.ToDateTime(NewDateInput.SelectedDate), NewAddressInput.Text, NewWorkplaceInput.Text, NewStudyplaceInput.Text, NewPhoneInput.Text, NewLoginInput.Text, NewPasswordInput.Password, NewEmailInput.Text, sessionClient))
@@ -349,15 +390,15 @@ namespace LibraryProject.Views
                 MessageBox.Show("Данные успешно обновлены");
                 if (Settings.Default.role == 1)
                 {
-                    this.NavigationService.Navigate(new MenuAdminPage());
+                    this.NavigationService.Navigate(new AuthorizationPage());
                 }
                 if (Settings.Default.role == 2)
                 {
-                    this.NavigationService.Navigate(new MenuLibrarianPage());
+                    this.NavigationService.Navigate(new AuthorizationPage());
                 }
                 if (Settings.Default.role == 3)
                 {
-                    this.NavigationService.Navigate(new MenuClientPage());
+                    this.NavigationService.Navigate(new AuthorizationPage());
                 }
             }
             else
@@ -365,6 +406,5 @@ namespace LibraryProject.Views
                 MessageBox.Show("Данные не были обновлены");
             }
         }
-
     }
 }

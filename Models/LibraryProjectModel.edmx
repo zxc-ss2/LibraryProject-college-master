@@ -208,9 +208,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_formular_books">
-          <End Role="books" Type="Self.books" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="books" Type="Self.books" Multiplicity="0..1" />
           <End Role="formular" Type="Self.formular" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="books">
@@ -479,9 +477,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_formular_books">
-          <End Role="books" Type="Self.books" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="books" Type="Self.books" Multiplicity="0..1" />
           <End Role="formular" Type="Self.formular" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="books">

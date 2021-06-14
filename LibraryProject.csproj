@@ -93,7 +93,6 @@
     <Compile Include="Controllers\InterpretorsController.cs" />
     <Compile Include="Controllers\QuantityController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
-    <Compile Include="Controllers\StorageController.cs" />
     <Compile Include="Controllers\TradingController.cs" />
     <Compile Include="Controllers\WaitingController.cs" />
     <Compile Include="Models\books.cs">
@@ -313,6 +312,7 @@
       <DependentUpon>LibraryProjectModel.edmx</DependentUpon>
       <LastGenOutput>LibraryProjectModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\images\logo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

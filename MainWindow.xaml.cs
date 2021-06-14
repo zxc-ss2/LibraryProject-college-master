@@ -22,6 +22,9 @@ namespace LibraryProject
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Действия при инициализации главной страницы MainWindow
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -31,11 +34,17 @@ namespace LibraryProject
         public string login;
         public string password;
 
+        /// <summary>
+        /// Событие при клике на картинку "PersonalAreaImage"
+        /// </summary>
         private void PersonalAreaImage_MouseDown(object sender, MouseButtonEventArgs e)
         {
             MainFrame.Navigate(new Views.EditUserPage(password));
         }
 
+        /// <summary>
+        /// Событие при клике на картинку "Image"
+        /// </summary>
         private void Image_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (MainFrame.CanGoBack)
@@ -107,11 +116,17 @@ namespace LibraryProject
             }
         }
 
+        /// <summary>
+        /// Событие при клике на кнопку "Выйти"
+        /// </summary>
         private void ExitBtn_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
 
+        /// <summary>
+        /// Событие при клике на кнопку "Выйти"
+        /// </summary>
         private void LogOutBtn_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите выйти?", "Выход из аккаунта", MessageBoxButton.YesNoCancel);

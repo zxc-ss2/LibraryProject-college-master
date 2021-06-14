@@ -127,11 +127,8 @@ namespace CheckDatabaseIntegrationTests
 
             if (booksController.AddNewBook(author, field_knowledge_id, name, isbn, place, year, interpreter_id, chamber_id))
             {
-                var selectTrading = dbHelper.context.books.OrderByDescending(t => t.book_id).ToList().Take(1);
-                foreach (var item in selectTrading)
-                {
-                    updatingClient.Add(item);
-                };
+                int tradingId = dbHelper.context.books.OrderByDescending(t => t.book_id).FirstOrDefault().book_id;
+                updatingClient = booksController.GetBookId(tradingId);
 
                 if (booksController.UpdateBookInfo(author, field_knowledge_id, newName, isbn, place, year, interpreter_id, chamber_id, updatingClient))
                 {

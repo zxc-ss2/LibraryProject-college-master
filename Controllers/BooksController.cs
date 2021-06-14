@@ -13,9 +13,20 @@ using System.Windows.Controls;
 
 namespace LibraryProject.Controllers
 {
+    /// <summary>
+    /// Класс для работы с данными таблицы "Books"
+    /// </summary>
     public class BooksController
     {
+        /// <summary>
+        /// Обращение к контексту базы данных
+        /// </summary>
         DbHelper dbHelper = new DbHelper();
+
+
+        /// <summary>
+        /// Обращение к классу "tradingController"
+        /// </summary>
         readonly TradingController tradingController = new TradingController();
 
         /// <summary>
@@ -30,7 +41,7 @@ namespace LibraryProject.Controllers
         }
 
         /// <summary>
-        /// Поиск совпадений полей authoe, isbn с вводимыми данными
+        /// Поиск совпадений полей author, isbn с вводимой строкой
         /// </summary>
         /// <param name="info" - строка, по которой ищутся совпадения>
         /// </param>
@@ -156,10 +167,12 @@ namespace LibraryProject.Controllers
         }
 
         /// <summary>
-        /// Формирование листа книг, которые доступные для пользователя.
+        /// Формирование листа книг, которые доступные для читателя.
         /// </summary>
-        /// <param name="userLogin"></param>
-        /// <returns></returns>
+        /// <param name="userLogin" - логин авторизовавшегося пользователя></param>
+        /// <returns>
+        /// Лист с книгами, которые доступны для читателя
+        /// </returns>
         public List<books> GetAvailableBooks(string userLogin)
         {
             List<books> AvailbleBooksList = new List<books>();
@@ -190,6 +203,15 @@ namespace LibraryProject.Controllers
 
         }
 
+        /// <summary>
+        /// Добавление номера выдачи книге
+        /// </summary>
+        /// <param name="selectBook" - идентификатор книги></param>
+        /// <param name="newTradingId" - идентификатор выдачи></param>
+        /// <returns>
+        /// true - в случае выполнения метода
+        /// false - в случае не выполения метода
+        /// </returns>
         public bool AssignIdTradingToBook(int selectBook, int newTradingId)
         {
             try
@@ -210,6 +232,14 @@ namespace LibraryProject.Controllers
 
         }
 
+        /// <summary>
+        /// Удаление номера выдачи у книги
+        /// </summary>
+        /// <param name="selectBook"></param>
+        /// <returns>
+        /// true - в случае выполнения метода
+        /// false - в случае не выполения метода
+        /// </returns>
         public bool RemoveIdTradingFromBook(int selectBook)
         {
             try
@@ -230,11 +260,34 @@ namespace LibraryProject.Controllers
             
         }
 
+        /// <summary>
+        /// Формирование листа книги, выбранной по ее номеру
+        /// </summary>
+        /// <param name="selectBookId" - номер книги></param>
+        /// <returns>
+        /// Лист книги, выбранной по ее номеру
+        /// </returns>
         public List<books> GetBookWithId(int selectBookId)
         {
             return dbHelper.context.books.Where(t => t.book_id == selectBookId).ToList();
         }
 
+        /// <summary>
+        /// Обновление данных выбранной книги
+        /// </summary>
+        /// <param name="newAuthor" - новое имя автора></param>
+        /// <param name="newfFieldKnowledgeId" - новый идентификатор ббк></param>
+        /// <param name="newName" - новое имя></param>
+        /// <param name="newIsbn" - новый шифр isbn></param>
+        /// <param name="newPlace" - новое место издания></param>
+        /// <param name="newYear" - новый год издания></param>
+        /// <param name="newInterpretorId" - новый идентификатор издательства></param>
+        /// <param name="newChamberId" - новый иднетификатор отсека></param>
+        /// <param name="oldBook" - лист со старыми данными книги></param>
+        /// <returns>
+        /// true - в случае выполнения метода
+        /// false - в случае не выполения метода
+        /// </returns>
         public bool UpdateBookInfo(string newAuthor, int newfFieldKnowledgeId, string newName, string newIsbn, string newPlace, int newYear, int newInterpretorId, int newChamberId, List<books> oldBook)
         {
             try
@@ -282,6 +335,14 @@ namespace LibraryProject.Controllers
 
         }
 
+        /// <summary>
+        /// Добавление книге ее количества
+        /// </summary>
+        /// <param name="newQuantity" - номер счетчика></param>
+        /// <returns>
+        /// true - в случае выполнения метода
+        /// false - в случае не выполения метода
+        /// </returns>
         public bool UpdateBookQuantity(int newQuantity)
         {
             try
@@ -311,6 +372,14 @@ namespace LibraryProject.Controllers
 
         }
 
+        /// <summary>
+        /// Вывод текущего индекса в комбо бокс
+        /// </summary>
+        /// <param name="tradingInfoDataContext" - выбранная строка дата грида></param>
+        /// <param name="BookComboBox" - изменяемый комбо бокс></param>
+        /// <returns>
+        /// index - в случае выполнения метода
+        /// </returns>
         public int SelectedIndexBookComboBox(trading tradingInfoDataContext, ComboBox BookComboBox)
         {
             try
@@ -323,6 +392,11 @@ namespace LibraryProject.Controllers
             {
                 return 0;
             }
+        }
+
+        public List<books> GetBookId(int count)
+        {
+            return dbHelper.context.books.Where(t => t.book_id == count).ToList();
         }
     }
 }

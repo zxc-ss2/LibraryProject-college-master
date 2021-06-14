@@ -28,6 +28,10 @@ namespace LibraryProject.Views
         readonly ChambersController chambersController = new ChambersController();
         readonly InterpretorsController interpretorsController = new InterpretorsController();
         readonly QuantityController quantityController = new QuantityController();
+
+        /// <summary>
+        /// Действия при инициализации страницы AddBookPage
+        /// </summary>
         public AddBookPage()
         {
             InitializeComponent();
@@ -44,6 +48,9 @@ namespace LibraryProject.Views
             InterpreterComboBox.SelectedValuePath = "interpreter_id";
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "BbkSearchBox"
+        /// </summary>
         private void BbkSearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             try
@@ -62,6 +69,9 @@ namespace LibraryProject.Views
 
         }
 
+        /// <summary>
+        /// Событие при клике на кнопку "BBK"
+        ///</summary>
         private void RadioButtonBbk_Click(object sender, RoutedEventArgs e)
         {
             BBkInputComboBox.ItemsSource = fieldsController.GetBbk();
@@ -69,6 +79,9 @@ namespace LibraryProject.Views
             BBkInputComboBox.SelectedValuePath = "field_knowledge_id";
         }
 
+        /// <summary>
+        /// Событие при клике на кнопку "Название"
+        ///</summary>
         private void RadioButtonName_Click(object sender, RoutedEventArgs e)
         {
             BBkInputComboBox.ItemsSource = fieldsController.GetBbk();
@@ -76,6 +89,9 @@ namespace LibraryProject.Views
             BBkInputComboBox.SelectedValuePath = "field_knowledge_id";
         }
 
+        /// <summary>
+        /// Событие при клике на кнопку "Вести вручную"
+        /// </summary>
         private void DirectInputBtn_Click(object sender, RoutedEventArgs e)
         {
             SelectInputBtn.Visibility = Visibility.Visible;
@@ -83,8 +99,13 @@ namespace LibraryProject.Views
             DirectInputTextBox.Visibility = Visibility.Visible;
             BBkInputComboBox.Visibility = Visibility.Collapsed;
             SelectShowDocPanel.Visibility = Visibility.Collapsed;
+            BbkSearchBox.Visibility = Visibility.Collapsed;
+            BbkPlaceholderTextBox.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// Событие при клике на кнопку "Вернуться к списку"
+        /// </summary>
         private void SelectInputBtn_Click(object sender, RoutedEventArgs e)
         {
             SelectInputBtn.Visibility = Visibility.Collapsed;
@@ -92,8 +113,13 @@ namespace LibraryProject.Views
             DirectInputTextBox.Visibility = Visibility.Collapsed;
             BBkInputComboBox.Visibility = Visibility.Visible;
             SelectShowDocPanel.Visibility = Visibility.Visible;
+            BbkSearchBox.Visibility = Visibility.Collapsed;
+            BbkPlaceholderTextBox.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "AuthorInput"
+        /// </summary>
         private void AuthorInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             StringCheck check = new StringCheck();
@@ -109,6 +135,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "NameInput"
+        /// </summary>
         private void NameInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             StringCheck check = new StringCheck();
@@ -124,6 +153,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "ISBNInput"
+        /// </summary>
         private void ISBNInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             StringCheck check = new StringCheck();
@@ -139,6 +171,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "YearInput"
+        /// </summary>
         private void YearInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             StringCheck check = new StringCheck();
@@ -154,6 +189,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при вводе текста в поле "DirectInputTextBox"
+        /// </summary>
         private void DirectInputTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             List<string> zxc = fieldsController.GetBbkNumbers();
@@ -169,6 +207,9 @@ namespace LibraryProject.Views
             }
         }
 
+        /// <summary>
+        /// Событие при клике на кнопку "Продолжить"
+        /// </summary>
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
             StringCheck check = new StringCheck();
@@ -263,11 +304,6 @@ namespace LibraryProject.Views
                 MessageBox.Show(resultString);
             }
             
-        }
-
-        private void BBkInputComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }

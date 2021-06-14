@@ -22,7 +22,6 @@ namespace CheckBbkLib
                     return true;
                 }
             }
-
             return false;
         }
     }

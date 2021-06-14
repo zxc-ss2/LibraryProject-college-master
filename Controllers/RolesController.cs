@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace LibraryProject.Controllers
 {
+    /// <summary>
+    /// Класс для работы с данными таблицы "Roles"
+    /// </summary>
     public class RolesController
     {
     }

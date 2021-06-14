@@ -23,6 +23,10 @@ namespace LibraryProject.Views
     public partial class AuthorizationPage : Page
     {
         readonly ClientsController clientsController = new ClientsController();
+
+        /// <summary>
+        /// Действия при инициализации страницы AuthorizationPage
+        /// </summary>
         public AuthorizationPage()
         {
             InitializeComponent();
@@ -31,11 +35,17 @@ namespace LibraryProject.Views
             PasswordTextBox.Text = String.Empty;
         }
 
+        /// <summary>
+        /// Событие при клике на кнопку "Зарегистрироваться"
+        /// </summary>
         private void SignUpBtnClick(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new RegistrationPage());
         }
 
+        /// <summary>
+        /// Событие при клике на кнопку "Войти"
+        /// </summary>
         private void LoginBtnClick(object sender, RoutedEventArgs e)
         {
             if (clientsController.CheckUser(LoginTextBox.Text, PasswordTextBox.Text))
