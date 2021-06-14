@@ -628,8 +628,8 @@ Value="{x:Static sys:String.Empty}">
     <SolidColorBrush x:Key="ComboBox.Static.Editable.Button.Border" Color="Transparent"/>
     <SolidColorBrush x:Key="ComboBox.MouseOver.Glyph" Color="#FF000000"/>
     <LinearGradientBrush x:Key="ComboBox.MouseOver.Background" EndPoint="0,1" StartPoint="0,0">
-        <GradientStop Color="#FFECF4FC" Offset="0.0"/>
-        <GradientStop Color="#FFDCECFC" Offset="1.0"/>
+        <GradientStop Color="#24313c" Offset="0.0"/>
+        <GradientStop Color="#24313c" Offset="1.0"/>
     </LinearGradientBrush>
     <SolidColorBrush x:Key="ComboBox.MouseOver.Border" Color="#FF7EB4EA"/>
     <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Background" Color="#FFFFFFFF"/>

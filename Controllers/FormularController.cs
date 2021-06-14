@@ -92,10 +92,13 @@ namespace LibraryProject.Controllers
 
                     using (StreamWriter wr = new StreamWriter(nameFile, false, Encoding.UTF8))
                     {
-                        wr.WriteLine($"; Дата выдачи {deliveryDate}");
-                        wr.WriteLine($"; Максимальная дата возврата {receptionDate}");
-                        wr.WriteLine($" Фактическая дата возврата {returnBook}");
-                        wr.WriteLine($"; Номер чит. билета {ticket}");
+                        foreach (var item in dbHelper.context.formular.ToList())
+                        {
+                            wr.WriteLine($"; Дата выдачи:     {item.book_delivery}");
+                            wr.WriteLine($"; Максимальная дата возврата:     {item.book_reception}");
+                            wr.WriteLine($"; Фактическая дата возврата:     {item.book_return}");
+                            wr.WriteLine($"; Номер чит. билета:    {item.ticket}");
+                        }
                     }
                     return true;
                 }

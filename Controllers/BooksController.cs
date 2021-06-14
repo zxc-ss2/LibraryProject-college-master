@@ -59,7 +59,7 @@ namespace LibraryProject.Controllers
                         isbn = bookISBN,
                         place = bookPlace,
                         year = bookYear,
-                        quantity_id = null,
+                        quantity_id = 11,
                         interpreter_id = bookInterpreter,
                         chamber_id = bookChamber,
                         trading_id = null

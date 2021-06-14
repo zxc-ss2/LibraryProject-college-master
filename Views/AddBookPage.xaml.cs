@@ -210,7 +210,13 @@ namespace LibraryProject.Views
                 resultString += "Неправильно введено имя Издания\n";
             }
 
-            if(resultString == "")
+            string resultChamber = ChamberComboBox.Text;
+            if (resultChamber == "")
+            {
+                resultString += "Неправильно введено имя Издания\n";
+            }
+
+            if (resultString == "")
             {
                 int userBbk = 0;
 
