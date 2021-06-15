@@ -341,7 +341,7 @@ namespace LibraryProject.Views
         /// </summary>
         private void SearchLibrarianTradingBooksBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            TradingDataGrid.ItemsSource = booksController.BooksMatchUpInfoOutput(SearchLibrarianTradingBooksBox.Text);
+            TradingDataGrid.ItemsSource = tradingController.TradingMatchUpInfoOutput(SearchLibrarianTradingBooksBox.Text);
             if (SearchLibrarianTradingBooksBox.Text == string.Empty)
             {
                 TradingDataGrid.ItemsSource = tradingController.GetTradingInfo();

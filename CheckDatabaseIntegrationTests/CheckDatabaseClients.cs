@@ -202,9 +202,15 @@ namespace CheckDatabaseIntegrationTests
             {
                 int updatedClientsLength = dbHelper.context.clients.Count();
                 bool check = clientsController.UpdateClientInfo(newName, surname, patronymic, Convert.ToDateTime(birthday), address, studyplace, workplace, phone, login, password, email, updatingClient);
-                
-                    //Assert
-                    Assert.IsFalse(check);
+
+                var selectString = dbHelper.context.clients.AsNoTracking().OrderByDescending(t => t.client_id).Take(1);
+                foreach (var item in selectString)
+                {
+                    clientsController.DeleteClientInfo(item);
+                }
+
+                //Assert
+                Assert.IsFalse(check);
             }
         }
 
@@ -233,6 +239,12 @@ namespace CheckDatabaseIntegrationTests
             {
                 int updatedClientsLength = dbHelper.context.clients.Count();
                 bool check = clientsController.UpdateClientInfo(newName, surname, patronymic, Convert.ToDateTime(birthday), address, studyplace, workplace, phone, login, password, email, updatingClient);
+
+                var selectString = dbHelper.context.clients.AsNoTracking().OrderByDescending(t => t.client_id).Take(1);
+                foreach (var item in selectString)
+                {
+                    clientsController.DeleteClientInfo(item);
+                }
 
                 //Assert
                 Assert.IsFalse(check);

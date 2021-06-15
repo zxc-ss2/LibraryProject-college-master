@@ -50,7 +50,6 @@ namespace LibraryProject.Controllers
         /// </returns>
         public List<books> BooksMatchUpInfoOutput(string info)
         {
-
             return dbHelper.context.books.Where(t => t.author.Contains(info) || t.isbn.Contains(info)).ToList();
         }
 

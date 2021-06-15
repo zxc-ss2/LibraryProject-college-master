@@ -33,6 +33,18 @@ namespace LibraryProject.Controllers
         }
 
         /// <summary>
+        /// Поиск совпадений поля ticket с вводимой строкой
+        /// </summary>
+        /// <param name="info" - строка, по которой осуществляется поиск></param>
+        /// <returns>
+        /// Лист с совпадениями
+        /// </returns>
+        public List<trading> TradingMatchUpInfoOutput(string info)
+        {
+            return dbHelper.context.trading.Where(t => t.ticket.Contains(info)).ToList();
+        }
+
+        /// <summary>
         /// Добавление новой выдачи
         /// </summary>
         /// <param name="bookId" - Идентификатор книги></param>

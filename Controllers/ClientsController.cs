@@ -31,6 +31,7 @@ namespace LibraryProject.Controllers
         {
             return dbHelper.context.clients.Where(t => t.id_role != 1).ToList();
         }
+
         /// <summary>
         /// Поиск совпадений полей name, surname, patronymic, ticket с вводимой строкой
         /// </summary>

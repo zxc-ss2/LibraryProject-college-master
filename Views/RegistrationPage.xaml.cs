@@ -255,6 +255,16 @@ namespace LibraryProject.Views
                         generator += rnd.Next(0, 9);
                     }
 
+                    FirstNameInput.IsReadOnly = true;
+                    LastNameInput.IsReadOnly = true;
+                    PatronymicInput.IsReadOnly = true;
+                    AddressInput.IsReadOnly = true;
+                    WorkplaceInput.IsReadOnly = true;
+                    StudyplaceInput.IsReadOnly = true;
+                    PhoneInput.IsReadOnly = true;
+                    LoginInput.IsReadOnly = true;
+                    EmailInput.IsReadOnly = true;
+
                     string ticket = "X" + "-" + generator + "-" + DateTime.Now.ToString("yy");
                     DateTime word2 = Convert.ToDateTime(Convert.ToDateTime(DateInput.Text).ToString("yyyy.MM.dd"));
                     if (clientsController.AddNewUser(FirstNameInput.Text, LastNameInput.Text, PatronymicInput.Text, word2, AddressInput.Text, WorkplaceInput.Text, StudyplaceInput.Text, PhoneInput.Text, LoginInput.Text, PasswordInput.Password, EmailInput.Text, ticket))
@@ -269,6 +279,15 @@ namespace LibraryProject.Views
                         else
                         {
                             MessageBox.Show("Данные для авторизации не были отправлены, повторная попытка будет произведена позже.");
+                            FirstNameInput.IsReadOnly = false;
+                            LastNameInput.IsReadOnly = false;
+                            PatronymicInput.IsReadOnly = false;
+                            AddressInput.IsReadOnly = false;
+                            WorkplaceInput.IsReadOnly = false;
+                            StudyplaceInput.IsReadOnly = false;
+                            PhoneInput.IsReadOnly = false;
+                            LoginInput.IsReadOnly = false;
+                            EmailInput.IsReadOnly = false;
                         }
                     }
                     else
