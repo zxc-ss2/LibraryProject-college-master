@@ -99,7 +99,7 @@
                             <Button x:Name="EditTradingInfoBtn" Style="{StaticResource AdminBtn}" Click="EditTradingInfoBtn_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <Image Source="/Resources/images/pencil.png"></Image>
-                                    <TextBlock VerticalAlignment="Center" Margin="10 0 10 0">Редактировать</TextBlock>
+                                    <TextBlock VerticalAlignment="Center" Margin="10 0 10 0">Изменить</TextBlock>
                                 </StackPanel>
                             </Button>
                             <TextBox  x:Name="SearchLibrarianTradingBooksBox" Style="{StaticResource SearchAdminBox}" TextChanged="SearchLibrarianTradingBooksBox_TextChanged"></TextBox>

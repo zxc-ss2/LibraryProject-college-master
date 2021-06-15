@@ -33,7 +33,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_55E1BC78951153D178E5FF148D55ECF0"
+        "MsmKey" = "8:_40D0F609DE30CC49FB44D5C7E609EC38"
         "OwnerKey" = "8:_E19C6148CB164BA9BC7B385B0356FAE2"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -63,13 +63,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_C5499FDA17665AF7394CC85331BE4071"
+        "MsmKey" = "8:_DEBFF18FCA69D859BEA7D0B9A77582A7"
         "OwnerKey" = "8:_9651172E99A7491D8B80D022087228D1"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_C5499FDA17665AF7394CC85331BE4071"
+        "MsmKey" = "8:_DEBFF18FCA69D859BEA7D0B9A77582A7"
         "OwnerKey" = "8:_E19C6148CB164BA9BC7B385B0356FAE2"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -100,19 +100,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_20A3BE4503E34CD8BF9DC600979D854D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_E19C6148CB164BA9BC7B385B0356FAE2"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_55E1BC78951153D178E5FF148D55ECF0"
+        "OwnerKey" = "8:_40D0F609DE30CC49FB44D5C7E609EC38"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -124,7 +118,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C5499FDA17665AF7394CC85331BE4071"
+        "OwnerKey" = "8:_DEBFF18FCA69D859BEA7D0B9A77582A7"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_20A3BE4503E34CD8BF9DC600979D854D"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -135,7 +135,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:Debug\\SetupProject.msi"
+        "OutputFilename" = "8:Debug\\Calcium.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -145,6 +145,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -161,6 +177,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
     }
     "Deployable"
@@ -272,14 +304,14 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_55E1BC78951153D178E5FF148D55ECF0"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_40D0F609DE30CC49FB44D5C7E609EC38"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:StringCheckLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_55E1BC78951153D178E5FF148D55ECF0"
+                    "_40D0F609DE30CC49FB44D5C7E609EC38"
                     {
                     "Name" = "8:StringCheckLib.DLL"
                     "Attributes" = "3:512"
@@ -394,14 +426,14 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C5499FDA17665AF7394CC85331BE4071"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DEBFF18FCA69D859BEA7D0B9A77582A7"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_C5499FDA17665AF7394CC85331BE4071"
+                    "_DEBFF18FCA69D859BEA7D0B9A77582A7"
                     {
                     "Name" = "8:EntityFramework.DLL"
                     "Attributes" = "3:512"
@@ -551,7 +583,7 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:SetupProject"
+        "ProductName" = "8:Calcium"
         "ProductCode" = "8:{3370476E-097A-4EA1-AF8B-3A66DCBB10D9}"
         "PackageCode" = "8:{7C198BF1-2CE1-4FBE-8080-9D4823D4C84D}"
         "UpgradeCode" = "8:{ECCDF505-7C74-4DA8-8092-3B84898E7156}"
